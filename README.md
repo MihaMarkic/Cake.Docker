@@ -16,6 +16,8 @@ Including addin in cake script is easy.
 - DockerBuild
 
 All come with settings argument and support all settings except for DockerBuild which supports only major settings.
-## Notes
+# General Notes
 **This is an initial version and not tested thoroughly**.
 Contributions welcome.
+
+Tested only on Windows. I guess it should work on Linux, too, assuming a proper docker exe name is added.
