@@ -1,6 +1,5 @@
 ﻿using Cake.Core;
 using Cake.Core.Annotations;
-using Cake.Docker.Rmi;
 using System;
 
 namespace Cake.Docker

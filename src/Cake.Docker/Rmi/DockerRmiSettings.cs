@@ -1,4 +1,4 @@
-﻿namespace Cake.Docker.Rmi
+﻿namespace Cake.Docker
 {
     /// <summary>
     /// Settings for docker rmi

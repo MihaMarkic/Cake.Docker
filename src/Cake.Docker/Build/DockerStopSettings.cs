@@ -1,4 +1,4 @@
-﻿namespace Cake.Docker.Rm
+﻿namespace Cake.Docker
 {
     /// <summary>
     /// Settings for docker build.
