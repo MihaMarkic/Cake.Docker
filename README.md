@@ -1,3 +1,6 @@
+# Cake.Docker 0.1.1
+- Fixed NuGet package
+
 # Cake.Docker 0.1.0
 Cake AddIn that extends Cake with Docker command tools.
 ## Including addin
