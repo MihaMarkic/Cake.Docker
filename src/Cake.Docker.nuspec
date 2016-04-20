@@ -8,8 +8,8 @@
       <title>Cake.Docker</title>
       <description>Cake Build addin for Docker.</description>
       <summary>Docker command line addin for cake build.</summary>
-      <licenseUrl>https://github.com/MihaMarkic/Cake_Docker/blob/master/LICENSE</licenseUrl>
-      <projectUrl>https://github.com/MihaMarkic/Cake_Docker</projectUrl>
+      <licenseUrl>https://github.com/MihaMarkic/Cake.Docker/blob/master/LICENSE</licenseUrl>
+      <projectUrl>https://github.com/MihaMarkic/Cake.Docker</projectUrl>
       
       <requireLicenseAcceptance>false</requireLicenseAcceptance>
       <copyright>Copyright (c) Righthand 2016</copyright>
