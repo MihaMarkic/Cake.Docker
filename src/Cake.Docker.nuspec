@@ -22,7 +22,7 @@
    </metadata>
 
    <files>
-      <file src="./Cake.Docker/bin/Release/Cake.Docker.dll" target="lib/net45" />
-      <file src="./Cake.Docker/bin/Release/Cake.Docker.xml" target="lib/net45" />
+		<file src="Cake.Docker\bin\Release\Cake.Docker.dll" target="lib\net45\Cake.Docker.dll" />
+        <file src="Cake.Docker\bin\Release\Cake.Docker.XML" target="lib\net45\Cake.Docker.XML" />
    </files>
 </package>
