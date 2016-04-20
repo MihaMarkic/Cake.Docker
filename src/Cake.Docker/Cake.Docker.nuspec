@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+      <id>Cake.Docker</id>
+      <version>$version$</version>
+      <authors>Righthand</authors>
+      <owners>Righthand</owners>
+      <title>Cake.Docker</title>
+      <description>Cake Build addin for Docker.</description>
+      <summary>Docker command line addin for cake build.</summary>
+      <licenseUrl>https://github.com/MihaMarkic/Cake_Docker/blob/master/README.md</licenseUrl>
+      <projectUrl>https://github.com/MihaMarkic/Cake_Docker</projectUrl>
+      
+      <requireLicenseAcceptance>false</requireLicenseAcceptance>
+      <copyright>Copyright (c) Righthand 2016</copyright>
+      <releaseNotes>Initial Release</releaseNotes>
+      <tags>Cake Script Build Docker</tags>
+
+      <dependencies>
+         <dependency id="Cake.Core" version="0.10.1" />
+      </dependencies>
+   </metadata>
+
+   <files>
+      <file src="./Cake.Docker/bin/Release/Cake.Docker.dll" target="lib/net45" />
+      <file src="./Cake.Docker/bin/Release/Cake.Docker.xml" target="lib/net45" />
+   </files>
+</package>
