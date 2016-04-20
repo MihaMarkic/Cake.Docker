@@ -5,6 +5,7 @@ var CakeDockerProj = Project + File("Cake.Docker.csproj");
 var AssemblyInfo = Project + File("Properties/AssemblyInfo.cs");
 var CakeDockerSln = File("./Cake.Docker.sln");
 var CakeDockerNuspec = Project + File("Cake.Docker.nuspec");
+var Nupkg = Directory("./nupkg");
 
 var target = Argument("target", "Default");
 var version = "";
@@ -24,10 +25,11 @@ Task("NuGetPack")
 	.IsDependentOn ("Default")
 	.Does (() =>
 {
+	CreateDirectory(Nupkg);
 	NuGetPack (CakeDockerNuspec, new NuGetPackSettings { 
 		Version = version,
 		Verbosity = NuGetVerbosity.Detailed,
-		OutputDirectory = "./",
+		OutputDirectory = Nupkg,
 		BasePath = "./",
 	});	
 });
