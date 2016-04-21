@@ -15,8 +15,9 @@ Including addin in cake script is easy.
 - [DockerRmi](https://docs.docker.com/engine/reference/commandline/rmi/)
 - [DockerStop](https://docs.docker.com/engine/reference/commandline/stop/)
 - [DockerBuild](https://docs.docker.com/engine/reference/commandline/build/)
-- [DockerCreate](https://docs.docker.com/engine/reference/commandline/create/)
-- [DockerBuild](https://docs.docker.com/engine/reference/commandline/build/)
+- [DockerCreate](https://docs.docker.com/engine/reference/commandline/create/) 0.2.0
+- [DockerBuild](https://docs.docker.com/engine/reference/commandline/build/) 0.1.0, 0.2.0 (full settings)
+- [DockerCp](https://docs.docker.com/engine/reference/commandline/cp/) 0.2.0
 
 ## Usage
 
