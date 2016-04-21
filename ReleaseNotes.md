@@ -4,6 +4,7 @@
 - **[Breaking]** Rearranged arguments for DockerRm, DockerRmi and DockerStop.
 Settings are first, and one or more container|images are last.
 This is to avoid using of new string[]{} when passing more than one item.
+- Bug fixes
 
 # Cake.Docker 0.1.1
 - Fixed NuGet package

@@ -8,16 +8,16 @@ namespace Cake.Docker
 {
     public static class ArgumentsBuilderExtension
     {
-        public static void AppendAll<TSettings>(this ProcessArgumentBuilder builder, string command, TSettings settings, string[] containers)
+        public static void AppendAll<TSettings>(this ProcessArgumentBuilder builder, string command, TSettings settings, string[] arguments)
             where TSettings: AutoToolSettings, new()
         {
             if (builder == null)
             {
                 throw new ArgumentNullException("builder");
             }
-            if (containers == null)
+            if (arguments == null)
             {
-                throw new ArgumentNullException("containers");
+                throw new ArgumentNullException("arguments");
             }
             if (string.IsNullOrEmpty(command))
             {
@@ -38,9 +38,9 @@ namespace Cake.Docker
                     }
                 }
             }
-            foreach (string container in containers)
+            foreach (string argument in arguments)
             {
-                builder.Append(container);
+                builder.Append(argument);
             }
         }
 
@@ -54,6 +54,10 @@ namespace Cake.Docker
             else if (property.PropertyType == typeof(int?))
             {
                 yield return GetArgumentFromNullableIntProperty(property, (int?)property.GetValue(settings));
+            }
+            else if (property.PropertyType == typeof(string))
+            {
+                yield return GetArgumentFromStringProperty(property, (string)property.GetValue(settings));
             }
             else if (property.PropertyType == typeof(string[]))
             {

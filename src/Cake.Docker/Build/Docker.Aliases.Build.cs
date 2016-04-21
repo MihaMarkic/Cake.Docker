@@ -16,7 +16,7 @@ namespace Cake.Docker
         [CakeAliasCategory("Docker")]
         public static void DockerBuild(this ICakeContext context, string path)
         {
-            DockerStop(context, path);
+            DockerBuild(context, new DockerBuildSettings(), path);
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Cake.Docker
         /// <param name="settings"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
-        public static void DockerBuild(this ICakeContext context, string path, DockerBuildSettings settings)
+        public static void DockerBuild(this ICakeContext context, DockerBuildSettings settings, string path)
         {
             if (context == null)
             {

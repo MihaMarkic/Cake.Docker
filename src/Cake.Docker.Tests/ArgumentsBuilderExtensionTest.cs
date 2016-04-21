@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using Cake.Docker;
+using Cake.Core.IO;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -116,6 +118,23 @@ namespace Cake.Docker.Tests
             {
                 return ArgumentsBuilderExtension.GetPropertyName(name);
             }
+        }
+
+        [TestFixture]
+        public class AppendAll
+        {
+            [Test]
+            public void WhenStringInput_AddsAsArgument()
+            {
+                TestSettings input = new TestSettings { String = "tubo" };
+
+                ProcessArgumentBuilder builder = new ProcessArgumentBuilder();
+                builder.AppendAll("cmd", input, new string[] { "arg1" });
+                var actual = builder.Render();
+
+                Assert.That(actual, Is.EqualTo("cmd --string=\"tubo\" arg1"));
+            }
+
         }
     }
 

@@ -1,7 +1,10 @@
 ﻿#addin "Cake.FileHelpers"
 
 var Project = Directory("./Cake.Docker/");
+var TestProject = Directory("./Cake.Docker.Tests/");
 var CakeDockerProj = Project + File("Cake.Docker.csproj");
+var CakeTestDockerProj = TestProject + File("Cake.Docker.Test.csproj");
+var CakeTestDockerAssembly = TestProject + Directory("bin/Release") + File("Cake.Docker.Tests.dll");
 var AssemblyInfo = Project + File("Properties/AssemblyInfo.cs");
 var CakeDockerSln = File("./Cake.Docker.sln");
 var CakeDockerNuspec = File("./Cake.Docker.nuspec");
@@ -20,9 +23,17 @@ Task("Default")
 		});
 });
 
+Task("UnitTest")
+	.IsDependentOn("Default")
+	.Does(() =>
+	{
+		NUnit3(CakeTestDockerAssembly);
+	});
+
 Task("NuGetPack")
 	.IsDependentOn("GetVersion")
-	.IsDependentOn ("Default")
+	.IsDependentOn("Default")
+	.IsDependentOn("UnitTest")
 	.Does (() =>
 {
 	CreateDirectory(Nupkg);
