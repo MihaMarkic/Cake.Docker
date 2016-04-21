@@ -3,6 +3,7 @@
 A Cake AddIn that extends Cake with [Docker](https://www.docker.com/) command tools.
 
 [![cakebuild.net](https://img.shields.io/badge/WWW-cakebuild.net-blue.svg)](http://cakebuild.net/)
+[![NuGet](https://img.shields.io/nuget/v/Cake.Docker.svg)](https://www.nuget.org/packages/Cake.Docker)
 
 ## Including addin
 Including addin in cake script is easy.
