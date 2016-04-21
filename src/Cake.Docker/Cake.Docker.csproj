@@ -47,11 +47,16 @@
   <ItemGroup>
     <Compile Include="ArgumentsBuilderExtension.cs" />
     <Compile Include="AutoToolSettings.cs" />
+    <Compile Include="Create\Docker.Aliases.Create.cs" />
+    <Compile Include="Create\DockerCreateSettings.cs" />
+    <Compile Include="Cp\Docker.Aliases.Cp.cs" />
+    <Compile Include="Cp\DockerCpSettings.cs" />
     <Compile Include="DockerAliases.cs" />
+    <Compile Include="DockerBridge.cs" />
     <Compile Include="DockerTool.cs" />
     <Compile Include="GenericDockerRunner.cs" />
-    <Compile Include="Build\Docker.Aliases.Stop.cs" />
-    <Compile Include="Build\DockerStopSettings.cs" />
+    <Compile Include="Build\Docker.Aliases.Build.cs" />
+    <Compile Include="Build\DockerBuildSettings.cs" />
     <Compile Include="Stop\Docker.Aliases.Stop.cs" />
     <Compile Include="Stop\DockerStopSettings.cs" />
     <Compile Include="Rmi\Docker.Aliases.Rmi.cs" />
@@ -61,10 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Rm\Docker.Aliases.Rm.cs" />
-    <None Include="Cake.Docker.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Build\args.txt" />
+    <Content Include="Create\args.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

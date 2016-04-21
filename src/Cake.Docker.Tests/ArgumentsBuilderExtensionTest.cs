@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -40,7 +41,7 @@ namespace Cake.Docker.Tests
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromStringProperty(StringProperty, "tubo");
 
-                Assert.That(actual, Is.EqualTo("--string=tubo"));
+                Assert.That(actual, Is.EqualTo("--string=\"tubo\""));
             }
             [Test]
             public void WhenGivenNull_NullIsReturned()
@@ -58,12 +59,30 @@ namespace Cake.Docker.Tests
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayProperty(StringsProperty, new string[] { "tubo1", "tubo2" });
 
-                Assert.AreEqual(actual.ToArray(), new string[] { "--strings=tubo1", "--strings=tubo2" }); 
+                Assert.AreEqual(actual.ToArray(), new string[] { "--strings=\"tubo1\"", "--strings=\"tubo2\"" }); 
             }
             [Test]
             public void WhenGivenNull_EmptyArrayReturned()
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayProperty(StringsProperty, null);
+
+                Assert.That(actual, Is.Empty);
+            }
+        }
+        [TestFixture]
+        public class GetArgumentFromDictionaryProperty
+        {
+            [Test]
+            public void WhenGivenStringArrayProperty_FormatsProperly()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromDictionaryProperty(StringsProperty, new Dictionary<string, string> { { "t1", "v1" }, { "t2", "v2" } });
+
+                Assert.AreEqual(actual.ToArray(), new string[] { "--strings=\"t1=v1\"", "--strings=\"t2=v2\"" });
+            }
+            [Test]
+            public void WhenGivenNull_EmptyArrayReturned()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromDictionaryProperty(StringsProperty, null);
 
                 Assert.That(actual, Is.Empty);
             }

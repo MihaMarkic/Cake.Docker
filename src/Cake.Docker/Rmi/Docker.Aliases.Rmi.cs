@@ -13,33 +13,11 @@ namespace Cake.Docker
         /// <param name="images"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
-        public static void DockerRmi(this ICakeContext context, string[] images)
+        public static void DockerRmi(this ICakeContext context, params string[] images)
         {
-            DockerRmi(context, images, new DockerRmiSettings());
+            DockerRmi(context, new DockerRmiSettings(), images);
         }
-        /// <summary>
-        /// Removes an <paramref name="image"/> using default settings.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="image"></param>
-        [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
-        public static void DockerRmi(this ICakeContext context, string image)
-        {
-            DockerRmi(context, new string[] { image });
-        }
-        /// <summary>
-        /// Removes an <paramref name="image"/> using the given <paramref name="settings" />.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="image"></param>
-        /// <param name="settings"></param>
-        [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
-        public static void DockerRmi(this ICakeContext context, string image, DockerRmiSettings settings)
-        {
-            DockerRmi(context, new string[] { image }, settings);
-        }
+        
         /// <summary>
         /// Removes an array of <paramref name="images"/> using the give <paramref name="settings"/>.
         /// </summary>
@@ -48,7 +26,7 @@ namespace Cake.Docker
         /// <param name="settings"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
-		public static void DockerRmi(this ICakeContext context, string[] images, DockerRmiSettings settings)
+		public static void DockerRmi(this ICakeContext context, DockerRmiSettings settings, params string[] images)
         {
             if (context == null)
             {

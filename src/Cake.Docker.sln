@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Docker", "Cake.Docker\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Docker.Tests", "Cake.Docker.Tests\Cake.Docker.Tests.csproj", "{7B0DDA5A-0A44-4288-8ABA-D7C08A11A63E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73141119-9964-4C31-9406-A24AAF6AB92F}"
+	ProjectSection(SolutionItems) = preProject
+		..\ReleaseNotes.md = ..\ReleaseNotes.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

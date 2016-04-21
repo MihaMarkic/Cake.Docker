@@ -13,32 +13,12 @@ namespace Cake.Docker
         /// <param name="containers"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
-        public static void DockerRm(this ICakeContext context, string[] containers)
+        public static void DockerRm(this ICakeContext context, params string[] containers)
         {
-            DockerRm(context, containers, new DockerRmSettings());
+            DockerRm(context, new DockerRmSettings(), containers);
         }
-        /// <summary>
-        /// Removes a <paramref name="container"/> using default settings.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="container"></param>
-        [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
-        public static void DockerRm(this ICakeContext context, string container)
-        {
-            DockerRm(context, new string[] { container });
-        }
-        /// <summary>
-        /// Removes a <paramref name="container"/> using the given <param name="settings" />.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="container"></param>
-        [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
-        public static void DockerRm(this ICakeContext context, string container, DockerRmSettings settings)
-        {
-            DockerRm(context, new string[] { container }, settings);
-        }
+        
+        
         /// <summary>
         /// Removes an array of <paramref name="containers"/> using the given <param name="settings"/>.
         /// </summary>
@@ -46,7 +26,7 @@ namespace Cake.Docker
         /// <param name="containers"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
-		public static void DockerRm(this ICakeContext context, string[] containers, DockerRmSettings settings)
+		public static void DockerRm(this ICakeContext context, DockerRmSettings settings, params string[] containers)
         {
             if (context == null)
             {

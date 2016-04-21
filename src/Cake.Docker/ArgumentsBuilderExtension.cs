@@ -74,6 +74,17 @@ namespace Cake.Docker
             return value.HasValue ? $"--{GetPropertyName(property.Name)}={value.Value}" : null;
         }
 
+        public static IEnumerable<string> GetArgumentFromDictionaryProperty(PropertyInfo property, Dictionary<string, string> values)
+        {
+            if (values != null)
+            {
+                foreach (var kp in values)
+                {
+                    yield return GetArgumentFromStringProperty(property, $"{kp.Key}={kp.Value}");
+                }
+            }
+        }
+
         public static IEnumerable<string> GetArgumentFromStringArrayProperty(PropertyInfo property, string[] values)
         {
             if (values != null)
@@ -87,7 +98,7 @@ namespace Cake.Docker
 
         public static string GetArgumentFromStringProperty(PropertyInfo property, string value)
         {
-            return !string.IsNullOrEmpty(value) ? $"--{GetPropertyName(property.Name)}={value}" : null;
+            return !string.IsNullOrEmpty(value) ? $"--{GetPropertyName(property.Name)}=\"{value}\"" : null;
         }
 
         /// <summary>

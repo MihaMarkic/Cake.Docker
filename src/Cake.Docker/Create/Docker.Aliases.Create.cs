@@ -6,38 +6,40 @@ namespace Cake.Docker
 {
     partial class DockerAliases
     {
+
         /// <summary>
-        /// Stops an array of <paramref name="containers"/> using default settings.
+        /// Creates a new container using default settings.
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="containers"></param>
+        /// <param name="path"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
-        public static void DockerStop(this ICakeContext context, params string[] containers)
+        public static void DockerCreate(this ICakeContext context, string path)
         {
-            DockerStop(context, new DockerBuildSettings(), containers);
+            DockerStop(context, path);
         }
-        
+
         /// <summary>
-        /// Stops an array of <paramref name="containers"/> using the give <paramref name="settings"/>.
+        /// Creates a new container given <paramref name="settings"/>.
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="containers"></param>
+        /// <param name="path"></param>
         /// <param name="settings"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
-		public static void DockerStop(this ICakeContext context, DockerBuildSettings settings, params string[] containers)
+        public static void DockerCreate(this ICakeContext context, string path, DockerBuildSettings settings)
         {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
             }
-            if (containers == null || containers.Length == 0)
+            if (string.IsNullOrEmpty(path))
             {
-                throw new ArgumentNullException("containers");
+                throw new ArgumentNullException("path");
             }
             var runner = new GenericDockerRunner<DockerBuildSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Run("stop", settings ?? new DockerBuildSettings(), containers);
+            runner.Run("create", settings ?? new DockerBuildSettings(), new string[] { path });
         }
+
     }
 }
