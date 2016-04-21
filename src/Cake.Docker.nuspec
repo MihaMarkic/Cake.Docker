@@ -10,7 +10,7 @@
       <summary>Docker command line addin for cake build.</summary>
       <licenseUrl>https://github.com/MihaMarkic/Cake.Docker/blob/master/LICENSE</licenseUrl>
       <projectUrl>https://github.com/MihaMarkic/Cake.Docker</projectUrl>
-     <releaseNotes></releaseNotes>
+      <releaseNotes>https://github.com/MihaMarkic/Cake.Docker/blob/master/ReleaseNotes.md</releaseNotes>
       
       <requireLicenseAcceptance>false</requireLicenseAcceptance>
       <copyright>Copyright (c) Righthand 2016</copyright>
