@@ -53,3 +53,5 @@ All come with settings argument and support all settings except for DockerBuild 
 Contributions welcome.
 
 Tested only on Windows. I guess it should work on Linux, too, assuming a proper docker exe name is added.
+
+[![Follow @mihamarkic](https://img.shields.io/badge/Twitter-Follow%20%40mihamarkic-blue.svg)](https://twitter.com/intent/follow?screen_name=mihamarkic)
