@@ -32,20 +32,18 @@ To use the addin just add it to Cake call the aliases and configure any settings
 // How to remove a container with no settings
 Task("DockerRm")
 	.Does(() => {
-		DockerRm("containerName");
 		// or more containers at once
-		DockerRm(new string[]{"containerName1", "containerName2", ...});
+		DockerRm("containerName1", "containerName2", ...);
 	)};
 	
 // How to remove a container with settings
 Task("DockerRmWithSettings")
 	.Does(() => {
-		DockerRm("containerName", new DockerRmSettings { Force = true });
 		// or more containers at once
-		DockerRm(new string[]{"containerName1", "containerName2", ...}, new DockerRmSettings { Force = true });
+		DockerRm(new DockerRmSettings { Force = true }, "containerName1", "containerName2", ...);
 	)};
 ```
-Other commands follow same approach.
+Other commands follow same convention.
 
 All come with settings argument and support all settings except for DockerBuild which supports only major settings.
 # General Notes
