@@ -11,10 +11,12 @@ Including addin in cake script is easy.
 ```
 ## Commands supported
 
-- DockerRm
-- DockerRmi
-- DockerStop
-- DockerBuild
+- [DockerRm](https://docs.docker.com/engine/reference/commandline/rm/)
+- [DockerRmi](https://docs.docker.com/engine/reference/commandline/rmi/)
+- [DockerStop](https://docs.docker.com/engine/reference/commandline/stop/)
+- [DockerBuild](https://docs.docker.com/engine/reference/commandline/build/)
+- [DockerCreate](https://docs.docker.com/engine/reference/commandline/create/)
+- [DockerBuild](https://docs.docker.com/engine/reference/commandline/build/)
 
 ## Usage
 
