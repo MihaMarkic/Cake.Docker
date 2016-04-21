@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Docker", "Cake.Docker\Cake.Docker.csproj", "{7DE3FF26-12A9-436C-9291-FED348AEACD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Docker.Tests", "..\..\Cake.Docker.Tests\Cake.Docker.Tests.csproj", "{7B0DDA5A-0A44-4288-8ABA-D7C08A11A63E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Docker.Tests", "Cake.Docker.Tests\Cake.Docker.Tests.csproj", "{7B0DDA5A-0A44-4288-8ABA-D7C08A11A63E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
