@@ -75,7 +75,7 @@ foreach (string line in lines)
 			default:
 				if (isBool)
 				{
-					type = "bool?";
+					type = "bool";
 				}
 				else if (isInt)
 				{

@@ -122,11 +122,11 @@ namespace Cake.Docker
         /// <summary>
         /// Print usage
         /// </summary>
-        public bool? Help { get; set; }
+        public bool Help { get; set; }
         /// <summary>
         /// Keep STDIN open even if not attached
         /// </summary>
-        public bool? Interactive { get; set; }
+        public bool Interactive { get; set; }
         /// <summary>
         /// Container IPv4 address (e.g. 172.30.100.104)
         /// </summary>
@@ -202,7 +202,7 @@ namespace Cake.Docker
         /// <summary>
         /// Whether to disable OOM Killer for the container or not
         /// </summary>
-        public bool? OomKillDisable { get; set; }
+        public bool OomKillDisable { get; set; }
         /// <summary>
         /// Tune the host's OOM preferences for containers (accepts -1000 to 1000)
         /// </summary>
@@ -210,7 +210,7 @@ namespace Cake.Docker
         /// <summary>
         /// Publish all exposed ports to random ports
         /// </summary>
-        public bool? PublishAll { get; set; }
+        public bool PublishAll { get; set; }
         /// <summary>
         /// Publish a container's port(s) to the host
         /// </summary>
@@ -226,11 +226,11 @@ namespace Cake.Docker
         /// <summary>
         /// Give extended privileges to this container
         /// </summary>
-        public bool? Privileged { get; set; }
+        public bool Privileged { get; set; }
         /// <summary>
         /// Mount the container's root filesystem as read only
         /// </summary>
-        public bool? ReadOnly { get; set; }
+        public bool ReadOnly { get; set; }
         /// <summary>
         /// Restart policy (no, on-failure[:max-retry], always, unless-stopped)
         /// </summary>
@@ -250,7 +250,7 @@ namespace Cake.Docker
         /// <summary>
         /// Allocate a pseudo-TTY
         /// </summary>
-        public bool? Tty { get; set; }
+        public bool Tty { get; set; }
         /// <summary>
         /// Username or UID
         /// </summary>

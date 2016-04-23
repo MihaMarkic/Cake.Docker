@@ -12,11 +12,11 @@
         /// <summary>
         /// CPU Shares (relative weight)
         /// </summary>
-        public bool? CpuShares { get; set; }
+        public bool CpuShares { get; set; }
         /// <summary>
         /// =""              Optional parent cgroup for the container
         /// </summary>
-        public bool? CgroupParen { get; set; }
+        public bool CgroupParen { get; set; }
         /// <summary>
         /// Limit the CPU CFS (Completely Fair Scheduler) period
         /// </summary>
@@ -36,7 +36,7 @@
         /// <summary>
         /// nt-trust=true    Skip image verification
         /// </summary>
-        public bool? DisableCont { get; set; }
+        public bool DisableCont { get; set; }
         /// <summary>
         /// Name of the Dockerfile (Default is 'PATH/Dockerfile')
         /// </summary>
@@ -44,11 +44,11 @@
         /// <summary>
         /// Always remove intermediate containers
         /// </summary>
-        public bool? ForceRm { get; set; }
+        public bool ForceRm { get; set; }
         /// <summary>
         /// Print usage
         /// </summary>
-        public bool? Help { get; set; }
+        public bool Help { get; set; }
         /// <summary>
         /// Container isolation technology
         /// </summary>
@@ -68,15 +68,15 @@
         /// <summary>
         /// Do not use cache when building the image
         /// </summary>
-        public bool? NoCache { get; set; }
+        public bool NoCache { get; set; }
         /// <summary>
         /// Always attempt to pull a newer version of the image
         /// </summary>
-        public bool? Pull { get; set; }
+        public bool Pull { get; set; }
         /// <summary>
         /// Suppress the build output and print image ID on success
         /// </summary>
-        public bool? Quiet { get; set; }
+        public bool Quiet { get; set; }
         /// <summary>
         /// Remove intermediate containers after a successful build
         /// </summary>
