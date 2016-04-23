@@ -47,10 +47,14 @@
   <ItemGroup>
     <Compile Include="ArgumentsBuilderExtension.cs" />
     <Compile Include="AutoToolSettings.cs" />
+    <Compile Include="Cp\DockerCpSettings.cs" />
     <Compile Include="Create\Docker.Aliases.Create.cs" />
     <Compile Include="Create\DockerCreateSettings.cs" />
     <Compile Include="Cp\Docker.Aliases.Cp.cs" />
-    <Compile Include="Cp\DockerCpSettings.cs" />
+    <Compile Include="Ps\ContainerStatus.cs" />
+    <Compile Include="Ps\Docker.Aliases.Ps.cs" />
+    <Compile Include="Ps\DockerPsResult.cs" />
+    <Compile Include="Ps\DockerPsSettings.cs" />
     <Compile Include="DockerAliases.cs" />
     <Compile Include="DockerBridge.cs" />
     <Compile Include="DockerTool.cs" />
@@ -71,6 +75,7 @@
   <ItemGroup>
     <Content Include="Build\args.txt" />
     <Content Include="Create\args.txt" />
+    <Content Include="Ps\args.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

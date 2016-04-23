@@ -38,9 +38,12 @@ namespace Cake.Docker
                     }
                 }
             }
-            foreach (string argument in arguments)
+            if (arguments != null)
             {
-                builder.Append(argument);
+                foreach (string argument in arguments)
+                {
+                    builder.Append(argument);
+                }
             }
         }
 
