@@ -12,13 +12,14 @@ Including addin in cake script is easy.
 ```
 ## Commands supported
 
+- [DockerPs](https://docs.docker.com/engine/reference/commandline/ps/) v0.3.0
 - [DockerRm](https://docs.docker.com/engine/reference/commandline/rm/)
 - [DockerRmi](https://docs.docker.com/engine/reference/commandline/rmi/)
 - [DockerStop](https://docs.docker.com/engine/reference/commandline/stop/)
 - [DockerBuild](https://docs.docker.com/engine/reference/commandline/build/)
-- [DockerCreate](https://docs.docker.com/engine/reference/commandline/create/) 0.2.0
-- [DockerBuild](https://docs.docker.com/engine/reference/commandline/build/) 0.1.0, 0.2.0 (full settings)
-- [DockerCp](https://docs.docker.com/engine/reference/commandline/cp/) 0.2.0
+- [DockerCreate](https://docs.docker.com/engine/reference/commandline/create/) v0.2.0
+- [DockerBuild](https://docs.docker.com/engine/reference/commandline/build/) v0.1.0, 0.2.0 (full settings)
+- [DockerCp](https://docs.docker.com/engine/reference/commandline/cp/) v0.2.0
 
 ## Usage
 

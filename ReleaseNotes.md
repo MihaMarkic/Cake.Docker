@@ -1,3 +1,8 @@
+# Cake.Docker 0.3.0
+- Added [DockerPs](https://docs.docker.com/engine/reference/commandline/ps/)
+    - ports aren't included, size is approximate, created date is in text format, exited data is not included
+- Bug fixes
+
 # Cake.Docker 0.2.0
 - Added [DockerCp](https://docs.docker.com/engine/reference/commandline/cp/) and [DockerCreate](https://docs.docker.com/engine/reference/commandline/create/)
 - Implemented all DockerBuild arguments
