@@ -40,15 +40,13 @@ namespace Cake.Docker
 
         public static DockerPsResult[] Processor(IEnumerable<string> input)
         {
-            string first = input.First();
-            int imageIndex = first.IndexOf("IMAGE", StringComparison.Ordinal);
-            var query = from l in input
-                        select new DockerPsResult
-                        {
-                            Id = l.Substring(0, imageIndex).Trim()
-                        };
-            return query.ToArray();
+            string[] lines = input.ToArray();
+            if (lines.Length > 1)
+            {
+                var indexes = DockerPsParser.Indexes.CreateFromFirstLine(lines[0]);
+                return lines.Skip(1).Select(l => DockerPsParser.ParseLine(indexes, l)).ToArray();
+            }
+            return new DockerPsResult[0];
         } 
-
     }
 }

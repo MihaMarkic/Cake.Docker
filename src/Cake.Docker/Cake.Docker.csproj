@@ -54,6 +54,7 @@
     <Compile Include="Ps\ContainerStatus.cs" />
     <Compile Include="Ps\Docker.Aliases.Ps.cs" />
     <Compile Include="Ps\DockerPsResult.cs" />
+    <Compile Include="Ps\DockerPsParser.cs" />
     <Compile Include="Ps\DockerPsSettings.cs" />
     <Compile Include="DockerAliases.cs" />
     <Compile Include="DockerBridge.cs" />
