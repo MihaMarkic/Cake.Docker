@@ -2,7 +2,7 @@
 
 namespace Cake.Docker
 {
-    [CakeAliasCategory("Git")]
+    [CakeAliasCategory("Container")]
     public static partial class DockerAliases
     {
     }
