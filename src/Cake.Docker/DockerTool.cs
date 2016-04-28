@@ -13,13 +13,12 @@ namespace Cake.Docker
         where TSettings: ToolSettings
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NuGetTool{TSettings}"/> class.
+        /// Initializes a new instance of the <see cref="DockerTool{TSettings}"/> class.
         /// </summary>
         /// <param name="fileSystem">The file system.</param>
         /// <param name="environment">The environment.</param>
         /// <param name="processRunner">The process runner.</param>
         /// <param name="globber">The globber.</param>
-        /// <param name="resolver">The NuGet tool resolver.</param>
         protected DockerTool(
             IFileSystem fileSystem,
             ICakeEnvironment environment,
