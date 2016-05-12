@@ -51,6 +51,7 @@
     <Compile Include="Create\Docker.Aliases.Create.cs" />
     <Compile Include="Create\DockerCreateSettings.cs" />
     <Compile Include="Cp\Docker.Aliases.Cp.cs" />
+    <Compile Include="DockerResolver.cs" />
     <Compile Include="Ps\ContainerStatus.cs" />
     <Compile Include="Ps\Docker.Aliases.Ps.cs" />
     <Compile Include="Ps\DockerPsResult.cs" />
