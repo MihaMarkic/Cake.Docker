@@ -26,7 +26,7 @@ namespace Cake.Docker
         /// <param name="settings"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
-		public static void DockerRmi(this ICakeContext context, DockerRmiSettings settings, params string[] images)
+        public static void DockerRmi(this ICakeContext context, DockerRmiSettings settings, params string[] images)
         {
             if (context == null)
             {
