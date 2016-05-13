@@ -2,6 +2,7 @@
 using Cake.Core.IO;
 using Cake.Core.Tooling;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cake.Docker
 {
@@ -12,6 +13,9 @@ namespace Cake.Docker
     public abstract class DockerTool<TSettings>: Tool<TSettings>
         where TSettings: ToolSettings
     {
+        private readonly ICakeEnvironment _environment;
+        private readonly IFileSystem _fileSystem;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DockerTool{TSettings}"/> class.
         /// </summary>
@@ -26,6 +30,8 @@ namespace Cake.Docker
             IGlobber globber)
             : base(fileSystem, environment, processRunner, globber)
         {
+            _fileSystem = fileSystem;
+            _environment = environment;
         }
 
         /// <summary>
@@ -43,7 +49,15 @@ namespace Cake.Docker
         /// <returns>The tool executable name.</returns>
         protected override IEnumerable<string> GetToolExecutableNames()
         {
-            return new[] { "docker.exe" };
+            return new[] { "docker.exe", "docker" };
+        }
+
+        protected override IEnumerable<FilePath> GetAlternativeToolPaths(TSettings settings)
+        {
+            var path = DockerResolver.GetDockerPath(_fileSystem, _environment);
+            return path != null
+                ? new[] { path }
+                : Enumerable.Empty<FilePath>();
         }
     }
 }

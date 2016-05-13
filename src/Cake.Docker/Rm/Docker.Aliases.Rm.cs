@@ -26,7 +26,7 @@ namespace Cake.Docker
         /// <param name="containers"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
-		public static void DockerRm(this ICakeContext context, DockerRmSettings settings, params string[] containers)
+        public static void DockerRm(this ICakeContext context, DockerRmSettings settings, params string[] containers)
         {
             if (context == null)
             {

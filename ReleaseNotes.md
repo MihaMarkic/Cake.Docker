@@ -1,3 +1,9 @@
+# Cake.Docker 0.4.0
+- Added support for using the package on Linux machines.
+- Added [DockerLogin](https://docs.docker.com/engine/reference/commandline/login/)
+- Added [DockerPush](https://docs.docker.com/engine/reference/commandline/push/)
+- Added [DockerTag](https://docs.docker.com/engine/reference/commandline/tag/)
+
 # Cake.Docker 0.3.0
 - Added [DockerPs](https://docs.docker.com/engine/reference/commandline/ps/)
     - ports aren't included, size is approximate, created date is in text format, exited data is not included
