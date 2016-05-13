@@ -82,7 +82,7 @@
         /// </summary>
         public string Rm { get; set; }
         /// <summary>
-        /// Size of `/dev/shm`. The format is `<number><unit>`. `number` must be greater than `0`.  Unit is optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes), or `g` (gigabytes). If you omit the unit, the system uses bytes. If you omit the size entirely, the system uses `64m`.
+        /// Size of `/dev/shm`. The format is `&lt;number&gt;&lt;unit&gt;`. `number` must be greater than `0`.  Unit is optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes), or `g` (gigabytes). If you omit the unit, the system uses bytes. If you omit the size entirely, the system uses `64m`.
         /// </summary>
         public string[] ShmSize { get; set; }
         /// <summary>

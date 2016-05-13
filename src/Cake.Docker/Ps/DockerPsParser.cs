@@ -3,18 +3,49 @@ using System.Globalization;
 
 namespace Cake.Docker
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class DockerPsParser
     {
+        /// <summary>
+        /// Contains starting index of given field in an output line.
+        /// </summary>
         public class Indexes
         {
+            /// <summary>
+            /// 
+            /// </summary>
             public int ImageIndex { get; private set; }
+            /// <summary>
+            /// 
+            /// </summary>
             public int CommandIndex{ get; private set; }
+            /// <summary>
+            /// 
+            /// </summary>
             public int CreatedIndex { get; private set; }
+            /// <summary>
+            /// 
+            /// </summary>
             public int StatusIndex { get; private set; }
+            /// <summary>
+            /// 
+            /// </summary>
             public int PortsIndex { get; private set; }
+            /// <summary>
+            /// 
+            /// </summary>
             public int NameIndex { get; private set; }
+            /// <summary>
+            /// 
+            /// </summary>
             public int? SizeIndex { get; private set; }
-
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="line"></param>
+            /// <returns></returns>
             public static Indexes CreateFromFirstLine(string line)
             {
                 var result = new Indexes();
@@ -29,7 +60,12 @@ namespace Cake.Docker
                 return result;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="indexes"></param>
+        /// <param name="line"></param>
+        /// <returns></returns>
         public static DockerPsResult ParseLine(Indexes indexes, string line)
         {
             string statusText = line.Substring(indexes.StatusIndex, indexes.PortsIndex - indexes.StatusIndex).Trim();
@@ -47,7 +83,11 @@ namespace Cake.Docker
                 VirtualSize = indexes.SizeIndex.HasValue ? ParseVirtualSize(line.Substring(indexes.SizeIndex.Value)) : (long?)null,
             };
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="statusText"></param>
+        /// <returns></returns>
         public static ContainerStatus ParseContainerStatus(string statusText)
         {
             ContainerStatus result;
@@ -58,7 +98,11 @@ namespace Cake.Docker
             }
             return result;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="statusText"></param>
+        /// <returns></returns>
         public static int? ParseExitCode(string statusText)
         {
             string[] parts = statusText.Split(' ');
@@ -78,18 +122,33 @@ namespace Cake.Docker
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static long ParseNormalSize(string input)
         {
             string[] parts = input.Split('(');
             return ParseSize(parts[0].Trim());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static long ParseVirtualSize(string input)
         {
             string[] parts = input.Split('(');
             return ParseSize(parts[1].Replace(')', ' ').Replace("virtual", "").Trim());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static long ParseSize(string input)
         {
             string[] parts = input.Split(' ');

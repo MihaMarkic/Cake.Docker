@@ -5,29 +5,46 @@ using System.Collections.Generic;
 
 namespace Cake.Docker
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TSettings"></typeparam>
     public class GenericDockerRunner<TSettings> : DockerTool<TSettings>
         where TSettings: AutoToolSettings, new()
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileSystem"></param>
+        /// <param name="environment"></param>
+        /// <param name="processRunner"></param>
+        /// <param name="globber"></param>
         public GenericDockerRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IGlobber globber) 
             : base(fileSystem, environment, processRunner, globber)
         {
         }
 
-        public void Run(string command, TSettings settings, string[] containers)
+        /// <summary>
+        /// Runs given <paramref name="command"/> using given <paramref name=" settings"/> and <paramref name="additional"/>.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="settings"></param>
+        /// <param name="additional"></param>
+        public void Run(string command, TSettings settings, string[] additional)
         {
             if (string.IsNullOrEmpty(command))
             {
-                throw new ArgumentNullException("command");
+                throw new ArgumentNullException(nameof(command));
             }
             if (settings == null)
             {
-                throw new ArgumentNullException("settings");
+                throw new ArgumentNullException(nameof(settings));
             }
-            if (containers == null || containers.Length == 0)
+            if (additional == null || additional.Length == 0)
             {
-                throw new ArgumentNullException("containers");
+                throw new ArgumentNullException(nameof(additional));
             }
-            Run(settings, GetArguments(command, settings, containers));
+            Run(settings, GetArguments(command, settings, additional));
         }
 
         private ProcessArgumentBuilder GetArguments(string command, TSettings settings, string[] containers)
@@ -37,6 +54,15 @@ namespace Cake.Docker
             return builder;
         }
 
+        /// <summary>
+        /// Runs a command and returns a result based on processed output.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="command"></param>
+        /// <param name="settings"></param>
+        /// <param name="processOutput"></param>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
         public T[] RunWithResult<T>(string command, TSettings settings, 
             Func<IEnumerable<string>, T[]> processOutput,
             params string[] arguments)

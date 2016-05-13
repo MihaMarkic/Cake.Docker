@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace Cake.Docker
 {
+    /// <summary>
+    /// DockerCreate alias.
+    /// </summary>
     partial class DockerAliases
     {
 
@@ -12,7 +15,9 @@ namespace Cake.Docker
         /// Creates a new container using default settings.
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="path"></param>
+        /// <param name="image"></param>
+        /// <param name="args"></param>
+        /// <param name="command"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")] 
         public static void DockerCreate(this ICakeContext context, string image, string command, params string[] args)
@@ -24,8 +29,10 @@ namespace Cake.Docker
         /// Creates a new container given <paramref name="settings"/>.
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="path"></param>
         /// <param name="settings"></param>
+        /// <param name="image"></param>
+        /// <param name="command"></param>
+        /// <param name="args"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
         public static void DockerCreate(this ICakeContext context, DockerCreateSettings settings, string image, string command, params string[] args)

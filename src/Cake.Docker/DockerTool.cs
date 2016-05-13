@@ -52,6 +52,11 @@ namespace Cake.Docker
             return new[] { "docker.exe", "docker" };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <returns></returns>
         protected override IEnumerable<FilePath> GetAlternativeToolPaths(TSettings settings)
         {
             var path = DockerResolver.GetDockerPath(_fileSystem, _environment);

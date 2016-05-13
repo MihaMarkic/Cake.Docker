@@ -10,8 +10,8 @@ namespace Cake.Docker
         /// Copy files from/to using default settings.
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="path"></param>
-        /// <param name="settings"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
         public static void DockerCp(this ICakeContext context, string from, string to)
@@ -22,7 +22,8 @@ namespace Cake.Docker
         /// Copy files from/to container given <paramref name="settings"/>.
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="path"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         /// <param name="settings"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]

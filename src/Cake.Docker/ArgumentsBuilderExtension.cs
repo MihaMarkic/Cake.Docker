@@ -6,8 +6,19 @@ using System.Reflection;
 
 namespace Cake.Docker
 {
+    /// <summary>
+    /// Arguments builder
+    /// </summary>
     public static class ArgumentsBuilderExtension
     {
+        /// <summary>
+        /// Appends all arguments from <paramref name="settings"/> and <paramref name="arguments"/>.
+        /// </summary>
+        /// <typeparam name="TSettings"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="command"></param>
+        /// <param name="settings"></param>
+        /// <param name="arguments"></param>
         public static void AppendAll<TSettings>(this ProcessArgumentBuilder builder, string command, TSettings settings, string[] arguments)
             where TSettings: AutoToolSettings, new()
         {
@@ -47,6 +58,13 @@ namespace Cake.Docker
             }
         }
 
+        /// <summary>
+        /// Gets and processes <paramref name="property"/> value from <paramref name="settings"/>.
+        /// </summary>
+        /// <typeparam name="TSettings"></typeparam>
+        /// <param name="property"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
         public static IEnumerable<string> GetArgumentFromProperty<TSettings>(PropertyInfo property, TSettings settings)
             where TSettings : AutoToolSettings, new()
         {
@@ -70,17 +88,34 @@ namespace Cake.Docker
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static string GetArgumentFromBoolProperty(PropertyInfo property, bool value)
         {
             return value ? $"--{GetPropertyName(property.Name)}" : null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static string GetArgumentFromNullableIntProperty(PropertyInfo property, int? value)
         {
             return value.HasValue ? $"--{GetPropertyName(property.Name)}={value.Value}" : null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public static IEnumerable<string> GetArgumentFromDictionaryProperty(PropertyInfo property, Dictionary<string, string> values)
         {
             if (values != null)
@@ -92,6 +127,12 @@ namespace Cake.Docker
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public static IEnumerable<string> GetArgumentFromStringArrayProperty(PropertyInfo property, string[] values)
         {
             if (values != null)
@@ -103,6 +144,12 @@ namespace Cake.Docker
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static string GetArgumentFromStringProperty(PropertyInfo property, string value)
         {
             return !string.IsNullOrEmpty(value) ? $"--{GetPropertyName(property.Name)}=\"{value}\"" : null;

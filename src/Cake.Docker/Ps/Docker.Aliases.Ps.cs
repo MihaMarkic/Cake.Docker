@@ -12,8 +12,6 @@ namespace Cake.Docker
         /// Lists containers using default settings.
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="path"></param>
-        /// <param name="settings"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
         public static DockerPsResult[] DockerPs(this ICakeContext context)
@@ -24,7 +22,6 @@ namespace Cake.Docker
         /// Lists containers using the given <paramref name="settings"/>.
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="path"></param>
         /// <param name="settings"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
@@ -38,6 +35,11 @@ namespace Cake.Docker
             return runner.RunWithResult("ps", settings ?? new DockerPsSettings(), Processor);
         }
 
+        /// <summary>
+        /// Processed the output.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static DockerPsResult[] Processor(IEnumerable<string> input)
         {
             string[] lines = input.ToArray();
