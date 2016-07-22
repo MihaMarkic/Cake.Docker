@@ -80,6 +80,10 @@ namespace Cake.Docker
             {
                 yield return GetArgumentFromStringProperty(property, (string)property.GetValue(settings));
             }
+            else if (property.PropertyType == typeof(TimeSpan?))
+            {
+                yield return GetArgumentFromNullableTimeSpanProperty(property, (TimeSpan?)property.GetValue(settings));
+            }
             else if (property.PropertyType == typeof(string[]))
             {
                 foreach (string arg in GetArgumentFromStringArrayProperty(property, (string[])property.GetValue(settings)))
@@ -153,6 +157,27 @@ namespace Cake.Docker
         public static string GetArgumentFromStringProperty(PropertyInfo property, string value)
         {
             return !string.IsNullOrEmpty(value) ? $"--{GetPropertyName(property.Name)}=\"{value}\"" : null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string GetArgumentFromNullableTimeSpanProperty(PropertyInfo property, TimeSpan? value)
+        {
+            return value.HasValue ? $"--{GetPropertyName(property.Name)}={ConvertTimeSpan(value.Value)}" : null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string ConvertTimeSpan(TimeSpan source)
+        {
+            return $"{Math.Floor(source.TotalHours)}h{source.Minutes}m{source.Seconds}s";
         }
 
         /// <summary>

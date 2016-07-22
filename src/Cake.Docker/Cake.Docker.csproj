@@ -73,6 +73,8 @@
     <Compile Include="Rmi\DockerRmiSettings.cs" />
     <Compile Include="Rm\DockerRmSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SwarmInit\Docker.Aliases.SwarmInit.cs" />
+    <Compile Include="SwarmInit\DockerSwarmInitSettings.cs" />
     <Compile Include="Tag\Docker.Aliases.Tag.cs" />
     <Compile Include="Tag\DockerTagSettings.cs" />
   </ItemGroup>
@@ -86,6 +88,7 @@
     <Content Include="Login\args.txt" />
     <Content Include="Ps\args.txt" />
     <Content Include="Push\args.txt" />
+    <Content Include="SwarmInit\args.txt" />
     <Content Include="Tag\args.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

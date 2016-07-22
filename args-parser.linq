@@ -1,6 +1,6 @@
 <Query Kind="Statements" />
 
-string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\Build\args.txt";
+string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\SwarmInit\args.txt";
 string[] lines = File.ReadAllLines(file);
 
 int delimiter = -1;
@@ -26,15 +26,27 @@ foreach (string line in lines)
 		bool isBool;
 		bool isInt;
 		bool isArray;
+		bool isTimeSpan;
 		string equals;
 		if (eqPos >= 0)
 		{
 			isBool = false;
 			raw = cmd.Substring(pos, eqPos - pos);
-			equals = cmd.Substring(eqPos+1);
+			equals = cmd.Substring(eqPos + 1);
+			isArray = cmd.EndsWith("[]");
+			int tmp;
+			isInt = int.TryParse(equals, out tmp);
 		}
 		else
 		{
+			if (info.StartsWith("value", StringComparison.Ordinal))
+			{
+				info = info.Substring("value".Length).TrimStart();
+			}
+			else if (info.StartsWith("duration", StringComparison.Ordinal))
+			{ 
+				isTimeSpan = true;
+			}
 			isBool = true;
 			raw = cmd.Substring(pos);
 			equals = null;
@@ -60,9 +72,6 @@ foreach (string line in lines)
 				}
 			}
 		}
-		isArray = cmd.EndsWith("[]");
-		int tmp;
-		isInt = int.TryParse(equals, out tmp);
 		"/// <summary>".Dump();
 		("/// " + info).Dump();
 		"/// </summary>".Dump();
