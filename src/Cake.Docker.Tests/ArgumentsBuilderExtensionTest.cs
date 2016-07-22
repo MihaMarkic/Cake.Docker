@@ -43,7 +43,7 @@ namespace Cake.Docker.Tests
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromStringProperty(StringProperty, "tubo");
 
-                Assert.That(actual, Is.EqualTo("--string=\"tubo\""));
+                Assert.That(actual, Is.EqualTo("--string \"tubo\""));
             }
             [Test]
             public void WhenGivenNull_NullIsReturned()
@@ -61,7 +61,7 @@ namespace Cake.Docker.Tests
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayProperty(StringsProperty, new string[] { "tubo1", "tubo2" });
 
-                Assert.AreEqual(actual.ToArray(), new string[] { "--strings=\"tubo1\"", "--strings=\"tubo2\"" }); 
+                Assert.AreEqual(actual.ToArray(), new string[] { "--strings \"tubo1\"", "--strings \"tubo2\"" }); 
             }
             [Test]
             public void WhenGivenNull_EmptyArrayReturned()
@@ -79,7 +79,7 @@ namespace Cake.Docker.Tests
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromDictionaryProperty(StringsProperty, new Dictionary<string, string> { { "t1", "v1" }, { "t2", "v2" } });
 
-                Assert.AreEqual(actual.ToArray(), new string[] { "--strings=\"t1=v1\"", "--strings=\"t2=v2\"" });
+                Assert.AreEqual(actual.ToArray(), new string[] { "--strings \"t1=v1\"", "--strings \"t2=v2\"" });
             }
             [Test]
             public void WhenGivenNull_EmptyArrayReturned()
@@ -97,7 +97,7 @@ namespace Cake.Docker.Tests
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromNullableIntProperty(NullableIntProperty, 5);
 
-                Assert.That(actual, Is.EqualTo("--nullable-int=5"));
+                Assert.That(actual, Is.EqualTo("--nullable-int 5"));
             }
 
             [Test]
@@ -132,7 +132,7 @@ namespace Cake.Docker.Tests
                 builder.AppendAll("cmd", input, new string[] { "arg1" });
                 var actual = builder.Render();
 
-                Assert.That(actual, Is.EqualTo("cmd --string=\"tubo\" arg1"));
+                Assert.That(actual, Is.EqualTo("cmd --string \"tubo\" arg1"));
             }
 
         }

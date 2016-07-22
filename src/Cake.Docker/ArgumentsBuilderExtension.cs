@@ -111,7 +111,7 @@ namespace Cake.Docker
         /// <returns></returns>
         public static string GetArgumentFromNullableIntProperty(PropertyInfo property, int? value)
         {
-            return value.HasValue ? $"--{GetPropertyName(property.Name)}={value.Value}" : null;
+            return value.HasValue ? $"--{GetPropertyName(property.Name)} {value.Value}" : null;
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Cake.Docker
         /// <returns></returns>
         public static string GetArgumentFromStringProperty(PropertyInfo property, string value)
         {
-            return !string.IsNullOrEmpty(value) ? $"--{GetPropertyName(property.Name)}=\"{value}\"" : null;
+            return !string.IsNullOrEmpty(value) ? $"--{GetPropertyName(property.Name)} \"{value}\"" : null;
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace Cake.Docker
         /// <returns></returns>
         public static string GetArgumentFromNullableTimeSpanProperty(PropertyInfo property, TimeSpan? value)
         {
-            return value.HasValue ? $"--{GetPropertyName(property.Name)}={ConvertTimeSpan(value.Value)}" : null;
+            return value.HasValue ? $"--{GetPropertyName(property.Name)} {ConvertTimeSpan(value.Value)}" : null;
         }
 
         /// <summary>
