@@ -15,6 +15,8 @@ namespace Cake.Docker
         /// Connects a container to a network using default settings.
         /// </summary>
         /// <param name="context"></param>
+        /// <param name="network"></param>
+        /// <param name="container"></param>
         /// <param name="args"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")] 
@@ -28,6 +30,8 @@ namespace Cake.Docker
         /// </summary>
         /// <param name="context"></param>
         /// <param name="settings"></param>
+        /// <param name="network"></param>
+        /// <param name="container"></param>
         /// <param name="args"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]

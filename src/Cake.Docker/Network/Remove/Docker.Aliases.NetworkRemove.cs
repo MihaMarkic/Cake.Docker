@@ -12,10 +12,10 @@ namespace Cake.Docker
     partial class DockerAliases
     {
         /// <summary>
-        /// Removes a network given <paramref name="settings"/>.
+        /// Removes a network.
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="settings"></param>
+        /// <param name="network"></param>
         /// <param name="args"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
@@ -24,10 +24,10 @@ namespace Cake.Docker
             context.DockerNetworkRemove(new string[] { network }, args);
         }
         /// <summary>
-        /// Removes networks given <paramref name="settings"/>.
+        /// Removes networks.
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="settings"></param>
+        /// <param name="network"></param>
         /// <param name="args"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
