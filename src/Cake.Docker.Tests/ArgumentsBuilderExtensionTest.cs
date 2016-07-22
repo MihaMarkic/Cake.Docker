@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System;
 
 namespace Cake.Docker.Tests
 {
@@ -12,6 +13,7 @@ namespace Cake.Docker.Tests
         public static PropertyInfo StringProperty => GetProperty(nameof(TestSettings.String));
         public static PropertyInfo StringsProperty => GetProperty(nameof(TestSettings.Strings));
         public static PropertyInfo NullableIntProperty => GetProperty(nameof(TestSettings.NullableInt));
+        public static PropertyInfo NullableTimeSpanProperty => GetProperty(nameof(TestSettings.NullableTimeSpan));
         public static PropertyInfo BoolProperty => GetProperty(nameof(TestSettings.Bool));
         public static PropertyInfo GetProperty(string name)
         {
@@ -108,6 +110,25 @@ namespace Cake.Docker.Tests
                 Assert.That(actual, Is.Null);
             }
         }
+        [TestFixture]
+        public class GetArgumentFromNullableTimeSpanProperty
+        {
+            [Test]
+            public void WhenGivenValue_FormatsProperly()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromNullableTimeSpanProperty(NullableTimeSpanProperty, new TimeSpan(734, 18, 4));
+
+                Assert.That(actual, Is.EqualTo("--nullable-time-span 734h18m4s"));
+            }
+
+            [Test]
+            public void WhenGivenNull_NullIsReturned()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromNullableTimeSpanProperty(NullableTimeSpanProperty, null);
+
+                Assert.That(actual, Is.Null);
+            }
+        }
 
         [TestFixture]
         public class GetPropertyName
@@ -136,6 +157,17 @@ namespace Cake.Docker.Tests
             }
 
         }
+
+        [TestFixture]
+        public class ConvertTimeSpan
+        {
+            public void WhenGivenInput_ConvertsProperly()
+            {
+                var actual = ArgumentsBuilderExtension.ConvertTimeSpan(new TimeSpan(734, 18, 4));
+
+                Assert.That(actual, Is.EqualTo("734h18m4s"));
+            }
+        }
     }
 
     public class TestSettings: AutoToolSettings
@@ -143,6 +175,7 @@ namespace Cake.Docker.Tests
         public string String { get; set; }
         public string[] Strings { get; set; }
         public int? NullableInt { get; set; }
+        public TimeSpan? NullableTimeSpan { get; set; }
         public bool Bool { get; set; }
     }
 }
