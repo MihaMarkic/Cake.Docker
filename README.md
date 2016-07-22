@@ -12,6 +12,14 @@ Including addin in cake script is easy.
 ```
 ## Commands supported
 
+- [DockerNetworkCreate](https://docs.docker.com/engine/reference/commandline/network_create/) v0.5.0
+- [DockerNetworkConnect](https://docs.docker.com/engine/reference/commandline/network_connect/) v0.5.0
+- [DockerNetworkDisconnect](https://docs.docker.com/engine/reference/commandline/network_disconnect/) v0.5.0
+- [DockerNetworkRm](https://docs.docker.com/engine/reference/commandline/network_rm/) v0.5.0
+- [DockerSwarmInit](https://docs.docker.com/engine/reference/commandline/swarm_init/) v0.5.0
+- [DockerSwarmJoin](https://docs.docker.com/engine/reference/commandline/swarm_join/) v0.5.0
+- [DockerSwarmLeave](https://docs.docker.com/engine/reference/commandline/swarm_leave/) v0.5.0
+- [DockerSwarmUpdate](https://docs.docker.com/engine/reference/commandline/swarm_update/) v0.5.0
 - [DockerLogin](https://docs.docker.com/engine/reference/commandline/login/) v0.4.0
 - [DockerPush](https://docs.docker.com/engine/reference/commandline/push/) v0.4.0
 - [DockerTag](https://docs.docker.com/engine/reference/commandline/tag/) v0.4.0

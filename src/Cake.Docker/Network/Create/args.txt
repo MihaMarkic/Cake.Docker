@@ -1,0 +1,12 @@
+﻿ --aux-address value    auxiliary ipv4 or ipv6 addresses used by Network driver (default map[])
+ --driver string        Driver to manage the Network (default "bridge")
+ --gateway value        ipv4 or ipv6 Gateway for the master subnet (default [])
+ --help                 Print usage
+ --internal             restricts external access to the network
+ --ip-range value       allocate container ip from a sub-range (default [])
+ --ipam-driver string   IP Address Management Driver (default "default")
+ --ipam-opt value       set IPAM driver specific options (default map[])
+ --ipv6                 enable IPv6 networking
+ --label value          Set metadata on a network (default [])
+ --opt value            Set driver specific options (default map[])
+ --subnet value         subnet in CIDR format that represents a network segment (default [])

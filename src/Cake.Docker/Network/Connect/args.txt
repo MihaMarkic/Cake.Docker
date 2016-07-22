@@ -1,0 +1,5 @@
+﻿--alias value           Add network-scoped alias for the container (default [])
+--ip string             IP Address
+--ip6 string            IPv6 Address
+--link value            Add link to another container (default [])
+--link-local-ip value   Add a link-local address for the container (default [])

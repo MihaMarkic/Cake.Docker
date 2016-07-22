@@ -52,8 +52,16 @@
     <Compile Include="Create\DockerCreateSettings.cs" />
     <Compile Include="Cp\Docker.Aliases.Cp.cs" />
     <Compile Include="DockerResolver.cs" />
+    <Compile Include="EmptySettings.cs" />
     <Compile Include="Login\Docker.Aliases.Login.cs" />
     <Compile Include="Login\DockerLoginSettings.cs" />
+    <Compile Include="Network\Remove\Docker.Aliases.NetworkRemove.cs" />
+    <Compile Include="Network\Disconnect\Docker.Aliases.NetworkDisconnect.cs" />
+    <Compile Include="Network\Disconnect\DockerNetworkDisconnectSettings.cs" />
+    <Compile Include="Network\Create\Docker.Aliases.NetworkCreate.cs" />
+    <Compile Include="Network\Create\DockerNetworkCreateSettings.cs" />
+    <Compile Include="Network\Connect\Docker.Aliases.NetworkConnect.cs" />
+    <Compile Include="Network\Connect\DockerNetworkConnectSettings.cs" />
     <Compile Include="Ps\ContainerStatus.cs" />
     <Compile Include="Ps\Docker.Aliases.Ps.cs" />
     <Compile Include="Ps\DockerPsResult.cs" />
@@ -92,6 +100,9 @@
     <Content Include="Build\args.txt" />
     <Content Include="Create\args.txt" />
     <Content Include="Login\args.txt" />
+    <Content Include="Network\Disconnect\args.txt" />
+    <Content Include="Network\Create\args.txt" />
+    <Content Include="Network\Connect\args.txt" />
     <Content Include="Ps\args.txt" />
     <Content Include="Push\args.txt" />
     <Content Include="Swarm\Init\args.txt" />

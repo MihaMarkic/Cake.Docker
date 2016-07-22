@@ -1,10 +1,10 @@
 <Query Kind="Statements" />
 
-string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\SwarmInit\args.txt";
+string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\Network\Connect\args.txt";
 string[] lines = File.ReadAllLines(file);
 
 Regex regex = new Regex(
-	  "--(?<Argument>[a-z,\\-]+)(?:\\s(?<Type>\\w+))?\\s+(?<Info>.+" +
+	  "--(?<Argument>[a-z0-9,\\-]+)(?:\\s(?<Type>\\w+))?\\s+(?<Info>.+" +
 	  ")",
 	RegexOptions.IgnoreCase
 	| RegexOptions.Multiline
@@ -58,6 +58,15 @@ foreach (string line in lines)
 				netType = "int";
 				break;
 			case "value":
+				if (info.EndsWith("[])"))
+                {
+					netType = "string[]";
+				}
+				else
+				{
+					netType = "string";
+				}
+				break;
 			case "string":
 				netType = "string";
 				break;

@@ -1,0 +1,1 @@
+﻿--force   Force the container to disconnect from a network
