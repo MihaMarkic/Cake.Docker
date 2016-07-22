@@ -40,7 +40,7 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException(nameof(settings));
             }
-            if (additional == null || additional.Length == 0)
+            if (additional == null)
             {
                 throw new ArgumentNullException(nameof(additional));
             }

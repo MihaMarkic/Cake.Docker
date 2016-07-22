@@ -5,10 +5,10 @@ namespace Cake.Docker
     /// <summary>
     /// Settings for docker swarm init.
     /// </summary>
-    public sealed class DockerSwarmInitSettings : AutoToolSettings
+    public sealed class DockerSwarmUpdateSettings : AutoToolSettings
     {
         /// <summary>
-        /// Auto acceptance policy (default worker)
+        /// Auto acceptance policy (worker, manager or none)
         /// </summary>
         public string AutoAccept { get; set; }
         /// <summary>
@@ -24,21 +24,9 @@ namespace Cake.Docker
         /// </summary>
         public string ExternalCa { get; set; }
         /// <summary>
-        /// Force create a new cluster from current state.
-        /// </summary>
-        public bool ForceNewCluster { get; set; }
-        /// <summary>
-        /// Print usage
-        /// </summary>
-        public bool Help { get; set; }
-        /// <summary>
-        /// Listen address (default 0.0.0.0:2377)
-        /// </summary>
-        public string ListenAddr { get; set; }
-        /// <summary>
         /// Set secret value needed to accept nodes into cluster
         /// </summary>
-        public bool Secret { get; set; }
+        public string Secret { get; set; }
         /// <summary>
         /// Task history retention limit (default 10)
         /// </summary>

@@ -58,6 +58,7 @@ foreach (string line in lines)
 				netType = "int";
 				break;
 			case "value":
+			case "string":
 				netType = "string";
 				break;
 			default:

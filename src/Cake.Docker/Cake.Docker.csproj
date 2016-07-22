@@ -73,8 +73,14 @@
     <Compile Include="Rmi\DockerRmiSettings.cs" />
     <Compile Include="Rm\DockerRmSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SwarmInit\Docker.Aliases.SwarmInit.cs" />
-    <Compile Include="SwarmInit\DockerSwarmInitSettings.cs" />
+    <Compile Include="Swarm\Init\Docker.Aliases.SwarmInit.cs" />
+    <Compile Include="Swarm\Init\DockerSwarmInitSettings.cs" />
+    <Compile Include="Swarm\Update\Docker.Aliases.SwarmUpdate.cs" />
+    <Compile Include="Swarm\Update\DockerSwarmUpdateSettings.cs" />
+    <Compile Include="Swarm\Leave\Docker.Aliases.SwarmLeave.cs" />
+    <Compile Include="Swarm\Leave\DockerSwarmLeaveSettings.cs" />
+    <Compile Include="Swarm\Join\Docker.Aliases.SwarmJoin.cs" />
+    <Compile Include="Swarm\Join\DockerSwarmJoinSettings.cs" />
     <Compile Include="Tag\Docker.Aliases.Tag.cs" />
     <Compile Include="Tag\DockerTagSettings.cs" />
   </ItemGroup>
@@ -88,9 +94,13 @@
     <Content Include="Login\args.txt" />
     <Content Include="Ps\args.txt" />
     <Content Include="Push\args.txt" />
-    <Content Include="SwarmInit\args.txt" />
+    <Content Include="Swarm\Init\args.txt" />
+    <Content Include="Swarm\Update\args.txt" />
+    <Content Include="Swarm\Leave\args.txt" />
+    <Content Include="Swarm\Join\args.txt" />
     <Content Include="Tag\args.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

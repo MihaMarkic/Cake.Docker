@@ -1,0 +1,4 @@
+﻿--ca-hash string      Hash of the Root Certificate Authority certificate used for trusted join
+--listen-addr value   Listen address (default 0.0.0.0:2377)
+--manager             Try joining as a manager.
+--secret string       Secret for node acceptance

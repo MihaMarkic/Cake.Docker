@@ -1,0 +1,8 @@
+﻿--auto-accept value               Auto acceptance policy (default worker)
+--cert-expiry duration            Validity period for node certificates (default 2160h0m0s)
+--dispatcher-heartbeat duration   Dispatcher heartbeat period (default 5s)
+--external-ca value               Specifications of one or more certificate signing endpoints
+--force-new-cluster               Force create a new cluster from current state.
+--listen-addr value               Listen address (default 0.0.0.0:2377)
+--secret string                   Set secret value needed to accept nodes into cluster
+--task-history-limit int          Task history retention limit (default 10)
