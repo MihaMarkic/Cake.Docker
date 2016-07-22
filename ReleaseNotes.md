@@ -1,3 +1,14 @@
+# Cake.Docker 0.5.0
+- WARNING: Updated passing parameter values. Equality '=' is replaced with a space ' '.
+- Added [DockerNetworkCreate](https://docs.docker.com/engine/reference/commandline/network_create/) v0.5.0
+- Added [DockerNetworkConnect](https://docs.docker.com/engine/reference/commandline/network_connect/) v0.5.0
+- Added [DockerNetworkDisconnect](https://docs.docker.com/engine/reference/commandline/network_disconnect/) v0.5.0
+- Added [DockerNetworkRm](https://docs.docker.com/engine/reference/commandline/network_rm/) v0.5.0
+- Added [DockerSwarmInit](https://docs.docker.com/engine/reference/commandline/swarm_init/) v0.5.0
+- Added [DockerSwarmJoin](https://docs.docker.com/engine/reference/commandline/swarm_join/) v0.5.0
+- Added [DockerSwarmLeave](https://docs.docker.com/engine/reference/commandline/swarm_leave/) v0.5.0
+- Added [DockerSwarmUpdate](https://docs.docker.com/engine/reference/commandline/swarm_update/) v0.5.0
+
 # Cake.Docker 0.4.0
 - Added support for using the package on Linux machines.
 - Added [DockerLogin](https://docs.docker.com/engine/reference/commandline/login/)
