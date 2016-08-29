@@ -6,7 +6,7 @@
     public sealed class DockerSaveSettings: AutoToolSettings
     {
         /// <summary>
-        ///  Seconds to wait for stop before killing it.
+        /// Write to a file, instead of STDOUT
         /// </summary>
         public string OutputString { get; set; }
     }

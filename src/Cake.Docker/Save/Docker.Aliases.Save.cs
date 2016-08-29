@@ -7,7 +7,7 @@ namespace Cake.Docker
     partial class DockerAliases
     {
         /// <summary>
-        /// Stops an array of <paramref name="images"/> using the give <paramref name="settings"/>.
+        /// Save one or more images to a tar archive (streamed to STDOUT by default).
         /// </summary>
         /// <param name="context"></param>
         /// <param name="settings"></param>
