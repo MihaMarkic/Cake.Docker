@@ -12,8 +12,8 @@ Including addin in cake script is easy.
 ```
 ## Commands supported
 
-- [DockerLoad](https://docs.docker.com/engine/reference/commandline/load/) v0.6.0)
-- [DockerSave](https://docs.docker.com/engine/reference/commandline/save/) v0.6.0)
+- [DockerLoad](https://docs.docker.com/engine/reference/commandline/load/) v0.6.0
+- [DockerSave](https://docs.docker.com/engine/reference/commandline/save/) v0.6.0
 - [DockerNetworkCreate](https://docs.docker.com/engine/reference/commandline/network_create/) v0.5.0
 - [DockerNetworkConnect](https://docs.docker.com/engine/reference/commandline/network_connect/) v0.5.0
 - [DockerNetworkDisconnect](https://docs.docker.com/engine/reference/commandline/network_disconnect/) v0.5.0
