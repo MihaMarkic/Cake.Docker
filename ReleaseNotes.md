@@ -1,3 +1,8 @@
+# Cake.Docker 0.6.0
+- Fixed a bug in DockerStop (it'd accept DockerBuildSettings)
+- Added [DockerLoad](https://docs.docker.com/engine/reference/commandline/load/)
+- Added [DockerSave](https://docs.docker.com/engine/reference/commandline/save/)
+
 # Cake.Docker 0.5.0
 - WARNING: Updated passing parameter values. Equality '=' is replaced with a space ' '.
 - Added [DockerNetworkCreate](https://docs.docker.com/engine/reference/commandline/network_create/) v0.5.0
