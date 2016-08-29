@@ -75,6 +75,8 @@
     <Compile Include="Build\DockerBuildSettings.cs" />
     <Compile Include="Push\Docker.Aliases.Push.cs" />
     <Compile Include="Push\DockerPushSettings.cs" />
+    <Compile Include="Load\Docker.Aliases.Load.cs" />
+    <Compile Include="Load\DockerLoadSettings.cs" />
     <Compile Include="Save\Docker.Aliases.Save.cs" />
     <Compile Include="Save\DockerSaveSettings.cs" />
     <Compile Include="Stop\Docker.Aliases.Stop.cs" />
