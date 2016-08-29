@@ -11,7 +11,6 @@ namespace Cake.Docker
         /// </summary>
         /// <param name="context"></param>
         /// <param name="settings"></param>
-        /// <param name="images"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
 		public static void DockerLoad(this ICakeContext context, DockerLoadSettings settings)

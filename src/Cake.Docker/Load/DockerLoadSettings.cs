@@ -9,6 +9,6 @@
         /// Read from tar archive file, instead of STDIN.
         /// The tarball may be compressed with gzip, bzip, or xz
         /// </summary>
-        public string InputString { get; set; }
+        public string Input { get; set; }
     }
 }

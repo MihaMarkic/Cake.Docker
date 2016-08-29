@@ -8,6 +8,6 @@
         /// <summary>
         /// Write to a file, instead of STDOUT
         /// </summary>
-        public string OutputString { get; set; }
+        public string Output { get; set; }
     }
 }
