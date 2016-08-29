@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeAliasCategory("Docker")]
         public static void DockerStop(this ICakeContext context, params string[] containers)
         {
-            DockerStop(context, new DockerBuildSettings(), containers);
+            DockerStop(context, new DockerStopSettings(), containers);
         }
         
         /// <summary>
@@ -26,7 +26,7 @@ namespace Cake.Docker
         /// <param name="settings"></param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
-		public static void DockerStop(this ICakeContext context, DockerBuildSettings settings, params string[] containers)
+		public static void DockerStop(this ICakeContext context, DockerStopSettings settings, params string[] containers)
         {
             if (context == null)
             {
@@ -36,8 +36,8 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("containers");
             }
-            var runner = new GenericDockerRunner<DockerBuildSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Run("stop", settings ?? new DockerBuildSettings(), containers);
+            var runner = new GenericDockerRunner<DockerStopSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            runner.Run("stop", settings ?? new DockerStopSettings(), containers);
         }
     }
 }
