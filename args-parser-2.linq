@@ -1,6 +1,6 @@
 <Query Kind="Statements" />
 
-string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\Network\Connect\args.txt";
+string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\Network\Disconnect\args.txt";
 string[] lines = File.ReadAllLines(file);
 
 Regex regex = new Regex(
