@@ -26,7 +26,7 @@ namespace Cake.Docker
             {
                 throw new ArgumentOutOfRangeException("at least one service-number pair has to be specified");
             }
-            var runner = new GenericDockerRunner<EmptySettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new GenericDockerComposeRunner<EmptySettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
             runner.Run("docker-compose scale", new EmptySettings(), numbers);
         }
     }

@@ -14,6 +14,7 @@ namespace Cake.Docker
         /// Runs docker-compose create with default settings.
         /// </summary>
         /// <param name="context">The context.</param>
+        /// <param name="path">The path.</param>
         [CakeMethodAlias]
         public static void DockerComposeCreate(this ICakeContext context, string path)
         {
@@ -37,7 +38,7 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("path");
             }
-            var runner = new GenericDockerRunner<DockerComposeCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new GenericDockerComposeRunner<DockerComposeCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
             runner.Run("docker-compose create", settings ?? new DockerComposeCreateSettings(), new string[] { path });
         }
 

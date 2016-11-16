@@ -9,6 +9,7 @@
         /// Detached mode: Run container in the background, print new container name.
         /// </summary>
         [AutoProperty(Format = "-d", OnlyWhenTrue = true)]
+        public bool DetachedMode { get; set; }
         /// <summary>
         /// Produce monochrome output.
         /// </summary>
