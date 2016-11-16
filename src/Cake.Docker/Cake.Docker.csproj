@@ -46,10 +46,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgumentsBuilderExtension.cs" />
+    <Compile Include="AutoPropertyAttribute.cs" />
     <Compile Include="AutoToolSettings.cs" />
-    <Compile Include="Compose\Build\Docker.Aliases.ComposeBuild.cs" />
+    <Compile Include="Compose\Up\Docker.Aliases.ComposeUp.cs" />
+    <Compile Include="Compose\Up\DockerComposeUpSettings.cs" />
+    <Compile Include="Compose\Unpause\Docker.Aliases.ComposeUnpause.cs" />
+    <Compile Include="Compose\Stop\Docker.Aliases.ComposeStop.cs" />
+    <Compile Include="Compose\Stop\DockerComposeStopSettings.cs" />
+    <Compile Include="Compose\Start\Docker.Aliases.ComposeStart.cs" />
+    <Compile Include="Compose\Scale\Docker.Aliases.ComposeScale.cs" />
+    <Compile Include="Compose\Run\Docker.Aliases.ComposeRun.cs" />
+    <Compile Include="Compose\Run\DockerComposeRunSettings.cs" />
+    <Compile Include="Compose\Rm\Docker.Aliases.ComposeRm.cs" />
+    <Compile Include="Compose\Rm\DockerComposeRmSettings.cs" />
+    <Compile Include="Compose\Restart\Docker.Aliases.ComposeRestart.cs" />
+    <Compile Include="Compose\Restart\DockerComposeRestartSettings.cs" />
+    <Compile Include="Compose\Pull\Docker.Aliases.ComposePull.cs" />
+    <Compile Include="Compose\Pull\DockerComposePullSettings.cs" />
+    <Compile Include="Compose\Build\Docker.Aliases.ComposePause.cs" />
+    <Compile Include="Compose\Pause\Docker.Aliases.ComposePause.cs" />
     <Compile Include="Compose\Build\DockerComposeBuildSettings.cs" />
-    <Compile Include="Compose\Create\Docker.Aliases.ComposeBuild.cs" />
+    <Compile Include="Compose\Kill\Docker.Aliases.ComposeKill.cs" />
+    <Compile Include="Compose\Kill\DockerComposeKillSettings.cs" />
+    <Compile Include="Compose\Down\Docker.Aliases.ComposeDown.cs" />
+    <Compile Include="Compose\Down\DockerComposeDownSettings.cs" />
+    <Compile Include="Compose\Create\Docker.Aliases.ComposeCreate.cs" />
     <Compile Include="Compose\Create\DockerComposeCreateSettings.cs" />
     <Compile Include="Cp\DockerCpSettings.cs" />
     <Compile Include="Create\Docker.Aliases.Create.cs" />
@@ -107,7 +128,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Build\args.txt" />
+    <Content Include="Compose\Up\args.txt" />
+    <Content Include="Compose\Stop\args.txt" />
+    <Content Include="Compose\Run\args.txt" />
+    <Content Include="Compose\Rm\args.txt" />
+    <Content Include="Compose\Restart\args.txt" />
+    <Content Include="Compose\Pull\args.txt" />
     <Content Include="Compose\Build\args.txt" />
+    <Content Include="Compose\Kill\args.txt" />
+    <Content Include="Compose\Down\args.txt" />
     <Content Include="Compose\Create\args.txt" />
     <Content Include="Create\args.txt" />
     <Content Include="Login\args.txt" />

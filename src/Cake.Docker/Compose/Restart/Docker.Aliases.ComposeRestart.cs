@@ -5,30 +5,30 @@ using System;
 namespace Cake.Docker
 {
     /// <summary>
-    /// Contains functionality for working with docker-compose build command.
+    /// Contains functionality for working with docker-compose restart command.
     /// </summary>
     [CakeAliasCategory("Docker")]
     partial class DockerAliases
     {
         /// <summary>
-        /// Builds an image using default settings.
+        /// Runs docker-compose restart with default settings.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="path">The path.</param>
         [CakeMethodAlias]
-        public static void DockerComposeBuild(this ICakeContext context, string path)
+        public static void DockerComposeRestart(this ICakeContext context, string path)
         {
-            DockerComposeBuild(context, new DockerComposeBuildSettings(), path);
+            DockerComposeRestart(context, new DockerComposeRestartSettings(), path);
         }
 
         /// <summary>
-        /// Builds an image given <paramref name="settings"/>.
+        /// Runs docker-compose restart given <paramref name="settings"/>.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="path">The path.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeBuild(this ICakeContext context, DockerComposeBuildSettings settings, string path)
+        public static void DockerComposeRestart(this ICakeContext context, DockerComposeRestartSettings settings, string path)
         {
             if (context == null)
             {
@@ -38,8 +38,8 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("path");
             }
-            var runner = new GenericDockerRunner<DockerComposeBuildSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Run("docker-compose build", settings ?? new DockerComposeBuildSettings(), new string[] { path });
+            var runner = new GenericDockerRunner<DockerComposeRestartSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            runner.Run("docker-compose restart", settings ?? new DockerComposeRestartSettings(), new string[] { path });
         }
 
     }

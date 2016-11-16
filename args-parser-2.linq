@@ -1,6 +1,6 @@
 <Query Kind="Statements" />
 
-string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\Compose\Build\args.txt";
+string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\Compose\Stop\args.txt";
 string[] lines = File.ReadAllLines(file);
 
 Regex regex = new Regex(
@@ -12,8 +12,24 @@ Regex regex = new Regex(
 	| RegexOptions.Compiled
 	);
 
-foreach (string line in lines)
+Dictionary<string, List<string>> data = new Dictionary<string, List<string>>();
+List<string> current = null;
+foreach (string line in lines.Where(l =>!string.IsNullOrEmpty(l)))
 {
+	if (line.StartsWith("-"))
+	{
+		current = new List<string>();
+		data.Add(line, current);
+	}
+	else
+	{
+		current.Add(line.Trim());
+	}
+}
+foreach (var pair in data)
+{
+	string line = pair.Key;
+	
 	var match = regex.Match(line);
 	if (!match.Success)
 	{
@@ -45,8 +61,14 @@ foreach (string line in lines)
 				}
 			}
 		}
+		List<string> comment = new List<string>();
+		comment.Add(info);
+		comment.AddRange(pair.Value.Select(l => $"\t{l}"));
 		"/// <summary>".Dump();
-		("/// " + info).Dump();
+		foreach (string commentLine in comment)
+		{
+			("/// " + commentLine).Dump();
+		}
 		"/// </summary>".Dump();
 		string netType;
 		switch (type)

@@ -11,10 +11,9 @@ namespace Cake.Docker
     partial class DockerAliases
     {
         /// <summary>
-        /// Builds an image using default settings.
+        /// Runs docker-compose create with default settings.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="path">The path.</param>
         [CakeMethodAlias]
         public static void DockerComposeCreate(this ICakeContext context, string path)
         {
@@ -22,7 +21,7 @@ namespace Cake.Docker
         }
 
         /// <summary>
-        /// Builds an image given <paramref name="settings"/>.
+        /// Runs docker-compose create given <paramref name="settings"/>.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="path">The path.</param>

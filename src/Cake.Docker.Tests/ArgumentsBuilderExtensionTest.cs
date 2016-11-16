@@ -15,6 +15,9 @@ namespace Cake.Docker.Tests
         public static PropertyInfo NullableIntProperty => GetProperty(nameof(TestSettings.NullableInt));
         public static PropertyInfo NullableTimeSpanProperty => GetProperty(nameof(TestSettings.NullableTimeSpan));
         public static PropertyInfo BoolProperty => GetProperty(nameof(TestSettings.Bool));
+        public static PropertyInfo DecoratedStringProperty => GetProperty(nameof(TestSettings.DecoratedString));
+        public static PropertyInfo DecoratedBoolProperty => GetProperty(nameof(TestSettings.DecoratedBool));
+        public static PropertyInfo DecoratedStringsProperty => GetProperty(nameof(TestSettings.DecoratedStrings));
         public static PropertyInfo GetProperty(string name)
         {
             return typeof(TestSettings).GetProperty(name, BindingFlags.Public | BindingFlags.Instance);
@@ -170,6 +173,62 @@ namespace Cake.Docker.Tests
         }
     }
 
+    [TestFixture]
+    public class GetAutoPropertyAttributeOrNull: ArgumentsBuilderExtensionTest
+    {
+        [Test]
+        public void WhenDecorated_ReturnsAutoPropertyAttribute()
+        {
+            var actual = ArgumentsBuilderExtension.GetAutoPropertyAttributeOrNull(DecoratedStringProperty);
+
+            Assert.That(actual.Format, Is.EqualTo("-s {1}"));
+        }
+        [Test]
+        public void WhenNotDecorated_ReturnsNull()
+        {
+            var actual = ArgumentsBuilderExtension.GetAutoPropertyAttributeOrNull(StringProperty);
+
+            Assert.That(actual, Is.Null);
+        }
+    }
+
+    [TestFixture]
+    public class GetArgumentFromAutoProperty: ArgumentsBuilderExtensionTest
+    {
+        [Test]
+        public void WhenGivenValue_FormatsProperly()
+        {
+            var attribute = ArgumentsBuilderExtension.GetAutoPropertyAttributeOrNull(DecoratedStringProperty);
+            var actual = ArgumentsBuilderExtension.GetArgumentFromAutoProperty(attribute, DecoratedStringProperty, "SIGNAL");
+
+            Assert.That(actual, Is.EqualTo("-s SIGNAL"));
+        }
+        [Test]
+        public void WhenOnlyWhenTrueValue_AndIsFalse_ReturnsEmptyString()
+        {
+            var attribute = ArgumentsBuilderExtension.GetAutoPropertyAttributeOrNull(DecoratedBoolProperty);
+            var actual = ArgumentsBuilderExtension.GetArgumentFromAutoProperty(attribute, DecoratedBoolProperty, false);
+
+            Assert.That(actual, Is.Empty);
+        }
+        [Test]
+        public void WhenOnlyWhenTrueValue_AndIsTrue_FormatsProperly()
+        {
+            var attribute = ArgumentsBuilderExtension.GetAutoPropertyAttributeOrNull(DecoratedBoolProperty);
+            var actual = ArgumentsBuilderExtension.GetArgumentFromAutoProperty(attribute, DecoratedBoolProperty, true);
+
+            Assert.That(actual, Is.EqualTo("-v"));
+        }
+        [Test]
+        public void WhenDecoratedStrings_FormatsProperly()
+        {
+            var attribute = ArgumentsBuilderExtension.GetAutoPropertyAttributeOrNull(DecoratedStringsProperty);
+            var actual = ArgumentsBuilderExtension.GetArgumentFromAutoProperty(attribute, DecoratedStringsProperty, new string[] {"One=1", "Two=2" });
+
+            Assert.That(actual, Is.EqualTo("-e One=1 -e Two=2"));
+        }
+    }
+
     public class TestSettings: AutoToolSettings
     {
         public string String { get; set; }
@@ -177,5 +236,11 @@ namespace Cake.Docker.Tests
         public int? NullableInt { get; set; }
         public TimeSpan? NullableTimeSpan { get; set; }
         public bool Bool { get; set; }
+        [AutoProperty(Format = "-s {1}")]
+        public string DecoratedString { get; set; }
+        [AutoProperty(Format = "-v", OnlyWhenTrue = true)]
+        public bool DecoratedBool { get; set; }
+        [AutoProperty(Format = "-e {1}")]
+        public string[] DecoratedStrings { get; set; }
     }
 }

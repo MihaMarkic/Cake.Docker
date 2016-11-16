@@ -3,6 +3,7 @@ using Cake.Core.IO;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Linq;
 
 namespace Cake.Docker
 {
@@ -68,29 +69,76 @@ namespace Cake.Docker
         public static IEnumerable<string> GetArgumentFromProperty<TSettings>(PropertyInfo property, TSettings settings)
             where TSettings : AutoToolSettings, new()
         {
-            if (property.PropertyType == typeof(bool))
+            var autoPropertyAttribute = GetAutoPropertyAttributeOrNull(property);
+            if (autoPropertyAttribute != null)
             {
-                yield return GetArgumentFromBoolProperty(property, (bool)property.GetValue(settings));
+                yield return GetArgumentFromAutoProperty(autoPropertyAttribute, property, property.GetValue(settings));
             }
-            else if (property.PropertyType == typeof(int?))
+            else
             {
-                yield return GetArgumentFromNullableIntProperty(property, (int?)property.GetValue(settings));
-            }
-            else if (property.PropertyType == typeof(string))
-            {
-                yield return GetArgumentFromStringProperty(property, (string)property.GetValue(settings));
-            }
-            else if (property.PropertyType == typeof(TimeSpan?))
-            {
-                yield return GetArgumentFromNullableTimeSpanProperty(property, (TimeSpan?)property.GetValue(settings));
-            }
-            else if (property.PropertyType == typeof(string[]))
-            {
-                foreach (string arg in GetArgumentFromStringArrayProperty(property, (string[])property.GetValue(settings)))
+                if (property.PropertyType == typeof(bool))
                 {
-                    yield return arg;
+                    yield return GetArgumentFromBoolProperty(property, (bool)property.GetValue(settings));
+                }
+                else if (property.PropertyType == typeof(int?))
+                {
+                    yield return GetArgumentFromNullableIntProperty(property, (int?)property.GetValue(settings));
+                }
+                else if (property.PropertyType == typeof(string))
+                {
+                    yield return GetArgumentFromStringProperty(property, (string)property.GetValue(settings));
+                }
+                else if (property.PropertyType == typeof(TimeSpan?))
+                {
+                    yield return GetArgumentFromNullableTimeSpanProperty(property, (TimeSpan?)property.GetValue(settings));
+                }
+                else if (property.PropertyType == typeof(string[]))
+                {
+                    foreach (string arg in GetArgumentFromStringArrayProperty(property, (string[])property.GetValue(settings)))
+                    {
+                        yield return arg;
+                    }
                 }
             }
+        }
+        /// <summary>
+        /// Uses format specified in attribute to format the argument.
+        /// </summary>
+        /// <param name="attribute"></param>
+        /// <param name="property"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string GetArgumentFromAutoProperty(AutoPropertyAttribute attribute, PropertyInfo property, object value)
+        {
+            if (value == null)
+            {
+                return null;
+            }
+
+            string result = string.Format(attribute.Format, GetPropertyName(property.Name), value);
+            if (attribute.OnlyWhenTrue)
+            {
+                bool boolvalue = (bool)value;
+                return boolvalue ? result : string.Empty;
+            }
+            else
+            {
+                if (property.PropertyType == typeof(string[]))
+                {
+                    var strings = (string[])value;
+                    result = string.Join(" ", strings.Select(s => string.Format(attribute.Format, GetPropertyName(property.Name), s)));
+                }
+            }
+            return result;
+        }
+        /// <summary>
+        /// Retrieve <see cref="AutoPropertyAttribute"/> from property or null if there isn't one.
+        /// </summary>
+        /// <param name="property"></param>
+        /// <returns></returns>
+        public static AutoPropertyAttribute GetAutoPropertyAttributeOrNull(PropertyInfo property)
+        {
+            return property.GetCustomAttribute<AutoPropertyAttribute>();
         }
         /// <summary>
         /// 
