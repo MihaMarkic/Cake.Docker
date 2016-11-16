@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="ArgumentsBuilderExtension.cs" />
     <Compile Include="AutoToolSettings.cs" />
+    <Compile Include="Compose\Build\Docker.Aliases.ComposeBuild.cs" />
+    <Compile Include="Compose\Build\DockerComposeBuildSettings.cs" />
     <Compile Include="Cp\DockerCpSettings.cs" />
     <Compile Include="Create\Docker.Aliases.Create.cs" />
     <Compile Include="Create\DockerCreateSettings.cs" />
@@ -103,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Build\args.txt" />
+    <Content Include="Compose\Build\args.txt" />
     <Content Include="Create\args.txt" />
     <Content Include="Login\args.txt" />
     <Content Include="Network\Disconnect\args.txt" />
