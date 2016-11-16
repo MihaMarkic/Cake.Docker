@@ -33,7 +33,7 @@ namespace Cake.Docker
                 throw new ArgumentNullException("context");
             }
             var runner = new GenericDockerComposeRunner<DockerComposeDownSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Run("docker-compose down", settings ?? new DockerComposeDownSettings(), new string[0]);
+            runner.Run("down", settings ?? new DockerComposeDownSettings(), new string[0]);
         }
 
     }

@@ -27,7 +27,7 @@ namespace Cake.Docker
                 throw new ArgumentNullException("path");
             }
             var runner = new GenericDockerComposeRunner<EmptySettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Run("docker-compose unpause", new EmptySettings(), new string[] { path });
+            runner.Run("unpause", new EmptySettings(), new string[] { path });
         }
     }
 }

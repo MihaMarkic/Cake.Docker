@@ -33,7 +33,7 @@ namespace Cake.Docker
                 throw new ArgumentNullException("context");
             }
             var runner = new GenericDockerComposeRunner<DockerComposeKillSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Run("docker-compose kill", settings ?? new DockerComposeKillSettings(), new string[0]);
+            runner.Run("kill", settings ?? new DockerComposeKillSettings(), new string[0]);
         }
 
     }

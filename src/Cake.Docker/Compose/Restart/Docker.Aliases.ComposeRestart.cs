@@ -39,7 +39,7 @@ namespace Cake.Docker
                 throw new ArgumentNullException("path");
             }
             var runner = new GenericDockerComposeRunner<DockerComposeRestartSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Run("docker-compose restart", settings ?? new DockerComposeRestartSettings(), new string[] { path });
+            runner.Run("restart", settings ?? new DockerComposeRestartSettings(), new string[] { path });
         }
 
     }

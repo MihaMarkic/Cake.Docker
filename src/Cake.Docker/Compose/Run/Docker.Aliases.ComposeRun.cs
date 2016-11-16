@@ -54,7 +54,7 @@ namespace Cake.Docker
             {
                 arguments.AddRange(args);
             }
-            runner.Run("docker-compose run", settings ?? new DockerComposeRunSettings(), arguments.ToArray());
+            runner.Run("run", settings ?? new DockerComposeRunSettings(), arguments.ToArray());
         }
 
     }
