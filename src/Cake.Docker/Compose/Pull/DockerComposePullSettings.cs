@@ -3,7 +3,7 @@
     /// <summary>
     /// Settings for docker build.
     /// </summary>
-    public sealed class DockerComposePullSettings: AutoToolSettings
+    public sealed class DockerComposePullSettings: DockerComposeSettings
     {
         /// <summary>
         /// Pull what it can and ignores images with pull failures.

@@ -3,7 +3,7 @@
     /// <summary>
     /// Settings for docker build.
     /// </summary>
-    public sealed class DockerComposeBuildSettings: AutoToolSettings
+    public sealed class DockerComposeBuildSettings: DockerComposeSettings
     {
         /// <summary>
         /// Always remove intermediate containers.

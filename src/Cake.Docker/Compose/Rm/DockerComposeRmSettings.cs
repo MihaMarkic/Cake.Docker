@@ -3,7 +3,7 @@
     /// <summary>
     /// Settings for docker build.
     /// </summary>
-    public sealed class DockerComposeRmSettings: AutoToolSettings
+    public sealed class DockerComposeRmSettings: DockerComposeSettings
     {
         /// <summary>
         /// Don't ask to confirm removal

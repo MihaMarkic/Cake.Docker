@@ -3,7 +3,7 @@
     /// <summary>
     /// Settings for docker build.
     /// </summary>
-    public sealed class DockerComposeDownSettings: AutoToolSettings
+    public sealed class DockerComposeDownSettings: DockerComposeSettings
     {
         /// <summary>
         /// Remove images. Type must be one of:

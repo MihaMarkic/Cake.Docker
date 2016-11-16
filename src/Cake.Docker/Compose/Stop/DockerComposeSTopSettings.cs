@@ -3,7 +3,7 @@
     /// <summary>
     /// Settings for docker build.
     /// </summary>
-    public sealed class DockerComposeStopSettings: AutoToolSettings
+    public sealed class DockerComposeStopSettings: DockerComposeSettings
     {
         /// <summary>
         /// Specify a shutdown timeout in seconds (default: 10).

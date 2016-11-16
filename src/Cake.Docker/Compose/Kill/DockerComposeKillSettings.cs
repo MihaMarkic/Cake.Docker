@@ -3,7 +3,7 @@
     /// <summary>
     /// Settings for docker build.
     /// </summary>
-    public sealed class DockerComposeKillSettings: AutoToolSettings
+    public sealed class DockerComposeKillSettings: DockerComposeSettings
     {
         /// <summary>
         ///  SIGNAL to send to the container. Default signal is SIGKILL.

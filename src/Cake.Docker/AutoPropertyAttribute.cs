@@ -17,5 +17,9 @@ namespace Cake.Docker
         /// Outputs only when given value is true.
         /// </summary>
         public bool OnlyWhenTrue { get; set; }
+        /// <summary>
+        /// Whether it appears before command
+        /// </summary>
+        public bool PreCommand { get; set; }
     }
 }

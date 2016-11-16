@@ -48,6 +48,7 @@
     <Compile Include="ArgumentsBuilderExtension.cs" />
     <Compile Include="AutoPropertyAttribute.cs" />
     <Compile Include="AutoToolSettings.cs" />
+    <Compile Include="Compose\DockerComposeSettings.cs" />
     <Compile Include="Compose\Up\Docker.Aliases.ComposeUp.cs" />
     <Compile Include="Compose\Up\DockerComposeUpSettings.cs" />
     <Compile Include="Compose\Unpause\Docker.Aliases.ComposeUnpause.cs" />
@@ -126,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Rm\Docker.Aliases.Rm.cs" />
+    <Content Include="Compose\args.txt" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

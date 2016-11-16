@@ -39,22 +39,29 @@ namespace Cake.Docker
             {
                 settings = new TSettings();
             }
+            AppendArguments(builder, settings, preCommand: true);
             builder.Append(command);
-            foreach (var property in typeof(TSettings).GetProperties(BindingFlags.Public | BindingFlags.Instance))
-            {
-                foreach (string argument in GetArgumentFromProperty(property, settings))
-                {
-                    if (!string.IsNullOrEmpty(argument))
-                    {
-                        builder.Append(argument);
-                    }
-                }
-            }
+            AppendArguments(builder, settings, preCommand: false);
             if (arguments != null)
             {
                 foreach (string argument in arguments)
                 {
                     builder.Append(argument);
+                }
+            }
+        }
+
+        public static void AppendArguments<TSettings>(ProcessArgumentBuilder builder, TSettings settings, bool preCommand)
+            where TSettings : AutoToolSettings, new()
+        {
+            foreach (var property in typeof(TSettings).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                foreach (string argument in GetArgumentFromProperty(property, settings, preCommand: preCommand))
+                {
+                    if (!string.IsNullOrEmpty(argument))
+                    {
+                        builder.Append(argument);
+                    }
                 }
             }
         }
@@ -66,15 +73,18 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="settings">The settings.</param>
         /// <returns></returns>
-        public static IEnumerable<string> GetArgumentFromProperty<TSettings>(PropertyInfo property, TSettings settings)
+        public static IEnumerable<string> GetArgumentFromProperty<TSettings>(PropertyInfo property, TSettings settings, bool preCommand)
             where TSettings : AutoToolSettings, new()
         {
             var autoPropertyAttribute = GetAutoPropertyAttributeOrNull(property);
-            if (autoPropertyAttribute != null)
+            if (autoPropertyAttribute?.Format != null)
             {
-                yield return GetArgumentFromAutoProperty(autoPropertyAttribute, property, property.GetValue(settings));
+                if (autoPropertyAttribute.PreCommand == preCommand)
+                {
+                    yield return GetArgumentFromAutoProperty(autoPropertyAttribute, property, property.GetValue(settings));
+                }
             }
-            else
+            else if (!preCommand || (autoPropertyAttribute != null && autoPropertyAttribute.PreCommand && preCommand))
             {
                 if (property.PropertyType == typeof(bool))
                 {

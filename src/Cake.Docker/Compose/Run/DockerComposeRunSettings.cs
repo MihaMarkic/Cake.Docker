@@ -3,7 +3,7 @@
     /// <summary>
     /// Settings for docker build.
     /// </summary>
-    public sealed class DockerComposeRunSettings : AutoToolSettings
+    public sealed class DockerComposeRunSettings : DockerComposeSettings
     {
         /// <summary>
         /// Detached mode: Run container in the background, print new container name.

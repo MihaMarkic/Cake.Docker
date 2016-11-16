@@ -3,7 +3,7 @@
     /// <summary>
     /// Settings for docker build.
     /// </summary>
-    public sealed class DockerComposeCreateSettings: AutoToolSettings
+    public sealed class DockerComposeCreateSettings: DockerComposeSettings
     {
         /// <summary>
         /// Recreate containers even if their configuration and image haven't changed. Incompatible with --no-recreate.

@@ -11,12 +11,22 @@ namespace Cake.Docker
     partial class DockerAliases
     {
         /// <summary>
-        /// Runs docker-compose pause.
+        /// Runs docker-compose pause with default settings.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="path">The path.</param>
         [CakeMethodAlias]
         public static void DockerComposePause(this ICakeContext context, string path)
+        {
+            DockerComposePause(context, new DockerComposeSettings(), path);
+        }
+        /// <summary>
+        /// Runs docker-compose pause.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="path">The path.</param>
+        [CakeMethodAlias]
+        public static void DockerComposePause(this ICakeContext context, DockerComposeSettings settings, string path)
         {
             if (context == null)
             {
@@ -26,8 +36,8 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("path");
             }
-            var runner = new GenericDockerComposeRunner<EmptySettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Run("pause", new EmptySettings(), new string[] { path });
+            var runner = new GenericDockerComposeRunner<DockerComposeSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            runner.Run("pause", settings ?? new DockerComposeSettings(), new string[] { path });
         }
     }
 }
