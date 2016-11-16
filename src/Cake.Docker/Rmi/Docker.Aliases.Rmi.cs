@@ -4,15 +4,18 @@ using System;
 
 namespace Cake.Docker
 {
+    /// <summary>
+    /// Contains functionality for working with rmi command.
+    /// </summary>
+    [CakeAliasCategory("Docker")]
     partial class DockerAliases
     {
         /// <summary>
         /// Removes an array of <paramref name="images"/> using default settings.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="images"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="images">The list of images.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerRmi(this ICakeContext context, params string[] images)
         {
             DockerRmi(context, new DockerRmiSettings(), images);
@@ -21,11 +24,10 @@ namespace Cake.Docker
         /// <summary>
         /// Removes an array of <paramref name="images"/> using the give <paramref name="settings"/>.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="images"></param>
-        /// <param name="settings"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="images">The list of images.</param>
+        /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerRmi(this ICakeContext context, DockerRmiSettings settings, params string[] images)
         {
             if (context == null)

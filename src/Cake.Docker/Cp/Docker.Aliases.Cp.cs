@@ -4,16 +4,19 @@ using System;
 
 namespace Cake.Docker
 {
+    /// <summary>
+    /// Contains functionality for working with cp command.
+    /// </summary>
+    [CakeAliasCategory("Docker")]
     partial class DockerAliases
     {
         /// <summary>
         /// Copy files from/to using default settings.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="from">Source path.</param>
+        /// <param name="to">Destination path.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerCp(this ICakeContext context, string from, string to)
         {
             DockerCp(context, from, to, new DockerCpSettings());
@@ -21,12 +24,11 @@ namespace Cake.Docker
         /// <summary>
         /// Copy files from/to container given <paramref name="settings"/>.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <param name="settings"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="from">Source path.</param>
+        /// <param name="to">Destination path.</param>
+        /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerCp(this ICakeContext context, string from, string to, DockerCpSettings settings)
         {
             if (context == null)

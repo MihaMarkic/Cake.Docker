@@ -6,17 +6,17 @@ using System.Collections.Generic;
 namespace Cake.Docker
 {
     /// <summary>
-    /// DockerNetworkCreate alias.
+    /// Contains functionality for working with network create command.
     /// </summary>
+    [CakeAliasCategory("Docker")]
     partial class DockerAliases
     {
         /// <summary>
         /// Crates a network using default settings.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="args"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")] 
         public static void DockerNetworkCreate(this ICakeContext context, params string[] args)
         {
             DockerNetworkCreate(context, new DockerNetworkCreateSettings(), args);
@@ -25,11 +25,10 @@ namespace Cake.Docker
         /// <summary>
         /// Crates a network given <paramref name="settings"/>.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="settings"></param>
-        /// <param name="args"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerNetworkCreate(this ICakeContext context, DockerNetworkCreateSettings settings, params string[] args)
         {
             if (context == null)

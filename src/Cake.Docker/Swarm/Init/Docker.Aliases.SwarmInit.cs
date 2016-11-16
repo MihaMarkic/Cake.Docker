@@ -6,18 +6,18 @@ using System.Collections.Generic;
 namespace Cake.Docker
 {
     /// <summary>
-    /// DockerSwarmInit alias.
+    /// Contains functionality for working with swarm init command.
     /// </summary>
+    [CakeAliasCategory("Docker")]
     partial class DockerAliases
     {
 
         /// <summary>
         /// Initializes a swarm using default settings.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="args"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")] 
         public static void DockerSwarmInit(this ICakeContext context, params string[] args)
         {
             DockerSwarmInit(context, new DockerSwarmInitSettings(), args);
@@ -26,11 +26,10 @@ namespace Cake.Docker
         /// <summary>
         /// Initializes a swarm given <paramref name="settings"/>.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="settings"></param>
-        /// <param name="args"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerSwarmInit(this ICakeContext context, DockerSwarmInitSettings settings, params string[] args)
         {
             if (context == null)

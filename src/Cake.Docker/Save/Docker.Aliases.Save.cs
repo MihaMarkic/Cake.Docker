@@ -4,16 +4,19 @@ using System;
 
 namespace Cake.Docker
 {
+    /// <summary>
+    /// Contains functionality for working with save command.
+    /// </summary>
+    [CakeAliasCategory("Docker")]
     partial class DockerAliases
     {
         /// <summary>
         /// Save one or more images to a tar archive (streamed to STDOUT by default).
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="settings"></param>
-        /// <param name="images"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="images">The list of images.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
 		public static void DockerSave(this ICakeContext context, DockerSaveSettings settings, params string[] images)
         {
             if (context == null)

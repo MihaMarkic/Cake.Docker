@@ -6,17 +6,17 @@ using System.Collections.Generic;
 namespace Cake.Docker
 {
     /// <summary>
-    /// DockerSwarmJoin alias.
+    /// Contains functionality for working with swarm join command.
     /// </summary>
+    [CakeAliasCategory("Docker")]
     partial class DockerAliases
     {
         /// <summary>
         /// Joins a swarm using default settings.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="args"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")] 
         public static void DockerSwarmJoin(this ICakeContext context, params string[] args)
         {
             DockerSwarmJoin(context, new DockerSwarmJoinSettings(), args);
@@ -25,11 +25,10 @@ namespace Cake.Docker
         /// <summary>
         /// Joins a swarm given <paramref name="settings"/>.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="settings"></param>
-        /// <param name="args"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerSwarmJoin(this ICakeContext context, DockerSwarmJoinSettings settings, params string[] args)
         {
             if (context == null)

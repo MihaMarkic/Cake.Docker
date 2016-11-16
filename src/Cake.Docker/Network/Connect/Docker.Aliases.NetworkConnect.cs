@@ -6,20 +6,19 @@ using System.Collections.Generic;
 namespace Cake.Docker
 {
     /// <summary>
-    /// DockerNetworkConnect alias.
+    /// Contains functionality for working with network connect command.
     /// </summary>
+    [CakeAliasCategory("Docker")]
     partial class DockerAliases
     {
-
         /// <summary>
         /// Connects a container to a network using default settings.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="network"></param>
-        /// <param name="container"></param>
-        /// <param name="args"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="network">The network.</param>
+        /// <param name="container">The container.</param>
+        /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")] 
         public static void DockerNetworkConnect(this ICakeContext context, string network, string container, params string[] args)
         {
             DockerNetworkConnect(context, new DockerNetworkConnectSettings(), network, container, args);
@@ -28,13 +27,12 @@ namespace Cake.Docker
         /// <summary>
         /// Connects a container to a network given <paramref name="settings"/>.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="settings"></param>
-        /// <param name="network"></param>
-        /// <param name="container"></param>
-        /// <param name="args"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="network">The network.</param>
+        /// <param name="container">The container.</param>
+        /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerNetworkConnect(this ICakeContext context, DockerNetworkConnectSettings settings, string network, string container, params string[] args)
         {
             if (context == null)

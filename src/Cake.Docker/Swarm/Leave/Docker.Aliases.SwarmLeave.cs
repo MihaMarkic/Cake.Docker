@@ -6,17 +6,17 @@ using System.Collections.Generic;
 namespace Cake.Docker
 {
     /// <summary>
-    /// DockerSwarmLeave alias.
+    /// Contains functionality for working with swarm leave command.
     /// </summary>
+    [CakeAliasCategory("Docker")] 
     partial class DockerAliases
     {
         /// <summary>
         /// Leaves a swarm using default settings.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="args"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")] 
         public static void DockerSwarmLeave(this ICakeContext context, params string[] args)
         {
             DockerSwarmLeave(context, new DockerSwarmLeaveSettings(), args);
@@ -25,11 +25,10 @@ namespace Cake.Docker
         /// <summary>
         /// Leaves a swarm given <paramref name="settings"/>.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="settings"></param>
-        /// <param name="args"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerSwarmLeave(this ICakeContext context, DockerSwarmLeaveSettings settings, params string[] args)
         {
             if (context == null)

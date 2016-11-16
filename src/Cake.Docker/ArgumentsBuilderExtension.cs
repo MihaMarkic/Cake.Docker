@@ -17,7 +17,7 @@ namespace Cake.Docker
         /// <typeparam name="TSettings"></typeparam>
         /// <param name="builder"></param>
         /// <param name="command"></param>
-        /// <param name="settings"></param>
+        /// <param name="settings">The settings.</param>
         /// <param name="arguments"></param>
         public static void AppendAll<TSettings>(this ProcessArgumentBuilder builder, string command, TSettings settings, string[] arguments)
             where TSettings: AutoToolSettings, new()
@@ -63,7 +63,7 @@ namespace Cake.Docker
         /// </summary>
         /// <typeparam name="TSettings"></typeparam>
         /// <param name="property"></param>
-        /// <param name="settings"></param>
+        /// <param name="settings">The settings.</param>
         /// <returns></returns>
         public static IEnumerable<string> GetArgumentFromProperty<TSettings>(PropertyInfo property, TSettings settings)
             where TSettings : AutoToolSettings, new()

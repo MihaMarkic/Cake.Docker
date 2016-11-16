@@ -6,17 +6,17 @@ using System.Collections.Generic;
 namespace Cake.Docker
 {
     /// <summary>
-    /// DockerNetworkDisconnect alias.
+    /// Contains functionality for working with network disconnect command.
     /// </summary>
+    [CakeAliasCategory("Docker")] 
     partial class DockerAliases
     {
         /// <summary>
         /// Disconnects a network using default settings.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="args"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")] 
         public static void DockerNetworkDisconnect(this ICakeContext context, params string[] args)
         {
             DockerNetworkDisconnect(context, new DockerNetworkDisconnectSettings(), args);
@@ -25,11 +25,10 @@ namespace Cake.Docker
         /// <summary>
         /// Disconnects a network given <paramref name="settings"/>.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="settings"></param>
-        /// <param name="args"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerNetworkDisconnect(this ICakeContext context, DockerNetworkDisconnectSettings settings, params string[] args)
         {
             if (context == null)

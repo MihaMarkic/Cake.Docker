@@ -6,14 +6,18 @@ using System.Linq;
 
 namespace Cake.Docker
 {
+    /// <summary>
+    /// Contains functionality for working with ps command.
+    /// </summary>
+    [CakeAliasCategory("Docker")]
     partial class DockerAliases
     {
         /// <summary>
         /// Lists containers using default settings.
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">The context.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
+        [CakeAliasCategory("Results")]
         public static DockerPsResult[] DockerPs(this ICakeContext context)
         {
             return DockerPs(context, new DockerPsSettings());
@@ -21,10 +25,10 @@ namespace Cake.Docker
         /// <summary>
         /// Lists containers using the given <paramref name="settings"/>.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="settings"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
+        [CakeAliasCategory("Results")]
         public static DockerPsResult[] DockerPs(this ICakeContext context, DockerPsSettings settings)
         {
             if (context == null)
@@ -38,8 +42,8 @@ namespace Cake.Docker
         /// <summary>
         /// Processed the output.
         /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
+        /// <param name="input">The input.</param>
+        /// <returns>An array of <see cref="DockerPsResult"/> results.</returns>
         public static DockerPsResult[] Processor(IEnumerable<string> input)
         {
             string[] lines = input.ToArray();

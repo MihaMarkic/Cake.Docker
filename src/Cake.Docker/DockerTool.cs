@@ -55,7 +55,7 @@ namespace Cake.Docker
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="settings"></param>
+        /// <param name="settings">The settings.</param>
         /// <returns></returns>
         protected override IEnumerable<FilePath> GetAlternativeToolPaths(TSettings settings)
         {

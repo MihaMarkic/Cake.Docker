@@ -4,15 +4,18 @@ using System;
 
 namespace Cake.Docker
 {
+    /// <summary>
+    /// Contains functionality for working with load command.
+    /// </summary>
+    [CakeAliasCategory("Docker")]
     partial class DockerAliases
     {
         /// <summary>
         /// Load an image from a tar archive or STDIN.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="settings"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
 		public static void DockerLoad(this ICakeContext context, DockerLoadSettings settings)
         {
             if (context == null)

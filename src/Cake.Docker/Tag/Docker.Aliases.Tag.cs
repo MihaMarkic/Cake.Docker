@@ -4,16 +4,19 @@ using System;
 
 namespace Cake.Docker
 {
+    /// <summary>
+    /// Contains functionality for working with tag command.
+    /// </summary>
+    [CakeAliasCategory("Docker")]
     partial class DockerAliases
     {
         /// <summary>
         /// Tag an image into a repository.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="imageReference"></param>
-        /// <param name="registryReference"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="imageReference">The image reference.</param>
+        /// <param name="registryReference">The registry reference.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerTag(this ICakeContext context, string imageReference, string registryReference)
         {
             if (context == null)

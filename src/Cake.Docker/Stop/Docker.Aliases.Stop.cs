@@ -4,15 +4,18 @@ using System;
 
 namespace Cake.Docker
 {
+    /// <summary>
+    /// Contains functionality for working with stop command.
+    /// </summary>
+    [CakeAliasCategory("Docker")]
     partial class DockerAliases
     {
         /// <summary>
         /// Stops an array of <paramref name="containers"/> using default settings.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="containers"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="containers">The list of containers.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerStop(this ICakeContext context, params string[] containers)
         {
             DockerStop(context, new DockerStopSettings(), containers);
@@ -21,11 +24,10 @@ namespace Cake.Docker
         /// <summary>
         /// Stops an array of <paramref name="containers"/> using the give <paramref name="settings"/>.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="containers"></param>
-        /// <param name="settings"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="containers">The list of containers.</param>
+        /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
 		public static void DockerStop(this ICakeContext context, DockerStopSettings settings, params string[] containers)
         {
             if (context == null)

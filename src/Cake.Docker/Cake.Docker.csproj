@@ -55,6 +55,7 @@
     <Compile Include="EmptySettings.cs" />
     <Compile Include="Login\Docker.Aliases.Login.cs" />
     <Compile Include="Login\DockerLoginSettings.cs" />
+    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Network\Remove\Docker.Aliases.NetworkRemove.cs" />
     <Compile Include="Network\Disconnect\Docker.Aliases.NetworkDisconnect.cs" />
     <Compile Include="Network\Disconnect\DockerNetworkDisconnectSettings.cs" />

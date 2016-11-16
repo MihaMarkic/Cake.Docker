@@ -28,7 +28,7 @@ namespace Cake.Docker
         /// Runs given <paramref name="command"/> using given <paramref name=" settings"/> and <paramref name="additional"/>.
         /// </summary>
         /// <param name="command"></param>
-        /// <param name="settings"></param>
+        /// <param name="settings">The settings.</param>
         /// <param name="additional"></param>
         public void Run(string command, TSettings settings, string[] additional)
         {
@@ -59,7 +59,7 @@ namespace Cake.Docker
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="command"></param>
-        /// <param name="settings"></param>
+        /// <param name="settings">The settings.</param>
         /// <param name="processOutput"></param>
         /// <param name="arguments"></param>
         /// <returns></returns>

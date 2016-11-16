@@ -6,20 +6,20 @@ using System.Collections.Generic;
 namespace Cake.Docker
 {
     /// <summary>
-    /// DockerCreate alias.
+    /// Contains functionality for working with create command.
     /// </summary>
+    [CakeAliasCategory("Docker")] 
     partial class DockerAliases
     {
 
         /// <summary>
         /// Creates a new container using default settings.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="image"></param>
-        /// <param name="args"></param>
-        /// <param name="command"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="image">The image.</param>
+        /// <param name="args">The arguments.</param>
+        /// <param name="command">The command.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")] 
         public static void DockerCreate(this ICakeContext context, string image, string command, params string[] args)
         {
             DockerCreate(context, new DockerCreateSettings(), image, command, args);
@@ -28,11 +28,11 @@ namespace Cake.Docker
         /// <summary>
         /// Creates a new container given <paramref name="settings"/>.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="settings"></param>
-        /// <param name="image"></param>
-        /// <param name="command"></param>
-        /// <param name="args"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="image">The image.</param>
+        /// <param name="args">The arguments.</param>
+        /// <param name="command">The command.</param>
         [CakeMethodAlias]
         [CakeAliasCategory("Docker")]
         public static void DockerCreate(this ICakeContext context, DockerCreateSettings settings, string image, string command, params string[] args)

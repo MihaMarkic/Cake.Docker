@@ -4,16 +4,18 @@ using System;
 
 namespace Cake.Docker
 {
+    /// <summary>
+    /// Contains functionality for working with build command.
+    /// </summary>
+    [CakeAliasCategory("Docker")]
     partial class DockerAliases
     {
-        
         /// <summary>
         /// Builds an image using default settings.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="path"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="path">The path.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerBuild(this ICakeContext context, string path)
         {
             DockerBuild(context, new DockerBuildSettings(), path);
@@ -22,11 +24,10 @@ namespace Cake.Docker
         /// <summary>
         /// Builds an image given <paramref name="settings"/>.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="path"></param>
-        /// <param name="settings"></param>
+        /// <param name="context">The context.</param>
+        /// <param name="path">The path.</param>
+        /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerBuild(this ICakeContext context, DockerBuildSettings settings, string path)
         {
             if (context == null)
