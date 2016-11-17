@@ -14,32 +14,28 @@ namespace Cake.Docker
         /// Runs docker-compose create with default settings.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="path">The path.</param>
+        /// <param name="services">The list of services.</param>
         [CakeMethodAlias]
-        public static void DockerComposeCreate(this ICakeContext context, string path)
+        public static void DockerComposeCreate(this ICakeContext context, params string[] services)
         {
-            DockerComposeCreate(context, new DockerComposeCreateSettings(), path);
+            DockerComposeCreate(context, new DockerComposeCreateSettings(), services);
         }
 
         /// <summary>
         /// Runs docker-compose create given <paramref name="settings"/>.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="path">The path.</param>
+        /// <param name="services">The list of services.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeCreate(this ICakeContext context, DockerComposeCreateSettings settings, string path)
+        public static void DockerComposeCreate(this ICakeContext context, DockerComposeCreateSettings settings, params string[] services)
         {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
             }
-            if (string.IsNullOrEmpty(path))
-            {
-                throw new ArgumentNullException("path");
-            }
             var runner = new GenericDockerComposeRunner<DockerComposeCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Run("create", settings ?? new DockerComposeCreateSettings(), new string[] { path });
+            runner.Run("create", settings ?? new DockerComposeCreateSettings(), services);
         }
 
     }

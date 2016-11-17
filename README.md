@@ -12,6 +12,20 @@ Including addin in cake script is easy.
 ```
 ## Commands supported
 
+- [DockerComposeBuild](https://docs.docker.com/compose/reference/build/) v0.7.0
+- [DockerComposeCreate](https://docs.docker.com/compose/reference/create/) v0.7.0
+- [DockerComposeDown](https://docs.docker.com/compose/reference/down/) v0.7.0
+- [DockerComposeKill](https://docs.docker.com/compose/reference/kill/) v0.7.0
+- [DockerComposePause](https://docs.docker.com/compose/reference/pause/) v0.7.0
+- [DockerComposePull](https://docs.docker.com/compose/reference/pull/) v0.7.0
+- [DockerComposeRestart](https://docs.docker.com/compose/reference/restart/) v0.7.0
+- [DockerComposeRm](https://docs.docker.com/compose/reference/rm/) v0.7.0
+- [DockerComposeRun](https://docs.docker.com/compose/reference/run/) v0.7.0
+- [DockerComposeScale](https://docs.docker.com/compose/reference/scale/) v0.7.0
+- [DockerComposeStart](https://docs.docker.com/compose/reference/start/) v0.7.0
+- [DockerComposeStop](https://docs.docker.com/compose/reference/stop/) v0.7.0
+- [DockerComposeUnpause](https://docs.docker.com/compose/reference/unpause/) v0.7.0
+- [DockerComposeUp](https://docs.docker.com/compose/reference/up/) v0.7.0
 - [DockerLoad](https://docs.docker.com/engine/reference/commandline/load/) v0.6.0
 - [DockerSave](https://docs.docker.com/engine/reference/commandline/save/) v0.6.0
 - [DockerNetworkCreate](https://docs.docker.com/engine/reference/commandline/network_create/) v0.5.0

@@ -14,30 +14,27 @@ namespace Cake.Docker
         /// Runs docker-compose pause with default settings.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="path">The path.</param>
+        /// <param name="services">The list of services.</param>
         [CakeMethodAlias]
-        public static void DockerComposePause(this ICakeContext context, string path)
+        public static void DockerComposePause(this ICakeContext context, params string[] services)
         {
-            DockerComposePause(context, new DockerComposeSettings(), path);
+            DockerComposePause(context, new DockerComposeSettings(), services);
         }
         /// <summary>
         /// Runs docker-compose pause.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="path">The path.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="services">The list of services.</param>
         [CakeMethodAlias]
-        public static void DockerComposePause(this ICakeContext context, DockerComposeSettings settings, string path)
+        public static void DockerComposePause(this ICakeContext context, DockerComposeSettings settings, params string[] services)
         {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
             }
-            if (string.IsNullOrEmpty(path))
-            {
-                throw new ArgumentNullException("path");
-            }
             var runner = new GenericDockerComposeRunner<DockerComposeSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Run("pause", settings ?? new DockerComposeSettings(), new string[] { path });
+            runner.Run("pause", settings ?? new DockerComposeSettings(), services);
         }
     }
 }

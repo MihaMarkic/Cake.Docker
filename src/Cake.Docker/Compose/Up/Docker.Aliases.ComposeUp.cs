@@ -14,32 +14,28 @@ namespace Cake.Docker
         /// Runs docker-compose up with default settings.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="path">The path.</param>
+        /// <param name="services">The list of services.</param>
         [CakeMethodAlias]
-        public static void DockerComposeUp(this ICakeContext context, string path)
+        public static void DockerComposeUp(this ICakeContext context, params string[] services)
         {
-            DockerComposeUp(context, new DockerComposeUpSettings(), path);
+            DockerComposeUp(context, new DockerComposeUpSettings(), services);
         }
 
         /// <summary>
         /// Runs docker-compose up given <paramref name="settings"/>.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="path">The path.</param>
+        /// <param name="services">The list of services.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeUp(this ICakeContext context, DockerComposeUpSettings settings, string path)
+        public static void DockerComposeUp(this ICakeContext context, DockerComposeUpSettings settings, params string[] services)
         {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
             }
-            if (string.IsNullOrEmpty(path))
-            {
-                throw new ArgumentNullException("path");
-            }
             var runner = new GenericDockerComposeRunner<DockerComposeUpSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
-            runner.Run("up", settings ?? new DockerComposeUpSettings(), new string[] { path });
+            runner.Run("up", settings ?? new DockerComposeUpSettings(), services);
         }
 
     }

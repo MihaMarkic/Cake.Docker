@@ -1,7 +1,13 @@
 ﻿namespace Cake.Docker
 {
+    /// <summary>
+    /// Generic docker-compose settings.
+    /// </summary>
     public class DockerComposeSettings: AutoToolSettings
     {
+        /// <summary>
+        /// Configuration files.
+        /// </summary>
         [AutoProperty(Format ="-f {1}", PreCommand =true)]
         public string[] Files { get; set; }
         /// <summary>

@@ -50,7 +50,13 @@ namespace Cake.Docker
                 }
             }
         }
-
+        /// <summary>
+        /// Appends pre or post command arguments.
+        /// </summary>
+        /// <typeparam name="TSettings"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="settings"></param>
+        /// <param name="preCommand"></param>
         public static void AppendArguments<TSettings>(ProcessArgumentBuilder builder, TSettings settings, bool preCommand)
             where TSettings : AutoToolSettings, new()
         {
@@ -72,6 +78,7 @@ namespace Cake.Docker
         /// <typeparam name="TSettings"></typeparam>
         /// <param name="property"></param>
         /// <param name="settings">The settings.</param>
+        /// <param name="preCommand">Pre or post command.</param>
         /// <returns></returns>
         public static IEnumerable<string> GetArgumentFromProperty<TSettings>(PropertyInfo property, TSettings settings, bool preCommand)
             where TSettings : AutoToolSettings, new()

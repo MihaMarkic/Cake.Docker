@@ -64,7 +64,7 @@
     <Compile Include="Compose\Restart\DockerComposeRestartSettings.cs" />
     <Compile Include="Compose\Pull\Docker.Aliases.ComposePull.cs" />
     <Compile Include="Compose\Pull\DockerComposePullSettings.cs" />
-    <Compile Include="Compose\Build\Docker.Aliases.ComposePause.cs" />
+    <Compile Include="Compose\Build\Docker.Aliases.ComposeBuild.cs" />
     <Compile Include="Compose\Pause\Docker.Aliases.ComposePause.cs" />
     <Compile Include="Compose\Build\DockerComposeBuildSettings.cs" />
     <Compile Include="Compose\Kill\Docker.Aliases.ComposeKill.cs" />

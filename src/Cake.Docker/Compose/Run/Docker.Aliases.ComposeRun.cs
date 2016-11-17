@@ -15,45 +15,66 @@ namespace Cake.Docker
         /// Runs docker-compose run with default settings.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="path">The path.</param>
+        /// <param name="service">The path.</param>
+        /// <param name="args">The arguments.</param>
+        [CakeMethodAlias]
+        public static void DockerComposeRun(this ICakeContext context, string service, params string[] args)
+        {
+            DockerComposeRun(context, new DockerComposeRunSettings(), service, null, args);
+        }
+        /// <summary>
+        /// Runs docker-compose run with default settings.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="service">The path.</param>
         /// <param name="command">The command.</param>
         /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        public static void DockerComposeRun(this ICakeContext context, string path, string command, params string[] args)
+        public static void DockerComposeRun(this ICakeContext context, string service, string command, params string[] args)
         {
-            DockerComposeRun(context, new DockerComposeRunSettings(), path, command, args);
+            DockerComposeRun(context, new DockerComposeRunSettings(), service, command, args);
         }
 
         /// <summary>
         /// Runs docker-compose run given <paramref name="settings"/>.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="path">The path.</param>
+        /// <param name="service">The path.</param>
+        /// <param name="args">The arguments.</param>
+        /// <param name="settings">The settings.</param>
+        [CakeMethodAlias]
+        public static void DockerComposeRun(this ICakeContext context, DockerComposeRunSettings settings, string service, params string[] args)
+        {
+            DockerComposeRun(context, settings, service, command: null, args: args);
+        }
+
+        /// <summary>
+        /// Runs docker-compose run given <paramref name="settings"/>.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="service">The path.</param>
         /// /// <param name="command">The command.</param>
         /// <param name="args">The arguments.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeRun(this ICakeContext context, DockerComposeRunSettings settings, string path, string command, params string[] args)
+        public static void DockerComposeRun(this ICakeContext context, DockerComposeRunSettings settings, string service, string command, params string[] args)
         {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
             }
-            if (string.IsNullOrEmpty(path))
+            if (string.IsNullOrEmpty(service))
             {
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(service));
             }
             var runner = new GenericDockerComposeRunner<DockerComposeRunSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
             List<string> arguments = new List<string>();
-            arguments.Add(path);
+            arguments.Add(service);
             if (command != null)
             {
                 arguments.Add(command);
             }
-            if (args != null)
-            {
-                arguments.AddRange(args);
-            }
+            arguments.AddRange(args);
             runner.Run("run", settings ?? new DockerComposeRunSettings(), arguments.ToArray());
         }
 
