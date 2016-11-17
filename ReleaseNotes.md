@@ -1,3 +1,21 @@
+# Cake.Docker 0.7.0
+- This release is about adding docker-compose commands
+- Added [DockerComposeBuild](https://docs.docker.com/compose/reference/build/)
+- Added [DockerComposeCreate](https://docs.docker.com/compose/reference/create/)
+- Added [DockerComposeDown](https://docs.docker.com/compose/reference/down/)
+- Added [DockerComposeKill](https://docs.docker.com/compose/reference/kill/)
+- Added [DockerComposePause](https://docs.docker.com/compose/reference/pause/)
+- Added [DockerComposePull](https://docs.docker.com/compose/reference/pull/)
+- Added [DockerComposeRestart](https://docs.docker.com/compose/reference/restart/)
+- Added [DockerComposeRm](https://docs.docker.com/compose/reference/rm/)
+- Added [DockerComposeRun](https://docs.docker.com/compose/reference/run/)
+- Added [DockerComposeScale](https://docs.docker.com/compose/reference/scale/)
+- Added [DockerComposeStart](https://docs.docker.com/compose/reference/start/)
+- Added [DockerComposeStop](https://docs.docker.com/compose/reference/stop/)
+- Added [DockerComposeUnpause](https://docs.docker.com/compose/reference/unpause/)
+- Added [DockerComposeUp](https://docs.docker.com/compose/reference/up/)
+- Updated documentation
+
 # Cake.Docker 0.6.0
 - Fixed a bug in DockerStop (it'd accept DockerBuildSettings)
 - Added [DockerLoad](https://docs.docker.com/engine/reference/commandline/load/)
