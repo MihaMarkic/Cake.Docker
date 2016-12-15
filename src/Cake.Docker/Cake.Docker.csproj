@@ -102,8 +102,10 @@
     <Compile Include="GenericDockerRunner.cs" />
     <Compile Include="Build\Docker.Aliases.Build.cs" />
     <Compile Include="Build\DockerBuildSettings.cs" />
-    <Compile Include="Push\Docker.Aliases.Push.cs" />
-    <Compile Include="Push\DockerPushSettings.cs" />
+    <Compile Include="Pull\Docker.Aliases.Push.cs" />
+    <Compile Include="Pull\DockerPushSettings.cs" />
+    <Compile Include="Push\Docker.Aliases.Pull.cs" />
+    <Compile Include="Push\DockerPullSettings.cs" />
     <Compile Include="Load\Docker.Aliases.Load.cs" />
     <Compile Include="Load\DockerLoadSettings.cs" />
     <Compile Include="Save\Docker.Aliases.Save.cs" />
@@ -148,6 +150,7 @@
     <Content Include="Network\Create\args.txt" />
     <Content Include="Network\Connect\args.txt" />
     <Content Include="Ps\args.txt" />
+    <Content Include="Pull\args.txt" />
     <Content Include="Push\args.txt" />
     <Content Include="Swarm\Init\args.txt" />
     <Content Include="Swarm\Update\args.txt" />

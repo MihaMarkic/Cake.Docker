@@ -1,3 +1,5 @@
+# Cake.Docker 0.7.1
+- Added [DockerPull](https://docs.docker.com/engine/reference/commandline/pull/)
 # Cake.Docker 0.7.0
 - This release is about adding docker-compose commands
 - Added [DockerComposeBuild](https://docs.docker.com/compose/reference/build/)

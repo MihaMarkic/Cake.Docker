@@ -12,6 +12,7 @@ Including addin in cake script is easy.
 ```
 ## Commands supported
 
+- [DockerPull](https://docs.docker.com/engine/reference/commandline/pull/) v0.7.1
 - [DockerComposeBuild](https://docs.docker.com/compose/reference/build/) v0.7.0
 - [DockerComposeCreate](https://docs.docker.com/compose/reference/create/) v0.7.0
 - [DockerComposeDown](https://docs.docker.com/compose/reference/down/) v0.7.0
