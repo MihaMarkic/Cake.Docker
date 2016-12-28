@@ -52,7 +52,7 @@ namespace Cake.Docker
                 result.ImageIndex = line.IndexOf("IMAGE", StringComparison.Ordinal);
                 result.CommandIndex = line.IndexOf("COMMAND", result.ImageIndex, StringComparison.Ordinal);
                 result.CreatedIndex = line.IndexOf("CREATED", result.CommandIndex, StringComparison.Ordinal);
-                result.StatusIndex = line.IndexOf("STATUS", result.CommandIndex, StringComparison.Ordinal);
+                result.StatusIndex = line.IndexOf("STATUS", result.CreatedIndex, StringComparison.Ordinal);
                 result.PortsIndex = line.IndexOf("PORTS", result.StatusIndex, StringComparison.Ordinal);
                 result.NameIndex = line.IndexOf("NAMES", result.PortsIndex, StringComparison.Ordinal);
                 int sizeIndex = line.IndexOf("SIZE", result.PortsIndex, StringComparison.Ordinal);
