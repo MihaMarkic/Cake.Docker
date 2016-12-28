@@ -1,3 +1,5 @@
+# Cake.Docker 0.7.3
+- Fixed DockerComposeSettings.ProjectName to string (thanks to Symbianx)
 # Cake.Docker 0.7.2
 - Added [DockerRun](https://docs.docker.com/engine/reference/commandline/run/)
 # Cake.Docker 0.7.1
@@ -37,7 +39,7 @@
 - Added [DockerSwarmUpdate](https://docs.docker.com/engine/reference/commandline/swarm_update/) v0.5.0
 
 # Cake.Docker 0.4.0
-- Added support for using the package on Linux machines.
+- Added support for using the package on Linux machines (thanks to pvwichen).
 - Added [DockerLogin](https://docs.docker.com/engine/reference/commandline/login/)
 - Added [DockerPush](https://docs.docker.com/engine/reference/commandline/push/)
 - Added [DockerTag](https://docs.docker.com/engine/reference/commandline/tag/)
