@@ -3,18 +3,18 @@
     /// <summary>
     /// Generic docker-compose settings.
     /// </summary>
-    public class DockerComposeSettings: AutoToolSettings
+    public class DockerComposeSettings : AutoToolSettings
     {
         /// <summary>
         /// Configuration files.
         /// </summary>
-        [AutoProperty(Format ="-f {1}", PreCommand =true)]
+        [AutoProperty(Format = "-f {1}", PreCommand = true)]
         public string[] Files { get; set; }
         /// <summary>
         /// Specify an alternate project name (default: directory name)
         /// </summary>
-        [AutoProperty(PreCommand = true)]
-        public bool ProjectName { get; set; }
+        [AutoProperty(Format = "-p {1}", PreCommand = true)]
+        public string ProjectName { get; set; }
         /// <summary>
         /// Show more output
         /// </summary>
@@ -62,5 +62,5 @@
         /// </summary>
         [AutoProperty(PreCommand = true)]
         public bool SkipHostnameCheck { get; set; }
-}
+    }
 }
