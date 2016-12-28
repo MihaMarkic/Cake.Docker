@@ -1,3 +1,5 @@
+# Cake.Docker 0.7.2
+- Added [DockerRun](https://docs.docker.com/engine/reference/commandline/run/)
 # Cake.Docker 0.7.1
 - Added [DockerPull](https://docs.docker.com/engine/reference/commandline/pull/)
 # Cake.Docker 0.7.0
