@@ -67,7 +67,10 @@ foreach (var pair in data)
 		"/// <summary>".Dump();
 		foreach (string commentLine in comment)
 		{
-			("/// " + commentLine).Dump();
+			("/// " + commentLine
+				.Replace("<", "&lt;")
+				.Replace(">", "&gt;"))
+				.Dump();
 		}
 		"/// </summary>".Dump();
 		string netType;

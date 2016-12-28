@@ -153,7 +153,7 @@ namespace Cake.Docker
         public bool Interactive { get; set; }
         /// <summary>
         /// Maximum IO bandwidth limit for the system drive (Windows only)
-        ///   (Windows only). The format is `<number><unit>`.
+        ///   (Windows only). The format is `&lt;number&gt;&lt;unit&gt;`.
         ///   Unit is optional and can be `b` (bytes per second),
         ///   `k` (kilobytes per second), `m` (megabytes per second),
         ///   or `g` (gigabytes per second). If you omit the unit,
@@ -240,9 +240,9 @@ namespace Cake.Docker
         /// Connect a container to a network
         ///   'bridge': create a network stack on the default Docker bridge
         ///   'none': no networking
-        ///   'container:<name|id>': reuse another container's network stack
+        ///   'container:&lt;name|id&gt;': reuse another container's network stack
         ///   'host': use the Docker host network stack
-        ///   '<network-name>|<network-id>': connect to a user-defined network
+        ///   '&lt;network-name&gt;|&lt;network-id&gt;': connect to a user-defined network
         /// </summary>
         public string Network { get; set; }
         /// <summary>
@@ -300,7 +300,7 @@ namespace Cake.Docker
         public string[] SecurityOpt { get; set; }
         /// <summary>
         /// Size of /dev/shm, default value is 64MB.
-        ///   The format is `<number><unit>`. `number` must be greater than `0`.
+        ///   The format is `&lt;number&gt;&lt;unit&gt;`. `number` must be greater than `0`.
         ///   Unit is optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes),
         ///   or `g` (gigabytes). If you omit the unit, the system uses bytes.
         /// </summary>
@@ -334,7 +334,7 @@ namespace Cake.Docker
         /// </summary>
         public string[] Ulimit { get; set; }
         /// <summary>
-        /// Username or UID (format: <name|uid>[:<group|gid>])
+        /// Username or UID (format: &lt;name|uid&gt;[:&lt;group|gid&gt;])
         /// </summary>
         public string User { get; set; }
         /// <summary>
@@ -349,7 +349,7 @@ namespace Cake.Docker
         public string Uts { get; set; }
         /// <summary>
         /// Bind mount a volume (default []). The format
-        ///   is `[host-src:]container-dest[:<options>]`.
+        ///   is `[host-src:]container-dest[:&lt;options&gt;]`.
         ///   The comma-delimited `options` are [rw|ro],
         ///   [z|Z], [[r]shared|[r]slave|[r]private], and
         ///   [nocopy]. The 'host-src' is an absolute path
