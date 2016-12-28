@@ -1,6 +1,6 @@
 <Query Kind="Statements" />
 
-string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\Compose\args.txt";
+string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\Run\args.txt";
 string[] lines = File.ReadAllLines(file);
 
 Regex regex = new Regex(
@@ -14,7 +14,7 @@ Regex regex = new Regex(
 
 Dictionary<string, List<string>> data = new Dictionary<string, List<string>>();
 List<string> current = null;
-foreach (string line in lines.Where(l =>!string.IsNullOrEmpty(l)))
+foreach (string line in lines.Where(l =>!string.IsNullOrEmpty(l)).Select(l => l.TrimStart()))
 {
 	if (line.StartsWith("-"))
 	{
@@ -77,6 +77,8 @@ foreach (var pair in data)
 				netType = "TimeSpan?";
 				break;
 			case "int?":
+			case "int":
+			case "uint":
 				netType = "int";
 				break;
 			case "value":
