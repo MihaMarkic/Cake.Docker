@@ -1,3 +1,5 @@
+# Cake.Docker 0.7.4
+- Fixed very minor consistency bug in DockerPs (thanks to WrathZA)
 # Cake.Docker 0.7.3
 - Fixed DockerComposeSettings.ProjectName to string (thanks to Symbianx)
 # Cake.Docker 0.7.2
