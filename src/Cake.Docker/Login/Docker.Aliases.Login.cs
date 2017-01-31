@@ -52,7 +52,7 @@ namespace Cake.Docker
                 throw new ArgumentNullException("settings");
             }
 
-            var runner = new GenericDockerRunner<DockerLoginSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new GenericDockerRunner<DockerLoginSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("login", settings, server != null ? new[] { server } : null);
         }
     }

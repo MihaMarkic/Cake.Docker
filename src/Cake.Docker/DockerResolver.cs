@@ -3,6 +3,7 @@ using Cake.Core.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cake.Core.Tooling;
 
 namespace Cake.Docker
 {
@@ -22,7 +23,7 @@ namespace Cake.Docker
 
             // Cake already searches the PATH for the executable tool names.
             // Check for other known locations.
-            return !environment.IsUnix() 
+            return !environment.Platform.IsUnix() 
                 ? CheckCommonWindowsPaths(fileSystem)
                 : null;
         }

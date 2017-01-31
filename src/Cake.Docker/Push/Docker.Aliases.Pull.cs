@@ -39,7 +39,7 @@ namespace Cake.Docker
                 throw new ArgumentNullException("imageReference");
             }
 
-            var runner = new GenericDockerRunner<DockerPullSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new GenericDockerRunner<DockerPullSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("pull", settings ?? new DockerPullSettings(), new [] { imageReference });
         }
     }

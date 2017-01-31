@@ -67,7 +67,7 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException(nameof(service));
             }
-            var runner = new GenericDockerComposeRunner<DockerComposeRunSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new GenericDockerComposeRunner<DockerComposeRunSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string>();
             arguments.Add(service);
             if (command != null)

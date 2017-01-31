@@ -27,7 +27,7 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("images");
             }
-            var runner = new GenericDockerRunner<DockerSaveSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new GenericDockerRunner<DockerSaveSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("save", settings ?? new DockerSaveSettings(), images);
         }
     }

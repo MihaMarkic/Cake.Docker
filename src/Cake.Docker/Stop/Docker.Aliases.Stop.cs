@@ -38,7 +38,7 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("containers");
             }
-            var runner = new GenericDockerRunner<DockerStopSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new GenericDockerRunner<DockerStopSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("stop", settings ?? new DockerStopSettings(), containers);
         }
     }

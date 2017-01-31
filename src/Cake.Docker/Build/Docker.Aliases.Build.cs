@@ -38,7 +38,7 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("path");
             }
-            var runner = new GenericDockerRunner<DockerBuildSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new GenericDockerRunner<DockerBuildSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("build", settings ?? new DockerBuildSettings(), new string[] { path });
         }
 

@@ -2,6 +2,7 @@
 using Cake.Core.IO;
 using System;
 using System.Collections.Generic;
+using Cake.Core.Tooling;
 
 namespace Cake.Docker
 {
@@ -18,9 +19,9 @@ namespace Cake.Docker
         /// <param name="fileSystem"></param>
         /// <param name="environment"></param>
         /// <param name="processRunner"></param>
-        /// <param name="globber"></param>
-        public GenericDockerComposeRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IGlobber globber) 
-            : base(fileSystem, environment, processRunner, globber)
+        /// <param name="tools"></param>
+        public GenericDockerComposeRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools) 
+            : base(fileSystem, environment, processRunner, tools)
         {
         }
 

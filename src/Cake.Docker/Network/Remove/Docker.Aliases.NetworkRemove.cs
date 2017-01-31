@@ -41,7 +41,7 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("network");
             }
-            var runner = new GenericDockerRunner<EmptySettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new GenericDockerRunner<EmptySettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> (network);
             if (args.Length > 0)
             {

@@ -27,8 +27,8 @@ namespace Cake.Docker
             IFileSystem fileSystem,
             ICakeEnvironment environment,
             IProcessRunner processRunner,
-            IGlobber globber)
-            : base(fileSystem, environment, processRunner, globber)
+            IToolLocator tools)
+            : base(fileSystem, environment, processRunner, tools)
         {
             _fileSystem = fileSystem;
             _environment = environment;

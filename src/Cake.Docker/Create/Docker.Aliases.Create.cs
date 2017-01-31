@@ -45,7 +45,7 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("image");
             }
-            var runner = new GenericDockerRunner<DockerCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Globber);
+            var runner = new GenericDockerRunner<DockerCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> { image };
             if (!string.IsNullOrEmpty(command))
             {
