@@ -1,3 +1,5 @@
+# Cake.Docker 0.7.5
+- Fixed Nuget package (cake.core was set as 0.10.1)
 # Cake.Docker 0.7.4
 - Fixed very minor consistency bug in DockerPs (thanks to WrathZA)
 # Cake.Docker 0.7.3

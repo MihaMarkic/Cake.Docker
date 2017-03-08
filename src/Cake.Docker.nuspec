@@ -17,7 +17,7 @@
       <tags>Cake Script Build Docker</tags>
 
       <dependencies>
-         <dependency id="Cake.Core" version="0.10.1" />
+         <dependency id="Cake.Core" version="0.17.0" />
       </dependencies>
    </metadata>
 
