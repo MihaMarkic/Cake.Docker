@@ -5,10 +5,7 @@ using System.Collections.Generic;
 
 namespace Cake.Docker
 {
-    /// <summary>
-    /// Contains functionality for working with network create command.
-    /// </summary>
-    [CakeAliasCategory("Docker")]
+    // Contains functionality for working with network create command.
     partial class DockerAliases
     {
         /// <summary>

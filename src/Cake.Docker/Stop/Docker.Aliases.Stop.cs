@@ -4,10 +4,7 @@ using System;
 
 namespace Cake.Docker
 {
-    /// <summary>
-    /// Contains functionality for working with stop command.
-    /// </summary>
-    [CakeAliasCategory("Docker")]
+    // Contains functionality for working with stop command.
     partial class DockerAliases
     {
         /// <summary>

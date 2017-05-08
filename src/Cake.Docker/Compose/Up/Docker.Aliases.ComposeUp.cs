@@ -4,10 +4,7 @@ using System;
 
 namespace Cake.Docker
 {
-    /// <summary>
-    /// Contains functionality for working with docker-compose up command.
-    /// </summary>
-    [CakeAliasCategory("Docker")]
+    // Contains functionality for working with docker-compose up command.
     partial class DockerAliases
     {
         /// <summary>

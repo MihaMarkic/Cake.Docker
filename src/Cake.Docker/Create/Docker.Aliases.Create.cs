@@ -5,10 +5,7 @@ using System.Collections.Generic;
 
 namespace Cake.Docker
 {
-    /// <summary>
-    /// Contains functionality for working with create command.
-    /// </summary>
-    [CakeAliasCategory("Docker")] 
+    // Contains functionality for working with create command.
     partial class DockerAliases
     {
 
@@ -34,7 +31,6 @@ namespace Cake.Docker
         /// <param name="args">The arguments.</param>
         /// <param name="command">The command.</param>
         [CakeMethodAlias]
-        [CakeAliasCategory("Docker")]
         public static void DockerCreate(this ICakeContext context, DockerCreateSettings settings, string image, string command, params string[] args)
         {
             if (context == null)
