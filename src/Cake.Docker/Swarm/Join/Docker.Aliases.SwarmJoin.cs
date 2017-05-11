@@ -5,10 +5,7 @@ using System.Collections.Generic;
 
 namespace Cake.Docker
 {
-    /// <summary>
-    /// Contains functionality for working with swarm join command.
-    /// </summary>
-    [CakeAliasCategory("Docker")]
+    // Contains functionality for working with swarm join command.
     partial class DockerAliases
     {
         /// <summary>

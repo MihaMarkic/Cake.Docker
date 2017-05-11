@@ -5,10 +5,7 @@ using System.Collections.Generic;
 
 namespace Cake.Docker
 {
-    /// <summary>
-    /// Contains functionality for working with network connect command.
-    /// </summary>
-    [CakeAliasCategory("Docker")]
+    // Contains functionality for working with network connect command.
     partial class DockerAliases
     {
         /// <summary>

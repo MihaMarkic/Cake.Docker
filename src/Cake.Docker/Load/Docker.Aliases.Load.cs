@@ -4,10 +4,7 @@ using System;
 
 namespace Cake.Docker
 {
-    /// <summary>
-    /// Contains functionality for working with load command.
-    /// </summary>
-    [CakeAliasCategory("Docker")]
+    // Contains functionality for working with load command.
     partial class DockerAliases
     {
         /// <summary>
