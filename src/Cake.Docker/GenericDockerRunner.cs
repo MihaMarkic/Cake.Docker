@@ -19,7 +19,7 @@ namespace Cake.Docker
         /// <param name="fileSystem"></param>
         /// <param name="environment"></param>
         /// <param name="processRunner"></param>
-        /// <param name="globber"></param>
+        /// <param name="tools"></param>
         public GenericDockerRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools) 
             : base(fileSystem, environment, processRunner, tools)
         {
