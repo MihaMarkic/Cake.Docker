@@ -50,12 +50,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cake.Docker\Cake.Docker.csproj">
-      <Project>{7de3ff26-12a9-436c-9291-fed348aeacd7}</Project>
-      <Name>Cake.Docker</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Ps\DockerPsParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +59,12 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cake.Docker\Cake.Docker.csproj">
+      <Project>{4208625d-10ee-425e-9dc0-b79e0ed79c13}</Project>
+      <Name>Cake.Docker</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

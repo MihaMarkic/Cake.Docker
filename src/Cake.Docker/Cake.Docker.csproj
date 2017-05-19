@@ -1,174 +1,55 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7DE3FF26-12A9-436C-9291-FED348AEACD7}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cake.Docker</RootNamespace>
+    <TargetFrameworks>net45;net46;netstandard1.6</TargetFrameworks>
     <AssemblyName>Cake.Docker</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <RootNamespace>Cake.Docker</RootNamespace>
+    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.6' ">1.6.0</NetStandardImplicitPackageVersion>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
+    <DocumentationFile>bin\Debug\net45\Cake.Docker.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Cake.Docker.XML</DocumentationFile>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
+    <DocumentationFile>bin\Release\net45\Cake.Docker.xml</DocumentationFile>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Cake.Core">
-      <HintPath>..\packages\Cake.Core.0.17.0\lib\net45\Cake.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ArgumentsBuilderExtension.cs" />
-    <Compile Include="AutoPropertyAttribute.cs" />
-    <Compile Include="AutoToolSettings.cs" />
-    <Compile Include="Compose\DockerComposeSettings.cs" />
-    <Compile Include="Compose\Up\Docker.Aliases.ComposeUp.cs" />
-    <Compile Include="Compose\Up\DockerComposeUpSettings.cs" />
-    <Compile Include="Compose\Unpause\Docker.Aliases.ComposeUnpause.cs" />
-    <Compile Include="Compose\Stop\Docker.Aliases.ComposeStop.cs" />
-    <Compile Include="Compose\Stop\DockerComposeStopSettings.cs" />
-    <Compile Include="Compose\Start\Docker.Aliases.ComposeStart.cs" />
-    <Compile Include="Compose\Scale\Docker.Aliases.ComposeScale.cs" />
-    <Compile Include="Compose\Run\Docker.Aliases.ComposeRun.cs" />
-    <Compile Include="Compose\Run\DockerComposeRunSettings.cs" />
-    <Compile Include="Compose\Rm\Docker.Aliases.ComposeRm.cs" />
-    <Compile Include="Compose\Rm\DockerComposeRmSettings.cs" />
-    <Compile Include="Compose\Restart\Docker.Aliases.ComposeRestart.cs" />
-    <Compile Include="Compose\Restart\DockerComposeRestartSettings.cs" />
-    <Compile Include="Compose\Pull\Docker.Aliases.ComposePull.cs" />
-    <Compile Include="Compose\Pull\DockerComposePullSettings.cs" />
-    <Compile Include="Compose\Build\Docker.Aliases.ComposeBuild.cs" />
-    <Compile Include="Compose\Pause\Docker.Aliases.ComposePause.cs" />
-    <Compile Include="Compose\Build\DockerComposeBuildSettings.cs" />
-    <Compile Include="Compose\Kill\Docker.Aliases.ComposeKill.cs" />
-    <Compile Include="Compose\Kill\DockerComposeKillSettings.cs" />
-    <Compile Include="Compose\Down\Docker.Aliases.ComposeDown.cs" />
-    <Compile Include="Compose\Down\DockerComposeDownSettings.cs" />
-    <Compile Include="Compose\Create\Docker.Aliases.ComposeCreate.cs" />
-    <Compile Include="Compose\Create\DockerComposeCreateSettings.cs" />
-    <Compile Include="Cp\DockerCpSettings.cs" />
-    <Compile Include="Create\Docker.Aliases.Create.cs" />
-    <Compile Include="Create\DockerCreateSettings.cs" />
-    <Compile Include="Cp\Docker.Aliases.Cp.cs" />
-    <Compile Include="DockerResolver.cs" />
-    <Compile Include="DockerComposeTool.cs" />
-    <Compile Include="EmptySettings.cs" />
-    <Compile Include="GenericDockerComposeRunner.cs" />
-    <Compile Include="Login\Docker.Aliases.Login.cs" />
-    <Compile Include="Login\DockerLoginSettings.cs" />
-    <Compile Include="NamespaceDoc.cs" />
-    <Compile Include="Network\Remove\Docker.Aliases.NetworkRemove.cs" />
-    <Compile Include="Network\Disconnect\Docker.Aliases.NetworkDisconnect.cs" />
-    <Compile Include="Network\Disconnect\DockerNetworkDisconnectSettings.cs" />
-    <Compile Include="Network\Create\Docker.Aliases.NetworkCreate.cs" />
-    <Compile Include="Network\Create\DockerNetworkCreateSettings.cs" />
-    <Compile Include="Network\Connect\Docker.Aliases.NetworkConnect.cs" />
-    <Compile Include="Network\Connect\DockerNetworkConnectSettings.cs" />
-    <Compile Include="Ps\ContainerStatus.cs" />
-    <Compile Include="Ps\Docker.Aliases.Ps.cs" />
-    <Compile Include="Ps\DockerPsResult.cs" />
-    <Compile Include="Ps\DockerPsParser.cs" />
-    <Compile Include="Ps\DockerPsSettings.cs" />
-    <Compile Include="DockerAliases.cs" />
-    <Compile Include="DockerBridge.cs" />
-    <Compile Include="DockerTool.cs" />
-    <Compile Include="GenericDockerRunner.cs" />
-    <Compile Include="Build\Docker.Aliases.Build.cs" />
-    <Compile Include="Build\DockerBuildSettings.cs" />
-    <Compile Include="Pull\Docker.Aliases.Push.cs" />
-    <Compile Include="Pull\DockerPushSettings.cs" />
-    <Compile Include="Push\Docker.Aliases.Pull.cs" />
-    <Compile Include="Push\DockerPullSettings.cs" />
-    <Compile Include="Load\Docker.Aliases.Load.cs" />
-    <Compile Include="Load\DockerLoadSettings.cs" />
-    <Compile Include="Run\Docker.Aliases.Run.cs" />
-    <Compile Include="Run\DockerRunSettings.cs" />
-    <Compile Include="Save\Docker.Aliases.Save.cs" />
-    <Compile Include="Save\DockerSaveSettings.cs" />
-    <Compile Include="Stop\Docker.Aliases.Stop.cs" />
-    <Compile Include="Stop\DockerStopSettings.cs" />
-    <Compile Include="Rmi\Docker.Aliases.Rmi.cs" />
-    <Compile Include="Rmi\DockerRmiSettings.cs" />
-    <Compile Include="Rm\DockerRmSettings.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Swarm\Init\Docker.Aliases.SwarmInit.cs" />
-    <Compile Include="Swarm\Init\DockerSwarmInitSettings.cs" />
-    <Compile Include="Swarm\Update\Docker.Aliases.SwarmUpdate.cs" />
-    <Compile Include="Swarm\Update\DockerSwarmUpdateSettings.cs" />
-    <Compile Include="Swarm\Leave\Docker.Aliases.SwarmLeave.cs" />
-    <Compile Include="Swarm\Leave\DockerSwarmLeaveSettings.cs" />
-    <Compile Include="Swarm\Join\Docker.Aliases.SwarmJoin.cs" />
-    <Compile Include="Swarm\Join\DockerSwarmJoinSettings.cs" />
-    <Compile Include="Tag\Docker.Aliases.Tag.cs" />
-    <Compile Include="Tag\DockerTagSettings.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Rm\Docker.Aliases.Rm.cs" />
-    <Content Include="Compose\args.txt" />
-  </ItemGroup>
+
   <ItemGroup>
     <Content Include="Build\args.txt" />
-    <Content Include="Compose\Up\args.txt" />
-    <Content Include="Compose\Stop\args.txt" />
-    <Content Include="Compose\Run\args.txt" />
-    <Content Include="Compose\Rm\args.txt" />
-    <Content Include="Compose\Restart\args.txt" />
-    <Content Include="Compose\Pull\args.txt" />
+    <Content Include="Compose\args.txt" />
     <Content Include="Compose\Build\args.txt" />
-    <Content Include="Compose\Kill\args.txt" />
-    <Content Include="Compose\Down\args.txt" />
     <Content Include="Compose\Create\args.txt" />
+    <Content Include="Compose\Down\args.txt" />
+    <Content Include="Compose\Kill\args.txt" />
+    <Content Include="Compose\Pull\args.txt" />
+    <Content Include="Compose\Restart\args.txt" />
+    <Content Include="Compose\Rm\args.txt" />
+    <Content Include="Compose\Run\args.txt" />
+    <Content Include="Compose\Stop\args.txt" />
+    <Content Include="Compose\Up\args.txt" />
     <Content Include="Create\args.txt" />
     <Content Include="Login\args.txt" />
-    <Content Include="Network\Disconnect\args.txt" />
-    <Content Include="Network\Create\args.txt" />
     <Content Include="Network\Connect\args.txt" />
+    <Content Include="Network\Create\args.txt" />
+    <Content Include="Network\Disconnect\args.txt" />
     <Content Include="Ps\args.txt" />
     <Content Include="Pull\args.txt" />
     <Content Include="Push\args.txt" />
     <Content Include="Run\args.txt" />
     <Content Include="Swarm\Init\args.txt" />
-    <Content Include="Swarm\Update\args.txt" />
-    <Content Include="Swarm\Leave\args.txt" />
     <Content Include="Swarm\Join\args.txt" />
+    <Content Include="Swarm\Leave\args.txt" />
+    <Content Include="Swarm\Update\args.txt" />
     <Content Include="Tag\args.txt" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="packages.config" />
+    <PackageReference Include="Cake.Core" Version="0.17.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

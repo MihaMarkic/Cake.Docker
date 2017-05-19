@@ -24,7 +24,7 @@ namespace Cake.Docker
             // Cake already searches the PATH for the executable tool names.
             // Check for other known locations.
             return !environment.Platform.IsUnix() 
-                ? CheckCommonWindowsPaths(fileSystem)
+                ? CheckCommonWindowsPaths(fileSystem, environment)
                 : null;
         }
 
@@ -32,13 +32,14 @@ namespace Cake.Docker
         /// Check common docker client locations.
         /// </summary>
         /// <param name="fileSystem"></param>
+        /// <param name="environment"></param>
         /// <returns></returns>
-        private static FilePath CheckCommonWindowsPaths(IFileSystem fileSystem)
+        private static FilePath CheckCommonWindowsPaths(IFileSystem fileSystem, ICakeEnvironment environment)
         {
             // The docker client is included as part of the Docker Toolbox installer 
             // or can be installed using a Chocolatey package (name: docker).
             // The Chocolatey install does not have a fixed location, but Docker Toolbox does.
-            return GetDefaultWindowsPaths(fileSystem)
+            return GetDefaultWindowsPaths(fileSystem, environment)
                 .Select(path => path.CombineWithFilePath("docker.exe"))
                 .FirstOrDefault(dockerExecutable => fileSystem.GetFile(dockerExecutable).Exists);
         }
@@ -47,12 +48,13 @@ namespace Cake.Docker
         /// Get default paths for common docker client installations.
         /// </summary>
         /// <param name="fileSystem"></param>
+        /// <param name="environment"></param>
         /// <returns></returns>
-        private static DirectoryPath[] GetDefaultWindowsPaths(IFileSystem fileSystem)
+        private static DirectoryPath[] GetDefaultWindowsPaths(IFileSystem fileSystem, ICakeEnvironment environment)
         {
             var paths = new List<DirectoryPath>();
 
-            var programFiles = new DirectoryPath(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+            var programFiles = environment.GetSpecialPath(SpecialPath.ProgramFiles);
             var defaultDockerToolboxPath = programFiles.Combine("Docker Toolbox");
             if (fileSystem.GetDirectory(defaultDockerToolboxPath).Exists)
             {
