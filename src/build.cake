@@ -11,15 +11,13 @@ var CakeDockerNuspec = File("./Cake.Docker.nuspec");
 var Nupkg = Directory("./nupkg");
 
 var target = Argument("target", "Default");
-var version = "";
 
 Task("Default")
 	.Does (() =>
 	{
 		NuGetRestore (CakeDockerSln);
-		DotNetBuild (CakeDockerSln, c => {
-			c.Configuration = "Release";
-			c.Verbosity = Verbosity.Minimal;
+		DotNetCoreBuild (CakeDockerSln, new DotNetCoreBuildSettings {
+			Configuration = "Release"
 		});
 });
 
@@ -31,26 +29,21 @@ Task("UnitTest")
 	});
 
 Task("NuGetPack")
-	.IsDependentOn("GetVersion")
-	.IsDependentOn("Default")
-	.IsDependentOn("UnitTest")
+	// .IsDependentOn("Default")
+	// .IsDependentOn("UnitTest")
 	.Does (() =>
 {
 	CreateDirectory(Nupkg);
-	NuGetPack (CakeDockerNuspec, new NuGetPackSettings { 
-		Version = version,
-		Verbosity = NuGetVerbosity.Detailed,
-		OutputDirectory = Nupkg,
-		BasePath = "./",
-	});	
+	// DotNetCorePublish (CakeDockerSln, new DotNetCorePublishSettings { 
+	// 	Configuration = "Release",
+	// 	Framework = "net45;net46;netstandard1.6"
+	// 	// BuildBasePath = "./",
+	// });	
+	DotNetCorePack (CakeDockerProj, new DotNetCorePackSettings
+     {
+         Configuration = "Release",
+         OutputDirectory = "./nupkg/"
+     });
 });
-
-Task("GetVersion")
-	.Does(() => {
-		var assemblyInfo = ParseAssemblyInfo(AssemblyInfo);
-		var semVersion = string.Join(".", assemblyInfo.AssemblyVersion.Split('.').Take(3));
-		Information("Version {0}", semVersion);
-		version = semVersion;
-	});
 
 RunTarget (target);

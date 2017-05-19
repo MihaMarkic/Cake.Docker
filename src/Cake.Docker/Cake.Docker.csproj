@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net45;net46;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>net45;netstandard1.6</TargetFrameworks>
     <AssemblyName>Cake.Docker</AssemblyName>
     <RootNamespace>Cake.Docker</RootNamespace>
     <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.6' ">1.6.0</NetStandardImplicitPackageVersion>
@@ -10,42 +10,24 @@
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
+  <PropertyGroup>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageId>Cake.Docker</PackageId>
+    <Authors>Miha Markic</Authors>
+    <Company>Righthand</Company>
+    <Description>Cake Build addin for Docker.</Description>
+    <PackageProjectUrl>https://github.com/MihaMarkic/Cake.Docker</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/MihaMarkic/Cake.Docker/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>cake docker cake-build cake-contrib</PackageTags>
+    <IncludeSymbols>true</IncludeSymbols>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageReleaseNotes>See https://github.com/MihaMarkic/Cake.Docker/blob/master/ReleaseNotes.md</PackageReleaseNotes>
+    <Version>0.7.7</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <DocumentationFile>bin\Debug\net45\Cake.Docker.xml</DocumentationFile>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
-    <DocumentationFile>bin\Release\net45\Cake.Docker.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="Build\args.txt" />
-    <Content Include="Compose\args.txt" />
-    <Content Include="Compose\Build\args.txt" />
-    <Content Include="Compose\Create\args.txt" />
-    <Content Include="Compose\Down\args.txt" />
-    <Content Include="Compose\Kill\args.txt" />
-    <Content Include="Compose\Pull\args.txt" />
-    <Content Include="Compose\Restart\args.txt" />
-    <Content Include="Compose\Rm\args.txt" />
-    <Content Include="Compose\Run\args.txt" />
-    <Content Include="Compose\Stop\args.txt" />
-    <Content Include="Compose\Up\args.txt" />
-    <Content Include="Create\args.txt" />
-    <Content Include="Login\args.txt" />
-    <Content Include="Network\Connect\args.txt" />
-    <Content Include="Network\Create\args.txt" />
-    <Content Include="Network\Disconnect\args.txt" />
-    <Content Include="Ps\args.txt" />
-    <Content Include="Pull\args.txt" />
-    <Content Include="Push\args.txt" />
-    <Content Include="Run\args.txt" />
-    <Content Include="Swarm\Init\args.txt" />
-    <Content Include="Swarm\Join\args.txt" />
-    <Content Include="Swarm\Leave\args.txt" />
-    <Content Include="Swarm\Update\args.txt" />
-    <Content Include="Tag\args.txt" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Cake.Core" Version="0.17.0">
