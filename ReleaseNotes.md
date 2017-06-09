@@ -1,3 +1,5 @@
+# Cake.Docker 0.7.7
+- .NET Core support
 # Cake.Docker 0.7.6
 - Documentation improvements
 # Cake.Docker 0.7.5

@@ -29,8 +29,8 @@ Task("UnitTest")
 	});
 
 Task("NuGetPack")
-	// .IsDependentOn("Default")
-	// .IsDependentOn("UnitTest")
+	.IsDependentOn("Default")
+	.IsDependentOn("UnitTest")
 	.Does (() =>
 {
 	CreateDirectory(Nupkg);
