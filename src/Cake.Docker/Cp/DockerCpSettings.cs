@@ -1,7 +1,7 @@
 ﻿namespace Cake.Docker
 {
     /// <summary>
-    /// Settings for docker build.
+    /// Settings for docker cp command.
     /// </summary>
     public sealed class DockerCpSettings: AutoToolSettings
     {
