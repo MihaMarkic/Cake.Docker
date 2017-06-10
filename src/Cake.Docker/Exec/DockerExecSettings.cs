@@ -1,9 +1,9 @@
 ﻿namespace Cake.Docker
 {
     /// <summary>
-    /// Settings for docker cp command.
+    /// Settings for docker exec command.
     /// </summary>
-    public sealed class DockerCpSettings: AutoToolSettings
+    public sealed class DockerExecSettings: AutoToolSettings
     {
         /// <summary>
         /// Always follow symbol link in SRC_PATH
