@@ -27,7 +27,7 @@ namespace Cake.Docker
                 throw new ArgumentNullException("password");
             }
 
-            DockerLogin(context, new DockerLoginSettings {Username = username, Password = password, Email = "none"}, server);
+            DockerLogin(context, new DockerLoginSettings {Username = username, Password = password}, server);
         }
 
         /// <summary>
