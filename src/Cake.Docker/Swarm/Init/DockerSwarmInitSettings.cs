@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Cake.Docker
+﻿namespace Cake.Docker
 {
     /// <summary>
     /// Settings for docker swarm init.
@@ -8,36 +6,74 @@ namespace Cake.Docker
     public sealed class DockerSwarmInitSettings : AutoToolSettings
     {
         /// <summary>
-        /// Auto acceptance policy (default worker)
+        /// --advertise-addr 
+        /// Advertised address (format: &lt;ip|interface&gt;[:port])
         /// </summary>
-        public string AutoAccept { get; set; }
+        public string AdvertiseAddr { get; set; }
         /// <summary>
-        /// Validity period for node certificates (default 2160h0m0s)
+        /// --autolock 
+        /// default: false
+        /// Enable manager autolocking (requiring an unlock key to start a stopped manager)
         /// </summary>
-        public TimeSpan? CertExpiry { get; set; }
+        public bool? Autolock { get; set; }
         /// <summary>
-        /// Dispatcher heartbeat period (default 5s)
+        /// --availability 
+        /// default: active
+        /// Availability of the node (“active”|“pause”|“drain”)
         /// </summary>
-        public TimeSpan? DispatcherHeartbeat { get; set; }
+        public string Availability { get; set; }
         /// <summary>
+        /// --cert-expiry 
+        /// default: 2160h0m0s
+        /// Validity period for node certificates (ns|us|ms|s|m|h)
+        /// </summary>
+        public string CertExpiry { get; set; }
+        /// <summary>
+        /// --data-path-addr 
+        /// Address or interface to use for data path traffic (format: &lt;ip|interface&gt;)
+        /// </summary>
+        public string DataPathAddr { get; set; }
+        /// <summary>
+        /// --dispatcher-heartbeat 
+        /// default: 5s
+        /// Dispatcher heartbeat period (ns|us|ms|s|m|h)
+        /// </summary>
+        public string DispatcherHeartbeat { get; set; }
+        /// <summary>
+        /// --external-ca 
         /// Specifications of one or more certificate signing endpoints
         /// </summary>
         public string ExternalCa { get; set; }
         /// <summary>
-        /// Force create a new cluster from current state.
+        /// --force-new-cluster 
+        /// default: false
+        /// Force create a new cluster from current state
         /// </summary>
-        public bool ForceNewCluster { get; set; }
+        public bool? ForceNewCluster { get; set; }
         /// <summary>
-        /// Listen address (default 0.0.0.0:2377)
+        /// --listen-addr 
+        /// default: 0.0.0.0:2377
+        /// Listen address (format: &lt;ip|interface&gt;[:port])
         /// </summary>
         public string ListenAddr { get; set; }
         /// <summary>
-        /// Set secret value needed to accept nodes into cluster
+        /// --max-snapshots 
+        /// default: 0
+        /// Number of additional Raft snapshots to retain
         /// </summary>
-        public bool Secret { get; set; }
+        public int? MaxSnapshots { get; set; }
         /// <summary>
-        /// Task history retention limit (default 10)
+        /// --snapshot-interval 
+        /// default: 10000
+        /// Number of log entries between Raft snapshots
         /// </summary>
-        public bool TaskHistoryLimit { get; set; }
+        public int? SnapshotInterval { get; set; }
+        /// <summary>
+        /// --task-history-limit 
+        /// default: 5
+        /// Task history retention limit
+        /// </summary>
+        public int? TaskHistoryLimit { get; set; }
     }
 }
+

@@ -8,365 +8,537 @@ namespace Cake.Docker
     public sealed class DockerRunSettings : AutoToolSettings
     {
         /// <summary>
-        /// Add a custom host-to-IP mapping (host:ip) (default [])
+        /// --add-host 
+        /// Add a custom host-to-IP mapping (host:ip)
         /// </summary>
-        public string[] AddHost { get; set; }
+        public string AddHost { get; set; }
         /// <summary>
-        /// Attach to STDIN, STDOUT or STDERR (default [])
+        /// --attach, -a 
+        /// Attach to STDIN, STDOUT or STDERR
         /// </summary>
-        public string[] Attach { get; set; }
+        public string Attach { get; set; }
         /// <summary>
-        /// Block IO (relative weight), between 10 and 1000
+        /// --blkio-weight 
+        /// default: 0
+        /// Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)
         /// </summary>
-        public int BlkioWeight { get; set; }
+        public int? BlkioWeight { get; set; }
         /// <summary>
-        /// Block IO weight (relative device weight) (default [])
+        /// --blkio-weight-device 
+        /// Block IO weight (relative device weight)
         /// </summary>
-        public int[] BlkioWeightDevice { get; set; }
+        public string BlkioWeightDevice { get; set; }
         /// <summary>
-        /// Add Linux capabilities (default [])
+        /// --cap-add 
+        /// Add Linux capabilities
         /// </summary>
-        public string[] CapAdd { get; set; }
+        public string CapAdd { get; set; }
         /// <summary>
-        /// Drop Linux capabilities (default [])
+        /// --cap-drop 
+        /// Drop Linux capabilities
         /// </summary>
-        public string[] CapDrop { get; set; }
+        public string CapDrop { get; set; }
         /// <summary>
+        /// --cgroup-parent 
         /// Optional parent cgroup for the container
         /// </summary>
         public string CgroupParent { get; set; }
         /// <summary>
+        /// --cidfile 
         /// Write the container ID to the file
         /// </summary>
         public string Cidfile { get; set; }
         /// <summary>
+        /// --cpu-count 
+        /// default: 0
+        /// CPU count (Windows only)
+        /// </summary>
+        public int? CpuCount { get; set; }
+        /// <summary>
+        /// --cpu-percent 
+        /// default: 0
         /// CPU percent (Windows only)
         /// </summary>
-        public int CpuPercent { get; set; }
+        public int? CpuPercent { get; set; }
         /// <summary>
+        /// --cpu-period 
+        /// default: 0
         /// Limit CPU CFS (Completely Fair Scheduler) period
         /// </summary>
-        public int CpuPeriod { get; set; }
+        public int? CpuPeriod { get; set; }
         /// <summary>
+        /// --cpu-quota 
+        /// default: 0
         /// Limit CPU CFS (Completely Fair Scheduler) quota
         /// </summary>
-        public int CpuQuota { get; set; }
+        public int? CpuQuota { get; set; }
         /// <summary>
+        /// --cpu-rt-period 
+        /// default: 0
+        /// Limit CPU real-time period in microseconds
+        /// </summary>
+        public int? CpuRtPeriod { get; set; }
+        /// <summary>
+        /// --cpu-rt-runtime 
+        /// default: 0
+        /// Limit CPU real-time runtime in microseconds
+        /// </summary>
+        public int? CpuRtRuntime { get; set; }
+        /// <summary>
+        /// --cpu-shares, -c 
+        /// default: 0
         /// CPU shares (relative weight)
         /// </summary>
-        public int CpuShares { get; set; }
+        public int? CpuShares { get; set; }
         /// <summary>
+        /// --cpus 
+        /// Number of CPUs
+        /// </summary>
+        public string Cpus { get; set; }
+        /// <summary>
+        /// --cpuset-cpus 
         /// CPUs in which to allow execution (0-3, 0,1)
         /// </summary>
         public string CpusetCpus { get; set; }
         /// <summary>
+        /// --cpuset-mems 
         /// MEMs in which to allow execution (0-3, 0,1)
         /// </summary>
         public string CpusetMems { get; set; }
         /// <summary>
+        /// --detach, -d 
+        /// default: false
         /// Run container in background and print container ID
         /// </summary>
-        public bool Detach { get; set; }
+        public bool? Detach { get; set; }
         /// <summary>
+        /// --detach-keys 
         /// Override the key sequence for detaching a container
         /// </summary>
         public string DetachKeys { get; set; }
         /// <summary>
-        /// Add a host device to the container (default [])
+        /// --device 
+        /// Add a host device to the container
         /// </summary>
-        public string[] Device { get; set; }
+        public string Device { get; set; }
         /// <summary>
-        /// Limit read rate (bytes per second) from a device (default [])
+        /// --device-cgroup-rule 
+        /// Add a rule to the cgroup allowed devices list
         /// </summary>
-        public int[] DeviceReadBps { get; set; }
+        public string DeviceCgroupRule { get; set; }
         /// <summary>
-        /// Limit read rate (IO per second) from a device (default [])
+        /// --device-read-bps 
+        /// Limit read rate (bytes per second) from a device
         /// </summary>
-        public int[] DeviceReadIops { get; set; }
+        public string DeviceReadBps { get; set; }
         /// <summary>
-        /// Limit write rate (bytes per second) to a device (default [])
+        /// --device-read-iops 
+        /// Limit read rate (IO per second) from a device
         /// </summary>
-        public int[] DeviceWriteBps { get; set; }
+        public string DeviceReadIops { get; set; }
         /// <summary>
-        /// Limit write rate (IO per second) to a device (default [])
+        /// --device-write-bps 
+        /// Limit write rate (bytes per second) to a device
         /// </summary>
-        public int[] DeviceWriteIops { get; set; }
+        public string DeviceWriteBps { get; set; }
         /// <summary>
-        /// Skip image verification (default true)
+        /// --device-write-iops 
+        /// Limit write rate (IO per second) to a device
         /// </summary>
-        public bool DisableContentTrust { get; set; }
+        public string DeviceWriteIops { get; set; }
         /// <summary>
-        /// Set custom DNS servers (default [])
+        /// --disable-content-trust 
+        /// default: true
+        /// Skip image verification
         /// </summary>
-        public string[] Dns { get; set; }
+        public bool? DisableContentTrust { get; set; }
         /// <summary>
-        /// Set DNS options (default [])
+        /// --dns 
+        /// Set custom DNS servers
         /// </summary>
-        public string[] DnsOpt { get; set; }
+        public string Dns { get; set; }
         /// <summary>
-        /// Set custom DNS search domains (default [])
+        /// --dns-opt 
+        /// Set DNS options
         /// </summary>
-        public string[] DnsSearch { get; set; }
+        public string DnsOpt { get; set; }
         /// <summary>
+        /// --dns-option 
+        /// Set DNS options
+        /// </summary>
+        public string DnsOption { get; set; }
+        /// <summary>
+        /// --dns-search 
+        /// Set custom DNS search domains
+        /// </summary>
+        public string DnsSearch { get; set; }
+        /// <summary>
+        /// --entrypoint 
         /// Overwrite the default ENTRYPOINT of the image
         /// </summary>
         public string Entrypoint { get; set; }
         /// <summary>
-        /// Set environment variables (default [])
+        /// --env, -e 
+        /// Set environment variables
         /// </summary>
-        public string[] Env { get; set; }
+        public string Env { get; set; }
         /// <summary>
-        /// Read in a file of environment variables (default [])
+        /// --env-file 
+        /// Read in a file of environment variables
         /// </summary>
-        public string[] EnvFile { get; set; }
+        public string EnvFile { get; set; }
         /// <summary>
-        /// Expose a port or a range of ports (default [])
+        /// --expose 
+        /// Expose a port or a range of ports
         /// </summary>
-        public string[] Expose { get; set; }
+        public string Expose { get; set; }
         /// <summary>
-        /// Add additional groups to join (default [])
+        /// --group-add 
+        /// Add additional groups to join
         /// </summary>
-        public string[] GroupAdd { get; set; }
+        public string GroupAdd { get; set; }
         /// <summary>
+        /// --health-cmd 
         /// Command to run to check health
         /// </summary>
         public string HealthCmd { get; set; }
         /// <summary>
-        /// Time between running the check
+        /// --health-interval 
+        /// default: 0s
+        /// Time between running the check (ms|s|m|h) (default 0s)
         /// </summary>
-        public TimeSpan? HealthInterval { get; set; }
+        public string HealthInterval { get; set; }
         /// <summary>
+        /// --health-retries 
+        /// default: 0
         /// Consecutive failures needed to report unhealthy
         /// </summary>
-        public int HealthRetries { get; set; }
+        public int? HealthRetries { get; set; }
         /// <summary>
-        /// Maximum time to allow one check to run
+        /// --health-start-period 
+        /// default: 0s
+        /// Start period for the container to initialize before starting health-retries countdown (ms|s|m|h) (default 0s)
         /// </summary>
-        public TimeSpan? HealthTimeout { get; set; }
+        public string HealthStartPeriod { get; set; }
         /// <summary>
+        /// --health-timeout 
+        /// default: 0s
+        /// Maximum time to allow one check to run (ms|s|m|h) (default 0s)
+        /// </summary>
+        public string HealthTimeout { get; set; }
+        /// <summary>
+        /// --help 
+        /// default: false
+        /// Print usage
+        /// </summary>
+        public bool? Help { get; set; }
+        /// <summary>
+        /// --hostname, -h 
         /// Container host name
         /// </summary>
         public string Hostname { get; set; }
         /// <summary>
+        /// --init 
+        /// default: false
+        /// Run an init inside the container that forwards signals and reaps processes
+        /// </summary>
+        public bool? Init { get; set; }
+        /// <summary>
+        /// --interactive, -i 
+        /// default: false
         /// Keep STDIN open even if not attached
         /// </summary>
-        public bool Interactive { get; set; }
+        public bool? Interactive { get; set; }
         /// <summary>
+        /// --io-maxbandwidth 
+        /// default: 0
         /// Maximum IO bandwidth limit for the system drive (Windows only)
-        ///   (Windows only). The format is `&lt;number&gt;&lt;unit&gt;`.
-        ///   Unit is optional and can be `b` (bytes per second),
-        ///   `k` (kilobytes per second), `m` (megabytes per second),
-        ///   or `g` (gigabytes per second). If you omit the unit,
-        ///   the system uses bytes per second.
         /// </summary>
-        public string IoMaxbandwidth { get; set; }
+        public int? IoMaxbandwidth { get; set; }
         /// <summary>
+        /// --io-maxiops 
+        /// default: 0
         /// Maximum IOps limit for the system drive (Windows only)
         /// </summary>
-        public int IoMaxiops { get; set; }
+        public int? IoMaxiops { get; set; }
         /// <summary>
-        /// Container IPv4 address (e.g. 172.30.100.104)
+        /// --ip 
+        /// IPv4 address (e.g., 172.30.100.104)
         /// </summary>
         public string Ip { get; set; }
         /// <summary>
-        /// Container IPv6 address (e.g. 2001:db8::33)
+        /// --ip6 
+        /// IPv6 address (e.g., 2001:db8::33)
         /// </summary>
         public string Ip6 { get; set; }
         /// <summary>
+        /// --ipc 
         /// IPC namespace to use
         /// </summary>
         public string Ipc { get; set; }
         /// <summary>
+        /// --isolation 
         /// Container isolation technology
         /// </summary>
         public string Isolation { get; set; }
         /// <summary>
+        /// --kernel-memory 
+        /// default: 0
         /// Kernel memory limit
         /// </summary>
-        public string KernelMemory { get; set; }
+        public int? KernelMemory { get; set; }
         /// <summary>
-        /// Set meta data on a container (default [])
+        /// --label, -l 
+        /// Set meta data on a container
         /// </summary>
-        public string[] Label { get; set; }
+        public string Label { get; set; }
         /// <summary>
-        /// Read in a line delimited file of labels (default [])
+        /// --label-file 
+        /// Read in a line delimited file of labels
         /// </summary>
-        public string[] LabelFile { get; set; }
+        public string LabelFile { get; set; }
         /// <summary>
-        /// Add link to another container (default [])
+        /// --link 
+        /// Add link to another container
         /// </summary>
-        public string[] Link { get; set; }
+        public string Link { get; set; }
         /// <summary>
-        /// Container IPv4/IPv6 link-local addresses (default [])
+        /// --link-local-ip 
+        /// Container IPv4/IPv6 link-local addresses
         /// </summary>
-        public string[] LinkLocalIp { get; set; }
+        public string LinkLocalIp { get; set; }
         /// <summary>
+        /// --log-driver 
         /// Logging driver for the container
         /// </summary>
         public string LogDriver { get; set; }
         /// <summary>
-        /// Log driver options (default [])
+        /// --log-opt 
+        /// Log driver options
         /// </summary>
-        public string[] LogOpt { get; set; }
+        public string LogOpt { get; set; }
         /// <summary>
-        /// Container MAC address (e.g. 92:d0:c6:0a:29:33)
+        /// --mac-address 
+        /// Container MAC address (e.g., 92:d0:c6:0a:29:33)
         /// </summary>
         public string MacAddress { get; set; }
         /// <summary>
+        /// --memory, -m 
+        /// default: 0
         /// Memory limit
         /// </summary>
-        public string Memory { get; set; }
+        public int? Memory { get; set; }
         /// <summary>
+        /// --memory-reservation 
+        /// default: 0
         /// Memory soft limit
         /// </summary>
-        public string MemoryReservation { get; set; }
+        public int? MemoryReservation { get; set; }
         /// <summary>
-        /// Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+        /// --memory-swap 
+        /// default: 0
+        /// Swap limit equal to memory plus swap: ‘-1’ to enable unlimited swap
         /// </summary>
-        public string MemorySwap { get; set; }
+        public int? MemorySwap { get; set; }
         /// <summary>
-        /// Tune container memory swappiness (0 to 100) (default -1).
+        /// --memory-swappiness 
+        /// default: -1
+        /// Tune container memory swappiness (0 to 100)
         /// </summary>
-        public int MemorySwappiness { get; set; }
+        public int? MemorySwappiness { get; set; }
         /// <summary>
+        /// --mount 
+        /// Attach a filesystem mount to the container
+        /// </summary>
+        public string Mount { get; set; }
+        /// <summary>
+        /// --name 
         /// Assign a name to the container
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// Add network-scoped alias for the container (default [])
-        /// </summary>
-        public string[] NetworkAlias { get; set; }
-        /// <summary>
+        /// --net 
+        /// default: default
         /// Connect a container to a network
-        ///   'bridge': create a network stack on the default Docker bridge
-        ///   'none': no networking
-        ///   'container:&lt;name|id&gt;': reuse another container's network stack
-        ///   'host': use the Docker host network stack
-        ///   '&lt;network-name&gt;|&lt;network-id&gt;': connect to a user-defined network
+        /// </summary>
+        public string Net { get; set; }
+        /// <summary>
+        /// --net-alias 
+        /// Add network-scoped alias for the container
+        /// </summary>
+        public string NetAlias { get; set; }
+        /// <summary>
+        /// --network 
+        /// default: default
+        /// Connect a container to a network
         /// </summary>
         public string Network { get; set; }
         /// <summary>
+        /// --network-alias 
+        /// Add network-scoped alias for the container
+        /// </summary>
+        public string NetworkAlias { get; set; }
+        /// <summary>
+        /// --no-healthcheck 
+        /// default: false
         /// Disable any container-specified HEALTHCHECK
         /// </summary>
-        public bool NoHealthcheck { get; set; }
+        public bool? NoHealthcheck { get; set; }
         /// <summary>
+        /// --oom-kill-disable 
+        /// default: false
         /// Disable OOM Killer
         /// </summary>
-        public bool OomKillDisable { get; set; }
+        public bool? OomKillDisable { get; set; }
         /// <summary>
-        /// Tune host's OOM preferences (-1000 to 1000)
+        /// --oom-score-adj 
+        /// default: 0
+        /// Tune host’s OOM preferences (-1000 to 1000)
         /// </summary>
-        public int OomScoreAdj { get; set; }
+        public int? OomScoreAdj { get; set; }
         /// <summary>
+        /// --pid 
         /// PID namespace to use
         /// </summary>
         public string Pid { get; set; }
         /// <summary>
+        /// --pids-limit 
+        /// default: 0
         /// Tune container pids limit (set -1 for unlimited)
         /// </summary>
-        public int PidsLimit { get; set; }
+        public int? PidsLimit { get; set; }
         /// <summary>
+        /// --privileged 
+        /// default: false
         /// Give extended privileges to this container
         /// </summary>
-        public bool Privileged { get; set; }
+        public bool? Privileged { get; set; }
         /// <summary>
-        /// Publish a container's port(s) to the host (default [])
+        /// --publish, -p 
+        /// Publish a container’s port(s) to the host
         /// </summary>
-        public string[] Publish { get; set; }
+        public string Publish { get; set; }
         /// <summary>
+        /// --publish-all, -P 
+        /// default: false
         /// Publish all exposed ports to random ports
         /// </summary>
-        public bool PublishAll { get; set; }
+        public bool? PublishAll { get; set; }
         /// <summary>
-        /// Mount the container's root filesystem as read only
+        /// --read-only 
+        /// default: false
+        /// Mount the container’s root filesystem as read only
         /// </summary>
-        public bool ReadOnly { get; set; }
+        public bool? ReadOnly { get; set; }
         /// <summary>
-        /// Restart policy to apply when a container exits (default "no")
-        ///   Possible values are : no, on-failure[:max-retry], always, unless-stopped
+        /// --restart 
+        /// default: no
+        /// Restart policy to apply when a container exits
         /// </summary>
         public string Restart { get; set; }
         /// <summary>
+        /// --rm 
+        /// default: false
         /// Automatically remove the container when it exits
         /// </summary>
-        public bool Rm { get; set; }
+        public bool? Rm { get; set; }
         /// <summary>
+        /// --runtime 
         /// Runtime to use for this container
         /// </summary>
         public string Runtime { get; set; }
         /// <summary>
-        /// Security Options (default [])
+        /// --security-opt 
+        /// Security Options
         /// </summary>
-        public string[] SecurityOpt { get; set; }
+        public string SecurityOpt { get; set; }
         /// <summary>
-        /// Size of /dev/shm, default value is 64MB.
-        ///   The format is `&lt;number&gt;&lt;unit&gt;`. `number` must be greater than `0`.
-        ///   Unit is optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes),
-        ///   or `g` (gigabytes). If you omit the unit, the system uses bytes.
+        /// --shm-size 
+        /// default: 0
+        /// Size of /dev/shm
         /// </summary>
-        public string ShmSize { get; set; }
+        public int? ShmSize { get; set; }
         /// <summary>
-        /// Proxy received signals to the process (default true)
+        /// --sig-proxy 
+        /// default: true
+        /// Proxy received signals to the process
         /// </summary>
-        public bool SigProxy { get; set; }
+        public bool? SigProxy { get; set; }
         /// <summary>
-        /// Signal to stop a container, SIGTERM by default (default "SIGTERM")
+        /// --stop-signal 
+        /// default: SIGTERM
+        /// Signal to stop a container
         /// </summary>
         public string StopSignal { get; set; }
         /// <summary>
-        /// Storage driver options for the container (default [])
+        /// --stop-timeout 
+        /// default: 0
+        /// Timeout (in seconds) to stop a container
         /// </summary>
-        public string[] StorageOpt { get; set; }
+        public int? StopTimeout { get; set; }
         /// <summary>
-        /// Sysctl options (default map[])
+        /// --storage-opt 
+        /// Storage driver options for the container
         /// </summary>
-        public string[] Sysctl { get; set; }
+        public string StorageOpt { get; set; }
         /// <summary>
-        /// Mount a tmpfs directory (default [])
+        /// --sysctl 
+        /// default: map[]
+        /// Sysctl options
         /// </summary>
-        public string[] Tmpfs { get; set; }
+        public string Sysctl { get; set; }
         /// <summary>
+        /// --tmpfs 
+        /// Mount a tmpfs directory
+        /// </summary>
+        public string Tmpfs { get; set; }
+        /// <summary>
+        /// --tty, -t 
+        /// default: false
         /// Allocate a pseudo-TTY
         /// </summary>
-        public bool Tty { get; set; }
+        public bool? Tty { get; set; }
         /// <summary>
-        /// Ulimit options (default [])
+        /// --ulimit 
+        /// Ulimit options
         /// </summary>
-        public string[] Ulimit { get; set; }
+        public string Ulimit { get; set; }
         /// <summary>
+        /// --user, -u 
         /// Username or UID (format: &lt;name|uid&gt;[:&lt;group|gid&gt;])
         /// </summary>
         public string User { get; set; }
         /// <summary>
+        /// --userns 
         /// User namespace to use
-        ///   'host': Use the Docker host user namespace
-        ///   '': Use the Docker daemon user namespace specified by `--userns-remap` option.
         /// </summary>
         public string Userns { get; set; }
         /// <summary>
+        /// --uts 
         /// UTS namespace to use
         /// </summary>
         public string Uts { get; set; }
         /// <summary>
-        /// Bind mount a volume (default []). The format
-        ///   is `[host-src:]container-dest[:&lt;options&gt;]`.
-        ///   The comma-delimited `options` are [rw|ro],
-        ///   [z|Z], [[r]shared|[r]slave|[r]private], and
-        ///   [nocopy]. The 'host-src' is an absolute path
-        ///   or a name value.
+        /// --volume, -v 
+        /// Bind mount a volume
         /// </summary>
-        public string[] Volume { get; set; }
+        public string Volume { get; set; }
         /// <summary>
+        /// --volume-driver 
         /// Optional volume driver for the container
         /// </summary>
         public string VolumeDriver { get; set; }
         /// <summary>
-        /// Mount volumes from the specified container(s) (default [])
+        /// --volumes-from 
+        /// Mount volumes from the specified container(s)
         /// </summary>
-        public string[] VolumesFrom { get; set; }
+        public string VolumesFrom { get; set; }
         /// <summary>
+        /// --workdir, -w 
         /// Working directory inside the container
         /// </summary>
         public string Workdir { get; set; }
+
+
     }
 }

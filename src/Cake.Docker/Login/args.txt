@@ -1,7 +1,2 @@
-﻿Register or log in to a Docker registry.
-If no server is specified, the default is defined by the daemon.
-
-  -e, --email        Email
-  --help             Print usage
-  -p, --password     Password
-  -u, --username     Username
+﻿--password, -p 	  	Password
+--username, -u 	  	Username

@@ -1,0 +1,2 @@
+﻿--force, -f 	false 	Force removal of the image
+--no-prune 	false 	Do not delete untagged parents

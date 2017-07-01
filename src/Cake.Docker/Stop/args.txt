@@ -1,0 +1,1 @@
+﻿--time, -t 	10 	Seconds to wait for stop before killing it

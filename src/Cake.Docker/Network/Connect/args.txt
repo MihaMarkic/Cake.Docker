@@ -1,5 +1,5 @@
-﻿--alias value           Add network-scoped alias for the container (default [])
---ip string             IP Address
---ip6 string            IPv6 Address
---link value            Add link to another container (default [])
---link-local-ip value   Add a link-local address for the container (default [])
+﻿--alias 	  	Add network-scoped alias for the container
+--ip 	  	IPv4 address (e.g., 172.30.100.104)
+--ip6 	  	IPv6 address (e.g., 2001:db8::33)
+--link 	  	Add link to another container
+--link-local-ip 	  	Add a link-local address for the container

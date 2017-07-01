@@ -1,6 +1,7 @@
-﻿--auto-accept value               Auto acceptance policy (worker, manager or none)
---cert-expiry duration            Validity period for node certificates (default 2160h0m0s)
---dispatcher-heartbeat duration   Dispatcher heartbeat period (default 5s)
---external-ca value               Specifications of one or more certificate signing endpoints
---secret string                   Set secret value needed to accept nodes into cluster
---task-history-limit int          Task history retention limit (default 10)
+﻿--autolock 	false 	Change manager autolocking setting (true|false)
+--cert-expiry 	2160h0m0s 	Validity period for node certificates (ns|us|ms|s|m|h)
+--dispatcher-heartbeat 	5s 	Dispatcher heartbeat period (ns|us|ms|s|m|h)
+--external-ca 	  	Specifications of one or more certificate signing endpoints
+--max-snapshots 	0 	Number of additional Raft snapshots to retain
+--snapshot-interval 	10000 	Number of log entries between Raft snapshots
+--task-history-limit 	5 	Task history retention limit

@@ -6,52 +6,94 @@
     public sealed class DockerNetworkCreateSettings : AutoToolSettings
     {
         /// <summary>
-        /// auxiliary ipv4 or ipv6 addresses used by Network driver (default map[])
+        /// --attachable 
+        /// default: false
+        /// Enable manual container attachment
         /// </summary>
-        public string[] AuxAddress { get; set; }
+        public bool? Attachable { get; set; }
         /// <summary>
-        /// Driver to manage the Network (default "bridge")
+        /// --aux-address 
+        /// default: map[]
+        /// Auxiliary IPv4 or IPv6 addresses used by Network driver
+        /// </summary>
+        public string AuxAddress { get; set; }
+        /// <summary>
+        /// --config-from 
+        /// The network from which copying the configuration
+        /// </summary>
+        public string ConfigFrom { get; set; }
+        /// <summary>
+        /// --config-only 
+        /// default: false
+        /// Create a configuration only network
+        /// </summary>
+        public bool? ConfigOnly { get; set; }
+        /// <summary>
+        /// --driver, -d 
+        /// default: bridge
+        /// Driver to manage the Network
         /// </summary>
         public string Driver { get; set; }
         /// <summary>
-        /// ipv4 or ipv6 Gateway for the master subnet (default [])
+        /// --gateway 
+        /// IPv4 or IPv6 Gateway for the master subnet
         /// </summary>
-        public string[] Gateway { get; set; }
+        public string Gateway { get; set; }
         /// <summary>
-        /// Print usage
+        /// --ingress 
+        /// default: false
+        /// Create swarm routing-mesh network
         /// </summary>
-        public bool Help { get; set; }
+        public bool? Ingress { get; set; }
         /// <summary>
-        /// restricts external access to the network
+        /// --internal 
+        /// default: false
+        /// Restrict external access to the network
         /// </summary>
-        public bool Internal { get; set; }
+        public bool? Internal { get; set; }
         /// <summary>
-        /// allocate container ip from a sub-range (default [])
+        /// --ip-range 
+        /// Allocate container ip from a sub-range
         /// </summary>
-        public string[] IpRange { get; set; }
+        public string IpRange { get; set; }
         /// <summary>
-        /// IP Address Management Driver (default "default")
+        /// --ipam-driver 
+        /// default: default
+        /// IP Address Management Driver
         /// </summary>
         public string IpamDriver { get; set; }
         /// <summary>
-        /// set IPAM driver specific options (default map[])
+        /// --ipam-opt 
+        /// default: map[]
+        /// Set IPAM driver specific options
         /// </summary>
-        public string[] IpamOpt { get; set; }
+        public string IpamOpt { get; set; }
         /// <summary>
-        /// enable IPv6 networking
+        /// --ipv6 
+        /// default: false
+        /// Enable IPv6 networking
         /// </summary>
-        public bool Ipv6 { get; set; }
+        public bool? Ipv6 { get; set; }
         /// <summary>
-        /// Set metadata on a network (default [])
+        /// --label 
+        /// Set metadata on a network
         /// </summary>
-        public string[] Label { get; set; }
+        public string Label { get; set; }
         /// <summary>
-        /// Set driver specific options (default map[])
+        /// --opt, -o 
+        /// default: map[]
+        /// Set driver specific options
         /// </summary>
-        public string[] Opt { get; set; }
+        public string Opt { get; set; }
         /// <summary>
-        /// subnet in CIDR format that represents a network segment (default [])
+        /// --scope 
+        /// Control the network’s scope
         /// </summary>
-        public string[] Subnet { get; set; }
+        public string Scope { get; set; }
+        /// <summary>
+        /// --subnet 
+        /// Subnet in CIDR format that represents a network segment
+        /// </summary>
+        public string Subnet { get; set; }
     }
 }

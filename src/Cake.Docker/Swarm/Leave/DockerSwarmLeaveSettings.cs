@@ -6,8 +6,11 @@
     public sealed class DockerSwarmLeaveSettings : AutoToolSettings
     {
         /// <summary>
-        /// Force leave ignoring warnings.
+        /// --force, -f 
+        /// default: false
+        /// Force this node to leave the swarm, ignoring warnings
         /// </summary>
-        public bool Force { get; set; }
+        public bool? Force { get; set; }
     }
 }
+

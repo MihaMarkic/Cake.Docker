@@ -1,13 +1,16 @@
 ﻿namespace Cake.Docker
 {
     /// <summary>
-    ///  Settings for docker stop
+    /// Settings for docker swarm init.
     /// </summary>
-    public sealed class DockerStopSettings: AutoToolSettings
+    public sealed class DockerStopSettings : AutoToolSettings
     {
         /// <summary>
-        ///  Seconds to wait for stop before killing it.
+        /// --time, -t 
+        /// default: 10
+        /// Seconds to wait for stop before killing it
         /// </summary>
         public int? Time { get; set; }
     }
 }
+

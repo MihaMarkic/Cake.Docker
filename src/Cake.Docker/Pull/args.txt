@@ -1,4 +1,2 @@
-﻿Options:
-  -a, --all-tags                Download all tagged images in the repository
-      --disable-content-trust   Skip image verification (default true)
-      --help                    Print usage
+﻿--all-tags, -a 	false 	Download all tagged images in the repository
+--disable-content-trust 	true 	Skip image verification

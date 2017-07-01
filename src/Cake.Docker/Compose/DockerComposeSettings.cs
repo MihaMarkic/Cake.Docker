@@ -62,5 +62,11 @@
         /// </summary>
         [AutoProperty(PreCommand = true)]
         public bool SkipHostnameCheck { get; set; }
+        /// <summary>
+        /// Specify an alternate working directory
+        /// (default: the path of the Compose file)
+        /// </summary>
+        [AutoProperty(PreCommand = true)]
+        public string ProjectDirectory { get; set; }
     }
 }

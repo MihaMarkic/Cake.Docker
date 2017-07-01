@@ -6,8 +6,10 @@
     public sealed class DockerNetworkDisconnectSettings : AutoToolSettings
     {
         /// <summary>
+        /// --force, -f 
+        /// default: false
         /// Force the container to disconnect from a network
         /// </summary>
-        public bool Force { get; set; }
+        public bool? Force { get; set; }
     }
 }

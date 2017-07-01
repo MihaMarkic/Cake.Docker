@@ -53,5 +53,15 @@
         ///   the Compose file
         /// </summary>
         public bool RemoveOrphans { get; set; }
+        /// <summary>
+        /// Return the exit code of the selected service container.
+        ///   Implies --abort-on-container-exit.
+        /// </summary>
+        public bool ExitCodeFrom { get; set; }
+        /// <summary>
+        /// SERVICE=NUM        Scale SERVICE to NUM instances. Overrides the `scale`
+        ///   setting in the Compose file if present.
+        /// </summary>
+        public bool Scale { get; set; }
     }
 }

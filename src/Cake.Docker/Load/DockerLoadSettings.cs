@@ -6,9 +6,15 @@
     public sealed class DockerLoadSettings: AutoToolSettings
     {
         /// <summary>
-        /// Read from tar archive file, instead of STDIN.
-        /// The tarball may be compressed with gzip, bzip, or xz
+        /// --input, -i 
+        /// Read from tar archive file, instead of STDIN
         /// </summary>
         public string Input { get; set; }
+        /// <summary>
+        /// --quiet, -q 
+        /// default: false
+        /// Suppress the load output
+        /// </summary>
+        public bool? Quiet { get; set; }
     }
 }

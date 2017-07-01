@@ -17,5 +17,9 @@
         /// Always attempt to pull a newer version of the image.
         /// </summary>
         public bool Pull { get; set; }
+        /// <summary>
+        /// key=val     Set build-time variables for one service.
+        /// </summary>
+        public bool BuildArg { get; set; }
     }
 }

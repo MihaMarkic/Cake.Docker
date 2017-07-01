@@ -1,2 +1,1 @@
-﻿--disable-content-trust=true    Skip image signing
---help                          Print usage
+﻿--disable-content-trust 	true 	Skip image signing

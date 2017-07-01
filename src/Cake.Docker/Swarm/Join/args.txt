@@ -1,4 +1,5 @@
-﻿--ca-hash string      Hash of the Root Certificate Authority certificate used for trusted join
---listen-addr value   Listen address (default 0.0.0.0:2377)
---manager             Try joining as a manager.
---secret string       Secret for node acceptance
+﻿--advertise-addr 	  	Advertised address (format: <ip|interface>[:port])
+--availability 	active 	Availability of the node (“active”|“pause”|“drain”)
+--data-path-addr 	  	Address or interface to use for data path traffic (format: <ip|interface>)
+--listen-addr 	0.0.0.0:2377 	Listen address (format: <ip|interface>[:port])
+--token 	  	Token for entry into the swarm

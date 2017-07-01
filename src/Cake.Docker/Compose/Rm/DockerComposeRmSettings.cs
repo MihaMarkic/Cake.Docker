@@ -15,9 +15,8 @@
         [AutoProperty(Format = "-v", OnlyWhenTrue = true)]
         public bool Volumes { get; set; }
         /// <summary>
-        /// Also remove one-off containers created by
-        ///   docker-compose run
+        /// Stop the containers, if required, before removing
         /// </summary>
-        public bool All { get; set; }
+        public bool Stop { get; set; }
     }
 }

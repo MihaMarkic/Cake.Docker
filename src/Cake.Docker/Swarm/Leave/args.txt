@@ -1,1 +1,1 @@
-﻿--force   Force leave ignoring warnings.
+﻿--force, -f 	false 	Force this node to leave the swarm, ignoring warnings

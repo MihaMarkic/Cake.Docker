@@ -16,4 +16,8 @@
                             when attached or when containers are already
                             running. (default: 10)
 --remove-orphans           Remove containers for services not defined in
-                               the Compose file
+                            the Compose file
+--exit-code-from SERVICE   Return the exit code of the selected service container.
+                            Implies --abort-on-container-exit.
+--scale SERVICE=NUM        Scale SERVICE to NUM instances. Overrides the `scale`
+                            setting in the Compose file if present.

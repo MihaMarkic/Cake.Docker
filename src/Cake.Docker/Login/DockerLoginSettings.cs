@@ -6,15 +6,13 @@
     public sealed class DockerLoginSettings : AutoToolSettings
     {
         /// <summary>
-        /// Email for login. Depreciated in Docker 1.11.0.
-        /// </summary>
-        public string Email { get; set; }
-        /// <summary>
-        /// Password for login.
+        /// --password, -p 
+        /// Password
         /// </summary>
         public string Password { get; set; }
         /// <summary>
-        /// Username for login.
+        /// --username, -u 
+        /// Username
         /// </summary>
         public string Username { get; set; }
     }

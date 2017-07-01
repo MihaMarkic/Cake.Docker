@@ -6,93 +6,165 @@
     public sealed class DockerBuildSettings: AutoToolSettings
     {
         /// <summary>
+        /// --add-host 
+        /// Add a custom host-to-IP mapping (host:ip)
+        /// </summary>
+        public string AddHost { get; set; }
+        /// <summary>
+        /// --build-arg 
         /// Set build-time variables
         /// </summary>
-        public string[] BuildArg { get; set; }
+        public string BuildArg { get; set; }
         /// <summary>
-        /// CPU Shares (relative weight)
+        /// --cache-from 
+        /// Images to consider as cache sources
         /// </summary>
-        public bool CpuShares { get; set; }
+        public string CacheFrom { get; set; }
         /// <summary>
-        /// =""              Optional parent cgroup for the container
+        /// --cgroup-parent 
+        /// Optional parent cgroup for the container
         /// </summary>
-        public bool CgroupParen { get; set; }
+        public string CgroupParent { get; set; }
         /// <summary>
+        /// --compress 
+        /// default: false
+        /// Compress the build context using gzip
+        /// </summary>
+        public bool? Compress { get; set; }
+        /// <summary>
+        /// --cpu-period 
+        /// default: 0
         /// Limit the CPU CFS (Completely Fair Scheduler) period
         /// </summary>
         public int? CpuPeriod { get; set; }
         /// <summary>
+        /// --cpu-quota 
+        /// default: 0
         /// Limit the CPU CFS (Completely Fair Scheduler) quota
         /// </summary>
         public int? CpuQuota { get; set; }
         /// <summary>
-        /// "                CPUs in which to allow execution, e.g. `0-3`, `0,1`
+        /// --cpu-shares, -c 
+        /// default: 0
+        /// CPU shares (relative weight)
+        /// </summary>
+        public int? CpuShares { get; set; }
+        /// <summary>
+        /// --cpuset-cpus 
+        /// CPUs in which to allow execution (0-3, 0,1)
         /// </summary>
         public string CpusetCpus { get; set; }
         /// <summary>
-        /// "                MEMs in which to allow execution, e.g. `0-3`, `0,1`
+        /// --cpuset-mems 
+        /// MEMs in which to allow execution (0-3, 0,1)
         /// </summary>
         public string CpusetMems { get; set; }
         /// <summary>
-        /// nt-trust=true    Skip image verification
+        /// --disable-content-trust 
+        /// default: true
+        /// Skip image verification
         /// </summary>
-        public bool DisableCont { get; set; }
+        public bool? DisableContentTrust { get; set; }
         /// <summary>
-        /// Name of the Dockerfile (Default is 'PATH/Dockerfile')
+        /// --file, -f 
+        /// Name of the Dockerfile (Default is ‘PATH/Dockerfile’)
         /// </summary>
         public string File { get; set; }
         /// <summary>
+        /// --force-rm 
+        /// default: false
         /// Always remove intermediate containers
         /// </summary>
-        public bool ForceRm { get; set; }
+        public bool? ForceRm { get; set; }
         /// <summary>
-        /// Print usage
+        /// --iidfile 
+        /// Write the image ID to the file
         /// </summary>
-        public bool Help { get; set; }
+        public string Iidfile { get; set; }
         /// <summary>
+        /// --isolation 
         /// Container isolation technology
         /// </summary>
         public string Isolation { get; set; }
         /// <summary>
+        /// --label 
         /// Set metadata for an image
         /// </summary>
-        public string[] Label { get; set; }
+        public string Label { get; set; }
         /// <summary>
-        /// Memory limit for all build containers
+        /// --memory, -m 
+        /// default: 0
+        /// Memory limit
         /// </summary>
-        public string Memory { get; set; }
+        public int? Memory { get; set; }
         /// <summary>
-        /// "                A positive integer equal to memory plus swap. Specify -1 to enable unlimited swap.
+        /// --memory-swap 
+        /// default: 0
+        /// Swap limit equal to memory plus swap: ‘-1’ to enable unlimited swap
         /// </summary>
-        public string MemorySwap { get; set; }
+        public int? MemorySwap { get; set; }
         /// <summary>
+        /// --network 
+        /// default: default
+        /// Set the networking mode for the RUN instructions during build
+        /// </summary>
+        public string Network { get; set; }
+        /// <summary>
+        /// --no-cache 
+        /// default: false
         /// Do not use cache when building the image
         /// </summary>
-        public bool NoCache { get; set; }
+        public bool? NoCache { get; set; }
         /// <summary>
+        /// --pull 
+        /// default: false
         /// Always attempt to pull a newer version of the image
         /// </summary>
-        public bool Pull { get; set; }
+        public bool? Pull { get; set; }
         /// <summary>
+        /// --quiet, -q 
+        /// default: false
         /// Suppress the build output and print image ID on success
         /// </summary>
-        public bool Quiet { get; set; }
+        public bool? Quiet { get; set; }
         /// <summary>
+        /// --rm 
+        /// default: true
         /// Remove intermediate containers after a successful build
         /// </summary>
-        public string Rm { get; set; }
+        public bool? Rm { get; set; }
         /// <summary>
-        /// Size of `/dev/shm`. The format is `&lt;number&gt;&lt;unit&gt;`. `number` must be greater than `0`.  Unit is optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes), or `g` (gigabytes). If you omit the unit, the system uses bytes. If you omit the size entirely, the system uses `64m`.
+        /// --security-opt 
+        /// Security options
         /// </summary>
-        public string[] ShmSize { get; set; }
+        public string SecurityOpt { get; set; }
         /// <summary>
-        /// Name and optionally a tag in the 'name:tag' format
+        /// --shm-size 
+        /// default: 0
+        /// Size of /dev/shm
         /// </summary>
-        public string[] Tag { get; set; }
+        public int? ShmSize { get; set; }
         /// <summary>
+        /// --squash 
+        /// default: false
+        /// Squash newly built layers into a single new layer
+        /// </summary>
+        public bool? Squash { get; set; }
+        /// <summary>
+        /// --tag, -t 
+        /// Name and optionally a tag in the ‘name:tag’ format
+        /// </summary>
+        public string Tag { get; set; }
+        /// <summary>
+        /// --target 
+        /// Set the target build stage to build.
+        /// </summary>
+        public string Target { get; set; }
+        /// <summary>
+        /// --ulimit 
         /// Ulimit options
         /// </summary>
-        public string[] Ulimit { get; set; }
+        public string Ulimit { get; set; }
 
 
     }

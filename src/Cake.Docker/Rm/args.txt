@@ -1,0 +1,3 @@
+﻿--force, -f 	false 	Force the removal of a running container (uses SIGKILL)
+--link, -l 	false 	Remove the specified link
+--volumes, -v 	false 	Remove the volumes associated with the container

@@ -6,24 +6,29 @@
     public sealed class DockerNetworkConnectSettings : AutoToolSettings
     {
         /// <summary>
-        /// Add network-scoped alias for the container (default [])
+        /// --alias 
+        /// Add network-scoped alias for the container
         /// </summary>
-        public string[] Alias { get; set; }
+        public string Alias { get; set; }
         /// <summary>
-        /// IP Address
+        /// --ip 
+        /// IPv4 address (e.g., 172.30.100.104)
         /// </summary>
         public string Ip { get; set; }
         /// <summary>
-        /// IPv6 Address
+        /// --ip6 
+        /// IPv6 address (e.g., 2001:db8::33)
         /// </summary>
         public string Ip6 { get; set; }
         /// <summary>
-        /// Add link to another container (default [])
+        /// --link 
+        /// Add link to another container
         /// </summary>
-        public string[] Link { get; set; }
+        public string Link { get; set; }
         /// <summary>
-        /// Add a link-local address for the container (default [])
+        /// --link-local-ip 
+        /// Add a link-local address for the container
         /// </summary>
-        public string[] LinkLocalIp { get; set; }
+        public string LinkLocalIp { get; set; }
     }
 }

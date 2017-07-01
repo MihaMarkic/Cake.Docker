@@ -1,0 +1,2 @@
+﻿--archive, -a 	false 	Archive mode (copy all uid/gid information)
+--follow-link, -L 	false 	Always follow symbol link in SRC_PATH

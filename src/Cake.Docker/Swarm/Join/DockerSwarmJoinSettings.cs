@@ -6,20 +6,32 @@
     public sealed class DockerSwarmJoinSettings : AutoToolSettings
     {
         /// <summary>
-        /// Hash of the Root Certificate Authority certificate used for trusted join
+        /// --advertise-addr 
+        /// Advertised address (format: &lt;ip|interface&gt;[:port])
         /// </summary>
-        public string CaHash { get; set; }
+        public string AdvertiseAddr { get; set; }
         /// <summary>
-        /// Listen address (default 0.0.0.0:2377)
+        /// --availability 
+        /// default: active
+        /// Availability of the node (“active”|“pause”|“drain”)
+        /// </summary>
+        public string Availability { get; set; }
+        /// <summary>
+        /// --data-path-addr 
+        /// Address or interface to use for data path traffic (format: &lt;ip|interface&gt;)
+        /// </summary>
+        public string DataPathAddr { get; set; }
+        /// <summary>
+        /// --listen-addr 
+        /// default: 0.0.0.0:2377
+        /// Listen address (format: &lt;ip|interface&gt;[:port])
         /// </summary>
         public string ListenAddr { get; set; }
         /// <summary>
-        /// Try joining as a manager.
+        /// --token 
+        /// Token for entry into the swarm
         /// </summary>
-        public bool Manager { get; set; }
-        /// <summary>
-        /// Secret for node acceptance
-        /// </summary>
-        public string Secret { get; set; }
+        public string Token { get; set; }
     }
 }
+

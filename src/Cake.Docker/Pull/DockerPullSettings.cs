@@ -1,17 +1,21 @@
 ﻿namespace Cake.Docker
 {
     /// <summary>
-    /// Settings for docker push.
+    /// Settings for docker swarm init.
     /// </summary>
     public sealed class DockerPullSettings : AutoToolSettings
     {
         /// <summary>
+        /// --all-tags, -a 
+        /// default: false
         /// Download all tagged images in the repository
         /// </summary>
-        public bool AllTags { get; set; }
+        public bool? AllTags { get; set; }
         /// <summary>
-        /// Skip image verification (default true)
+        /// --disable-content-trust 
+        /// default: true
+        /// Skip image verification
         /// </summary>
-        public bool DisableContentTrust { get; set; }
+        public bool? DisableContentTrust { get; set; }
     }
 }
