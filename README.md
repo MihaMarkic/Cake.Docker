@@ -12,6 +12,9 @@ Including addin in cake script is easy.
 ```
 ## Commands supported
 
+**Important**: Docker 17.* is supported since v0.8 and background compatibility is dropped (most notably, array arguments are converter to strings). If you wish to match older docker versions, user an older Cake.Docker version.
+
+- [DockerExec](https://docs.docker.com/engine/reference/commandline/exec/) v0.8.0
 - [DockerRun](https://docs.docker.com/engine/reference/commandline/run/) v0.7.2
 - [DockerPull](https://docs.docker.com/engine/reference/commandline/pull/) v0.7.1
 - [DockerComposeBuild](https://docs.docker.com/compose/reference/build/) v0.7.0

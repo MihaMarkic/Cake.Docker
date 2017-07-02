@@ -1,4 +1,10 @@
+# Cake.Docker 0.8.0
+
+* Docker 17.* is supported since v0.8 and background compatibility is dropped (most notably, array arguments are converter to strings). If you wish to match older docker versions, user an older Cake.Docker version.
+* Added DockerExec command
+
 # Cake.Docker 0.7.7
+
 - .NET Core support
 # Cake.Docker 0.7.6
 - Documentation improvements
@@ -61,8 +67,8 @@
 - Added [DockerCp](https://docs.docker.com/engine/reference/commandline/cp/) and [DockerCreate](https://docs.docker.com/engine/reference/commandline/create/)
 - Implemented all DockerBuild arguments
 - **[Breaking]** Rearranged arguments for DockerRm, DockerRmi and DockerStop.
-Settings are first, and one or more container|images are last.
-This is to avoid using of new string[]{} when passing more than one item.
+  Settings are first, and one or more container|images are last.
+  This is to avoid using of new string[]{} when passing more than one item.
 - Bug fixes
 
 # Cake.Docker 0.1.1
