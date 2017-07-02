@@ -1,10 +1,9 @@
-﻿using Cake.Docker;
-using Cake.Core.IO;
+﻿using Cake.Core.IO;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System;
 
 namespace Cake.Docker.Tests
 {
@@ -13,6 +12,7 @@ namespace Cake.Docker.Tests
         public static PropertyInfo StringProperty => GetProperty(nameof(TestSettings.String));
         public static PropertyInfo StringsProperty => GetProperty(nameof(TestSettings.Strings));
         public static PropertyInfo NullableIntProperty => GetProperty(nameof(TestSettings.NullableInt));
+        public static PropertyInfo NullableBoolProperty => GetProperty(nameof(TestSettings.NullableBool));
         public static PropertyInfo NullableTimeSpanProperty => GetProperty(nameof(TestSettings.NullableTimeSpan));
         public static PropertyInfo BoolProperty => GetProperty(nameof(TestSettings.Bool));
         public static PropertyInfo DecoratedStringProperty => GetProperty(nameof(TestSettings.DecoratedString));
@@ -109,6 +109,25 @@ namespace Cake.Docker.Tests
             public void WhenGivenNull_NullIsReturned()
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromNullableIntProperty(NullableIntProperty, null);
+
+                Assert.That(actual, Is.Null);
+            }
+        }
+        [TestFixture]
+        public class GetArgumentFromNullableBoolProperty
+        {
+            [Test]
+            public void WhenGivenValue_FormatsProperly()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromNullableBoolProperty(NullableBoolProperty, true);
+
+                Assert.That(actual, Is.EqualTo("--nullable-bool"));
+            }
+
+            [Test]
+            public void WhenGivenNull_NullIsReturned()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromNullableBoolProperty(NullableBoolProperty, null);
 
                 Assert.That(actual, Is.Null);
             }
@@ -234,6 +253,7 @@ namespace Cake.Docker.Tests
         public string String { get; set; }
         public string[] Strings { get; set; }
         public int? NullableInt { get; set; }
+        public  bool? NullableBool { get; set; }
         public TimeSpan? NullableTimeSpan { get; set; }
         public bool Bool { get; set; }
         [AutoProperty(Format = "-s {1}")]

@@ -97,6 +97,10 @@ namespace Cake.Docker
                 {
                     yield return GetArgumentFromBoolProperty(property, (bool)property.GetValue(settings));
                 }
+                else if (property.PropertyType == typeof(bool?))
+                {
+                    yield return GetArgumentFromNullableBoolProperty(property, (bool?)property.GetValue(settings));
+                }
                 else if (property.PropertyType == typeof(int?))
                 {
                     yield return GetArgumentFromNullableIntProperty(property, (int?)property.GetValue(settings));
@@ -177,6 +181,17 @@ namespace Cake.Docker
         public static string GetArgumentFromNullableIntProperty(PropertyInfo property, int? value)
         {
             return value.HasValue ? $"--{GetPropertyName(property.Name)} {value.Value}" : null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string GetArgumentFromNullableBoolProperty(PropertyInfo property, bool? value)
+        {
+            return value.HasValue ? $"--{GetPropertyName(property.Name)}" : null;
         }
 
         /// <summary>
