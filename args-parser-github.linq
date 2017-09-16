@@ -1,0 +1,376 @@
+<Query Kind="Program">
+  <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
+  <NuGetReference>Humanizer.Core.uk</NuGetReference>
+  <NuGetReference>System.Collections.Immutable</NuGetReference>
+  <NuGetReference>YamlDotNet</NuGetReference>
+  <Namespace>Humanizer</Namespace>
+  <Namespace>System.Collections.Immutable</Namespace>
+  <Namespace>System.Net.Http</Namespace>
+  <Namespace>System.Threading.Tasks</Namespace>
+  <Namespace>YamlDotNet.Serialization</Namespace>
+</Query>
+
+const string root = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\";
+string[] folders = new string[] { 
+	Path.Combine("Image", "Build"),
+	Path.Combine("Image", "Load") 
+};
+
+async Task Main()
+{
+	foreach (string folder in folders)
+	{
+		await ProcessCommandAsync(folder);
+	}
+}
+
+async Task ProcessCommandAsync(string path)
+{
+	string[] parts = path.Split(new[] { Path.DirectorySeparatorChar});
+	string command = parts[parts.Length-1];
+
+	var httpClient = new HttpClient { BaseAddress = new Uri("https://raw.githubusercontent.com/docker/cli/master/cli/command/") };
+	string url = string.Join("/",parts).ToLower();
+	string source = await httpClient.GetStringAsync($"{url}.go");
+//	source.Dump();
+
+	var lines = source.Split('\n').Select(l => l.Trim()).ToArray();
+
+	var typeRegex = new Regex(
+	  $"^\\s*type\\s+{command.ToLower()}Options\\s+struct\\s*{{\\s*$",
+			RegexOptions.IgnoreCase
+			| RegexOptions.Multiline
+			| RegexOptions.CultureInvariant
+			| RegexOptions.IgnorePatternWhitespace
+			| RegexOptions.Compiled
+			);
+	string cmdRegexText = $"^\\s*func\\s+New{command}Command\\s*\\(\\s*dockerCli\\s+command." +
+	  "Cli\\s*\\)\\s*\\*cobra.Command\\s*{\\s*$";
+	var cmdRegex = new Regex(cmdRegexText,
+	RegexOptions.IgnoreCase
+	| RegexOptions.Multiline
+	| RegexOptions.CultureInvariant
+	| RegexOptions.IgnorePatternWhitespace
+	| RegexOptions.Compiled
+	);
+	var typesAndFlags = CollectTypesAndFlags(lines, typeRegex, cmdRegex);
+	var args = GetOptArguments(typesAndFlags.Types);
+	FillArgumentsWithFlags(args, typesAndFlags.Flags);
+//	args.Dump();
+	string output = OutputContent(args, command);
+	string fileName = Path.Combine(root, path, $"Docker{command}Settings.cs");
+	File.WriteAllText( fileName, output);
+	output.Dump();
+}
+
+string OutputContent(Argument[] args, string className)
+{
+	StringBuilder sb = new StringBuilder();
+	sb.AppendLine("namespace Cake.Docker");
+	sb.AppendLine("{");
+	sb.AppendLine("\t/// <summary>");
+	sb.AppendLine("\t/// Settings for docker swarm init.");
+	sb.AppendLine("\t/// </summary>");
+	sb.AppendLine($"\tpublic sealed class Docker{className}Settings : AutoToolSettings");
+	sb.AppendLine("\t{");
+	foreach (var arg in args.OrderBy(a => a.NetName))
+	{
+		sb.AppendLine("\t\t/// <summary>");
+		sb.AppendLine($"\t\t/// {arg.NameInfo}");
+		if (!string.IsNullOrEmpty(arg.Default))
+		{
+			sb.AppendLine($"\t\t/// default: {arg.NetDefault}");
+		}
+		sb.AppendLine($"\t\t/// {arg.Description}");
+		sb.AppendLine("\t\t/// </summary>");
+		if (arg.IsExperimental || !string.IsNullOrEmpty(arg.Version))
+		{
+			sb.AppendLine("\t\t/// <remarks>");
+			if (arg.IsExperimental)
+			{
+				sb.AppendLine($"\t\t/// Experimental");
+			}
+			if (!string.IsNullOrEmpty(arg.Version))
+			{
+				sb.AppendLine($"\t\t/// Version: {arg.Version}");
+			}
+			sb.AppendLine("\t\t/// </remarks>");
+		}
+		sb.AppendLine($"\t\tpublic {arg.NetTypeName} {arg.NetName} {{ get; set; }}");
+	}
+	sb.AppendLine("\t}");
+	sb.AppendLine("}");
+	return sb.ToString();
+}
+
+(string[] Types, string[] Flags) CollectTypesAndFlags(string[] lines, Regex typeRegex, Regex cmdRegex)
+{
+	var state = State.SearchingType;
+	var types = new List<string>();
+	var flags = new List<string>();
+	foreach (string line in lines)
+	{
+		switch (state)
+		{
+			case State.SearchingType:
+				if (typeRegex.IsMatch(line))
+				{
+					"Type start found".Dump();
+					state = State.CollectingType;
+				}
+				break;
+			case State.CollectingType:
+				if (line == "}")
+				{
+					"Type end found".Dump();
+					state = State.SearchingCommand;
+				}
+				else
+				{
+					types.Add(line);
+				}
+				break;
+			case State.SearchingCommand:
+				if (line.StartsWith("flags."))
+				{
+					"Command start found".Dump();
+					state = State.CollectingFlags;
+					flags.Add(line);
+				}
+				break;
+			case State.CollectingFlags:
+				if (line == "}")
+				{
+					"Command end found".Dump();
+					return (types.ToArray(), flags.ToArray());
+				}
+				else if (line.StartsWith("flags."))
+				{
+					flags.Add(line);
+				}
+				break;
+			default:
+				throw new Exception($"Invalid state {state}");
+		}
+	}
+	"Failed parsing".Dump();
+	return (null, null);
+}
+
+void FillArgumentsWithFlags(Argument[] arguments, string[] flags)
+{
+	var dict = arguments.ToDictionary(a => a.OptName, a => a);
+	foreach (string flag in flags)
+	{
+		int dotIndex = flag.IndexOf('.');
+		int openBracketIndex = flag.IndexOf('(', dotIndex + 1);
+		string type = flag.Substring(dotIndex + 1, openBracketIndex - dotIndex - 1);
+		string content = flag.Substring(openBracketIndex + 1, flag.Length - (openBracketIndex + 1) - 1);
+		switch (type)
+		{
+			case "SetAnnotation":
+				{
+					int openQuotationsIndex  = content.IndexOf('"');
+					int closeQuotationsIndex = content.IndexOf('"', openQuotationsIndex + 1);
+					string fullName = content.Substring(openQuotationsIndex + 1, closeQuotationsIndex - openQuotationsIndex - 1);
+					var arg = arguments.Single(a => a.Long == fullName);
+					int firstCommaIndex = content.IndexOf(',', closeQuotationsIndex+1);
+					AnnotateArgument(arg, content.Substring(firstCommaIndex + 1).Trim());
+				}
+				break;
+			default:
+				{
+					dotIndex = content.IndexOf('.');
+					int firstCommaIndex = content.IndexOf(',');
+					string fullName = content.Substring(dotIndex + 1, firstCommaIndex - dotIndex - 1);
+					var arg = dict[fullName];
+					PopulateArgument(arg, type, content.Substring(firstCommaIndex + 1).Trim());
+				}
+				break;
+		}
+	}
+}
+void AnnotateArgument(Argument arg, string content)
+{
+	string[] parts = PartsWithStrings(content);
+	string type = parts[0];
+	switch (type)
+	{
+		case "experimental":
+			arg.IsExperimental = true;
+			break;
+		case "version":
+			string value = parts[1];
+			int openQuotationsIndex = value.IndexOf('{');
+			int closeQuotationsIndex = value.IndexOf('}', openQuotationsIndex + 1);
+			arg.Version = value.Substring(openQuotationsIndex + 1, closeQuotationsIndex - openQuotationsIndex - 1);
+			break;
+	}
+}
+void PopulateArgument(Argument args, string type, string content)
+{
+	string[] parts = PartsWithStrings(content);
+	args.Long = parts[0];
+	switch (type)
+	{
+		case "VarP":
+			args.Short = parts[1];
+			args.Description = parts[2];
+			break;
+		case "Var":
+			args.Description = parts[1];
+			break;
+		case "StringVarP":
+		case "Int64VarP":
+		case "BoolVarP":
+			args.Short = parts[1];
+			args.Default = parts[2];
+			args.Description = parts[3];
+			break;
+		case "Int64Var":
+		case "StringVar":
+		case "BoolVar":
+		case "StringSliceVar":
+			args.Default = parts[1];
+			args.Description = parts[2];
+			break;
+		case "SetAnnotation":
+			break;
+	}
+}
+
+string[] PartsWithStrings(string content)
+{
+	var result = new List<string>();
+	var item = new StringBuilder();
+	bool isString = false;
+	foreach (char c in content)
+	{
+		if (c == '"')
+		{
+			isString = !isString;
+		}
+		else if (c == ',' && !isString)
+		{
+			result.Add(item.ToString().Trim());
+			item.Clear();
+		}
+		else
+		{
+			item.Append(c);
+		}
+	}
+	result.Add(item.ToString().Trim());
+	item.Clear();
+	return result.ToArray();
+}
+
+Argument[] GetOptArguments(string[] types)
+{
+	var result = new List<Argument>(types.Length);
+	foreach (string type in types)
+	{
+		string[] parts = type.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+		if (parts[0] == "context")
+		{
+			continue;
+		}
+		Argument arg = new Argument
+		{
+			OptName = parts[0],
+			RawType = parts[1]
+		};
+		switch (parts[1])
+		{
+			case "string":
+				arg.Type = "string";
+				break;
+			case "int64":
+			case "opts.MemBytes":
+			case "opts.MemSwapBytes":
+				arg.Type = "Int64";
+				break;
+			case "bool":
+				arg.Type = "bool";
+				break;
+			case "[]string":
+			case "opts.ListOpts":
+			case "*opts.UlimitOpt":
+				arg.Type = "string";
+				arg.IsArray = true;
+				break;
+			default:
+				$"Unknown type: {parts[1]}".Dump();
+				break;
+		}
+		result.Add(arg);
+	}
+	
+	return result.ToArray();
+}
+
+enum State
+{
+	SearchingType,
+	CollectingType,
+	SearchingCommand,
+	CollectingFlags
+}
+
+public class Argument
+{
+	public string RawType;
+	public string OptName;
+	public string Type;
+	public bool IsArray;
+	public string Default;
+	public string Short;
+	public string Long;
+	public string Description;
+	public bool IsExperimental;
+	public string Version;
+
+	public string NameInfo
+	{
+		get
+		{
+			string result = $"--{Long}";
+			if (!string.IsNullOrEmpty(Short))
+			{
+				return $"{result}, -{Short}";
+			}
+			return result;
+		}
+	}
+	public string NetTypeName
+	{
+		get
+		{
+			if (IsArray)
+			{
+				return Type+"[]";
+			}
+			else
+			{
+				switch (Type)
+				{
+					case "bool":
+					case "Int64":
+						return Type + (!string.IsNullOrEmpty(Default) ? "?": "");
+					default:
+						return Type;
+				}
+			}
+		}
+	}
+	public string NetName => Long.Humanize(LetterCasing.Title).Replace(" ","");
+	public  string NetDefault => Default != "[]string{}" ? Default: "";
+}
+//void ReadYaml(string fileName)
+//{
+//	var deserializer = new DeserializerBuilder()
+//		.WithNamingConvention(new CamelCaseNamingConvention())
+//		.Build();
+//
+//	var settings = deserializer.Deserialize<Settings>(input);
+//}
