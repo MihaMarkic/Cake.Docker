@@ -1,7 +1,10 @@
+using System;
+
 namespace Cake.Docker
 {
 	/// <summary>
-	/// Settings for docker swarm init.
+	/// Settings for docker load [OPTIONS].
+	/// Load an image from a tar archive or STDIN
 	/// </summary>
 	public sealed class DockerLoadSettings : AutoToolSettings
 	{

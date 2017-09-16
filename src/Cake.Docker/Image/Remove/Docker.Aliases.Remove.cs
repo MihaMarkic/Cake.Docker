@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerRmi(this ICakeContext context, params string[] images)
         {
-            DockerRmi(context, new DockerRmiSettings(), images);
+            DockerRemove(context, new DockerRemoveSettings(), images);
         }
         
         /// <summary>
@@ -25,7 +25,7 @@ namespace Cake.Docker
         /// <param name="images">The list of images.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerRmi(this ICakeContext context, DockerRmiSettings settings, params string[] images)
+        public static void DockerRemove(this ICakeContext context, DockerRemoveSettings settings, params string[] images)
         {
             if (context == null)
             {
@@ -35,8 +35,8 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("containers");
             }
-            var runner = new GenericDockerRunner<DockerRmiSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("rmi", settings ?? new DockerRmiSettings(), images);
+            var runner = new GenericDockerRunner<DockerRemoveSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("rmi", settings ?? new DockerRemoveSettings(), images);
         }
     }
 }

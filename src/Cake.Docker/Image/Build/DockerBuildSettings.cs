@@ -1,7 +1,10 @@
+using System;
+
 namespace Cake.Docker
 {
 	/// <summary>
-	/// Settings for docker swarm init.
+	/// Settings for docker build [OPTIONS] PATH | URL | -.
+	/// Build an image from a Dockerfile
 	/// </summary>
 	public sealed class DockerBuildSettings : AutoToolSettings
 	{
@@ -60,6 +63,12 @@ namespace Cake.Docker
 		/// CPU shares (relative weight)
 		/// </summary>
 		public Int64? CpuShares { get; set; }
+		/// <summary>
+		/// --disable-content-trust
+		/// default: true
+		/// Skip image verification
+		/// </summary>
+		public bool? DisableContentTrust { get; set; }
 		/// <summary>
 		/// --file, -f
 		/// Name of the Dockerfile (Default is 'PATH/Dockerfile')

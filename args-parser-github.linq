@@ -13,13 +13,19 @@
 const string root = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\";
 string[] folders = new string[] { 
 	Path.Combine("Image", "Build"),
-	Path.Combine("Image", "Load") 
+	Path.Combine("Image", "Load"),
+	Path.Combine("Image", "Pull"),
+	Path.Combine("Image", "Push"),
+	Path.Combine("Image", "Remove"),
+	Path.Combine("Image", "Save"),
+	Path.Combine("Image", "Tag"),
 };
 
 async Task Main()
 {
 	foreach (string folder in folders)
 	{
+		$"Processing ${folder}".Dump();
 		await ProcessCommandAsync(folder);
 	}
 }
@@ -55,21 +61,31 @@ async Task ProcessCommandAsync(string path)
 	);
 	var typesAndFlags = CollectTypesAndFlags(lines, typeRegex, cmdRegex);
 	var args = GetOptArguments(typesAndFlags.Types);
+	if (typesAndFlags.Trust.has)
+	{
+		var resize = new List<Argument>(args);
+		resize.Add(new Argument { RawType="bool", OptName = "disableContentTrust", Long = "disable-content-trust", Type="bool", Default="true", Description = "Skip image verification"});
+		args = resize.ToArray();
+	}
 	FillArgumentsWithFlags(args, typesAndFlags.Flags);
-//	args.Dump();
-	string output = OutputContent(args, command);
+	var validArgs = args.Where(a => !string.IsNullOrEmpty(a.Long)).ToArray();
+	validArgs.Dump();
+	string output = OutputContent(validArgs, command, typesAndFlags.Use, typesAndFlags.Description);
 	string fileName = Path.Combine(root, path, $"Docker{command}Settings.cs");
 	File.WriteAllText( fileName, output);
-	output.Dump();
+//	output.Dump();
 }
 
-string OutputContent(Argument[] args, string className)
+string OutputContent(Argument[] args, string className, string use, string description)
 {
 	StringBuilder sb = new StringBuilder();
+	sb.AppendLine("using System;");
+	sb.AppendLine();
 	sb.AppendLine("namespace Cake.Docker");
 	sb.AppendLine("{");
 	sb.AppendLine("\t/// <summary>");
-	sb.AppendLine("\t/// Settings for docker swarm init.");
+	sb.AppendLine($"\t/// Settings for docker {use}.");
+	sb.AppendLine($"\t/// {description}");
 	sb.AppendLine("\t/// </summary>");
 	sb.AppendLine($"\tpublic sealed class Docker{className}Settings : AutoToolSettings");
 	sb.AppendLine("\t{");
@@ -103,13 +119,28 @@ string OutputContent(Argument[] args, string className)
 	return sb.ToString();
 }
 
-(string[] Types, string[] Flags) CollectTypesAndFlags(string[] lines, Regex typeRegex, Regex cmdRegex)
+(string[] Types, string[] Flags, string Use, string Description, Trust? Trust) CollectTypesAndFlags(string[] lines, Regex typeRegex, Regex cmdRegex)
 {
 	var state = State.SearchingType;
 	var types = new List<string>();
 	var flags = new List<string>();
+	string use = null;
+	string description = null;
+	Trust? trust = null;
+	bool isInCommand = false;
 	foreach (string line in lines)
 	{
+		if (isInCommand)
+		{
+			if (use == null && line.StartsWith("Use:"))
+			{
+				use = ExtractText(line);
+			}
+			else if (description == null && line.StartsWith("Short:"))
+			{
+				description = ExtractText(line);
+			}
+		}
 		switch (state)
 		{
 			case State.SearchingType:
@@ -118,35 +149,60 @@ string OutputContent(Argument[] args, string className)
 					"Type start found".Dump();
 					state = State.CollectingType;
 				}
+				else if (cmdRegex.IsMatch(line))
+				{
+					"Command header found".Dump();
+					isInCommand = true;
+				}
+				else if (line.StartsWith("flags "))
+				{
+					"Command start found".Dump();
+					state = State.CollectingFlags;
+				}
 				break;
 			case State.CollectingType:
 				if (line == "}")
 				{
 					"Type end found".Dump();
-					state = State.SearchingCommand;
+					state = State.SearchingFlags;
 				}
 				else
 				{
 					types.Add(line);
 				}
 				break;
-			case State.SearchingCommand:
-				if (line.StartsWith("flags."))
+			case State.SearchingFlags:
+				if (line.StartsWith("flags "))
 				{
 					"Command start found".Dump();
 					state = State.CollectingFlags;
-					flags.Add(line);
+				}
+				else if (cmdRegex.IsMatch(line))
+				{
+					"Command header found".Dump();
+					isInCommand = true;
 				}
 				break;
 			case State.CollectingFlags:
 				if (line == "}")
 				{
 					"Command end found".Dump();
-					return (types.ToArray(), flags.ToArray());
+					return (types.ToArray(), flags.ToArray(), use, description, trust);
 				}
 				else if (line.StartsWith("flags."))
 				{
 					flags.Add(line);
+				}
+				else if (!trust.HasValue)
+				{
+					if (line == "command.AddTrustVerificationFlags(flags)")
+					{
+						trust = Trust.Verification;
+					}
+					else if (line == "command.AddTrustSigningFlags(flags)")
+					{
+						trust = Trust.Signing;
+					}
 				}
 				break;
 			default:
@@ -154,12 +210,19 @@ string OutputContent(Argument[] args, string className)
 		}
 	}
 	"Failed parsing".Dump();
-	return (null, null);
+	return (null, null, use, description, trust);
+}
+string ExtractText(string content)
+{
+	int openQuotationsIndex = content.IndexOf('"');
+	int closeQuotationsIndex = content.IndexOf('"', openQuotationsIndex + 1);
+	return content.Substring(openQuotationsIndex + 1, closeQuotationsIndex - openQuotationsIndex - 1);
 }
 
 void FillArgumentsWithFlags(Argument[] arguments, string[] flags)
 {
 	var dict = arguments.ToDictionary(a => a.OptName, a => a);
+	bool hasTrustVerification = false;
 	foreach (string flag in flags)
 	{
 		int dotIndex = flag.IndexOf('.');
@@ -178,7 +241,15 @@ void FillArgumentsWithFlags(Argument[] arguments, string[] flags)
 					AnnotateArgument(arg, content.Substring(firstCommaIndex + 1).Trim());
 				}
 				break;
-			default:
+			case "VarP":
+			case "Var":
+			case "StringVarP":
+			case "Int64VarP":
+			case "BoolVarP":
+			case "Int64Var":
+			case "StringVar":
+			case "BoolVar":
+			case "StringSliceVar":
 				{
 					dotIndex = content.IndexOf('.');
 					int firstCommaIndex = content.IndexOf(',');
@@ -267,6 +338,10 @@ string[] PartsWithStrings(string content)
 
 Argument[] GetOptArguments(string[] types)
 {
+	if (types.Length == 0)
+	{
+		return new Argument[0];
+	}
 	var result = new List<Argument>(types.Length);
 	foreach (string type in types)
 	{
@@ -313,7 +388,7 @@ enum State
 {
 	SearchingType,
 	CollectingType,
-	SearchingCommand,
+	SearchingFlags,
 	CollectingFlags
 }
 
@@ -363,8 +438,14 @@ public class Argument
 			}
 		}
 	}
-	public string NetName => Long.Humanize(LetterCasing.Title).Replace(" ","");
+	public string NetName => Long?.Humanize(LetterCasing.Title).Replace(" ","");
 	public  string NetDefault => Default != "[]string{}" ? Default: "";
+}
+
+public enum Trust
+{
+	Signing,
+	Verification
 }
 //void ReadYaml(string fileName)
 //{
