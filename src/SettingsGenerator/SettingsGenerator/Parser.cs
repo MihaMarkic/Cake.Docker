@@ -9,7 +9,8 @@ namespace SettingsGenerator
     public static class Parser
     {
         public static (string[] Types, string[] Flags, string Use, string Description, Trust? Trust) 
-            CollectTypesAndFlags(string[] lines, Regex typeRegex, Regex cmdRegex, (string Key, string Value)[] consts)
+            CollectTypesAndFlags(string[] lines, Regex typeRegex, Regex cmdRegex, (string Key, string Value)[] consts,
+            Option options)
         {
             var state = State.SearchingType;
             var types = new List<string>();
@@ -18,6 +19,7 @@ namespace SettingsGenerator
             string description = null;
             Trust? trust = null;
             bool isInCommand = false;
+            bool typeContainsBlankLines = options.HasFlag(Option.TypeContainsBlankLines);
             foreach (string line in lines)
             {
                 if (isInCommand)
@@ -51,12 +53,12 @@ namespace SettingsGenerator
                         }
                         break;
                     case State.CollectingType:
-                        if (line == "}" || string.IsNullOrEmpty(line))
+                        if (line == "}" || (!typeContainsBlankLines && string.IsNullOrEmpty(line)))
                         {
                             Console.WriteLine("Type end found");
                             state = State.SearchingFlags;
                         }
-                        else if (!line.StartsWith("//"))
+                        else if (!line.StartsWith("//") && !string.IsNullOrEmpty(line))
                         {
                             types.Add(line);
                         }

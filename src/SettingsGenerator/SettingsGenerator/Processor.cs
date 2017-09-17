@@ -16,7 +16,8 @@ namespace SettingsGenerator
         {
             this.root = root;
         }
-        public async Task ProcessCommandAsync(string path, string command, string originalCommandName, InputTypeOptions? inputTypeOptions)
+        public async Task ProcessCommandAsync(string path, string command, string originalCommandName, InputTypeOptions? inputTypeOptions,
+            Option options)
         {
             var httpClient = new HttpClient { BaseAddress = new Uri("https://raw.githubusercontent.com/docker/cli/master/cli/command/") };
 
@@ -62,7 +63,7 @@ namespace SettingsGenerator
             );
 
             //bool isMatch = cmdRegex.IsMatch("func NewCopyCommand(dockerCli *command.DockerCli) *cobra.Command {");
-            var typesAndFlags = Parser.CollectTypesAndFlags(lines, typeRegex, cmdRegex, consts);
+            var typesAndFlags = Parser.CollectTypesAndFlags(lines, typeRegex, cmdRegex, consts, options);
             if (typesAndFlags.Types != null)
             {
                 args = args.AddRange(GetOptArguments(typesAndFlags.Types));
