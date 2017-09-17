@@ -14,6 +14,10 @@ Including addin in cake script is easy.
 
 **Important**: Docker 17.* is supported since v0.8 and background compatibility is dropped (most notably, array arguments are converter to strings). If you wish to match older docker versions, user an older Cake.Docker version.
 
+**Important**: Since version 0.8.0 the settings are generated from the latest Docker source code on github.
+
+- [DockerStart](https://docs.docker.com/engine/reference/commandline/start/) v0.8.2
+- [DockerLogs](https://docs.docker.com/engine/reference/commandline/logs/) v0.8.2
 - [DockerExec](https://docs.docker.com/engine/reference/commandline/exec/) v0.8.0
 - [DockerRun](https://docs.docker.com/engine/reference/commandline/run/) v0.7.2
 - [DockerPull](https://docs.docker.com/engine/reference/commandline/pull/) v0.7.1
