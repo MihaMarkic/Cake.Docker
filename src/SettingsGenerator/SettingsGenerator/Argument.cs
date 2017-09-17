@@ -43,7 +43,8 @@ namespace SettingsGenerator
                         case "Int64":
                         case "UInt64":
                         case "int":
-                            return Type + (!string.IsNullOrEmpty(Default) ? "?" : "");
+                            return Type + "?";
+                            //return Type + (!string.IsNullOrEmpty(Default) ? "?" : "");
                         default:
                             return Type;
                     }

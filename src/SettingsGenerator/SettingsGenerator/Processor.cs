@@ -16,8 +16,7 @@ namespace SettingsGenerator
         {
             this.root = root;
         }
-        public async Task ProcessCommandAsync(string path, string command, string originalCommandName,
-            string additionalOptionsUrl, string additionalOptionsTypeName)
+        public async Task ProcessCommandAsync(string path, string command, string originalCommandName, InputTypeOptions? inputTypeOptions)
         {
             var httpClient = new HttpClient { BaseAddress = new Uri("https://raw.githubusercontent.com/docker/cli/master/cli/command/") };
 
@@ -25,18 +24,22 @@ namespace SettingsGenerator
             string url = string.Join("/", parts).ToLower();
             string source = await httpClient.GetStringAsync($"{url}.go");
             var args = ImmutableArray<Argument>.Empty;
-            if (!string.IsNullOrEmpty(additionalOptionsUrl))
+            (string Key, string Value)[] consts = null;
+            if (inputTypeOptions.HasValue)
             {
-                string additionalUrl = string.Join("/", parts.Take(parts.Length-1)).ToLower();
-                if (additionalUrl.Length > 0 )
+                switch (inputTypeOptions.Value)
                 {
-                    additionalUrl += "/";
+                    case InputTypeOptions.Container:
+                        args = await LoadContainerOptions(httpClient);
+                        break;
+                    case InputTypeOptions.Swarm:
+                        (args, consts) = await LoadSwarmOptions(httpClient);
+                        break;
+                    case InputTypeOptions.SwarmConsts:
+                        (_, consts) = await LoadSwarmOptions(httpClient);
+                        break;
                 }
-                additionalUrl += $"{additionalOptionsUrl}.go";
-                string additionalSource = await httpClient.GetStringAsync(additionalUrl);
-                args = GetAdditionalArguments(additionalSource, additionalOptionsTypeName);
             }
-            //	source.Dump();
 
             var lines = source.Split('\n').Select(l => l.Trim()).ToArray();
 
@@ -59,8 +62,11 @@ namespace SettingsGenerator
             );
 
             //bool isMatch = cmdRegex.IsMatch("func NewCopyCommand(dockerCli *command.DockerCli) *cobra.Command {");
-            var typesAndFlags = Parser.CollectTypesAndFlags(lines, typeRegex, cmdRegex);
-            args = args.AddRange(GetOptArguments(typesAndFlags.Types));
+            var typesAndFlags = Parser.CollectTypesAndFlags(lines, typeRegex, cmdRegex, consts);
+            if (typesAndFlags.Types != null)
+            {
+                args = args.AddRange(GetOptArguments(typesAndFlags.Types));
+            }
             if (typesAndFlags.Trust.HasValue)
             {
                 args = args.Add(new Argument
@@ -73,20 +79,40 @@ namespace SettingsGenerator
                     Description = "Skip image " + (typesAndFlags.Trust.Value == Trust.Verification ? "verification" : "signing")
                 });
             }
-            FillArgumentsWithFlags(args, typesAndFlags.Flags);
+            if (typesAndFlags.Flags != null)
+            {
+                FillArgumentsWithFlags(args, typesAndFlags.Flags);
+            }
             var validArgs = args.Where(a => !string.IsNullOrEmpty(a.Long)).ToArray();
             //validArgs.Dump();
-            string output = OutputGenerator.OutputContent(validArgs, originalCommandName, typesAndFlags.Use, typesAndFlags.Description);
-            string fileName = Path.Combine(root, path, $"Docker{originalCommandName}Settings.cs");
+            string className = string.Join("", parts);
+            string output = OutputGenerator.OutputContent(validArgs, className, typesAndFlags.Use, typesAndFlags.Description);
+            string fileName = Path.Combine(root, path, $"Docker{className}Settings.cs");
             File.WriteAllText(fileName, output);
             //	output.Dump();
         }
 
-        ImmutableArray<Argument> GetAdditionalArguments(string source, string additionalOptionsTypeName)
+        async Task<ImmutableArray<Argument>> LoadContainerOptions(HttpClient client)
         {
-            var lines = source.Split('\n').Select(l => l.Trim()).ToArray();
+            string additionalUrl = "container/opts.go";
+            string additionalSource = await client.GetStringAsync(additionalUrl);
+            var lines = additionalSource.Split('\n').Select(l => l.Trim()).ToArray();
+            return GetAdditionalArguments(lines, "container", addFlagsTrigger: "func addFlags(", consts: null);
+        }
+        async Task<(ImmutableArray<Argument> Args, (string Key, string Value)[] Consts)> LoadSwarmOptions(HttpClient client)
+        {
+            string additionalUrl = "swarm/opts.go";
+            string additionalSource = await client.GetStringAsync(additionalUrl);
+            var lines = additionalSource.Split('\n').Select(l => l.Trim()).ToArray();
+            var consts = Parser.CollectConsts(lines);
+            var args = GetAdditionalArguments(lines, "swarm", addFlagsTrigger: "func addSwarmFlags(", consts: consts);
+            var caArgs = GetAdditionalArguments(lines, "swarmCA", addFlagsTrigger: "func addSwarmCAFlags(", consts: consts);
+            return (args.AddRange(caArgs), consts);
+        }
 
-            string pattern = $"^\\s*type\\s+{additionalOptionsTypeName.ToLower()}Options\\s+struct\\s*{{\\s*$";
+        ImmutableArray<Argument> GetAdditionalArguments(string[] lines, string additionalOptionsTypeName, string addFlagsTrigger, (string Key, string Value)[] consts)
+        {
+            string pattern = $"^\\s*type\\s+{additionalOptionsTypeName}Options\\s+struct\\s*{{\\s*$";
             var typeRegex = new Regex(
               pattern,
                     RegexOptions.IgnoreCase
@@ -95,8 +121,7 @@ namespace SettingsGenerator
                     | RegexOptions.IgnorePatternWhitespace
                     | RegexOptions.Compiled
                     );
-            bool isMatch = typeRegex.IsMatch("type containerOptions struct {");
-            var typesAndFlags = Parser.CollectTypesAndFlagsFromAdditional(lines, typeRegex);
+            var typesAndFlags = Parser.CollectTypesAndFlagsFromAdditional(lines, typeRegex, addFlagsTrigger, consts);
             var args = GetOptArguments(typesAndFlags.Types).ToImmutableArray();
             FillArgumentsWithFlags(args, typesAndFlags.Flags);
 
@@ -120,10 +145,11 @@ namespace SettingsGenerator
                 {
                     case "SetAnnotation":
                         {
-                            int openQuotationsIndex = content.IndexOf('"');
-                            int closeQuotationsIndex = content.IndexOf('"', openQuotationsIndex + 1);
-                            string fullName = content.Substring(openQuotationsIndex + 1, closeQuotationsIndex - openQuotationsIndex - 1);
-                            int firstCommaIndex = content.IndexOf(',', closeQuotationsIndex + 1);
+                            int openQuotaton = content.IndexOf('"');
+                            int closeQuotaton = content.IndexOf('"', openQuotaton + 1);
+                            int firstCommaIndex = content.IndexOf(',', closeQuotaton+1);
+                            string fullName = content.Substring(openQuotaton+1, closeQuotaton - openQuotaton - 1);
+                            //int firstCommaIndex = content.IndexOf(',', closeQuotationsIndex + 1);
                             annotations.Add((fullName, content.Substring(firstCommaIndex + 1).Trim()));
                         }
                         break;
@@ -216,7 +242,7 @@ namespace SettingsGenerator
             foreach (string type in types)
             {
                 string[] parts = type.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                if (parts[0] == "context")
+                if (parts[0] == "context" || parts.Length == 1)
                 {
                     continue;
                 }
@@ -229,6 +255,8 @@ namespace SettingsGenerator
                 {
                     case "string":
                     case "time.Duration":
+                    case "ExternalCAOption":
+                    case "NodeAddrOption":
                         arg.Type = "string";
                         break;
                     case "int64":

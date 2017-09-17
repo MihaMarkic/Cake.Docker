@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -7,7 +8,8 @@ namespace SettingsGenerator
 {
     public static class Parser
     {
-        public static (string[] Types, string[] Flags, string Use, string Description, Trust? Trust) CollectTypesAndFlags(string[] lines, Regex typeRegex, Regex cmdRegex)
+        public static (string[] Types, string[] Flags, string Use, string Description, Trust? Trust) 
+            CollectTypesAndFlags(string[] lines, Regex typeRegex, Regex cmdRegex, (string Key, string Value)[] consts)
         {
             var state = State.SearchingType;
             var types = new List<string>();
@@ -54,7 +56,7 @@ namespace SettingsGenerator
                             Console.WriteLine("Type end found");
                             state = State.SearchingFlags;
                         }
-                        else 
+                        else if (!line.StartsWith("//"))
                         {
                             types.Add(line);
                         }
@@ -79,7 +81,7 @@ namespace SettingsGenerator
                         }
                         else if (line.StartsWith("flags."))
                         {
-                            flags.Add(line);
+                            flags.Add(PreprocessFlagLine(consts, line));
                         }
                         else if (!trust.HasValue)
                         {
@@ -100,13 +102,28 @@ namespace SettingsGenerator
             Console.WriteLine("Failed parsing");
             return (null, null, use, description, trust);
         }
-        public static (string[] Types, string[] Flags) CollectTypesAndFlagsFromAdditional(string[] lines, Regex typeRegex)
+        static string PreprocessFlagLine((string Key, string Value)[] consts, string content)
         {
+            if (consts != null)
+            {
+                foreach (var cnst in consts)
+                {
+                    content = content.Replace(cnst.Key, $"\"{cnst.Value}\"");
+                }
+            }
+            return content;
+        }
+        public static (string[] Types, string[] Flags) CollectTypesAndFlagsFromAdditional(string[] lines, Regex typeRegex, string addFlagsTrigger, (string Key, string Value)[] consts)
+        {
+            
             var state = State.SearchingType;
             var types = new List<string>();
             var flags = new List<string>();
-            foreach (string line in lines)
+            int index = 0;
+            while (index < lines.Length)
             {
+                string line = lines[index];
+                index++;
                 switch (state)
                 {
                     case State.SearchingType:
@@ -121,14 +138,15 @@ namespace SettingsGenerator
                         {
                             Console.WriteLine("Type end found");
                             state = State.SearchingFlags;
+                            index = 0;
                         }
-                        else
+                        else if (!line.StartsWith("//"))
                         {
                             types.Add(line);
                         }
                         break;
                     case State.SearchingFlags:
-                        if (line.StartsWith("func addFlags("))
+                        if (line.StartsWith(addFlagsTrigger))
                         {
                             Console.WriteLine("Command start found");
                             state = State.SearchingFlagsFirst;
@@ -139,7 +157,7 @@ namespace SettingsGenerator
                         {
                             Console.WriteLine("First flag found: " + line);
                             state = State.CollectingFlags;
-                            flags.Add(line);
+                            flags.Add(PreprocessFlagLine(consts, line));
                         }
                         break;
                     case State.CollectingFlags:
@@ -150,7 +168,7 @@ namespace SettingsGenerator
                         }
                         else if (line.StartsWith("flags."))
                         {
-                            flags.Add(line);
+                            flags.Add(PreprocessFlagLine(consts, line));
                         }
                         break;
                     default:
@@ -191,6 +209,35 @@ namespace SettingsGenerator
             result.Add(item.ToString().Trim());
             item.Clear();
             return result.ToArray();
+        }
+        public static (string Key, string Value)[] CollectConsts(string[] lines)
+        {
+            var pairs = new List<(string Key, string Value)>();
+            int index = 0;
+            bool seeking = true;
+            while (index < lines.Length)
+            {
+                string line = lines[index];
+                index++;
+                if (seeking)
+                {
+                    if (line == "const (")
+                    {
+                        seeking = false;
+                    }
+                }
+                else if (line == ")")
+                {
+                    return pairs.ToArray();
+                }
+                else if (!string.IsNullOrEmpty(line))
+                {
+                    string[] parts = line.Split('=').Select(p => p.Trim().Trim('"')).ToArray();
+                    pairs.Add((parts[0], parts[1]));
+                }
+            }
+            Console.WriteLine("Failed parsing consts");
+            return null;
         }
     }
 }
