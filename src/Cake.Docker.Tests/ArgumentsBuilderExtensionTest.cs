@@ -13,6 +13,7 @@ namespace Cake.Docker.Tests
         public static PropertyInfo StringsProperty => GetProperty(nameof(TestSettings.Strings));
         public static PropertyInfo NullableIntProperty => GetProperty(nameof(TestSettings.NullableInt));
         public static PropertyInfo NullableInt64Property => GetProperty(nameof(TestSettings.NullableInt64));
+        public static PropertyInfo NullableUInt64Property => GetProperty(nameof(TestSettings.NullableUInt64));
         public static PropertyInfo NullableBoolProperty => GetProperty(nameof(TestSettings.NullableBool));
         public static PropertyInfo NullableTimeSpanProperty => GetProperty(nameof(TestSettings.NullableTimeSpan));
         public static PropertyInfo BoolProperty => GetProperty(nameof(TestSettings.Bool));
@@ -129,6 +130,25 @@ namespace Cake.Docker.Tests
             public void WhenGivenNull_NullIsReturned()
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromNullableIntProperty(NullableInt64Property, null);
+
+                Assert.That(actual, Is.Null);
+            }
+        }
+        [TestFixture]
+        public class GetArgumentFromNullableUInt64Property
+        {
+            [Test]
+            public void WhenGivenValue_FormatsProperly()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromNullableUInt64Property(NullableUInt64Property, 5);
+
+                Assert.That(actual, Is.EqualTo("--nullable-uint64 5"));
+            }
+
+            [Test]
+            public void WhenGivenNull_NullIsReturned()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromNullableIntProperty(NullableUInt64Property, null);
 
                 Assert.That(actual, Is.Null);
             }
@@ -274,6 +294,7 @@ namespace Cake.Docker.Tests
         public string[] Strings { get; set; }
         public int? NullableInt { get; set; }
         public Int64? NullableInt64 { get; set; }
+        public UInt64? NullableUInt64 { get; set; }
         public  bool? NullableBool { get; set; }
         public TimeSpan? NullableTimeSpan { get; set; }
         public bool Bool { get; set; }

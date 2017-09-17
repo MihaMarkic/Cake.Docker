@@ -11,31 +11,50 @@
 </Query>
 
 const string root = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\";
-string[] folders = new string[] { 
-	Path.Combine("Image", "Build"),
-	Path.Combine("Image", "Load"),
-	Path.Combine("Image", "Pull"),
-	Path.Combine("Image", "Push"),
-	Path.Combine("Image", "Remove"),
-	Path.Combine("Image", "Save"),
-	Path.Combine("Image", "Tag"),
+Input[] inputs = new Input[] { 
+//	new Input(Path.Combine("Image", "Build")),
+//	new Input(Path.Combine("Image", "Load")),
+//	new Input(Path.Combine("Image", "Pull")),
+//	new Input(Path.Combine("Image", "Push")),
+//	new Input(Path.Combine("Image", "Remove")),
+//	new Input(Path.Combine("Image", "Save")),
+//	new Input(Path.Combine("Image", "Tag")),
+//	new Input(Path.Combine("Container", "Cp"), "Copy"),
+	new Input(Path.Combine("Container", "Create")),
+//	new Input(Path.Combine("Container", "Exec")),
+//	new Input(Path.Combine("Container", "Rm")),
+//	new Input(Path.Combine("Container", "Run")),
+//	new Input(Path.Combine("Container", "Stop")),
 };
-
-async Task Main()
+public class Input
 {
-	foreach (string folder in folders)
+	public readonly string Path;
+	public readonly string GoCommandName;
+	public readonly string OriginalCommandName;
+	public readonly 
+	
+	public Input(string path, string goCommandName = null)
 	{
-		$"Processing ${folder}".Dump();
-		await ProcessCommandAsync(folder);
+		string[] parts = path.Split(new[] { System.IO.Path.DirectorySeparatorChar});
+		Path = path;
+		OriginalCommandName = parts[parts.Length-1];
+		GoCommandName = goCommandName != null ? goCommandName: OriginalCommandName;
 	}
 }
 
-async Task ProcessCommandAsync(string path)
+async Task Main()
 {
-	string[] parts = path.Split(new[] { Path.DirectorySeparatorChar});
-	string command = parts[parts.Length-1];
+	foreach (var input in inputs)
+	{
+		$"Processing ${input.Path}".Dump();
+		await ProcessCommandAsync(input.Path, input.GoCommandName, input.OriginalCommandName);
+	}
+}
 
+async Task ProcessCommandAsync(string path, string command, string originalCommandName)
+{
 	var httpClient = new HttpClient { BaseAddress = new Uri("https://raw.githubusercontent.com/docker/cli/master/cli/command/") };
+	string[] parts = path.Split(new[] { System.IO.Path.DirectorySeparatorChar});
 	string url = string.Join("/",parts).ToLower();
 	string source = await httpClient.GetStringAsync($"{url}.go");
 //	source.Dump();
@@ -50,8 +69,8 @@ async Task ProcessCommandAsync(string path)
 			| RegexOptions.IgnorePatternWhitespace
 			| RegexOptions.Compiled
 			);
-	string cmdRegexText = $"^\\s*func\\s+New{command}Command\\s*\\(\\s*dockerCli\\s+command." +
-	  "Cli\\s*\\)\\s*\\*cobra.Command\\s*{\\s*$";
+	string cmdRegexText = $"^\\s*func\\s+New{command}Command\\s*\\(\\s*dockerCli\\s+[*]?command." +
+	  "\\w*Cli\\s*\\)\\s*\\*cobra.Command\\s*{\\s*$";
 	var cmdRegex = new Regex(cmdRegexText,
 	RegexOptions.IgnoreCase
 	| RegexOptions.Multiline
@@ -59,19 +78,22 @@ async Task ProcessCommandAsync(string path)
 	| RegexOptions.IgnorePatternWhitespace
 	| RegexOptions.Compiled
 	);
+	
+	bool isMatch = cmdRegex.IsMatch("func NewCopyCommand(dockerCli *command.DockerCli) *cobra.Command {");
 	var typesAndFlags = CollectTypesAndFlags(lines, typeRegex, cmdRegex);
 	var args = GetOptArguments(typesAndFlags.Types);
-	if (typesAndFlags.Trust.has)
+	if (typesAndFlags.Trust.HasValue)
 	{
 		var resize = new List<Argument>(args);
-		resize.Add(new Argument { RawType="bool", OptName = "disableContentTrust", Long = "disable-content-trust", Type="bool", Default="true", Description = "Skip image verification"});
+		resize.Add(new Argument { RawType="bool", OptName = "disableContentTrust", Long = "disable-content-trust", Type="bool", Default="true", 
+		Description = "Skip image " + (typesAndFlags.Trust.Value == Trust.Verification ? "verification": "signing")});
 		args = resize.ToArray();
 	}
 	FillArgumentsWithFlags(args, typesAndFlags.Flags);
 	var validArgs = args.Where(a => !string.IsNullOrEmpty(a.Long)).ToArray();
 	validArgs.Dump();
 	string output = OutputContent(validArgs, command, typesAndFlags.Use, typesAndFlags.Description);
-	string fileName = Path.Combine(root, path, $"Docker{command}Settings.cs");
+	string fileName = Path.Combine(root, path, $"Docker{originalCommandName}Settings.cs");
 	File.WriteAllText( fileName, output);
 //	output.Dump();
 }
@@ -115,7 +137,7 @@ string OutputContent(Argument[] args, string className, string use, string descr
 		sb.AppendLine($"\t\tpublic {arg.NetTypeName} {arg.NetName} {{ get; set; }}");
 	}
 	sb.AppendLine("\t}");
-	sb.AppendLine("}");
+	sb.Append("}");
 	return sb.ToString();
 }
 
@@ -166,7 +188,7 @@ string OutputContent(Argument[] args, string className, string use, string descr
 					"Type end found".Dump();
 					state = State.SearchingFlags;
 				}
-				else
+				else if (!string.IsNullOrEmpty(line))
 				{
 					types.Add(line);
 				}
@@ -215,8 +237,9 @@ string OutputContent(Argument[] args, string className, string use, string descr
 string ExtractText(string content)
 {
 	int openQuotationsIndex = content.IndexOf('"');
-	int closeQuotationsIndex = content.IndexOf('"', openQuotationsIndex + 1);
-	return content.Substring(openQuotationsIndex + 1, closeQuotationsIndex - openQuotationsIndex - 1);
+	//int closeQuotationsIndex = content.IndexOf('"', openQuotationsIndex + 1);
+//	return content.Substring(openQuotationsIndex + 1, closeQuotationsIndex - openQuotationsIndex - 1);
+	return content.Substring(openQuotationsIndex + 1).TrimEnd('"');
 }
 
 void FillArgumentsWithFlags(Argument[] arguments, string[] flags)

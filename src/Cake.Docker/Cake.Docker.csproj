@@ -30,6 +30,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Ps\**" />
+    <EmbeddedResource Remove="Ps\**" />
+    <None Remove="Ps\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Cake.Core" Version="0.17.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
