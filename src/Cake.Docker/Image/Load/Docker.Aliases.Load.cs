@@ -13,14 +13,14 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-		public static void DockerLoad(this ICakeContext context, DockerLoadSettings settings)
+		public static void DockerLoad(this ICakeContext context, DockerImageLoadSettings settings)
         {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
             }
-            var runner = new GenericDockerRunner<DockerLoadSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("load", settings ?? new DockerLoadSettings(), new string[0]);
+            var runner = new GenericDockerRunner<DockerImageLoadSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("load", settings ?? new DockerImageLoadSettings(), new string[0]);
         }
     }
 }

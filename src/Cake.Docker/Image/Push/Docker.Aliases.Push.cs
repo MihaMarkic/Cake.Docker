@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerPush(this ICakeContext context, string imageReference)
         {
-            DockerPush(context, new DockerPushSettings(), imageReference);
+            DockerPush(context, new DockerImagePushSettings(), imageReference);
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="imageReference">The image reference.</param>
         [CakeMethodAlias]
-        public static void DockerPush(this ICakeContext context, DockerPushSettings settings, string imageReference)
+        public static void DockerPush(this ICakeContext context, DockerImagePushSettings settings, string imageReference)
         {
             if (context == null)
             {
@@ -36,8 +36,8 @@ namespace Cake.Docker
                 throw new ArgumentNullException("imageReference");
             }
 
-            var runner = new GenericDockerRunner<DockerPushSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("push", settings ?? new DockerPushSettings(), new [] { imageReference });
+            var runner = new GenericDockerRunner<DockerImagePushSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("push", settings ?? new DockerImagePushSettings(), new [] { imageReference });
         }
     }
 }

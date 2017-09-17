@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker rm [OPTIONS] CONTAINER [CONTAINER...].
 	/// Remove one or more containers
 	/// </summary>
-	public sealed class DockerRmSettings : AutoToolSettings
+	public sealed class DockerContainerRmSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --force, -f

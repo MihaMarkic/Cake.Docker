@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker stop [OPTIONS] CONTAINER [CONTAINER...].
 	/// Stop one or more running containers
 	/// </summary>
-	public sealed class DockerStopSettings : AutoToolSettings
+	public sealed class DockerContainerStopSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --time, -t

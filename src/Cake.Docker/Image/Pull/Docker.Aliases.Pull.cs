@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerPull(this ICakeContext context, string imageReference)
         {
-            DockerPull(context, new DockerPullSettings(), imageReference);
+            DockerPull(context, new DockerImagePullSettings(), imageReference);
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="imageReference">The image reference.</param>
         [CakeMethodAlias]
-        public static void DockerPull(this ICakeContext context, DockerPullSettings settings, string imageReference)
+        public static void DockerPull(this ICakeContext context, DockerImagePullSettings settings, string imageReference)
         {
             if (context == null)
             {
@@ -36,8 +36,8 @@ namespace Cake.Docker
                 throw new ArgumentNullException("imageReference");
             }
 
-            var runner = new GenericDockerRunner<DockerPullSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("pull", settings ?? new DockerPullSettings(), new [] { imageReference });
+            var runner = new GenericDockerRunner<DockerImagePullSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("pull", settings ?? new DockerImagePullSettings(), new [] { imageReference });
         }
     }
 }

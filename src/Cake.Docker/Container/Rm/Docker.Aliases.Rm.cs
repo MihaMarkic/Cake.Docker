@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerRm(this ICakeContext context, params string[] containers)
         {
-            DockerRm(context, new DockerRmSettings(), containers);
+            DockerRm(context, new DockerContainerRmSettings(), containers);
         }
         
         
@@ -25,7 +25,7 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="containers">The list of containers.</param>
         [CakeMethodAlias]
-        public static void DockerRm(this ICakeContext context, DockerRmSettings settings, params string[] containers)
+        public static void DockerRm(this ICakeContext context, DockerContainerRmSettings settings, params string[] containers)
         {
             if (context == null)
             {
@@ -35,8 +35,8 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("containers");
             }
-            var runner = new GenericDockerRunner<DockerRmSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("rm", settings ?? new DockerRmSettings(), containers);
+            var runner = new GenericDockerRunner<DockerContainerRmSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("rm", settings ?? new DockerContainerRmSettings(), containers);
         }
     }
 }

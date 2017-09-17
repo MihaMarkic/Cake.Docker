@@ -42,6 +42,7 @@ namespace SettingsGenerator
                         case "bool":
                         case "Int64":
                         case "UInt64":
+                        case "UInt16":
                         case "int":
                             return Type + "?";
                             //return Type + (!string.IsNullOrEmpty(Default) ? "?" : "");

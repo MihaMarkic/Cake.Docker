@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker build [OPTIONS] PATH | URL | -.
 	/// Build an image from a Dockerfile
 	/// </summary>
-	public sealed class DockerBuildSettings : AutoToolSettings
+	public sealed class DockerImageBuildSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --add-host
@@ -71,7 +71,7 @@ namespace Cake.Docker
 		public bool? DisableContentTrust { get; set; }
 		/// <summary>
 		/// --file, -f
-		/// Name of the Dockerfile (Default is 'PATH/Dockerfile')
+		/// Name of the Dockerfile (Default is &#39;PATH/Dockerfile&#39;)
 		/// </summary>
 		public string File { get; set; }
 		/// <summary>
@@ -99,12 +99,12 @@ namespace Cake.Docker
 		/// --memory, -m
 		/// Memory limit
 		/// </summary>
-		public UInt64 Memory { get; set; }
+		public UInt64? Memory { get; set; }
 		/// <summary>
 		/// --memory-swap
-		/// Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+		/// Swap limit equal to memory plus swap: &#39;-1&#39; to enable unlimited swap
 		/// </summary>
-		public UInt64 MemorySwap { get; set; }
+		public UInt64? MemorySwap { get; set; }
 		/// <summary>
 		/// --network
 		/// default: default
@@ -148,7 +148,7 @@ namespace Cake.Docker
 		/// --shm-size
 		/// Size of /dev/shm
 		/// </summary>
-		public UInt64 ShmSize { get; set; }
+		public UInt64? ShmSize { get; set; }
 		/// <summary>
 		/// --squash
 		/// default: false
@@ -171,7 +171,7 @@ namespace Cake.Docker
 		public bool? Stream { get; set; }
 		/// <summary>
 		/// --tag, -t
-		/// Name and optionally a tag in the 'name:tag' format
+		/// Name and optionally a tag in the &#39;name:tag&#39; format
 		/// </summary>
 		public string[] Tag { get; set; }
 		/// <summary>

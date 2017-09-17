@@ -3,10 +3,10 @@ using System;
 namespace Cake.Docker
 {
 	/// <summary>
-	/// Settings for docker create [OPTIONS] IMAGE [COMMAND] [ARG...].
-	/// Create a new container
+	/// Settings for docker run [OPTIONS] IMAGE [COMMAND] [ARG...].
+	/// Run a command in a new container
 	/// </summary>
-	public sealed class DockerCreateSettings : AutoToolSettings
+	public sealed class DockerContainerRunSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --add-host
@@ -22,7 +22,7 @@ namespace Cake.Docker
 		/// --blkio-weight-device
 		/// Block IO weight (relative device weight)
 		/// </summary>
-		public UInt64 BlkioWeightDevice { get; set; }
+		public UInt64? BlkioWeightDevice { get; set; }
 		/// <summary>
 		/// --cap-add
 		/// Add Linux capabilities
@@ -92,7 +92,7 @@ namespace Cake.Docker
 		/// <remarks>
 		/// Version: 1.25
 		/// </remarks>
-		public UInt64 Cpus { get; set; }
+		public UInt64? Cpus { get; set; }
 		/// <summary>
 		/// --cpuset-cpus
 		/// CPUs in which to allow execution (0-3, 0,1)
@@ -110,6 +110,17 @@ namespace Cake.Docker
 		/// </summary>
 		public Int64? CpuShares { get; set; }
 		/// <summary>
+		/// --detach, -d
+		/// default: false
+		/// Run container in background and print container ID
+		/// </summary>
+		public bool? Detach { get; set; }
+		/// <summary>
+		/// --detach-keys
+		/// Override the key sequence for detaching a container
+		/// </summary>
+		public string DetachKeys { get; set; }
+		/// <summary>
 		/// --device
 		/// Add a host device to the container
 		/// </summary>
@@ -123,22 +134,22 @@ namespace Cake.Docker
 		/// --device-read-bps
 		/// Limit read rate (bytes per second) from a device
 		/// </summary>
-		public UInt64 DeviceReadBps { get; set; }
+		public UInt64? DeviceReadBps { get; set; }
 		/// <summary>
 		/// --device-read-iops
 		/// Limit read rate (IO per second) from a device
 		/// </summary>
-		public UInt64 DeviceReadIops { get; set; }
+		public UInt64? DeviceReadIops { get; set; }
 		/// <summary>
 		/// --device-write-bps
 		/// Limit write rate (bytes per second) to a device
 		/// </summary>
-		public UInt64 DeviceWriteBps { get; set; }
+		public UInt64? DeviceWriteBps { get; set; }
 		/// <summary>
 		/// --device-write-iops
 		/// Limit write rate (IO per second) to a device
 		/// </summary>
-		public UInt64 DeviceWriteIops { get; set; }
+		public UInt64? DeviceWriteIops { get; set; }
 		/// <summary>
 		/// --disable-content-trust
 		/// default: true
@@ -241,12 +252,11 @@ namespace Cake.Docker
 		/// --io-maxbandwidth
 		/// Maximum IO bandwidth limit for the system drive (Windows only)
 		/// </summary>
-		public UInt64 IoMaxbandwidth { get; set; }
+		public UInt64? IoMaxbandwidth { get; set; }
 		/// <summary>
 		/// --io-maxiops
-		/// 
 		/// </summary>
-		public UInt64 IoMaxiops { get; set; }
+		public UInt64? IoMaxiops { get; set; }
 		/// <summary>
 		/// --ip
 		/// IPv4 address (e.g., 172.30.100.104)
@@ -271,7 +281,7 @@ namespace Cake.Docker
 		/// --kernel-memory
 		/// Kernel memory limit
 		/// </summary>
-		public UInt64 KernelMemory { get; set; }
+		public UInt64? KernelMemory { get; set; }
 		/// <summary>
 		/// --label, -l
 		/// Set meta data on a container
@@ -311,17 +321,17 @@ namespace Cake.Docker
 		/// --memory, -m
 		/// Memory limit
 		/// </summary>
-		public UInt64 Memory { get; set; }
+		public UInt64? Memory { get; set; }
 		/// <summary>
 		/// --memory-reservation
 		/// Memory soft limit
 		/// </summary>
-		public UInt64 MemoryReservation { get; set; }
+		public UInt64? MemoryReservation { get; set; }
 		/// <summary>
 		/// --memory-swap
-		/// Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+		/// Swap limit equal to memory plus swap: &#39;-1&#39; to enable unlimited swap
 		/// </summary>
-		public UInt64 MemorySwap { get; set; }
+		public UInt64? MemorySwap { get; set; }
 		/// <summary>
 		/// --memory-swappiness
 		/// default: -1
@@ -364,7 +374,7 @@ namespace Cake.Docker
 		/// <summary>
 		/// --oom-score-adj
 		/// default: 0
-		/// Tune host's OOM preferences (-1000 to 1000)
+		/// Tune host&#39;s OOM preferences (-1000 to 1000)
 		/// </summary>
 		public int? OomScoreAdj { get; set; }
 		/// <summary>
@@ -386,7 +396,7 @@ namespace Cake.Docker
 		public bool? Privileged { get; set; }
 		/// <summary>
 		/// --publish, -p
-		/// Publish a container's port(s) to the host
+		/// Publish a container&#39;s port(s) to the host
 		/// </summary>
 		public string[] Publish { get; set; }
 		/// <summary>
@@ -398,7 +408,7 @@ namespace Cake.Docker
 		/// <summary>
 		/// --read-only
 		/// default: false
-		/// Mount the container's root filesystem as read only
+		/// Mount the container&#39;s root filesystem as read only
 		/// </summary>
 		public bool? ReadOnly { get; set; }
 		/// <summary>
@@ -427,7 +437,13 @@ namespace Cake.Docker
 		/// --shm-size
 		/// Size of /dev/shm
 		/// </summary>
-		public UInt64 ShmSize { get; set; }
+		public UInt64? ShmSize { get; set; }
+		/// <summary>
+		/// --sig-proxy
+		/// default: true
+		/// Proxy received signals to the process
+		/// </summary>
+		public bool? SigProxy { get; set; }
 		/// <summary>
 		/// --stop-signal
 		/// default: signal.DefaultStopSignal
@@ -471,7 +487,7 @@ namespace Cake.Docker
 		public string[] Ulimit { get; set; }
 		/// <summary>
 		/// --user, -u
-		/// Username or UID (format: <name|uid>[:<group|gid>])
+		/// Username or UID (format: &lt;name|uid&gt;[:&lt;group|gid&gt;])
 		/// </summary>
 		public string User { get; set; }
 		/// <summary>

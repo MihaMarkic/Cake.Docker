@@ -7,7 +7,7 @@ using Cake.Core.IO;
 
 namespace Cake.Docker.Tests.Build
 {
-    public class DockerBuildFixture : ToolFixture<DockerBuildSettings>, ICakeContext
+    public class DockerBuildFixture : ToolFixture<DockerImageBuildSettings>, ICakeContext
     {
         public string Path { get; set; }
 

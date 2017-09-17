@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker load [OPTIONS].
 	/// Load an image from a tar archive or STDIN
 	/// </summary>
-	public sealed class DockerLoadSettings : AutoToolSettings
+	public sealed class DockerImageLoadSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --input, -i

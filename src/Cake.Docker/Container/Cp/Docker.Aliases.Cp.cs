@@ -16,7 +16,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerCp(this ICakeContext context, string from, string to)
         {
-            DockerCp(context, from, to, new DockerCpSettings());
+            DockerCp(context, from, to, new DockerContainerCpSettings());
         }
         /// <summary>
         /// Copy files from/to container given <paramref name="settings"/>.
@@ -26,7 +26,7 @@ namespace Cake.Docker
         /// <param name="to">Destination path.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerCp(this ICakeContext context, string from, string to, DockerCpSettings settings)
+        public static void DockerCp(this ICakeContext context, string from, string to, DockerContainerCpSettings settings)
         {
             if (context == null)
             {
@@ -40,8 +40,8 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("to");
             }
-            var runner = new GenericDockerRunner<DockerCpSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("cp", settings ?? new DockerCpSettings(), new string[] { from, to });
+            var runner = new GenericDockerRunner<DockerContainerCpSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("cp", settings ?? new DockerContainerCpSettings(), new string[] { from, to });
         }
 
     }

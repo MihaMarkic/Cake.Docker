@@ -29,8 +29,8 @@ namespace Cake.Docker
                 throw new ArgumentNullException("registryReference");
             }
 
-            var runner = new GenericDockerRunner<DockerTagSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("tag", new DockerTagSettings(), new[] { imageReference, registryReference });
+            var runner = new GenericDockerRunner<DockerImageTagSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("tag", new DockerImageTagSettings(), new[] { imageReference, registryReference });
         }
     }
 }

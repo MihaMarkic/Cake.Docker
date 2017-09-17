@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker pull [OPTIONS] NAME[:TAG|@DIGEST].
 	/// Pull an image or a repository from a registry
 	/// </summary>
-	public sealed class DockerPullSettings : AutoToolSettings
+	public sealed class DockerImagePullSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --all-tags, -a

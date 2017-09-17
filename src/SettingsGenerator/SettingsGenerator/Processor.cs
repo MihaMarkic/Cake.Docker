@@ -270,6 +270,9 @@ namespace SettingsGenerator
                     case "opts.NanoCPUs":
                         arg.Type = "UInt64";
                         break;
+                    case "uint16":
+                        arg.Type = "UInt16";
+                        break;
                     case "bool":
                         arg.Type = "bool";
                         break;

@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker push [OPTIONS] NAME[:TAG].
 	/// Push an image or a repository to a registry
 	/// </summary>
-	public sealed class DockerPushSettings : AutoToolSettings
+	public sealed class DockerImagePushSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --disable-content-trust

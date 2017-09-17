@@ -19,7 +19,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerRun(this ICakeContext context, string image, string command, params string[] args)
         {
-            DockerRun(context, new DockerRunSettings(), image, command, args);
+            DockerRun(context, new DockerContainerRunSettings(), image, command, args);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Cake.Docker
         /// <param name="args">The arguments.</param>
         /// <param name="command">The command.</param>
         [CakeMethodAlias]
-        public static void DockerRun(this ICakeContext context, DockerRunSettings settings, string image, string command, params string[] args)
+        public static void DockerRun(this ICakeContext context, DockerContainerRunSettings settings, string image, string command, params string[] args)
         {
             if (context == null)
             {
@@ -41,7 +41,7 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("image");
             }
-            var runner = new GenericDockerRunner<DockerRunSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            var runner = new GenericDockerRunner<DockerContainerRunSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> { image };
             if (!string.IsNullOrEmpty(command))
             {
@@ -51,7 +51,7 @@ namespace Cake.Docker
                     arguments.AddRange(args);
                 }
             }
-            runner.Run("run", settings ?? new DockerRunSettings(), arguments.ToArray());
+            runner.Run("run", settings ?? new DockerContainerRunSettings(), arguments.ToArray());
         }
 
     }

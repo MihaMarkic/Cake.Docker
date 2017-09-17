@@ -27,7 +27,7 @@ namespace Cake.Docker
                 throw new ArgumentNullException("password");
             }
 
-            DockerLogin(context, new DockerLoginSettings {Username = username, Password = password }, server);
+            DockerLogin(context, new DockerRegistryLoginSettings { Username = username, Password = password }, server);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="server">The server.</param>
         [CakeMethodAlias]
-        public static void DockerLogin(this ICakeContext context, DockerLoginSettings settings, string server = null)
+        public static void DockerLogin(this ICakeContext context, DockerRegistryLoginSettings settings, string server = null)
         {
             if (context == null)
             {
@@ -49,7 +49,7 @@ namespace Cake.Docker
                 throw new ArgumentNullException("settings");
             }
 
-            var runner = new GenericDockerRunner<DockerLoginSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            var runner = new GenericDockerRunner<DockerRegistryLoginSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("login", settings, server != null ? new[] { server } : null);
         }
     }

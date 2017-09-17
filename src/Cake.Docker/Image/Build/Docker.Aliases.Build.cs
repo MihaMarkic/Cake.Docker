@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuild(this ICakeContext context, string path)
         {
-            DockerBuild(context, new DockerBuildSettings(), path);
+            DockerBuild(context, new DockerImageBuildSettings(), path);
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Cake.Docker
         /// <param name="path">The path.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerBuild(this ICakeContext context, DockerBuildSettings settings, string path)
+        public static void DockerBuild(this ICakeContext context, DockerImageBuildSettings settings, string path)
         {
             if (context == null)
             {
@@ -35,8 +35,8 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("path");
             }
-            var runner = new GenericDockerRunner<DockerBuildSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("build", settings ?? new DockerBuildSettings(), new string[] { path });
+            var runner = new GenericDockerRunner<DockerImageBuildSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("build", settings ?? new DockerImageBuildSettings(), new string[] { path });
         }
 
     }

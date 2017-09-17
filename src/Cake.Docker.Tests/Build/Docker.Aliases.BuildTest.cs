@@ -10,7 +10,7 @@ namespace Cake.Docker.Tests.Build
         {
             var fixture = new DockerBuildFixture
             {
-                Settings = new DockerBuildSettings(),
+                Settings = new DockerImageBuildSettings(),
                 Path = "path"
             };
 
@@ -23,7 +23,7 @@ namespace Cake.Docker.Tests.Build
         {
             var fixture = new DockerBuildFixture
             {
-                Settings = new DockerBuildSettings {  Rm = true },
+                Settings = new DockerImageBuildSettings {  Rm = true },
                 Path = "path"
             };
 

@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker exec [OPTIONS] CONTAINER COMMAND [ARG...].
 	/// Run a command in a running container
 	/// </summary>
-	public sealed class DockerExecSettings : AutoToolSettings
+	public sealed class DockerContainerExecSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --detach, -d
@@ -47,7 +47,7 @@ namespace Cake.Docker
 		public bool? Tty { get; set; }
 		/// <summary>
 		/// --user, -u
-		/// Username or UID (format: <name|uid>[:<group|gid>])
+		/// Username or UID (format: &lt;name|uid&gt;[:&lt;group|gid&gt;])
 		/// </summary>
 		public string User { get; set; }
 	}

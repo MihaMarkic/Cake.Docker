@@ -113,6 +113,10 @@ namespace Cake.Docker
                 {
                     yield return GetArgumentFromNullableUInt64Property(property, (UInt64?)property.GetValue(settings));
                 }
+                else if (property.PropertyType == typeof(UInt16?))
+                {
+                    yield return GetArgumentFromNullableUInt16Property(property, (UInt16?)property.GetValue(settings));
+                }
                 else if (property.PropertyType == typeof(string))
                 {
                     yield return GetArgumentFromStringProperty(property, (string)property.GetValue(settings));
@@ -207,6 +211,16 @@ namespace Cake.Docker
         /// <param name="value"></param>
         /// <returns></returns>
         public static string GetArgumentFromNullableUInt64Property(PropertyInfo property, UInt64? value)
+        {
+            return value.HasValue ? $"--{GetPropertyName(property.Name)} {value.Value}" : null;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string GetArgumentFromNullableUInt16Property(PropertyInfo property, UInt16? value)
         {
             return value.HasValue ? $"--{GetPropertyName(property.Name)} {value.Value}" : null;
         }

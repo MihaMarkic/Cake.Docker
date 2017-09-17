@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker login [OPTIONS] [SERVER].
 	/// Log in to a Docker registry
 	/// </summary>
-	public sealed class DockerLoginSettings : AutoToolSettings
+	public sealed class DockerRegistryLoginSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --password, -p

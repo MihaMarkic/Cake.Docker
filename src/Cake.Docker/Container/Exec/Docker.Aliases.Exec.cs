@@ -22,7 +22,7 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("context");
             }
-            DockerExec(context, new DockerExecSettings(), container, command, args);
+            DockerExec(context, new DockerContainerExecSettings(), container, command, args);
         }
         /// <summary>
         /// Execs a command using given <paramref name="settings"/>.
@@ -33,7 +33,7 @@ namespace Cake.Docker
         /// <param name="args">The arguments.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-		public static void DockerExec(this ICakeContext context, DockerExecSettings settings, string container, string command, params string[] args)
+		public static void DockerExec(this ICakeContext context, DockerContainerExecSettings settings, string container, string command, params string[] args)
         {
             if (context == null)
             {
@@ -47,13 +47,13 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException("command");
             }
-            var runner = new GenericDockerRunner<DockerExecSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            var runner = new GenericDockerRunner<DockerContainerExecSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> { container, command };
             if (args.Length > 0)
             {
                 arguments.AddRange(args);
             }
-            runner.Run("exec", settings ?? new DockerExecSettings(), arguments.ToArray());
+            runner.Run("exec", settings ?? new DockerContainerExecSettings(), arguments.ToArray());
         }
     }
 }
