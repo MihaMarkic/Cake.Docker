@@ -16,8 +16,11 @@ Including addin in cake script is easy.
 
 **Important**: Since version 0.8.0 the settings are generated from the latest Docker source code on github.
 
-- [DockerStart](https://docs.docker.com/engine/reference/commandline/start/) v0.8.2
-- [DockerLogs](https://docs.docker.com/engine/reference/commandline/logs/) v0.8.2
+- v0.8.2
+  - Uses cake-contrib icon
+  - Based on Cake 0.22
+  - [DockerStart](https://docs.docker.com/engine/reference/commandline/start/)
+  - [DockerLogs](https://docs.docker.com/engine/reference/commandline/logs/)
 - [DockerExec](https://docs.docker.com/engine/reference/commandline/exec/) v0.8.0
 - [DockerRun](https://docs.docker.com/engine/reference/commandline/run/) v0.7.2
 - [DockerPull](https://docs.docker.com/engine/reference/commandline/pull/) v0.7.1
