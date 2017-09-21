@@ -1,3 +1,5 @@
+# Cake.Docker 1.0.0
+- Support Cake 0.22.2 which is a breaking change
 # Cake.Docker 0.7.7
 - .NET Core support
 # Cake.Docker 0.7.6

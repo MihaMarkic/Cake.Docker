@@ -22,7 +22,9 @@
    </metadata>
 
    <files>
-		<file src="Cake.Docker\bin\Release\Cake.Docker.dll" target="lib\net45\Cake.Docker.dll" />
-        <file src="Cake.Docker\bin\Release\Cake.Docker.XML" target="lib\net45\Cake.Docker.XML" />
+        <file src="Cake.Docker\bin\Release\net46\Cake.Docker.dll" target="lib\net46\Cake.Docker.dll" />
+        <file src="Cake.Docker\bin\Release\net46\Cake.Docker.XML" target="lib\net46\Cake.Docker.XML" />
+        <file src="Cake.Docker\bin\Release\netstandard1.6\Cake.Docker.dll" target="lib\netstandard1.6\Cake.Docker.dll" />
+        <file src="Cake.Docker\bin\Release\netstandard1.6\Cake.Docker.XML" target="lib\netstandard1.6\Cake.Docker.XML" />
    </files>
 </package>

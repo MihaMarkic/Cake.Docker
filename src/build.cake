@@ -1,4 +1,5 @@
-﻿#addin "Cake.FileHelpers"
+﻿#addin Cake.FileHelpers
+#tool NUnit.ConsoleRunner
 
 var Project = Directory("./Cake.Docker/");
 var TestProject = Directory("./Cake.Docker.Tests/");
