@@ -1,7 +1,14 @@
+# Cake.Docker 0.8.2
+- References Cake 0.22 (**breaking**)
+- Added [DockerStart](https://docs.docker.com/engine/reference/commandline/start/)
+- Added [DockerLogs](https://docs.docker.com/engine/reference/commandline/logs/)
+
 # Cake.Docker 0.8.0
 
-* Docker 17.* is supported since v0.8 and background compatibility is dropped (most notably, array arguments are converter to strings). If you wish to match older docker versions, user an older Cake.Docker version.
-* Added DockerExec command
+- Docker 17.* is supported since v0.8 and background compatibility is dropped (most notably, array arguments are converter to strings). If you wish to match older docker versions, user an older Cake.Docker version.
+- Added DockerExec command
+- Added [DockerExec](https://docs.docker.com/engine/reference/commandline/exec/) 
+- **BREAKING** Starting with 0.8.0 command's setting types that haven't been composed of all words have changed to full name. i.e. DockerBuildSettings to DockerImageBuildSettings). 
 
 # Cake.Docker 0.7.7
 
