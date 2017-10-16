@@ -25,7 +25,7 @@ namespace Cake.Docker
         /// <param name="containers">The list of containers.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-		public static void DockerStop(this ICakeContext context, DockerContainerStopSettings settings, params string[] containers)
+	public static void DockerStop(this ICakeContext context, DockerContainerStopSettings settings, params string[] containers)
         {
             if (context == null)
             {
