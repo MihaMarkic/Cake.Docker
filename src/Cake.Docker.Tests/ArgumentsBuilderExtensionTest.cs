@@ -177,11 +177,19 @@ namespace Cake.Docker.Tests
         public class GetArgumentFromNullableBoolProperty
         {
             [Test]
-            public void WhenGivenValue_FormatsProperly()
+            public void WhenGivenValueIsTrue_FormatsProperly()
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromNullableBoolProperty(NullableBoolProperty, true);
 
                 Assert.That(actual, Is.EqualTo("--nullable-bool"));
+            }
+
+            [Test]
+            public void WhenGivenValueIsFalse_NullIsReturned()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromNullableBoolProperty(NullableBoolProperty, false);
+
+                Assert.That(actual, Is.Null);
             }
 
             [Test]

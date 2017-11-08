@@ -31,5 +31,61 @@ namespace Cake.Docker.Tests.Build
 
             Assert.That(actual.Args, Is.EqualTo("build --rm path"));
         }
+
+        [Test]
+        public void WhenRmFlagIsSetToFalse_CommandLineDoesNotHaveRm()
+        {
+            var fixture = new DockerBuildFixture
+            {
+                Settings = new DockerImageBuildSettings { Rm = false },
+                Path = "path"
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("build path"));
+        }
+
+        [Test]
+        public void WhenForceRmFlagIsSetToFalse_CommandLineDoesNotHaveForceRm()
+        {
+            var fixture = new DockerBuildFixture
+            {
+                Settings = new DockerImageBuildSettings { ForceRm = false },
+                Path = "path"
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("build path"));
+        }
+
+        [Test]
+        public void WhenPullFlagIsSetToFalse_CommandLineDoesNotHavePull()
+        {
+            var fixture = new DockerBuildFixture
+            {
+                Settings = new DockerImageBuildSettings { Pull = false },
+                Path = "path"
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("build path"));
+        }
+
+        [Test]
+        public void WhenPullFlagIsSetToTrue_CommandLineDoesHavePull()
+        {
+            var fixture = new DockerBuildFixture
+            {
+                Settings = new DockerImageBuildSettings { Pull = true },
+                Path = "path"
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("build --pull path"));
+        }
     }
 }
