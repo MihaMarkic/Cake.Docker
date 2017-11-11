@@ -233,7 +233,11 @@ namespace Cake.Docker
         /// <returns></returns>
         public static string GetArgumentFromNullableBoolProperty(PropertyInfo property, bool? value)
         {
-            return value.HasValue ? $"--{GetPropertyName(property.Name)}" : null;
+            if (value ?? false)
+            {
+                return $"--{GetPropertyName(property.Name)}";
+            }
+            return null;
         }
 
         /// <summary>
