@@ -8,7 +8,7 @@ namespace Cake.Docker
     partial class DockerAliases
     {
         /// <summary>
-        /// Register or log in to a Docker registry.
+        /// Logout from a Docker registry.
         /// If no server is specified, the docker engine default is used.
         /// </summary>
         /// <param name="context">The context.</param>
