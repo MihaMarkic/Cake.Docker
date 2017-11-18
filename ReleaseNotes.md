@@ -1,4 +1,9 @@
+# Cake.Docker 0.8.3
+
+* Added DockerLogout
+
 # Cake.Docker 0.8.2
+
 - References Cake 0.22 (**breaking**)
 - Added [DockerStart](https://docs.docker.com/engine/reference/commandline/start/)
 - Added [DockerLogs](https://docs.docker.com/engine/reference/commandline/logs/)
