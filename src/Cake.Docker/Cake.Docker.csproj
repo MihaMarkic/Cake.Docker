@@ -41,4 +41,8 @@
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Registry\Logout\" />
+  </ItemGroup>
 </Project>
