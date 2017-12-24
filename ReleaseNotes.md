@@ -1,6 +1,7 @@
 # Cake.Docker 0.8.3
 
 * Added DockerLogout
+* Refactors arguments handling to support hiding password values
 
 # Cake.Docker 0.8.2
 

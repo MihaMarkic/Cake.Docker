@@ -99,6 +99,7 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="settings">The settings.</param>
         /// <param name="preCommand">Pre or post command.</param>
+        /// <param name="isSecret"></param>
         /// <returns></returns>
         public static IEnumerable<DockerArgument?> GetArgumentFromProperty<TSettings>(PropertyInfo property, TSettings settings, bool preCommand, bool isSecret)
             where TSettings : AutoToolSettings, new()
@@ -154,6 +155,13 @@ namespace Cake.Docker
                 }
             }
         }
+        /// <summary>
+        /// Checks out whether given <paramref name="property"/> is a secret.
+        /// </summary>
+        /// <typeparam name="TSettings"></typeparam>
+        /// <param name="property"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
         public  static bool IsPropertyValueSecret<TSettings>(PropertyInfo property, TSettings settings)
             where TSettings : AutoToolSettings
         {
@@ -270,6 +278,7 @@ namespace Cake.Docker
         /// </summary>
         /// <param name="property"></param>
         /// <param name="values"></param>
+        /// <param name="isSecret"></param>
         /// <returns></returns>
         public static IEnumerable<DockerArgument?> GetArgumentFromDictionaryProperty(PropertyInfo property, Dictionary<string, string> values, bool isSecret)
         {
@@ -287,6 +296,7 @@ namespace Cake.Docker
         /// </summary>
         /// <param name="property"></param>
         /// <param name="values"></param>
+        /// <param name="isSecret"></param>
         /// <returns></returns>
         public static IEnumerable<DockerArgument?> GetArgumentFromStringArrayProperty(PropertyInfo property, string[] values, bool isSecret)
         {
@@ -304,6 +314,7 @@ namespace Cake.Docker
         /// </summary>
         /// <param name="property"></param>
         /// <param name="value"></param>
+        /// <param name="isSecret"></param>
         /// <returns></returns>
         public static DockerArgument? GetArgumentFromStringProperty(PropertyInfo property, string value, bool isSecret)
         {
