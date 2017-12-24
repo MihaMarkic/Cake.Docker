@@ -10,6 +10,7 @@ namespace Cake.Docker.Tests
     public class ArgumentsBuilderExtensionTest
     {
         public static PropertyInfo StringProperty => GetProperty(nameof(TestSettings.String));
+        public static PropertyInfo PasswordProperty => GetProperty(nameof(TestSettings.Password));
         public static PropertyInfo StringsProperty => GetProperty(nameof(TestSettings.Strings));
         public static PropertyInfo NullableIntProperty => GetProperty(nameof(TestSettings.NullableInt));
         public static PropertyInfo NullableInt64Property => GetProperty(nameof(TestSettings.NullableInt64));
@@ -49,16 +50,31 @@ namespace Cake.Docker.Tests
             [Test]
             public void WhenGivenStringProperty_FormatsProperly()
             {
-                var actual = ArgumentsBuilderExtension.GetArgumentFromStringProperty(StringProperty, "tubo");
+                var actual = ArgumentsBuilderExtension.GetArgumentFromStringProperty(StringProperty, "tubo", isSecret: false).Value;
 
-                Assert.That(actual, Is.EqualTo("--string \"tubo\""));
+                Assert.That(actual.Key, Is.EqualTo("--string"));
+                Assert.That(actual.Value, Is.EqualTo("tubo"));
+                Assert.That(actual.Quoting, Is.EqualTo(DockerArgumentQuoting.Quoted));
             }
             [Test]
             public void WhenGivenNull_NullIsReturned()
             {
-                var actual = ArgumentsBuilderExtension.GetArgumentFromStringProperty(StringProperty, null);
+                var actual = ArgumentsBuilderExtension.GetArgumentFromStringProperty(StringProperty, null, isSecret: false);
 
                 Assert.That(actual, Is.Null);
+            }
+        }
+        [TestFixture]
+        public class GetArgumentFromPasswordProperty
+        {
+            [Test]
+            public void WhenGivenStringProperty_FormatsProperly()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromStringProperty(StringProperty, "tubo", isSecret: true).Value;
+
+                Assert.That(actual.Key, Is.EqualTo("--string"));
+                Assert.That(actual.Value, Is.EqualTo("tubo"));
+                Assert.That(actual.Quoting, Is.EqualTo(DockerArgumentQuoting.QuotedSecret));
             }
         }
         [TestFixture]
@@ -67,14 +83,19 @@ namespace Cake.Docker.Tests
             [Test]
             public void WhenGivenStringArrayProperty_FormatsProperly()
             {
-                var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayProperty(StringsProperty, new string[] { "tubo1", "tubo2" });
+                var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayProperty(StringsProperty, new string[] { "tubo1", "tubo2" }, isSecret: false);
 
-                Assert.AreEqual(actual.ToArray(), new string[] { "--strings \"tubo1\"", "--strings \"tubo2\"" }); 
+                //Assert.AreEqual(actual.ToArray(), new DockerArgument[] {
+                //    "--strings \"tubo1\"", "--strings \"tubo2\""
+                //}); 
+                CollectionAssert.AreEqual(actual, new DockerArgument[] {
+                    new DockerArgument("--strings", "tubo1", DockerArgumentQuoting.Quoted),
+                    new DockerArgument("--strings", "tubo2", DockerArgumentQuoting.Quoted)});
             }
             [Test]
             public void WhenGivenNull_EmptyArrayReturned()
             {
-                var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayProperty(StringsProperty, null);
+                var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayProperty(StringsProperty, null, isSecret: false);
 
                 Assert.That(actual, Is.Empty);
             }
@@ -85,14 +106,18 @@ namespace Cake.Docker.Tests
             [Test]
             public void WhenGivenStringArrayProperty_FormatsProperly()
             {
-                var actual = ArgumentsBuilderExtension.GetArgumentFromDictionaryProperty(StringsProperty, new Dictionary<string, string> { { "t1", "v1" }, { "t2", "v2" } });
+                var actual = ArgumentsBuilderExtension.GetArgumentFromDictionaryProperty(
+                    StringsProperty, new Dictionary<string, string> { { "t1", "v1" }, { "t2", "v2" } }, isSecret: false);
 
-                Assert.AreEqual(actual.ToArray(), new string[] { "--strings \"t1=v1\"", "--strings \"t2=v2\"" });
+                CollectionAssert.AreEqual(actual, new DockerArgument[] {
+                    new DockerArgument("--strings", "t1=v1", DockerArgumentQuoting.Quoted),
+                    new DockerArgument("--strings","t2=v2", DockerArgumentQuoting.Quoted),
+                    });
             }
             [Test]
             public void WhenGivenNull_EmptyArrayReturned()
             {
-                var actual = ArgumentsBuilderExtension.GetArgumentFromDictionaryProperty(StringsProperty, null);
+                var actual = ArgumentsBuilderExtension.GetArgumentFromDictionaryProperty(StringsProperty, null, isSecret: false);
 
                 Assert.That(actual, Is.Empty);
             }
@@ -320,6 +345,7 @@ namespace Cake.Docker.Tests
     {
         public string String { get; set; }
         public string[] Strings { get; set; }
+        public string Password { get; set; }
         public int? NullableInt { get; set; }
         public Int64? NullableInt64 { get; set; }
         public UInt64? NullableUInt64 { get; set; }
@@ -333,5 +359,9 @@ namespace Cake.Docker.Tests
         public bool DecoratedBool { get; set; }
         [AutoProperty(Format = "-e {1}")]
         public string[] DecoratedStrings { get; set; }
+        protected override string[] CollectSecretProperties()
+        {
+            return new[] { nameof(Password) };
+        }
     }
 }

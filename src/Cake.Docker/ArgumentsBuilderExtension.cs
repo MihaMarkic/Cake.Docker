@@ -62,11 +62,31 @@ namespace Cake.Docker
         {
             foreach (var property in typeof(TSettings).GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                foreach (string argument in GetArgumentFromProperty(property, settings, preCommand: preCommand))
+                bool isSecret = IsPropertyValueSecret(property, settings);
+                var query = from a in GetArgumentFromProperty(property, settings, preCommand: preCommand, isSecret: isSecret)
+                            where a.HasValue
+                            select a.Value;
+                foreach (var argument in query)
                 {
-                    if (!string.IsNullOrEmpty(argument))
+                    if (!string.IsNullOrEmpty(argument.Key))
                     {
-                        builder.Append(argument);
+                        builder.Append(argument.Key);
+                    }
+                    if (!string.IsNullOrEmpty(argument.Value))
+                    {
+                        switch (argument.Quoting)
+                        {
+                            case DockerArgumentQuoting.Unquoted:
+                                builder.Append(argument.Value);
+                                break;
+                            case DockerArgumentQuoting.QuotedSecret:
+                                builder.AppendQuotedSecret(argument.Value);
+                                break;
+                            default:
+                                builder.AppendQuoted(argument.Value);
+                                break;
+                                
+                        }
                     }
                 }
             }
@@ -80,7 +100,7 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="preCommand">Pre or post command.</param>
         /// <returns></returns>
-        public static IEnumerable<string> GetArgumentFromProperty<TSettings>(PropertyInfo property, TSettings settings, bool preCommand)
+        public static IEnumerable<DockerArgument?> GetArgumentFromProperty<TSettings>(PropertyInfo property, TSettings settings, bool preCommand, bool isSecret)
             where TSettings : AutoToolSettings, new()
         {
             var autoPropertyAttribute = GetAutoPropertyAttributeOrNull(property);
@@ -88,51 +108,56 @@ namespace Cake.Docker
             {
                 if (autoPropertyAttribute.PreCommand == preCommand)
                 {
-                    yield return GetArgumentFromAutoProperty(autoPropertyAttribute, property, property.GetValue(settings));
+                    yield return new DockerArgument(null, GetArgumentFromAutoProperty(autoPropertyAttribute, property, property.GetValue(settings)), DockerArgumentQuoting.Unquoted);
                 }
             }
             else if (!preCommand || (autoPropertyAttribute != null && autoPropertyAttribute.PreCommand && preCommand))
             {
                 if (property.PropertyType == typeof(bool))
                 {
-                    yield return GetArgumentFromBoolProperty(property, (bool)property.GetValue(settings));
+                    yield return new DockerArgument(null, GetArgumentFromBoolProperty(property, (bool)property.GetValue(settings)), DockerArgumentQuoting.Unquoted);
                 }
                 else if (property.PropertyType == typeof(bool?))
                 {
-                    yield return GetArgumentFromNullableBoolProperty(property, (bool?)property.GetValue(settings));
+                    yield return new DockerArgument(null, GetArgumentFromNullableBoolProperty(property, (bool?)property.GetValue(settings)), DockerArgumentQuoting.Unquoted);
                 }
                 else if (property.PropertyType == typeof(int?))
                 {
-                    yield return GetArgumentFromNullableIntProperty(property, (int?)property.GetValue(settings));
+                    yield return new DockerArgument(null, GetArgumentFromNullableIntProperty(property, (int?)property.GetValue(settings)), DockerArgumentQuoting.Unquoted);
                 }
                 else if (property.PropertyType == typeof(Int64?))
                 {
-                    yield return GetArgumentFromNullableInt64Property(property, (Int64?)property.GetValue(settings));
+                    yield return new DockerArgument(null, GetArgumentFromNullableInt64Property(property, (Int64?)property.GetValue(settings)), DockerArgumentQuoting.Unquoted);
                 }
                 else if (property.PropertyType == typeof(UInt64?))
                 {
-                    yield return GetArgumentFromNullableUInt64Property(property, (UInt64?)property.GetValue(settings));
+                    yield return new DockerArgument(null, GetArgumentFromNullableUInt64Property(property, (UInt64?)property.GetValue(settings)), DockerArgumentQuoting.Unquoted);
                 }
                 else if (property.PropertyType == typeof(UInt16?))
                 {
-                    yield return GetArgumentFromNullableUInt16Property(property, (UInt16?)property.GetValue(settings));
+                    yield return new DockerArgument(null, GetArgumentFromNullableUInt16Property(property, (UInt16?)property.GetValue(settings)), DockerArgumentQuoting.Unquoted);
                 }
                 else if (property.PropertyType == typeof(string))
                 {
-                    yield return GetArgumentFromStringProperty(property, (string)property.GetValue(settings));
+                    yield return GetArgumentFromStringProperty(property, (string)property.GetValue(settings), isSecret);
                 }
                 else if (property.PropertyType == typeof(TimeSpan?))
                 {
-                    yield return GetArgumentFromNullableTimeSpanProperty(property, (TimeSpan?)property.GetValue(settings));
+                    yield return new DockerArgument(null, GetArgumentFromNullableTimeSpanProperty(property, (TimeSpan?)property.GetValue(settings)), DockerArgumentQuoting.Unquoted);
                 }
                 else if (property.PropertyType == typeof(string[]))
                 {
-                    foreach (string arg in GetArgumentFromStringArrayProperty(property, (string[])property.GetValue(settings)))
+                    foreach (var arg in GetArgumentFromStringArrayProperty(property, (string[])property.GetValue(settings), isSecret))
                     {
                         yield return arg;
                     }
                 }
             }
+        }
+        public  static bool IsPropertyValueSecret<TSettings>(PropertyInfo property, TSettings settings)
+            where TSettings : AutoToolSettings
+        {
+            return settings.SecretProperties.Contains(property.Name);
         }
         /// <summary>
         /// Uses format specified in attribute to format the argument.
@@ -246,13 +271,13 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static IEnumerable<string> GetArgumentFromDictionaryProperty(PropertyInfo property, Dictionary<string, string> values)
+        public static IEnumerable<DockerArgument?> GetArgumentFromDictionaryProperty(PropertyInfo property, Dictionary<string, string> values, bool isSecret)
         {
             if (values != null)
             {
                 foreach (var kp in values)
                 {
-                    yield return GetArgumentFromStringProperty(property, $"{kp.Key}={kp.Value}");
+                    yield return GetArgumentFromStringProperty(property, $"{kp.Key}={kp.Value}", isSecret);
                 }
             }
         }
@@ -263,13 +288,13 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static IEnumerable<string> GetArgumentFromStringArrayProperty(PropertyInfo property, string[] values)
+        public static IEnumerable<DockerArgument?> GetArgumentFromStringArrayProperty(PropertyInfo property, string[] values, bool isSecret)
         {
             if (values != null)
             {
                 foreach (string value in values)
                 {
-                    yield return GetArgumentFromStringProperty(property, value);
+                    yield return GetArgumentFromStringProperty(property, value, isSecret);
                 }
             }
         }
@@ -280,9 +305,13 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromStringProperty(PropertyInfo property, string value)
+        public static DockerArgument? GetArgumentFromStringProperty(PropertyInfo property, string value, bool isSecret)
         {
-            return !string.IsNullOrEmpty(value) ? $"--{GetPropertyName(property.Name)} \"{value}\"" : null;
+            if (!string.IsNullOrEmpty(value))
+            {
+                return new DockerArgument($"--{GetPropertyName(property.Name)}", value, isSecret ? DockerArgumentQuoting.QuotedSecret: DockerArgumentQuoting.Quoted);
+            }
+            return null;
         }
 
         /// <summary>

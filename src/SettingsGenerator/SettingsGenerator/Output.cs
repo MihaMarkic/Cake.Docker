@@ -19,7 +19,7 @@ namespace SettingsGenerator
             sb.AppendLine($"\t/// Settings for docker {TrimDesc(use)}.");
             sb.AppendLine($"\t/// {TrimDesc(description)}");
             sb.AppendLine("\t/// </summary>");
-            sb.AppendLine($"\tpublic sealed class Docker{className}Settings : AutoToolSettings");
+            sb.AppendLine($"\tpublic sealed partial class Docker{className}Settings : AutoToolSettings");
             sb.AppendLine("\t{");
             foreach (var arg in args.OrderBy(a => a.NetName))
             {
