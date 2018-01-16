@@ -18,6 +18,7 @@ Including addin in cake script is easy.
 
 **BREAKING** Starting with 0.8.0 command's setting types that haven't been composed of all words have changed to full name. i.e. DockerBuildSettings to DockerImageBuildSettings). 
 
+- DockerCustomCommand (*can execute any command*) v0.8.4
 - [DockerLogout](https://docs.docker.com/engine/reference/commandline/logout/) v0.8.3
 - [DockerStart](https://docs.docker.com/engine/reference/commandline/start/) v0.8.2
 - [DockerLogs](https://docs.docker.com/engine/reference/commandline/logs/) v0.8.2

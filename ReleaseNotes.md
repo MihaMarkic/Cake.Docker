@@ -1,3 +1,7 @@
+# Cake.Docker 0.8.4
+
+* Addes DockerCustomCommand
+
 # Cake.Docker 0.8.3
 
 * Added DockerLogout
