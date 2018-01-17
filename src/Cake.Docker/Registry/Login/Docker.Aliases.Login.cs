@@ -50,7 +50,7 @@ namespace Cake.Docker
             }
 
             var runner = new GenericDockerRunner<DockerRegistryLoginSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("login", settings, server != null ? new[] { server } : null);
+            runner.Run("login", settings, server != null ? new[] { server } : new string[] { });
         }
     }
 }
