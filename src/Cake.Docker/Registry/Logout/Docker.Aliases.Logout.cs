@@ -16,8 +16,8 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerLogout(this ICakeContext context, string server = null)
         {
-            var runner = new GenericDockerRunner<DockerRegistryLoginSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("logout", null, server != null ? new[] { server } : null);
+            var runner = new GenericDockerRunner<DockerRegistryLogoutSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("logout", new DockerRegistryLogoutSettings(), server != null ? new[] { server } : null);
         }
     }
 }
