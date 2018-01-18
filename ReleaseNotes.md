@@ -1,3 +1,7 @@
+* Fixes Log command, now it is returning log
+* Log command was using wrong verb
+* Fixes Logout and Login arguments passing
+
 # Cake.Docker 0.8.4
 
 * Addes DockerCustomCommand
