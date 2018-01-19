@@ -1,3 +1,5 @@
+# Cake.Docker 0.8.5
+
 * Fixes Log command, now it is returning log
 * Log command was using wrong verb
 * Fixes Logout and Login arguments passing
