@@ -1,3 +1,7 @@
+# Cake.Docker 0.9.0
+
+* BREAKING: References Cake 0.26 (and goes .NET Standard 2.0 only)
+
 # Cake.Docker 0.8.5
 
 * Fixes Log command, now it is returning log

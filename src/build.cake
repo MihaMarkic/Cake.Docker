@@ -1,6 +1,4 @@
-﻿#addin "Cake.FileHelpers"
-
-var Project = Directory("./Cake.Docker/");
+﻿var Project = Directory("./Cake.Docker/");
 var TestProject = Directory("./Cake.Docker.Tests/");
 var CakeDockerProj = Project + File("Cake.Docker.csproj");
 var CakeTestDockerProj = TestProject + File("Cake.Docker.Test.csproj");
