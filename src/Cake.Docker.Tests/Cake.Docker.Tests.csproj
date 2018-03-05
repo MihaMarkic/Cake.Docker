@@ -1,20 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Cake" Version="0.22.0" />
-    <PackageReference Include="Cake.Testing" Version="0.22.0" />
+    <PackageReference Include="Cake" Version="0.26.1" />
+    <PackageReference Include="Cake.Testing" Version="0.26.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="NSubstitute" Version="3.1.0" />
     <PackageReference Include="NUnit" Version="3.8.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.9.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Cake.Docker\Cake.Docker.csproj" />
   </ItemGroup>
-
 </Project>
