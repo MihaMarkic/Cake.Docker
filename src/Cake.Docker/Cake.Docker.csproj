@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFrameworks>net46;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
     <AssemblyName>Cake.Docker</AssemblyName>
     <RootNamespace>Cake.Docker</RootNamespace>
     <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.6' ">1.6.1</NetStandardImplicitPackageVersion>
@@ -9,7 +8,6 @@
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
   </PropertyGroup>
-
   <PropertyGroup>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageId>Cake.Docker</PackageId>
@@ -23,26 +21,20 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageReleaseNotes>See https://github.com/MihaMarkic/Cake.Docker/blob/master/ReleaseNotes.md</PackageReleaseNotes>
     <Version>0.8.5</Version>
-	 <PackageIconUrl>https://raw.githubusercontent.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</PackageIconUrl>
   </PropertyGroup>
-
   <PropertyGroup>
     <DocumentationFile>bin\Debug\net46\Cake.Docker.xml</DocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Ps\**" />
     <EmbeddedResource Remove="Ps\**" />
     <None Remove="Ps\**" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Cake.Core" Version="0.22.0">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Registry\Logout\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Cake.Core" Version="0.26.1" />
   </ItemGroup>
 </Project>
