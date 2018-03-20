@@ -72,6 +72,7 @@
 --oom-score-adj 	0 	Tune host’s OOM preferences (-1000 to 1000)
 --pid 	  	PID namespace to use
 --pids-limit 	0 	Tune container pids limit (set -1 for unlimited)
+--platform 	string	Set platform if server is multi-platform capable
 --privileged 	false 	Give extended privileges to this container
 --publish, -p 	  	Publish a container’s port(s) to the host
 --publish-all, -P 	false 	Publish all exposed ports to random ports
@@ -96,3 +97,4 @@
 --volume-driver 	  	Optional volume driver for the container
 --volumes-from 	  	Mount volumes from the specified container(s)
 --workdir, -w 	  	Working directory inside the container
+
