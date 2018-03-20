@@ -388,6 +388,12 @@ namespace Cake.Docker
 		/// Tune container pids limit (set -1 for unlimited)
 		/// </summary>
 		public Int64? PidsLimit { get; set; }
+	    /// <summary>
+	    /// --platform
+	    /// default: 
+	    /// Set platform if server is multi-platform capable
+	    /// </summary>
+	    public string Platform { get; set; }
 		/// <summary>
 		/// --privileged
 		/// default: false
