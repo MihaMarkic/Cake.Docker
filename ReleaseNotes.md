@@ -1,3 +1,14 @@
+#Cake.Docker 0.9.1
+
+A refresh against current Docker Cli sources.
+
+Adds these arguments:
+
+- Container: Create, Run (Platform)
+- Container: Exec (Workdir)
+- Container: Logs (Until)
+- Image: Build, Pull (Platform)
+
 # Cake.Docker 0.9.0
 
 * BREAKING: References Cake 0.26 (and goes .NET Standard 2.0 only)
