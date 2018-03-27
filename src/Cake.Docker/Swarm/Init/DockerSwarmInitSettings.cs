@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker init [OPTIONS].
 	/// Initialize a swarm
 	/// </summary>
-	public sealed class DockerSwarmInitSettings : AutoToolSettings
+	public sealed partial class DockerSwarmInitSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --advertise-addr

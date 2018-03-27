@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker Use: `cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-.
 	/// Copy files/folders between a container and the local filesystem
 	/// </summary>
-	public sealed class DockerContainerCpSettings : AutoToolSettings
+	public sealed partial class DockerContainerCpSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --archive, -a

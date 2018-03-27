@@ -32,6 +32,7 @@ namespace SettingsGenerator
     public enum Option
     {
         None = 0,
-        TypeContainsBlankLines = 1
+        TypeContainsBlankLines = 1,
+        NoDuplicateCreate = 2
     }
 }

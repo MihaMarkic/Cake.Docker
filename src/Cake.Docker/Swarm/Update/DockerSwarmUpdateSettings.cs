@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker update [OPTIONS].
 	/// Update the swarm
 	/// </summary>
-	public sealed class DockerSwarmUpdateSettings : AutoToolSettings
+	public sealed partial class DockerSwarmUpdateSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --cert-expiry

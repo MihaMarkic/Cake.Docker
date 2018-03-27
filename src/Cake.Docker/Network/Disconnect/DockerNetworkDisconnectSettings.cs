@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker disconnect [OPTIONS] NETWORK CONTAINER.
 	/// Disconnect a container from a network
 	/// </summary>
-	public sealed class DockerNetworkDisconnectSettings : AutoToolSettings
+	public sealed partial class DockerNetworkDisconnectSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --force, -f

@@ -24,6 +24,7 @@ namespace SettingsGenerator
             string[] parts = path.Split(new[] { System.IO.Path.DirectorySeparatorChar });
             string url = string.Join("/", parts).ToLower();
             string source = await httpClient.GetStringAsync($"{url}.go");
+            Console.WriteLine($"Processing GitHub source file {url}.go");
             var args = ImmutableArray<Argument>.Empty;
             (string Key, string Value)[] consts = null;
             if (inputTypeOptions.HasValue)
@@ -31,7 +32,7 @@ namespace SettingsGenerator
                 switch (inputTypeOptions.Value)
                 {
                     case InputTypeOptions.Container:
-                        args = await LoadContainerOptions(httpClient);
+                        args = await LoadContainerOptions(httpClient, options.HasFlag(Option.NoDuplicateCreate));
                         break;
                     case InputTypeOptions.Swarm:
                         (args, consts) = await LoadSwarmOptions(httpClient);
@@ -84,7 +85,15 @@ namespace SettingsGenerator
             {
                 FillArgumentsWithFlags(args, typesAndFlags.Flags);
             }
+            // platform is globally available and hard to parse, hardcode it
+            var platformArg = args.SingleOrDefault(a => string.Equals(a.OptName, "platform", StringComparison.OrdinalIgnoreCase));
+            if (platformArg != null)
+            {
+                platformArg.Description = "Set platform if server is multi-platform capable";
+                platformArg.Long = "platform";
+            }
             var validArgs = args.Where(a => !string.IsNullOrEmpty(a.Long)).ToArray();
+            var invalidArgs = args.Where(a => string.IsNullOrEmpty(a.Long)).ToArray();
             //validArgs.Dump();
             string className = string.Join("", parts);
             string output = OutputGenerator.OutputContent(validArgs, className, typesAndFlags.Use, typesAndFlags.Description);
@@ -93,12 +102,22 @@ namespace SettingsGenerator
             //	output.Dump();
         }
 
-        async Task<ImmutableArray<Argument>> LoadContainerOptions(HttpClient client)
+        async Task<ImmutableArray<Argument>> LoadContainerOptions(HttpClient client, bool noCreate)
         {
-            string additionalUrl = "container/opts.go";
-            string additionalSource = await client.GetStringAsync(additionalUrl);
-            var lines = additionalSource.Split('\n').Select(l => l.Trim()).ToArray();
-            return GetAdditionalArguments(lines, "container", addFlagsTrigger: "func addFlags(", consts: null);
+            ImmutableArray<Argument> result = ImmutableArray<Argument>.Empty;
+            foreach (string additionalUrl in new[] { "container/opts.go", "container/create.go" })
+            {
+                if (noCreate && additionalUrl == "container/create.go")
+                {
+                    continue;
+                }
+                string addFlagsTrigger = additionalUrl != "container/create.go" ? "func addFlags(": "func NewCreateCommand";
+                string additionalSource = await client.GetStringAsync(additionalUrl);
+                var lines = additionalSource.Split('\n').Select(l => l.Trim()).ToArray();
+                string typeName = additionalUrl != "container/create.go" ? "container": "create";
+                result = result.AddRange(GetAdditionalArguments(lines, typeName, addFlagsTrigger, consts: null));
+            }
+            return result;
         }
         async Task<(ImmutableArray<Argument> Args, (string Key, string Value)[] Consts)> LoadSwarmOptions(HttpClient client)
         {

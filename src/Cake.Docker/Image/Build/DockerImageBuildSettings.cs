@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker build [OPTIONS] PATH | URL | -.
 	/// Build an image from a Dockerfile
 	/// </summary>
-	public sealed class DockerImageBuildSettings : AutoToolSettings
+	public sealed partial class DockerImageBuildSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --add-host
@@ -120,6 +120,11 @@ namespace Cake.Docker
 		/// Do not use cache when building the image
 		/// </summary>
 		public bool? NoCache { get; set; }
+		/// <summary>
+		/// --platform
+		/// Set platform if server is multi-platform capable
+		/// </summary>
+		public string Platform { get; set; }
 		/// <summary>
 		/// --pull
 		/// default: false

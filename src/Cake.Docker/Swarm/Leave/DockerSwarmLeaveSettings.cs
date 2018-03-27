@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker leave [OPTIONS].
 	/// Leave the swarm
 	/// </summary>
-	public sealed class DockerSwarmLeaveSettings : AutoToolSettings
+	public sealed partial class DockerSwarmLeaveSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --force, -f

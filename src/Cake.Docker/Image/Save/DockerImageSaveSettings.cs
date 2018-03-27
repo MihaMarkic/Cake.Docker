@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker save [OPTIONS] IMAGE [IMAGE...].
 	/// Save one or more images to a tar archive (streamed to STDOUT by default)
 	/// </summary>
-	public sealed class DockerImageSaveSettings : AutoToolSettings
+	public sealed partial class DockerImageSaveSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --output, -o

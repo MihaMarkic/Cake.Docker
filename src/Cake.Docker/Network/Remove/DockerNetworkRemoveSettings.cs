@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker rm NETWORK [NETWORK...].
 	/// Remove one or more networks
 	/// </summary>
-	public sealed class DockerNetworkRemoveSettings : AutoToolSettings
+	public sealed partial class DockerNetworkRemoveSettings : AutoToolSettings
 	{
 	}
 }

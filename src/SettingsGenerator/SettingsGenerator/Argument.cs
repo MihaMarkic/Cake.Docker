@@ -1,7 +1,9 @@
 ﻿using Humanizer;
+using System.Diagnostics;
 
 namespace SettingsGenerator
 {
+    [DebuggerDisplay("{OptName} {RawType,nq}")]
     public class Argument
     {
         public string RawType;

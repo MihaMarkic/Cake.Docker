@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker logs [OPTIONS] CONTAINER.
 	/// Fetch the logs of a container
 	/// </summary>
-	public sealed class DockerContainerLogsSettings : AutoToolSettings
+	public sealed partial class DockerContainerLogsSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --details
@@ -37,5 +37,13 @@ namespace Cake.Docker
 		/// Show timestamps
 		/// </summary>
 		public bool? Timestamps { get; set; }
+		/// <summary>
+		/// --until
+		/// Show logs before a timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+		/// </summary>
+		/// <remarks>
+		/// Version: 1.35
+		/// </remarks>
+		public string Until { get; set; }
 	}
 }

@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker create [OPTIONS] IMAGE [COMMAND] [ARG...].
 	/// Create a new container
 	/// </summary>
-	public sealed class DockerContainerCreateSettings : AutoToolSettings
+	public sealed partial class DockerContainerCreateSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --add-host
@@ -377,6 +377,11 @@ namespace Cake.Docker
 		/// Tune container pids limit (set -1 for unlimited)
 		/// </summary>
 		public Int64? PidsLimit { get; set; }
+		/// <summary>
+		/// --platform
+		/// Set platform if server is multi-platform capable
+		/// </summary>
+		public string Platform { get; set; }
 		/// <summary>
 		/// --privileged
 		/// default: false

@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker join [OPTIONS] HOST:PORT.
 	/// Join a swarm as a node and/or manager
 	/// </summary>
-	public sealed class DockerSwarmJoinSettings : AutoToolSettings
+	public sealed partial class DockerSwarmJoinSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --advertise-addr

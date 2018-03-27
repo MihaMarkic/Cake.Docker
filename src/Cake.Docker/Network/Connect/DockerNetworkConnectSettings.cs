@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker connect [OPTIONS] NETWORK CONTAINER.
 	/// Connect a container to a network
 	/// </summary>
-	public sealed class DockerNetworkConnectSettings : AutoToolSettings
+	public sealed partial class DockerNetworkConnectSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --alias

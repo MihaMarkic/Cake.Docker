@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker rmi [OPTIONS] IMAGE [IMAGE...].
 	/// Remove one or more images
 	/// </summary>
-	public sealed class DockerImageRemoveSettings : AutoToolSettings
+	public sealed partial class DockerImageRemoveSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --force, -f

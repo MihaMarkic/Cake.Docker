@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker pull [OPTIONS] NAME[:TAG|@DIGEST].
 	/// Pull an image or a repository from a registry
 	/// </summary>
-	public sealed class DockerImagePullSettings : AutoToolSettings
+	public sealed partial class DockerImagePullSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --all-tags, -a
@@ -20,5 +20,10 @@ namespace Cake.Docker
 		/// Skip image verification
 		/// </summary>
 		public bool? DisableContentTrust { get; set; }
+		/// <summary>
+		/// --platform
+		/// Set platform if server is multi-platform capable
+		/// </summary>
+		public string Platform { get; set; }
 	}
 }

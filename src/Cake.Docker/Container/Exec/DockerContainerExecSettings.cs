@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker exec [OPTIONS] CONTAINER COMMAND [ARG...].
 	/// Run a command in a running container
 	/// </summary>
-	public sealed class DockerContainerExecSettings : AutoToolSettings
+	public sealed partial class DockerContainerExecSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --detach, -d
@@ -50,5 +50,13 @@ namespace Cake.Docker
 		/// Username or UID (format: &lt;name|uid&gt;[:&lt;group|gid&gt;])
 		/// </summary>
 		public string User { get; set; }
+		/// <summary>
+		/// --workdir, -w
+		/// Working directory inside the container
+		/// </summary>
+		/// <remarks>
+		/// Version: 1.35
+		/// </remarks>
+		public string Workdir { get; set; }
 	}
 }

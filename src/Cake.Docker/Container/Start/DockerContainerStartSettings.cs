@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker start [OPTIONS] CONTAINER [CONTAINER...].
 	/// Start one or more stopped containers
 	/// </summary>
-	public sealed class DockerContainerStartSettings : AutoToolSettings
+	public sealed partial class DockerContainerStartSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --attach, -a

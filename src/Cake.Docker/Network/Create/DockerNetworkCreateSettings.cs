@@ -6,7 +6,7 @@ namespace Cake.Docker
 	/// Settings for docker create [OPTIONS] NETWORK.
 	/// Create a network
 	/// </summary>
-	public sealed class DockerNetworkCreateSettings : AutoToolSettings
+	public sealed partial class DockerNetworkCreateSettings : AutoToolSettings
 	{
 		/// <summary>
 		/// --attachable

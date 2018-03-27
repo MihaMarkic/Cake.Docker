@@ -87,11 +87,11 @@ namespace SettingsGenerator
                         }
                         else if (!trust.HasValue)
                         {
-                            if (line == "command.AddTrustVerificationFlags(flags)")
+                            if (line.StartsWith("command.AddTrustVerificationFlags(flags"))
                             {
                                 trust = Trust.Verification;
                             }
-                            else if (line == "command.AddTrustSigningFlags(flags)")
+                            else if (line.StartsWith("command.AddTrustSigningFlags(flags"))
                             {
                                 trust = Trust.Signing;
                             }
