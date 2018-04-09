@@ -57,7 +57,8 @@
         /// Return the exit code of the selected service container.
         ///   Implies --abort-on-container-exit.
         /// </summary>
-        public bool ExitCodeFrom { get; set; }
+        [AutoProperty(Format = "--exit-code-from {1}")]
+        public string ExitCodeFrom { get; set; }
         /// <summary>
         /// SERVICE=NUM        Scale SERVICE to NUM instances. Overrides the `scale`
         ///   setting in the Compose file if present.
