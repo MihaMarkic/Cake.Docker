@@ -1,3 +1,8 @@
+# Cake.Docker 0.9.2
+
+* Adds docker-compose exec command
+* Fixes docker-compose --exit-code-from argument
+
 # Cake.Docker 0.9.1
 
 A refresh against current Docker Cli sources.

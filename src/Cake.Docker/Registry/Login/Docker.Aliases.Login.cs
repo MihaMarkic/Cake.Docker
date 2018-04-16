@@ -12,7 +12,7 @@ namespace Cake.Docker
         /// If no server is specified, the docker engine default is used.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="username">Ther username.</param>
+        /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
         /// <param name="server">The server.</param>
         [CakeMethodAlias]
