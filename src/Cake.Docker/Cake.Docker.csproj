@@ -21,7 +21,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageReleaseNotes>See https://github.com/MihaMarkic/Cake.Docker/blob/master/ReleaseNotes.md</PackageReleaseNotes>
-    <Version>0.9.2</Version>
+    <Version>0.9.3</Version>
 	 <PackageIconUrl>https://raw.githubusercontent.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</PackageIconUrl>
   </PropertyGroup>
 
