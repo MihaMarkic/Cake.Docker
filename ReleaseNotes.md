@@ -1,3 +1,7 @@
+# Cake.Docker 0.9.3
+
+* Changes memory arguments from UInt64 to string
+
 # Cake.Docker 0.9.2
 
 * Adds docker-compose exec command
