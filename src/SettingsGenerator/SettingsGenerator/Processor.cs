@@ -285,6 +285,8 @@ namespace SettingsGenerator
                     case "uint64":
                     case "opts.MemBytes":
                     case "opts.MemSwapBytes":
+                        arg.Type = "string";
+                        break;
                     case "opts.WeightdeviceOpt":
                     case "opts.ThrottledeviceOpt":
                     case "opts.NanoCPUs":

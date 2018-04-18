@@ -99,12 +99,12 @@ namespace Cake.Docker
 		/// --memory, -m
 		/// Memory limit
 		/// </summary>
-		public UInt64? Memory { get; set; }
+		public string Memory { get; set; }
 		/// <summary>
 		/// --memory-swap
 		/// Swap limit equal to memory plus swap: &#39;-1&#39; to enable unlimited swap
 		/// </summary>
-		public UInt64? MemorySwap { get; set; }
+		public string MemorySwap { get; set; }
 		/// <summary>
 		/// --network
 		/// default: default
@@ -153,7 +153,7 @@ namespace Cake.Docker
 		/// --shm-size
 		/// Size of /dev/shm
 		/// </summary>
-		public UInt64? ShmSize { get; set; }
+		public string ShmSize { get; set; }
 		/// <summary>
 		/// --squash
 		/// default: false

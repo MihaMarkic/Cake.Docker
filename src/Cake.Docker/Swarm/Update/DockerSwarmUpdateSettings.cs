@@ -31,14 +31,14 @@ namespace Cake.Docker
 		/// <remarks>
 		/// Version: 1.25
 		/// </remarks>
-		public UInt64? MaxSnapshots { get; set; }
+		public string MaxSnapshots { get; set; }
 		/// <summary>
 		/// --snapshot-interval
 		/// </summary>
 		/// <remarks>
 		/// Version: 1.25
 		/// </remarks>
-		public UInt64? SnapshotInterval { get; set; }
+		public string SnapshotInterval { get; set; }
 		/// <summary>
 		/// --task-history-limit
 		/// default: 5

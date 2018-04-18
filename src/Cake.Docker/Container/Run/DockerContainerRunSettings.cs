@@ -252,11 +252,11 @@ namespace Cake.Docker
 		/// --io-maxbandwidth
 		/// Maximum IO bandwidth limit for the system drive (Windows only)
 		/// </summary>
-		public UInt64? IoMaxbandwidth { get; set; }
+		public string IoMaxbandwidth { get; set; }
 		/// <summary>
 		/// --io-maxiops
 		/// </summary>
-		public UInt64? IoMaxiops { get; set; }
+		public string IoMaxiops { get; set; }
 		/// <summary>
 		/// --ip
 		/// IPv4 address (e.g., 172.30.100.104)
@@ -281,7 +281,7 @@ namespace Cake.Docker
 		/// --kernel-memory
 		/// Kernel memory limit
 		/// </summary>
-		public UInt64? KernelMemory { get; set; }
+		public string KernelMemory { get; set; }
 		/// <summary>
 		/// --label, -l
 		/// Set meta data on a container
@@ -321,17 +321,17 @@ namespace Cake.Docker
 		/// --memory, -m
 		/// Memory limit
 		/// </summary>
-		public UInt64? Memory { get; set; }
+		public string Memory { get; set; }
 		/// <summary>
 		/// --memory-reservation
 		/// Memory soft limit
 		/// </summary>
-		public UInt64? MemoryReservation { get; set; }
+		public string MemoryReservation { get; set; }
 		/// <summary>
 		/// --memory-swap
 		/// Swap limit equal to memory plus swap: &#39;-1&#39; to enable unlimited swap
 		/// </summary>
-		public UInt64? MemorySwap { get; set; }
+		public string MemorySwap { get; set; }
 		/// <summary>
 		/// --memory-swappiness
 		/// default: -1
@@ -442,7 +442,7 @@ namespace Cake.Docker
 		/// --shm-size
 		/// Size of /dev/shm
 		/// </summary>
-		public UInt64? ShmSize { get; set; }
+		public string ShmSize { get; set; }
 		/// <summary>
 		/// --sig-proxy
 		/// default: true
