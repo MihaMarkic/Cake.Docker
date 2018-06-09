@@ -2,6 +2,7 @@
 using Cake.Core.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cake.Docker
 {
@@ -16,10 +17,11 @@ namespace Cake.Docker
         /// <param name="image">The image.</param>
         /// <param name="args">The arguments.</param>
         /// <param name="command">The command.</param>
+        /// <returns>container ID</returns>
         [CakeMethodAlias]
-        public static void DockerCreate(this ICakeContext context, string image, string command, params string[] args)
+        public static string DockerCreate(this ICakeContext context, string image, string command, params string[] args)
         {
-            DockerCreate(context, new DockerContainerCreateSettings(), image, command, args);
+            return DockerCreate(context, new DockerContainerCreateSettings(), image, command, args);
         }
 
         /// <summary>
@@ -30,8 +32,9 @@ namespace Cake.Docker
         /// <param name="image">The image.</param>
         /// <param name="args">The arguments.</param>
         /// <param name="command">The command.</param>
+        /// <returns>container ID</returns>
         [CakeMethodAlias]
-        public static void DockerCreate(this ICakeContext context, DockerContainerCreateSettings settings, string image, string command, params string[] args)
+        public static string DockerCreate(this ICakeContext context, DockerContainerCreateSettings settings, string image, string command, params string[] args)
         {
             if (context == null)
             {
@@ -51,7 +54,9 @@ namespace Cake.Docker
                     arguments.AddRange(args);
                 }
             }
-            runner.Run("create", settings ?? new DockerContainerCreateSettings(), arguments.ToArray());
+
+            return runner.RunWithResult("create", settings ?? new DockerContainerCreateSettings(), r => r.ToArray(), arguments.ToArray())
+                .FirstOrDefault();
         }
 
     }
