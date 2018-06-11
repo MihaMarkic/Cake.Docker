@@ -12,7 +12,11 @@ Including addin in cake script is easy.
 ```
 ## Commands supported
 
-**BREAKING**: Since 0.9 references Cake 0.26 (and goes .NET Standard 2.0 only)
+**Cake references**
+
+* 0.9.4: Cake 0.28
+
+- 0.9 references Cake 0.26 (and goes .NET Standard 2.0 only)
 
 **Important**: Docker 17.* is supported since v0.8 and background compatibility is dropped (most notably, array arguments are converter to strings). If you wish to match older docker versions, user an older Cake.Docker version.
 

@@ -1,3 +1,8 @@
+# Cake.Docker 0.9.4
+
+* DockerCreate returns container id
+* References Cake 0.28
+
 # Cake.Docker 0.9.3
 
 * Changes memory arguments from UInt64 to string
