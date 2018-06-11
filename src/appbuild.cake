@@ -32,11 +32,6 @@ Task("NuGetPack")
 	.Does (() =>
 {
 	CreateDirectory(Nupkg);
-	// DotNetCorePublish (CakeDockerSln, new DotNetCorePublishSettings { 
-	// 	Configuration = "Release",
-	// 	Framework = "net45;net46;netstandard1.6"
-	// 	// BuildBasePath = "./",
-	// });	
 	DotNetCorePack (CakeDockerProj, new DotNetCorePackSettings
      {
          Configuration = "Release",
