@@ -23,6 +23,8 @@ namespace Cake.Docker.Tests.Build
 
         public IRegistry Registry => Registry;
 
+        public ICakeDataResolver Data => throw new NotImplementedException();
+
         public DockerBuildFixture(): base("docker")
         {
             ProcessRunner.Process.SetStandardOutput(new string[] { });

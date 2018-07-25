@@ -1,15 +1,16 @@
-﻿using System;
-using Cake.Docker;
-using Cake.Testing.Fixtures;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Diagnostics;
 using Cake.Core.IO;
+using Cake.Testing.Fixtures;
+using System;
 
-namespace Cake.Docker.Tests.Build
+namespace Cake.Docker.Tests.Compose.Exec
 {
-    public class DockerRegistryLoginFixture : ToolFixture<DockerRegistryLoginSettings>, ICakeContext
+    public class DockerComposeExecFixture : ToolFixture<DockerComposeExecSettings>, ICakeContext
     {
-        public string Path { get; set; }
+        public string Service { get; set; }
+        public string Command { get; set; }
+        public string[] Args { get; set; } = new string[0];
 
         IFileSystem ICakeContext.FileSystem => FileSystem;
 
@@ -23,15 +24,15 @@ namespace Cake.Docker.Tests.Build
 
         public IRegistry Registry => Registry;
 
-        public ICakeDataResolver Data => throw new NotImplementedException();
+        public ICakeDataResolver Data => Data;
 
-        public DockerRegistryLoginFixture(): base("docker")
+        public DockerComposeExecFixture() : base("DockerCompose")
         {
             ProcessRunner.Process.SetStandardOutput(new string[] { });
         }
         protected override void RunTool()
         {
-            this.DockerLogin(Settings, Path);
+            this.DockerComposeExec(Settings, Service, Command, Args);
         }
     }
 }
