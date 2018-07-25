@@ -2,6 +2,7 @@
 using Cake.Core.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cake.Docker
 {
@@ -17,9 +18,9 @@ namespace Cake.Docker
         /// <param name="args">The arguments.</param>
         /// <param name="command">The command.</param>
         [CakeMethodAlias]
-        public static void DockerRun(this ICakeContext context, string image, string command, params string[] args)
+        public static string DockerRun(this ICakeContext context, string image, string command, params string[] args)
         {
-            DockerRun(context, new DockerContainerRunSettings(), image, command, args);
+            return DockerRun(context, new DockerContainerRunSettings(), image, command, args);
         }
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace Cake.Docker
         /// <param name="args">The arguments.</param>
         /// <param name="command">The command.</param>
         [CakeMethodAlias]
-        public static void DockerRun(this ICakeContext context, DockerContainerRunSettings settings, string image, string command, params string[] args)
+        public static string DockerRun(this ICakeContext context, DockerContainerRunSettings settings, string image, string command, params string[] args)
         {
             if (context == null)
             {
@@ -51,7 +52,7 @@ namespace Cake.Docker
                     arguments.AddRange(args);
                 }
             }
-            runner.Run("run", settings ?? new DockerContainerRunSettings(), arguments.ToArray());
+            return runner.RunWithResult("run", settings ?? new DockerContainerRunSettings(), r => r.ToArray(), arguments.ToArray()).FirstOrDefault();
         }
 
     }
