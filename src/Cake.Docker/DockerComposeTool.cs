@@ -40,7 +40,7 @@ namespace Cake.Docker
         /// <returns>The name of the tool.</returns>
         protected override string GetToolName()
         {
-            return "Docker";
+            return "DockerCompose";
         }
 
         /// <summary>

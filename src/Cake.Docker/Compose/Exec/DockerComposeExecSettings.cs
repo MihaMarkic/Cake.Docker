@@ -45,5 +45,13 @@
         /// Path to workdir directory for this command.
         /// </summary>
         public string Workdir { get; set; }
+
+        /// <summary>
+        /// -T
+        ///  Disable pseudo-tty allocation. By default `docker-compose exec`
+        /// allocates a TTY.
+        /// </summary>
+        [AutoProperty(Format = "-T", OnlyWhenTrue = true)]
+        public bool? DisablePseudoTTYAllocation { get; set; }
     }
 }
