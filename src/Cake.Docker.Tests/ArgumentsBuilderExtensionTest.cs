@@ -22,6 +22,7 @@ namespace Cake.Docker.Tests
         public static PropertyInfo DecoratedStringProperty => GetProperty(nameof(TestSettings.DecoratedString));
         public static PropertyInfo DecoratedBoolProperty => GetProperty(nameof(TestSettings.DecoratedBool));
         public static PropertyInfo DecoratedStringsProperty => GetProperty(nameof(TestSettings.DecoratedStrings));
+        public static PropertyInfo PreCommandValueProperty => GetProperty(nameof(TestSettings.PreCommandValue));
         public static PropertyInfo GetProperty(string name)
         {
             return typeof(TestSettings).GetProperty(name, BindingFlags.Public | BindingFlags.Instance);
@@ -340,6 +341,26 @@ namespace Cake.Docker.Tests
             Assert.That(actual, Is.EqualTo("-e One=1 -e Two=2"));
         }
     }
+    [TestFixture]
+    public class GetArgumentFromProperty: ArgumentsBuilderExtensionTest
+    {
+        [Test]
+        public void WhenPreCommand_DoesNotAppearInNormalCommands()
+        {
+            TestSettings input = new TestSettings { PreCommandValue = "preCommand" };
+            var actual = ArgumentsBuilderExtension.GetArgumentFromProperty(PreCommandValueProperty, input, preCommand: false, isSecret: false);
+
+            Assert.That(actual.Count(), Is.Zero);
+        }
+        [Test]
+        public void WhenPreCommand_ItAppearsInPreCommands()
+        {
+            TestSettings input = new TestSettings { PreCommandValue = "preCommand" };
+            var actual = ArgumentsBuilderExtension.GetArgumentFromProperty(PreCommandValueProperty, input, preCommand: true, isSecret: false);
+
+            Assert.That(actual.Count(), Is.EqualTo(1));
+        }
+    }
 
     public class TestSettings: AutoToolSettings
     {
@@ -359,6 +380,8 @@ namespace Cake.Docker.Tests
         public bool DecoratedBool { get; set; }
         [AutoProperty(Format = "-e {1}")]
         public string[] DecoratedStrings { get; set; }
+        [AutoProperty(PreCommand = true)]
+        public string PreCommandValue { get; set; }
         protected override string[] CollectSecretProperties()
         {
             return new[] { nameof(Password) };

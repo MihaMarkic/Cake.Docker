@@ -112,7 +112,8 @@ namespace Cake.Docker
                     yield return new DockerArgument(null, GetArgumentFromAutoProperty(autoPropertyAttribute, property, property.GetValue(settings)), DockerArgumentQuoting.Unquoted);
                 }
             }
-            else if (!preCommand || (autoPropertyAttribute != null && autoPropertyAttribute.PreCommand && preCommand))
+            else if (!preCommand && (autoPropertyAttribute == null || !autoPropertyAttribute.PreCommand) 
+                || (autoPropertyAttribute != null && autoPropertyAttribute.PreCommand && preCommand))
             {
                 if (property.PropertyType == typeof(bool))
                 {
