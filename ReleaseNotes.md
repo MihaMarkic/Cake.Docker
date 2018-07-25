@@ -1,3 +1,10 @@
+# Cake.Docker 0.9.5
+
+* Fixes/enhancements for:
+  *  [Return container id on DockerRun #42](https://github.com/MihaMarkic/Cake.Docker/issues/42)
+  *  [Lack of support of -T flag for DockerComposeExec #43](https://github.com/MihaMarkic/Cake.Docker/issues/43) 
+  *  [Pre-command arguments are also inserted as post-command arguments #44](https://github.com/MihaMarkic/Cake.Docker/issues/44) 
+
 # Cake.Docker 0.9.4
 
 * DockerCreate returns container id
