@@ -1,3 +1,7 @@
+# Cake.Docker 0.9.6
+
+* Bugfix #45 DockerComposeDownSettings doesn't support Rmi flag properly
+
 # Cake.Docker 0.9.5
 
 * Fixes/enhancements for:

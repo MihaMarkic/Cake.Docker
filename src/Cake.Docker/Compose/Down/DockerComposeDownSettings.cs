@@ -11,7 +11,8 @@
         ///   'local': Remove only images that don't have a custom tag
         ///   set by the `image` field.
         /// </summary>
-        public bool Rmi { get; set; }
+        /// <remarks>Can use <see cref="DockerComposeDownRmiType"/> constants.</remarks>
+        public string Rmi { get; set; }
         /// <summary>
         /// Remove named volumes declared in the `volumes` section
         ///   of the Compose file and anonymous volumes
@@ -23,5 +24,20 @@
         ///   Compose file
         /// </summary>
         public bool RemoveOrphans { get; set; }
+    }
+
+    /// <summary>
+    /// Options for <see cref="DockerComposeDownSettings"/> Rmi.
+    /// </summary>
+    public static class DockerComposeDownRmiType
+    {
+        /// <summary>
+        /// Remove all images used by any service.
+        /// </summary>
+        public const string All = "all";
+        /// <summary>
+        ///  Remove only images that don't have a custom tag set by the `image` field.
+        /// </summary>
+        public const string Local = "local";
     }
 }
