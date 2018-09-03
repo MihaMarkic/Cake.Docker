@@ -19,6 +19,7 @@ namespace Cake.Docker
 		/// default: true
 		/// Skip image verification
 		/// </summary>
+        [AutoProperty(Format = Constants.BoolWithTrueDefaultFormat)]
 		public bool? DisableContentTrust { get; set; }
 		/// <summary>
 		/// --platform

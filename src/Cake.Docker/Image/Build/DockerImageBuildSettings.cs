@@ -63,12 +63,13 @@ namespace Cake.Docker
 		/// CPU shares (relative weight)
 		/// </summary>
 		public Int64? CpuShares { get; set; }
-		/// <summary>
-		/// --disable-content-trust
-		/// default: true
-		/// Skip image verification
-		/// </summary>
-		public bool? DisableContentTrust { get; set; }
+        /// <summary>
+        /// --disable-content-trust
+        /// default: true
+        /// Skip image verification
+        /// </summary>
+        [AutoProperty(Format = Constants.BoolWithTrueDefaultFormat)]
+        public bool? DisableContentTrust { get; set; }
 		/// <summary>
 		/// --file, -f
 		/// Name of the Dockerfile (Default is &#39;PATH/Dockerfile&#39;)
@@ -142,6 +143,7 @@ namespace Cake.Docker
 		/// default: true
 		/// Remove intermediate containers after a successful build
 		/// </summary>
+        [AutoProperty(Format = Constants.BoolWithTrueDefaultFormat)]
 		public bool? Rm { get; set; }
 		/// <summary>
 		/// --security-opt

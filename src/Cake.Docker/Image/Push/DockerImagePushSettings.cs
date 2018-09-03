@@ -8,11 +8,12 @@ namespace Cake.Docker
 	/// </summary>
 	public sealed partial class DockerImagePushSettings : AutoToolSettings
 	{
-		/// <summary>
-		/// --disable-content-trust
-		/// default: true
-		/// Skip image signing
-		/// </summary>
-		public bool? DisableContentTrust { get; set; }
+        /// <summary>
+        /// --disable-content-trust
+        /// default: true
+        /// Skip image signing
+        /// </summary>
+        [AutoProperty(Format = Constants.BoolWithTrueDefaultFormat)]
+        public bool? DisableContentTrust { get; set; }
 	}
 }

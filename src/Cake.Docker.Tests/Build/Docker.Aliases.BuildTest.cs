@@ -29,7 +29,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build --rm path"));
+            Assert.That(actual.Args, Is.EqualTo("build --rm=True path"));
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build path"));
+            Assert.That(actual.Args, Is.EqualTo("build --rm=False path"));
         }
 
         [Test]

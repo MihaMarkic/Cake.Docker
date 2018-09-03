@@ -150,12 +150,13 @@ namespace Cake.Docker
 		/// Limit write rate (IO per second) to a device
 		/// </summary>
 		public UInt64? DeviceWriteIops { get; set; }
-		/// <summary>
-		/// --disable-content-trust
-		/// default: true
-		/// Skip image verification
-		/// </summary>
-		public bool? DisableContentTrust { get; set; }
+        /// <summary>
+        /// --disable-content-trust
+        /// default: true
+        /// Skip image verification
+        /// </summary>
+        [AutoProperty(Format = Constants.BoolWithTrueDefaultFormat)]
+        public bool? DisableContentTrust { get; set; }
 		/// <summary>
 		/// --dns
 		/// Set custom DNS servers
