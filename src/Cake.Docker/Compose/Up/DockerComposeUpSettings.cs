@@ -63,6 +63,6 @@
         /// SERVICE=NUM        Scale SERVICE to NUM instances. Overrides the `scale`
         ///   setting in the Compose file if present.
         /// </summary>
-        public bool Scale { get; set; }
+        public string Scale { get; set; }
     }
 }
