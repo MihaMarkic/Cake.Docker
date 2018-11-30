@@ -1,3 +1,11 @@
+# Cake.Docker 0.9.7
+
+* DockerComposeBuildSettings BuildArg should be string array instead of bool
+* Implements docker-compose logs
+* DockerRun doesn't return internal commandline output after upgrading to 0.9.5
+* DockerComposeUpSettings does not support --scale option properly
+* 'Rm' and 'ForceRM' settings in DockerImageBuildSettings are not applied correctly
+
 # Cake.Docker 0.9.6
 
 * Bugfix #45 DockerComposeDownSettings doesn't support Rmi flag properly
