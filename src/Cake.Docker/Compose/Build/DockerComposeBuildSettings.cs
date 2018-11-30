@@ -20,6 +20,6 @@
         /// <summary>
         /// key=val     Set build-time variables for one service.
         /// </summary>
-        public bool BuildArg { get; set; }
+        public string[] BuildArg { get; set; }
     }
 }
