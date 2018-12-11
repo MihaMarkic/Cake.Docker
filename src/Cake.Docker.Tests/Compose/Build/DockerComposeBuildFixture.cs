@@ -4,13 +4,11 @@ using Cake.Core.IO;
 using Cake.Testing.Fixtures;
 using System;
 
-namespace Cake.Docker.Tests.Compose.Exec
+namespace Cake.Docker.Tests.Build
 {
-    public class DockerComposeExecFixture : ToolFixture<DockerComposeExecSettings>, ICakeContext
+    public class DockerComposeBuildFixture : ToolFixture<DockerComposeBuildSettings>, ICakeContext
     {
-        public string Service { get; set; }
-        public string Command { get; set; }
-        public string[] Args { get; set; } = new string[0];
+        public string[] Services { get; set; } = new string[0];
 
         IFileSystem ICakeContext.FileSystem => FileSystem;
 
@@ -24,15 +22,15 @@ namespace Cake.Docker.Tests.Compose.Exec
 
         public IRegistry Registry => Registry;
 
-        public ICakeDataResolver Data => Data;
+        public ICakeDataResolver Data => throw new NotImplementedException();
 
-        public DockerComposeExecFixture() : base("docker-compose")
+        public DockerComposeBuildFixture(): base("docker-compose")
         {
             ProcessRunner.Process.SetStandardOutput(new string[] { });
         }
         protected override void RunTool()
         {
-            this.DockerComposeExec(Settings, Service, Command, Args);
+            this.DockerComposeBuild(Settings, Services);
         }
     }
 }

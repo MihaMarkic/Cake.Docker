@@ -21,5 +21,9 @@
         /// key=val     Set build-time variables for one service.
         /// </summary>
         public string[] BuildArg { get; set; }
+        /// <summary>
+        /// Build images in parallel.
+        /// </summary>
+        public bool? Parallel { get; set; }
     }
 }
