@@ -1,3 +1,8 @@
+# Cake.Docker 0.9.8
+
+* Adds --quiet, --no-parallel and --include-deps to docker-compose pull
+* Adds --parallel to docker-compose build
+
 # Cake.Docker 0.9.7
 
 * DockerComposeBuildSettings BuildArg should be string array instead of bool
