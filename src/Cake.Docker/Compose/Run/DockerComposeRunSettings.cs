@@ -17,7 +17,7 @@
         /// <summary>
         /// Override the entrypoint of the image.
         /// </summary>
-        public bool Entrypoint { get; set; }
+        public string Entrypoint { get; set; }
         /// <summary>
         /// Set an environment variable(can be used multiple times)
         /// </summary>
