@@ -24,6 +24,7 @@ Including addin in cake script is easy.
 
 **BREAKING** Starting with 0.8.0 command's setting types that haven't been composed of all words have changed to full name. i.e. DockerBuildSettings to DockerImageBuildSettings). 
 
+- [DockerPs](https://docs.docker.com/engine/reference/commandline/ps/) v0.9.9
 - [DockerComposeLogs](https://docs.docker.com/compose/reference/logs/) v0.9.7
 - [DockerComposeExec](https://docs.docker.com/compose/reference/exec/) v0.9.2
 - DockerCustomCommand (*can execute any command*) v0.8.4
@@ -60,7 +61,6 @@ Including addin in cake script is easy.
 - [DockerLogin](https://docs.docker.com/engine/reference/commandline/login/) v0.4.0
 - [DockerPush](https://docs.docker.com/engine/reference/commandline/push/) v0.4.0
 - [DockerTag](https://docs.docker.com/engine/reference/commandline/tag/) v0.4.0
-- [DockerPs](https://docs.docker.com/engine/reference/commandline/ps/) v0.3.0
 - [DockerRm](https://docs.docker.com/engine/reference/commandline/rm/)
 - [DockerRmi](https://docs.docker.com/engine/reference/commandline/rmi/)
 - [DockerStop](https://docs.docker.com/engine/reference/commandline/stop/)
