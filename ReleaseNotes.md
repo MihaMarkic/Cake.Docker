@@ -1,3 +1,6 @@
+# Cake.Docker 0.9.9
+* Reintroduces DockerPs again
+* Corrects DockerComposeRunSettings.Entrypoint type from bool to string
 # Cake.Docker 0.9.8
 
 * Adds --quiet, --no-parallel and --include-deps to docker-compose pull
