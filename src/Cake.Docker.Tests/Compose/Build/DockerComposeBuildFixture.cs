@@ -1,4 +1,5 @@
 ﻿using Cake.Core;
+using Cake.Core.Configuration;
 using Cake.Core.Diagnostics;
 using Cake.Core.IO;
 using Cake.Testing.Fixtures;
@@ -23,6 +24,8 @@ namespace Cake.Docker.Tests.Build
         public IRegistry Registry => Registry;
 
         public ICakeDataResolver Data => throw new NotImplementedException();
+
+        ICakeConfiguration ICakeContext.Configuration => throw new NotImplementedException();
 
         public DockerComposeBuildFixture(): base("docker-compose")
         {

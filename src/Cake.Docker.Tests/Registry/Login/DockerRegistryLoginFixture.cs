@@ -1,9 +1,9 @@
-﻿using System;
-using Cake.Docker;
-using Cake.Testing.Fixtures;
-using Cake.Core;
+﻿using Cake.Core;
+using Cake.Core.Configuration;
 using Cake.Core.Diagnostics;
 using Cake.Core.IO;
+using Cake.Testing.Fixtures;
+using System;
 
 namespace Cake.Docker.Tests.Build
 {
@@ -24,6 +24,8 @@ namespace Cake.Docker.Tests.Build
         public IRegistry Registry => Registry;
 
         public ICakeDataResolver Data => throw new NotImplementedException();
+
+        ICakeConfiguration ICakeContext.Configuration => throw new NotImplementedException();
 
         public DockerRegistryLoginFixture(): base("docker")
         {
