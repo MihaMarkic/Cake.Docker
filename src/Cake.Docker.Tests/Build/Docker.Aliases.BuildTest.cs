@@ -100,5 +100,34 @@ namespace Cake.Docker.Tests.Build
 
             Assert.That(actual.Args, Is.EqualTo(@"build ""C:\Some where"""));
         }
+        [Test]
+        public void WhenPathHasSingleQuote_ArgumentIsQuoted()
+        {
+            var fixture = new DockerBuildFixture
+            {
+                Settings = new DockerImageBuildSettings(),
+                Path = "\""
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo(@"build """""""));
+        }
+        [TestCase("\"test\"")]
+        [TestCase(" \"test\"")]
+        [TestCase("\"test\" ")]
+        [TestCase(" \"test\" ")]
+        public void WhenPathIsQuoted_ArgumentIsNotDoubleQuoted(string path)
+        {
+            var fixture = new DockerBuildFixture
+            {
+                Settings = new DockerImageBuildSettings(),
+                Path = path
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo($"build {path}"));
+        }
     }
 }

@@ -37,7 +37,25 @@ namespace Cake.Docker
                 throw new ArgumentNullException("path");
             }
             var runner = new GenericDockerRunner<DockerImageBuildSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("build", settings ?? new DockerImageBuildSettings(), new string[] { $"\"{path}\"" });
+            // quote path if not already quoted
+            string quotedPath;
+            if (!string.IsNullOrEmpty(path))
+            {
+                string trimmed = path.Trim();
+                if (trimmed.Length > 1 && trimmed.StartsWith("\"") && trimmed.EndsWith("\""))
+                {
+                    quotedPath = path;
+                }
+                else
+                {
+                    quotedPath = $"\"{path}\"";
+                }
+            }
+            else
+            {
+                quotedPath = path;
+            }
+            runner.Run("build", settings ?? new DockerImageBuildSettings(), new string[] { quotedPath });
         }
 
     }
