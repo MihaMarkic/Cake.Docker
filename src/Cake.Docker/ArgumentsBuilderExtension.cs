@@ -66,6 +66,7 @@ namespace Cake.Docker
                 var query = from a in GetArgumentFromProperty(property, settings, preCommand: preCommand, isSecret: isSecret)
                             where a.HasValue
                             select a.Value;
+                var test = query.ToArray();
                 foreach (var argument in query)
                 {
                     if (!string.IsNullOrEmpty(argument.Key))

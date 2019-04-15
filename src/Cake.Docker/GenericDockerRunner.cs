@@ -48,10 +48,10 @@ namespace Cake.Docker
             Run(settings, GetArguments(command, settings, additional));
         }
 
-        private ProcessArgumentBuilder GetArguments(string command, TSettings settings, string[] containers)
+        private ProcessArgumentBuilder GetArguments(string command, TSettings settings, string[] additional)
         {
             var builder = new ProcessArgumentBuilder();
-            builder.AppendAll(command, settings, containers);
+            builder.AppendAll(command, settings, additional);
             return builder;
         }
 

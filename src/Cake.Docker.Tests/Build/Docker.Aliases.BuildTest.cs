@@ -16,7 +16,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build path"));
+            Assert.That(actual.Args, Is.EqualTo("build \"path\""));
         }
         [Test]
         public void WhenRmFlagIsSet_CommandLineIsCorrect()
@@ -29,7 +29,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build --rm=True path"));
+            Assert.That(actual.Args, Is.EqualTo("build --rm=True \"path\""));
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build --rm=False path"));
+            Assert.That(actual.Args, Is.EqualTo("build --rm=False \"path\""));
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build path"));
+            Assert.That(actual.Args, Is.EqualTo("build \"path\""));
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build path"));
+            Assert.That(actual.Args, Is.EqualTo("build \"path\""));
         }
 
         [Test]
@@ -85,7 +85,20 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build --pull path"));
+            Assert.That(actual.Args, Is.EqualTo("build --pull \"path\""));
+        }
+        [Test]
+        public void WhenPathHasSpaces_ArgumentIsQuoted()
+        {
+            var fixture = new DockerBuildFixture
+            {
+                Settings = new DockerImageBuildSettings(),
+                Path = @"C:\Some where"
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo(@"build ""C:\Some where"""));
         }
     }
 }

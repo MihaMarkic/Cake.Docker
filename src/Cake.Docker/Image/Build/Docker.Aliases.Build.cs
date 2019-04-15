@@ -1,5 +1,6 @@
 ﻿using Cake.Core;
 using Cake.Core.Annotations;
+using Cake.Core.IO.Arguments;
 using System;
 
 namespace Cake.Docker
@@ -36,7 +37,7 @@ namespace Cake.Docker
                 throw new ArgumentNullException("path");
             }
             var runner = new GenericDockerRunner<DockerImageBuildSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("build", settings ?? new DockerImageBuildSettings(), new string[] { path });
+            runner.Run("build", settings ?? new DockerImageBuildSettings(), new string[] { $"\"{path}\"" });
         }
 
     }

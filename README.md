@@ -14,7 +14,9 @@ Including addin in cake script is easy.
 
 **Cake references**
 
-* 0.9.4: Cake 0.28
+- 0.9.10: Cake 0.33
+
+- 0.9.4: Cake 0.28
 
 - 0.9 references Cake 0.26 (and goes .NET Standard 2.0 only)
 

@@ -1,4 +1,10 @@
+# Cake.Docker 0.9.10
+
+* Bumps Cake reference to 0.33
+* Image Build path is now quoted
+
 # Cake.Docker 0.9.9
+
 * Reintroduces DockerPs again
 * Corrects DockerComposeRunSettings.Entrypoint type from bool to string
 # Cake.Docker 0.9.8
