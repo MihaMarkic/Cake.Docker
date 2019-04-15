@@ -1,7 +1,8 @@
-# Cake.Docker 0.9.10
+# Cake.Docker 0.10.0
 
 * Bumps Cake reference to 0.33
 * Image Build path is now quoted
+* Adds docker volume support
 
 # Cake.Docker 0.9.9
 

@@ -20,12 +20,19 @@ Including addin in cake script is easy.
 
 - 0.9 references Cake 0.26 (and goes .NET Standard 2.0 only)
 
+**Important**: Since version 0.10.0 path argument to DockerBuild is now quoted if not quoted already.
+
 **Important**: Docker 17.* is supported since v0.8 and background compatibility is dropped (most notably, array arguments are converter to strings). If you wish to match older docker versions, user an older Cake.Docker version.
 
 **Important**: Since version 0.8.0 the settings are generated from the latest Docker source code on github.
 
 **BREAKING** Starting with 0.8.0 command's setting types that haven't been composed of all words have changed to full name. i.e. DockerBuildSettings to DockerImageBuildSettings). 
 
+- [DockerVolumeCreate](https://docs.docker.com/engine/reference/commandline/volume_create/) v0.10.0
+- [DockerVolumeInspect](https://docs.docker.com/engine/reference/commandline/volume_inspect/) v0.10.0
+- [DockerVolumeLs](https://docs.docker.com/engine/reference/commandline/volume_ls/) v0.10.0
+- [DockerVolumePrune](https://docs.docker.com/engine/reference/commandline/volume_prune/) v0.10.0
+- [DockerVolumeRm](https://docs.docker.com/engine/reference/commandline/volume_rm/) v0.10.0
 - [DockerPs](https://docs.docker.com/engine/reference/commandline/ps/) v0.9.9
 - [DockerComposeLogs](https://docs.docker.com/compose/reference/logs/) v0.9.7
 - [DockerComposeExec](https://docs.docker.com/compose/reference/exec/) v0.9.2
