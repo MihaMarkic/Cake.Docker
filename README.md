@@ -14,7 +14,7 @@ Including addin in cake script is easy.
 
 **Cake references**
 
-- 0.9.10: Cake 0.33
+- 0.10.0: Cake 0.33
 
 - 0.9.4: Cake 0.28
 
