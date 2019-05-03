@@ -1,3 +1,7 @@
+# Cake.Docker 0.10.1
+
+- Adds docker-compose port and ps commands
+
 # Cake.Docker 0.10.0
 
 * Bumps Cake reference to 0.33
