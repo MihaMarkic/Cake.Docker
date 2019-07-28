@@ -18,5 +18,32 @@ namespace Cake.Docker.Tests.Run
 
             Assert.That(actual.Args, Is.EqualTo("run --entrypoint \"somepoint\" cmd"));
         }
+
+        [Test]
+        public void WhenVolumeIsSet_CommandLineIsCorrect()
+        {
+            var fixture = new DockerComposeRunFixture
+            {
+                Command = "cmd",
+                Settings = new DockerComposeRunSettings { Volume = new[] { "host:guest" } },
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("run --volume \"host:guest\" cmd"));
+        }
+        [Test]
+        public void WhenTwoVolumesAreSet_CommandLineIsCorrect()
+        {
+            var fixture = new DockerComposeRunFixture
+            {
+                Command = "cmd",
+                Settings = new DockerComposeRunSettings { Volume = new[] { "host:guest", "host2:guest2" } },
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("run --volume \"host:guest\" --volume \"host2:guest2\" cmd"));
+        }
     }
 }

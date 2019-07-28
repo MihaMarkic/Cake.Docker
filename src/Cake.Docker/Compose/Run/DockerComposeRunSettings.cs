@@ -43,5 +43,9 @@
         /// Run command with the service's ports enabled and mapped to the host.
         /// </summary>
         public bool ServicePorts { get; set; }
+        /// <summary>
+        /// Bind mount a volume (default [])
+        /// </summary>
+        public string[] Volume { get; set; }
     }
 }
