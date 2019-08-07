@@ -1,6 +1,7 @@
 # Cake.Docker 0.10.1
 
-- Adds docker-compose port and ps commands
+- Adds docker-compose port and ps commands #68
+- docker-compose run - unable to provide volumes #70
 
 # Cake.Docker 0.10.0
 
