@@ -4,7 +4,7 @@ using System;
 
 namespace Cake.Docker
 {
-    // Contains functionality for working with docker-compose build command.
+    // Contains functionality for working with docker-compose create command.
     partial class DockerAliases
     {
         /// <summary>

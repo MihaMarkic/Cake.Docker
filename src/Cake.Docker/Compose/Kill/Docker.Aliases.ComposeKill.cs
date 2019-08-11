@@ -4,7 +4,7 @@ using System;
 
 namespace Cake.Docker
 {
-    // Contains functionality for working with docker-compose down command.
+    // Contains functionality for working with docker-compose kill command.
     partial class DockerAliases
     {
         /// <summary>
