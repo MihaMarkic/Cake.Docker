@@ -1,7 +1,7 @@
 ﻿namespace Cake.Docker
 {
     /// <summary>
-    /// Settings for docker swarm init.
+    /// Settings for docker ps [OPTIONS].
     /// </summary>
     public sealed class DockerPsSettings : AutoToolSettings
     {

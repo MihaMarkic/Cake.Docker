@@ -3,7 +3,7 @@ using System;
 namespace Cake.Docker
 {
 	/// <summary>
-	/// Settings for docker join [OPTIONS] HOST:PORT.
+	/// Settings for docker swarm join [OPTIONS] HOST:PORT.
 	/// Join a swarm as a node and/or manager
 	/// </summary>
 	public sealed partial class DockerSwarmJoinSettings : AutoToolSettings
