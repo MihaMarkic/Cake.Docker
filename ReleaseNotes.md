@@ -1,3 +1,7 @@
+# Cake.Docker vNext
+
+- Fixes XML documentation
+
 # Cake.Docker 0.10.1
 
 - Adds docker-compose port and ps commands #68
