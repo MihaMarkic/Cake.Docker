@@ -4,11 +4,11 @@ using System;
 
 namespace Cake.Docker
 {
-    // Contains functionality for working with docker-compose down command.
+    // Contains functionality for working with docker-compose logs command.
     partial class DockerAliases
     {
         /// <summary>
-        /// Runs docker-compose kill with default settings.
+        /// Runs docker-compose logs with default settings.
         /// </summary>
         /// <param name="context">The context.</param>
         [CakeMethodAlias]
@@ -18,7 +18,7 @@ namespace Cake.Docker
         }
 
         /// <summary>
-        /// Runs docker-compose kill given <paramref name="settings"/>.
+        /// Runs docker-compose logs given <paramref name="settings"/>.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>

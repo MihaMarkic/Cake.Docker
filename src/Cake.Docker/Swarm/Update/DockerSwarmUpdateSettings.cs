@@ -3,7 +3,7 @@ using System;
 namespace Cake.Docker
 {
 	/// <summary>
-	/// Settings for docker update [OPTIONS].
+	/// Settings for docker swarm update [OPTIONS].
 	/// Update the swarm
 	/// </summary>
 	public sealed partial class DockerSwarmUpdateSettings : AutoToolSettings

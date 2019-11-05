@@ -3,7 +3,7 @@ using System;
 namespace Cake.Docker
 {
 	/// <summary>
-	/// Settings for docker leave [OPTIONS].
+	/// Settings for docker swarm leave [OPTIONS].
 	/// Leave the swarm
 	/// </summary>
 	public sealed partial class DockerSwarmLeaveSettings : AutoToolSettings

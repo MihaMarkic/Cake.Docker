@@ -4,7 +4,7 @@ using System;
 
 namespace Cake.Docker
 {
-    // Contains functionality for working with push command.
+    // Contains functionality for working with pull command.
     partial class DockerAliases
     {
         /// <summary>

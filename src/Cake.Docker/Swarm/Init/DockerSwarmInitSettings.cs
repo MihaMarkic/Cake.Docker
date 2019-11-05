@@ -3,7 +3,7 @@ using System;
 namespace Cake.Docker
 {
 	/// <summary>
-	/// Settings for docker init [OPTIONS].
+	/// Settings for docker swarm init [OPTIONS].
 	/// Initialize a swarm
 	/// </summary>
 	public sealed partial class DockerSwarmInitSettings : AutoToolSettings

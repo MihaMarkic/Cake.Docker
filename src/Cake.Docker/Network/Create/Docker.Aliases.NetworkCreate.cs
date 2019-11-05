@@ -9,7 +9,7 @@ namespace Cake.Docker
     partial class DockerAliases
     {
         /// <summary>
-        /// Crates a network using default settings.
+        /// Creates a network using default settings.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="args">The arguments.</param>
@@ -20,7 +20,7 @@ namespace Cake.Docker
         }
 
         /// <summary>
-        /// Crates a network given <paramref name="settings"/>.
+        /// Creates a network given <paramref name="settings"/>.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>
