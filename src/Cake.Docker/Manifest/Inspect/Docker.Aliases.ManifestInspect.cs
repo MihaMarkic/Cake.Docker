@@ -14,6 +14,17 @@ namespace Cake.Docker
         /// Display an image manifest, or manifest list
         /// </summary>
         /// <param name="context">The context.</param>
+        /// <param name="manifest">MANIFEST</param>
+        [CakeMethodAlias]
+        [Experimental]
+        public static void DockerManifestInspect(this ICakeContext context, string manifest)
+        {
+            DockerManifestInspect(context, new DockerManifestInspectSettings(), null, manifest);
+        }
+        /// <summary>
+        /// Display an image manifest, or manifest list
+        /// </summary>
+        /// <param name="context">The context.</param>
         /// <param name="manifestList">MANIFEST_LIST</param>
         /// <param name="manifest">MANIFEST</param>
         [CakeMethodAlias]
