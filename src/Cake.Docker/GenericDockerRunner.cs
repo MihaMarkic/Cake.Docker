@@ -45,7 +45,19 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException(nameof(additional));
             }
-            Run(settings, GetArguments(command, settings, additional));
+            // checks whether method is experimental based on ExperimentalAttribute decoration
+            var isExperimental = typeof(TSettings).GetCustomAttributes(typeof(ExperimentalAttribute), inherit: true)?.Length > 0;
+            if (isExperimental)
+            {
+                // when experimental, applies proper environmental variable to runner process
+                var processSettings = new ProcessSettings();
+                processSettings.EnvironmentVariables = new Dictionary<string, string> { { "DOCKER_CLI_EXPERIMENTAL", "enabled" } };
+                Run(settings, GetArguments(command, settings, additional), processSettings, postAction: null);
+            }
+            else
+            {
+                Run(settings, GetArguments(command, settings, additional));
+            }
         }
 
         private ProcessArgumentBuilder GetArguments(string command, TSettings settings, string[] additional)
