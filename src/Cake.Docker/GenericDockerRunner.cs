@@ -46,12 +46,10 @@ namespace Cake.Docker
                 throw new ArgumentNullException(nameof(additional));
             }
             // checks whether method is experimental based on ExperimentalAttribute decoration
-            var isExperimental = typeof(TSettings).GetCustomAttributes(typeof(ExperimentalAttribute), inherit: true)?.Length > 0;
-            if (isExperimental)
+            if (IsExperimental)
             {
                 // when experimental, applies proper environmental variable to runner process
-                var processSettings = new ProcessSettings();
-                processSettings.EnvironmentVariables = new Dictionary<string, string> { { "DOCKER_CLI_EXPERIMENTAL", "enabled" } };
+                var processSettings = CreateExperimentalProcessSettings();
                 Run(settings, GetArguments(command, settings, additional), processSettings, postAction: null);
             }
             else
@@ -59,7 +57,13 @@ namespace Cake.Docker
                 Run(settings, GetArguments(command, settings, additional));
             }
         }
-
+        static bool IsExperimental => typeof(TSettings).GetCustomAttributes(typeof(ExperimentalAttribute), inherit: true)?.Length > 0;
+        static ProcessSettings CreateExperimentalProcessSettings()
+        {
+            var processSettings = new ProcessSettings();
+            processSettings.EnvironmentVariables = new Dictionary<string, string> { { "DOCKER_CLI_EXPERIMENTAL", "enabled" } };
+            return processSettings;
+        }
         private ProcessArgumentBuilder GetArguments(string command, TSettings settings, string[] additional)
         {
             var builder = new ProcessArgumentBuilder();
@@ -93,8 +97,10 @@ namespace Cake.Docker
                 throw new ArgumentNullException("processOutput");
             }
             T[] result = new T[0];
-            Run(settings, GetArguments(command, settings, arguments), 
-                new ProcessSettings { RedirectStandardOutput = true }, 
+            ProcessSettings processSettings = IsExperimental ? CreateExperimentalProcessSettings(): new ProcessSettings();
+            processSettings.RedirectStandardOutput = true;
+            Run(settings, GetArguments(command, settings, arguments),
+                processSettings, 
                 proc => {
                     result = processOutput(proc.GetStandardOutput());
                 });
