@@ -1,5 +1,7 @@
-# Cake.Docker vNext
+# Cake.Docker 0.11.0
 
+- Adds support for experimental docker commands
+- Adds `docker manifest` commands
 - Fixes XML documentation
 
 # Cake.Docker 0.10.1
