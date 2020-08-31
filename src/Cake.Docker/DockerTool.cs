@@ -49,7 +49,11 @@ namespace Cake.Docker
         /// <returns>The tool executable name.</returns>
         protected override IEnumerable<string> GetToolExecutableNames()
         {
-            return new[] { "docker.exe", "docker" };
+            // In WSL (Windows Subsystem for Linux), both 'docker' and
+            // 'docker.exe' are available. The linux version of docker 
+            // must have precedence over the windows version so that
+            // the native (i.e. linux) version of docker is used under WSL.
+            return new[] { "docker", "docker.exe" };
         }
 
         /// <summary>
