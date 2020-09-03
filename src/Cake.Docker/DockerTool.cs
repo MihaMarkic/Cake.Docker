@@ -55,11 +55,11 @@ namespace Cake.Docker
             // the native (i.e. linux) version of docker is used under WSL.
             if (_environment.Platform.IsUnix())
             {
-                return new[] { "docker" };
+                return new[] { "docker", "docker.exe" };
             }
             else
             {
-                return new[] { "docker.exe" };
+                return new[] { "docker.exe", "docker" };
             }
         }
 
