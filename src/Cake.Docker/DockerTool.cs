@@ -53,7 +53,14 @@ namespace Cake.Docker
             // 'docker.exe' are available. The linux version of docker 
             // must have precedence over the windows version so that
             // the native (i.e. linux) version of docker is used under WSL.
-            return new[] { "docker", "docker.exe" };
+            if (_environment.Platform.IsUnix())
+            {
+                return new[] { "docker" };
+            }
+            else
+            {
+                return new[] { "docker.exe" };
+            }
         }
 
         /// <summary>
