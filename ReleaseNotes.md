@@ -1,3 +1,9 @@
+# Cake.Docker 0.11.1
+
+- Adds 'image ls' command
+- Adds 'container ls' command
+- Uses docker on unix systems and docker.exe binary on Windows (fixes problem when running on Windows with WSL enabled)
+
 # Cake.Docker 0.11.0
 
 - Adds support for experimental docker commands

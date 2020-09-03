@@ -28,6 +28,8 @@ Including addin in cake script is easy.
 
 **BREAKING** Starting with 0.8.0 command's setting types that haven't been composed of all words have changed to full name. i.e. DockerBuildSettings to DockerImageBuildSettings). 
 
+- [DockerContainerLs](https://docs.docker.com/engine/reference/commandline/container_ls/) v0.11.1
+- [DockerImageLs](https://docs.docker.com/engine/reference/commandline/image_ls/) v0.11.1
 - [DockerManifestAnnotate](https://docs.docker.com/engine/reference/commandline/manifest_annotate/) v0.11.0
 - [DockerManifestCreate](https://docs.docker.com/engine/reference/commandline/manifest_create/) v0.11.0
 - [DockerManifestInspect](https://docs.docker.com/engine/reference/commandline/manifest_inspect/) v0.11.0
