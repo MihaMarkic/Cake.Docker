@@ -115,7 +115,7 @@ All come with settings argument and support all settings except for DockerBuild 
 # General Notes
 **This is an initial version and not tested thoroughly**.
 
-**Contributions welcome - but ask first (create an issue)**.
+**Contributions welcome - but ask first(create an issue and also explain the process of doing the same)**.
 
 Tested only on Windows and Ubuntu. Ensure that Docker command line tool can be located using the PATH (e.g. check that it can be found with `which docker`).
 On Linux machines, ensure that user has access to the `docker` daemon Unix socket or use the DOCKER_HOST environment variable to point to the daemon's TCP port.
