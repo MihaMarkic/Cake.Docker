@@ -49,7 +49,18 @@ namespace Cake.Docker
         /// <returns>The tool executable name.</returns>
         protected override IEnumerable<string> GetToolExecutableNames()
         {
-            return new[] { "docker-compose.exe", "docker-compose" };
+            // In WSL (Windows Subsystem for Linux), both 'docker-compose' and
+            // 'docker-compose.exe' are available. The Linux version of docker-compose 
+            // must have precedence over the windows version so that the native
+            // (i.e. Linux) version of docker-compose is used under WSL.
+            if (_environment.Platform.IsUnix())
+            {
+                return new[] { "docker-compose", "docker-compose.exe" };
+            }
+            else
+            {
+                return new[] { "docker-compose.exe", "docker-compose" };
+            }
         }
 
         /// <summary>
