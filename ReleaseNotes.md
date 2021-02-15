@@ -1,3 +1,9 @@
+# Cake.Docker 1.0.0
+
+* Bumps Cake reference to 1.0.0 #85 (thanks [Sean Fausett](https://github.com/gitfool))
+* Adds docker-compuse push commands PR#81 (thanks [eoehen](https://github.com/eoehen))
+* Uses docker-compose on unix systems and docker-compose.exe binary on Windows #83 (thanks [Thomas Harold](https://github.com/tgharold))
+
 # Cake.Docker 0.11.1
 
 - Adds 'image ls' command

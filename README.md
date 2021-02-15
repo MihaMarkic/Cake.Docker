@@ -14,6 +14,8 @@ Including addin in cake script is easy.
 
 **Cake references**
 
+- 1.0.0: Cake 1.0.0
+
 - 0.10.0: Cake 0.33
 
 - 0.9.4: Cake 0.28
@@ -28,6 +30,7 @@ Including addin in cake script is easy.
 
 **BREAKING** Starting with 0.8.0 command's setting types that haven't been composed of all words have changed to full name. i.e. DockerBuildSettings to DockerImageBuildSettings). 
 
+- [DockerComposePush](https://docs.docker.com/compose/reference/push/) v1.0.0
 - [DockerContainerLs](https://docs.docker.com/engine/reference/commandline/container_ls/) v0.11.1
 - [DockerImageLs](https://docs.docker.com/engine/reference/commandline/image_ls/) v0.11.1
 - [DockerManifestAnnotate](https://docs.docker.com/engine/reference/commandline/manifest_annotate/) v0.11.0
