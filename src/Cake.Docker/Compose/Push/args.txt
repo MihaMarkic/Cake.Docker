@@ -1,0 +1,1 @@
+﻿--ignore-push-failures  Push what it can and ignores images with push failures.
