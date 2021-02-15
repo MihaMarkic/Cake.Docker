@@ -232,5 +232,6 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 testing/
-src/tools
+src/tools/*
 .cr/
+!src/tools/packages.config
