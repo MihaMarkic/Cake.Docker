@@ -3,7 +3,7 @@
     /// <summary>
     /// Settings for docker publish.
     /// </summary>
-    public sealed class DockerComposePublishSettings: DockerComposeSettings
+    public sealed class DockerComposePushSettings: DockerComposeSettings
     {
         /// <summary>
         /// Push what it can and ignores images with push failures.
