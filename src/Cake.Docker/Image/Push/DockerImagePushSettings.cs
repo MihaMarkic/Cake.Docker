@@ -15,5 +15,9 @@ namespace Cake.Docker
         /// </summary>
         [AutoProperty(Format = Constants.BoolWithTrueDefaultFormat)]
         public bool? DisableContentTrust { get; set; }
-	}
+        /// <summary>
+        /// Push all tagged images in the repository
+        /// </summary>
+        public bool AllTags { get; set; }
+    }
 }

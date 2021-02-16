@@ -1,3 +1,5 @@
+* Adds --all-tags argument to DockerPush
+
 # Cake.Docker 1.0.0
 
 * Bumps Cake reference to 1.0.0 #85 (thanks [Sean Fausett](https://github.com/gitfool))
