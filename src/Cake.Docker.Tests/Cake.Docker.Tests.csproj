@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cake" Version="1.0.0" />
-    <PackageReference Include="Cake.Testing" Version="1.0.0" />
+    <PackageReference Include="Cake" Version="1.1.0" />
+    <PackageReference Include="Cake.Testing" Version="1.1.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
     <PackageReference Include="NSubstitute" Version="4.2.2" />
     <PackageReference Include="NUnit" Version="3.13.1" />
