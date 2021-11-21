@@ -2,7 +2,7 @@
 var TestProject = Directory("./Cake.Docker.Tests/");
 var CakeDockerProj = Project + File("Cake.Docker.csproj");
 var CakeTestDockerProj = TestProject + File("Cake.Docker.Tests.csproj");
-var CakeTestDockerAssembly = TestProject + Directory("bin/Release/netcoreapp3.1") + File("Cake.Docker.Tests.dll");
+var CakeTestDockerAssembly = TestProject + Directory("bin/Release/net6") + File("Cake.Docker.Tests.dll");
 var AssemblyInfo = Project + File("Properties/AssemblyInfo.cs");
 var CakeDockerSln = File("./Cake.Docker.sln");
 var CakeDockerNuspec = File("./Cake.Docker.nuspec");
