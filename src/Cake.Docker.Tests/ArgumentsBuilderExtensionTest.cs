@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 
@@ -12,6 +13,7 @@ namespace Cake.Docker.Tests
         public static PropertyInfo StringProperty => GetProperty(nameof(TestSettings.String));
         public static PropertyInfo PasswordProperty => GetProperty(nameof(TestSettings.Password));
         public static PropertyInfo StringsProperty => GetProperty(nameof(TestSettings.Strings));
+        public static PropertyInfo ListStringsProperty => GetProperty(nameof(TestSettings.ListStrings));
         public static PropertyInfo NullableIntProperty => GetProperty(nameof(TestSettings.NullableInt));
         public static PropertyInfo NullableInt64Property => GetProperty(nameof(TestSettings.NullableInt64));
         public static PropertyInfo NullableUInt64Property => GetProperty(nameof(TestSettings.NullableUInt64));
@@ -86,9 +88,6 @@ namespace Cake.Docker.Tests
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayProperty(StringsProperty, new string[] { "tubo1", "tubo2" }, isSecret: false);
 
-                //Assert.AreEqual(actual.ToArray(), new DockerArgument[] {
-                //    "--strings \"tubo1\"", "--strings \"tubo2\""
-                //}); 
                 CollectionAssert.AreEqual(actual, new DockerArgument[] {
                     new DockerArgument("--strings", "tubo1", DockerArgumentQuoting.Quoted),
                     new DockerArgument("--strings", "tubo2", DockerArgumentQuoting.Quoted)});
@@ -97,6 +96,27 @@ namespace Cake.Docker.Tests
             public void WhenGivenNull_EmptyArrayReturned()
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayProperty(StringsProperty, null, isSecret: false);
+
+                Assert.That(actual, Is.Empty);
+            }
+        }
+        [TestFixture]
+        public class GetArgumentFromStringArrayListProperty
+        {
+            [Test]
+            public void WhenGivenStringArrayProperty_FormatsProperly()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayListProperty(
+                    ListStringsProperty, new string[] { "tubo1", "tubo2" }, isSecret: false).Value;
+
+                Assert.That(actual.Key, Is.EqualTo("--list-strings"));
+                Assert.That(actual.Value, Is.EqualTo("tubo1,tubo2"));
+                Assert.That(actual.Quoting, Is.EqualTo(DockerArgumentQuoting.Quoted));
+            }
+            [Test]
+            public void WhenGivenNull_EmptyArrayReturned()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayProperty(ListStringsProperty, null, isSecret: false);
 
                 Assert.That(actual, Is.Empty);
             }
@@ -366,6 +386,8 @@ namespace Cake.Docker.Tests
     {
         public string String { get; set; }
         public string[] Strings { get; set; }
+        [AutoProperty(AutoArrayType = AutoArrayType.List)]
+        public string[] ListStrings { get; set; }
         public string Password { get; set; }
         public int? NullableInt { get; set; }
         public Int64? NullableInt64 { get; set; }

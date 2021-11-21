@@ -311,6 +311,15 @@ namespace Cake.Docker
             }
         }
 
+        public static DockerArgument? GetArgumentFromStringArrayListProperty(PropertyInfo property, string[] values, bool isSecret)
+        {
+            if (values?.Length > 0)
+            {
+                return GetArgumentFromStringProperty(property, string.Join(",", values), isSecret);
+            }
+            return null;
+        }
+
         /// <summary>
         /// 
         /// </summary>
