@@ -235,3 +235,4 @@ testing/
 src/tools/*
 .cr/
 !src/tools/packages.config
+*.nogit.cs
