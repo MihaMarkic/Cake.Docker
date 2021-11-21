@@ -17,7 +17,7 @@
     <Description>Cake Build addin for Docker.</Description>
     <PackageProjectUrl>https://github.com/MihaMarkic/Cake.Docker</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>cake docker cake-build cake-contrib</PackageTags>
+    <PackageTags>cake docker cake-build cake-contrib cake-addin</PackageTags>
     <IncludeSymbols>true</IncludeSymbols>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageReleaseNotes>See https://github.com/MihaMarkic/Cake.Docker/blob/master/ReleaseNotes.md</PackageReleaseNotes>
