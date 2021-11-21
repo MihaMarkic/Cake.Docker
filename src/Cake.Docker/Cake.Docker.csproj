@@ -23,7 +23,7 @@
     <PackageReleaseNotes>See https://github.com/MihaMarkic/Cake.Docker/blob/master/ReleaseNotes.md</PackageReleaseNotes>
     <Version>1.0.0</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
+    <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/addin/cake-contrib-addin-medium.png</PackageIconUrl>
     <PackageIcon>cake-contrib-medium.png</PackageIcon>
   </PropertyGroup>
 
