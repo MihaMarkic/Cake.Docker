@@ -15,7 +15,7 @@ Regex regex = new Regex(
 	);
 
 Dictionary<string, List<string>> data = new Dictionary<string, List<string>>();
-List<string> current = null;
+List<string>? current = null;
 foreach (string line in lines.Where(l =>!string.IsNullOrEmpty(l)).Select(l => l.TrimStart()))
 {
 	if (line.StartsWith("-"))
