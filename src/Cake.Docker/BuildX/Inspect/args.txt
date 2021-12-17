@@ -1,0 +1,2 @@
+﻿      --bootstrap        Ensure builder has booted before inspecting
+      --builder string   Override the configured builder instance

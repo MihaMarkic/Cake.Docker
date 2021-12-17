@@ -14,6 +14,8 @@ namespace Cake.Docker
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>
+        /// /// <returns>Output text.</returns>
+        /// <remarks>Return value are the lines from stdout. This method will redirect stdout and it won't be available for capture.</remarks>
         [CakeMethodAlias]
         public static IEnumerable<string> DockerBuildXDu(this ICakeContext context, DockerBuildXDuSettings settings = null)
         {

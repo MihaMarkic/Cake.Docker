@@ -1,0 +1,5 @@
+﻿      --append             Append to existing manifest
+      --builder string     Override the configured builder instance
+      --dry-run            Show final image instead of pushing
+  -f, --file stringArray   Read source descriptor from file
+  -t, --tag stringArray    Set reference for new image
