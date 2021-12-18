@@ -1,3 +1,11 @@
+# Cake.Docker 1.1.0
+
+* Adds docker image prune
+* Adds version to assemblies
+* Updates icon
+* Adds buildx commands
+* Adds .NET5, .NET6 and .NETCore 3.1 targets, drops .netstandard2
+* DockerComposeLogs is not returning any value bug 
 * Adds --all-tags argument to DockerPush
 
 # Cake.Docker 1.0.0
