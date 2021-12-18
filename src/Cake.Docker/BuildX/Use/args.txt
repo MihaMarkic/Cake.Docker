@@ -1,0 +1,3 @@
+﻿      --builder string   Override the configured builder instance
+      --default          Set builder as default for current context
+      --global           Builder persists context changes

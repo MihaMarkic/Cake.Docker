@@ -30,6 +30,21 @@ Including addin in cake script is easy.
 
 **BREAKING** Starting with 0.8.0 command's setting types that haven't been composed of all words have changed to full name. i.e. DockerBuildSettings to DockerImageBuildSettings). 
 
+- DockerBuildXBake v1.1.0
+- DockerBuildXBuild v1.1.0
+- DockerBuildXCreate v1.1.0
+- DockerBuildXDu v1.1.0
+- DockerBuildXImageToolsCreate v1.1.0
+- DockerBuildXImageToolsInspect v1.1.0
+- DockerBuildXInspect v1.1.0
+- DockerBuildXInstall v1.1.0
+- DockerBuildXLs v1.1.0
+- DockerBuildXPrune v1.1.0
+- DockerBuildXRm v1.1.0
+- DockerBuildXStop v1.1.0
+- DockerBuildXUninstall v1.1.0
+- DockerBuildXUse v1.1.0
+- DockerBuildXVersion v1.1.0
 - [DockerComposePush](https://docs.docker.com/compose/reference/push/) v1.0.0
 - [DockerContainerLs](https://docs.docker.com/engine/reference/commandline/container_ls/) v0.11.1
 - [DockerImageLs](https://docs.docker.com/engine/reference/commandline/image_ls/) v0.11.1

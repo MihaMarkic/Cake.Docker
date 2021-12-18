@@ -13,7 +13,7 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerBuildXInstall(this ICakeContext context, DockerBuildXPruneSettings settings = null)
+        public static void DockerBuildXPrune(this ICakeContext context, DockerBuildXPruneSettings settings = null)
         {
             if (context == null)
             {
