@@ -14,6 +14,8 @@ Including addin in cake script is easy.
 
 **Cake references**
 
+* 1.1.0: Cake 2.0.0
+
 - 1.0.0: Cake 1.0.0
 
 - 0.10.0: Cake 0.33
@@ -30,21 +32,21 @@ Including addin in cake script is easy.
 
 **BREAKING** Starting with 0.8.0 command's setting types that haven't been composed of all words have changed to full name. i.e. DockerBuildSettings to DockerImageBuildSettings). 
 
-- DockerBuildXBake v1.1.0
-- DockerBuildXBuild v1.1.0
-- DockerBuildXCreate v1.1.0
-- DockerBuildXDu v1.1.0
-- DockerBuildXImageToolsCreate v1.1.0
-- DockerBuildXImageToolsInspect v1.1.0
-- DockerBuildXInspect v1.1.0
-- DockerBuildXInstall v1.1.0
-- DockerBuildXLs v1.1.0
-- DockerBuildXPrune v1.1.0
-- DockerBuildXRm v1.1.0
-- DockerBuildXStop v1.1.0
-- DockerBuildXUninstall v1.1.0
-- DockerBuildXUse v1.1.0
-- DockerBuildXVersion v1.1.0
+- [DockerBuildXBake](https://docs.docker.com/engine/reference/commandline/buildx_bake/) v1.1.0
+- [DockerBuildXBuild](https://docs.docker.com/engine/reference/commandline/buildx_build/) v1.1.0
+- [DockerBuildXCreate](https://docs.docker.com/engine/reference/commandline/buildx_create/) v1.1.0
+- [DockerBuildXDu](https://docs.docker.com/engine/reference/commandline/buildx_du/) v1.1.0
+- [DockerBuildXImageToolsCreate](https://docs.docker.com/engine/reference/commandline/buildx_imagetools_create/) v1.1.0
+- [DockerBuildXImageToolsInspect](https://docs.docker.com/engine/reference/commandline/buildx_imagetools_inspect/) v1.1.0
+- [DockerBuildXInspect](https://docs.docker.com/engine/reference/commandline/buildx_inspect/) v1.1.0
+- [DockerBuildXInstall](https://docs.docker.com/engine/reference/commandline/buildx_install/) v1.1.0
+- [DockerBuildXLs](https://docs.docker.com/engine/reference/commandline/buildx_ls/) v1.1.0
+- [DockerBuildXPrune](https://docs.docker.com/engine/reference/commandline/buildx_prune/) v1.1.0
+- [DockerBuildXRm](https://docs.docker.com/engine/reference/commandline/buildx_rm/) v1.1.0
+- [DockerBuildXStop](https://docs.docker.com/engine/reference/commandline/buildx_stop/) v1.1.0
+- [DockerBuildXUninstall](https://docs.docker.com/engine/reference/commandline/buildx_uninstall/) v1.1.0
+- [DockerBuildXUse](https://docs.docker.com/engine/reference/commandline/buildx_use/) v1.1.0
+- [DockerBuildXVersion](https://docs.docker.com/engine/reference/commandline/buildx_version/) v1.1.0
 - [DockerComposePush](https://docs.docker.com/compose/reference/push/) v1.0.0
 - [DockerContainerLs](https://docs.docker.com/engine/reference/commandline/container_ls/) v0.11.1
 - [DockerImageLs](https://docs.docker.com/engine/reference/commandline/image_ls/) v0.11.1
