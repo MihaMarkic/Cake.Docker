@@ -24,6 +24,8 @@ Including addin in cake script is easy.
 
 - 0.9 references Cake 0.26 (and goes .NET Standard 2.0 only)
 
+**Important**: In version 1.1.0 the .netstandard 2.0 version is dropped and instead .netcore 3.1, .net5 and .net6 versions are distributed.
+
 **Important**: Since version 0.10.0 path argument to DockerBuild is now quoted if not quoted already.
 
 **Important**: Docker 17.* is supported since v0.8 and background compatibility is dropped (most notably, array arguments are converter to strings). If you wish to match older docker versions, user an older Cake.Docker version.
