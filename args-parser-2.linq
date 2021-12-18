@@ -1,6 +1,8 @@
 <Query Kind="Statements" />
 
-string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\Compose\Up\args.txt";
+string path = @"BuildX\Bake";
+string file = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath)!, $@"src\Cake.Docker\{path}\args.txt");
+//string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\Compose\Up\args.txt";
 string[] lines = File.ReadAllLines(file);
 
 Regex regex = new Regex(
@@ -13,7 +15,7 @@ Regex regex = new Regex(
 	);
 
 Dictionary<string, List<string>> data = new Dictionary<string, List<string>>();
-List<string> current = null;
+List<string>? current = null;
 foreach (string line in lines.Where(l =>!string.IsNullOrEmpty(l)).Select(l => l.TrimStart()))
 {
 	if (line.StartsWith("-"))
@@ -26,6 +28,14 @@ foreach (string line in lines.Where(l =>!string.IsNullOrEmpty(l)).Select(l => l.
 		current.Add(line.Trim());
 	}
 }
+string className = path.Replace(@"\", "");
+"namespace Cake.Docker".Dump();
+"{".Dump();
+"/// <summary>".Dump();
+$"/// Settings for docker {string.Join(" ", path.Split('\\').Select(p => p.ToLower()))}.".Dump();
+"/// </summary>".Dump();
+$"public sealed class Docker{className}Settings : AutoToolSettings".Dump();
+"{".Dump();
 foreach (var pair in data)
 {
 	string line = pair.Key;
@@ -97,10 +107,22 @@ foreach (var pair in data)
 			case "string":
 				netType = "string";
 				break;
+			case "strings":
+				netType = "string[]";
+				break;
+			case "stringArray":
+				netType = "string[]";
+				break;
 			default:
 				netType = "bool";
 				break;
 		}
+		if (type == "stringArray")
+		{
+			"[AutoProperty(AutoArrayType=AutoArrayType.List)]".Dump();
+		}
 		$"public {netType} {name} {{ get; set; }}".Dump();
 	}
 }
+"}".Dump();
+"}".Dump();

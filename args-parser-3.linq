@@ -2,7 +2,7 @@
 
 void Main()
 {
-	string path = @"Exec";
+	string path = @"BuildX\Bake";
 	string file = $@"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\{path}\args.txt";
 	string[] lines = File.ReadAllLines(file);
 
