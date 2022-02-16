@@ -20,10 +20,16 @@ namespace Cake.Docker
 		public string[] BuildArg { get; set; }
 		/// <summary>
 		/// --cache-from
-		/// default: 
-		/// Images to consider as cache sources
+		/// default:
+		/// External cache sources
 		/// </summary>
 		public string[] CacheFrom { get; set; }
+		/// <summary>
+		/// --cache-to
+		/// default:
+		/// Cache export destinations
+		/// </summary>
+		public string[] CacheTo { get; set; }
 		/// <summary>
 		/// --cgroup-parent
 		/// Optional parent cgroup for the container
@@ -147,7 +153,7 @@ namespace Cake.Docker
 		public bool? Rm { get; set; }
 		/// <summary>
 		/// --security-opt
-		/// default: 
+		/// default:
 		/// Security options
 		/// </summary>
 		public string[] SecurityOpt { get; set; }
