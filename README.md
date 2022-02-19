@@ -34,6 +34,7 @@ Including addin in cake script is easy.
 
 **BREAKING** Starting with 0.8.0 command's setting types that haven't been composed of all words have changed to full name. i.e. DockerBuildSettings to DockerImageBuildSettings). 
 
+- [DockerComposeCp](https://docs.docker.com/engine/reference/commandline/compose_cp/) v1.1.1
 - [DockerBuildXBake](https://docs.docker.com/engine/reference/commandline/buildx_bake/) v1.1.0
 - [DockerBuildXBuild](https://docs.docker.com/engine/reference/commandline/buildx_build/) v1.1.0
 - [DockerBuildXCreate](https://docs.docker.com/engine/reference/commandline/buildx_create/) v1.1.0

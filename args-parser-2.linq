@@ -1,6 +1,6 @@
 <Query Kind="Statements" />
 
-string path = @"BuildX\Bake";
+string path = @"Compose\Cp";
 string file = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath)!, $@"src\Cake.Docker\{path}\args.txt");
 //string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\Compose\Up\args.txt";
 string[] lines = File.ReadAllLines(file);
