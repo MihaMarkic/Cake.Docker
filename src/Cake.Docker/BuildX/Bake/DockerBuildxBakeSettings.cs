@@ -31,9 +31,7 @@ namespace Cake.Docker
         /// </summary>
         public bool Print { get; set; }
         /// <summary>
-        /// Set type of progress output ("auto",
-        ///   "plain", "tty"). Use plain to show
-        ///   container output (default "auto")
+        /// Set type of progress output ("auto", "plain", "tty"). Use plain to show container output (default "auto")
         /// </summary>
         public string Progress { get; set; }
         /// <summary>
@@ -45,8 +43,7 @@ namespace Cake.Docker
         /// </summary>
         public bool Push { get; set; }
         /// <summary>
-        /// Override target value (e.g.,
-        ///   "targetpattern.key=value")
+        /// Override target value (e.g., "targetpattern.key=value")
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] Set { get; set; }

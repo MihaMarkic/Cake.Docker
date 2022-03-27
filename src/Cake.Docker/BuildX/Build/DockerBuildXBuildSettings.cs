@@ -8,15 +8,12 @@ namespace Cake.Docker
     public sealed class DockerBuildXBuildSettings : AutoToolSettings
     {
         /// <summary>
-        /// Add a custom host-to-IP mapping
-        ///   (format: "host:ip")
+        /// Add a custom host-to-IP mapping (format: "host:ip")
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] AddHost { get; set; }
         /// <summary>
-        /// Allow extra privileged entitlement
-        ///   (e.g., "network.host",
-        ///   "security.insecure")
+        /// Allow extra privileged entitlement (e.g., "network.host", "security.insecure")
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] Allow { get; set; }
@@ -26,8 +23,7 @@ namespace Cake.Docker
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] BuildArg { get; set; }
         /// <summary>
-        /// Additional build contexts (e.g.,
-        ///   name=path)
+        /// Additional build contexts (e.g., name=path)
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] BuildContext { get; set; }
@@ -36,16 +32,12 @@ namespace Cake.Docker
         /// </summary>
         public string Builder { get; set; }
         /// <summary>
-        /// External cache sources (e.g.,
-        ///   "user/app:cache",
-        ///   "type=local,src=path/to/dir")
+        /// External cache sources (e.g., "user/app:cache", "type=local,src=path/to/dir")
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] CacheFrom { get; set; }
         /// <summary>
-        /// Cache export destinations (e.g.,
-        ///   "user/app:cache",
-        ///   "type=local,dest=path/to/dir")
+        /// Cache export destinations (e.g., "user/app:cache", "type=local,dest=path/to/dir")
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] CacheTo { get; set; }
@@ -83,8 +75,7 @@ namespace Cake.Docker
         [AutoProperty(Format = Constants.BoolWithTrueDefaultFormat)]
         public bool? DisableContentTrust { get; set; }
         /// <summary>
-        /// Name of the Dockerfile (default:
-        ///   "PATH/Dockerfile")
+        /// Name of the Dockerfile (default: "PATH/Dockerfile")
         /// </summary>
         public string File { get; set; }
         /// <summary>
@@ -121,9 +112,7 @@ namespace Cake.Docker
         /// </summary>
         public string MetadataFile { get; set; }
         /// <summary>
-        /// Set the networking mode for the
-        ///   "RUN" instructions during build
-        ///   (default "default")
+        /// Set the networking mode for the "RUN" instructions during build (default "default")
         /// </summary>
         public string Network { get; set; }
         /// <summary>
@@ -136,8 +125,7 @@ namespace Cake.Docker
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] NoCacheFilter { get; set; }
         /// <summary>
-        /// Output destination (format:
-        ///   "type=local,dest=path")
+        /// Output destination (format: "type=local,dest=path")
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] Output { get; set; }
@@ -147,15 +135,11 @@ namespace Cake.Docker
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] Platform { get; set; }
         /// <summary>
-        /// Set type of progress output
-        ///   ("auto", "plain", "tty"). Use plain
-        ///   to show container output (default
-        ///   "auto")
+        /// Set type of progress output ("auto", "plain", "tty"). Use plain to show container output (default "auto")
         /// </summary>
         public string Progress { get; set; }
         /// <summary>
-        /// Always attempt to pull all
-        ///   referenced images
+        /// Always attempt to pull all referenced images
         /// </summary>
         public bool Pull { get; set; }
         /// <summary>
@@ -163,8 +147,7 @@ namespace Cake.Docker
         /// </summary>
         public bool Push { get; set; }
         /// <summary>
-        /// Suppress the build output and print
-        ///   image ID on success
+        /// Suppress the build output and print image ID on success
         /// </summary>
         public bool Quiet { get; set; }
         /// <summary>
@@ -173,9 +156,7 @@ namespace Cake.Docker
         [AutoProperty(Format = Constants.BoolWithTrueDefaultFormat)]
         public bool? Rm { get; set; }
         /// <summary>
-        /// Secret to expose to the build
-        ///   (format:
-        ///   "id=mysecret[,src=/local/secret]")
+        /// Secret to expose to the build (format: "id=mysecret[,src=/local/secret]")
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] Secret { get; set; }
@@ -193,15 +174,12 @@ namespace Cake.Docker
         /// </summary>
         public bool? Squash { get; set; }
         /// <summary>
-        /// SSH agent socket or keys to expose
-        ///   to the build (format:
-        ///   "default|&lt;id&gt;[=&lt;socket&gt;|&lt;key&gt;[,&lt;key&gt;]]")
+        /// SSH agent socket or keys to expose to the build (format: "default|&lt;id&gt;[=&lt;socket&gt;|&lt;key&gt;[,&lt;key&gt;]]")
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] Ssh { get; set; }
         /// <summary>
-        /// Name and optionally a tag (format:
-        ///   "name:tag")
+        /// Name and optionally a tag (format: "name:tag")
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] Tag { get; set; }
