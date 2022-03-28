@@ -11,6 +11,10 @@
         /// </summary>
         public bool Append { get; set; }
         /// <summary>
+        /// Boot builder after creation
+        /// </summary>
+        public bool Bootstrap { get; set; }
+        /// <summary>
         /// Override the configured builder instance
         /// </summary>
         public string Builder { get; set; }
@@ -23,8 +27,8 @@
         /// </summary>
         public string Config { get; set; }
         /// <summary>
-        /// Driver to use (available: [docker
-        ///   docker-container kubernetes])
+        /// Driver to use (available: "docker",
+        ///   "docker-container", "kubernetes")
         /// </summary>
         public string Driver { get; set; }
         /// <summary>

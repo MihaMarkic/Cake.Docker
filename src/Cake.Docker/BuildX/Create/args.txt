@@ -1,10 +1,11 @@
 ﻿      --append                   Append a node to builder instead of
                                  changing it
+      --bootstrap                Boot builder after creation
       --builder string           Override the configured builder instance
       --buildkitd-flags string   Flags for buildkitd daemon
       --config string            BuildKit config file
-      --driver string            Driver to use (available: [docker
-                                 docker-container kubernetes])
+      --driver string            Driver to use (available: "docker",
+                                 "docker-container", "kubernetes")
       --driver-opt stringArray   Options for the driver
       --leave                    Remove a node from builder instead of
                                  changing it

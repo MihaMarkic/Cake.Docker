@@ -3,7 +3,7 @@
     /// <summary>
     /// Settings for docker buildx ls.
     /// </summary>
-    public class DockerBuildXLsSettings: AutoToolSettings
+    public sealed class DockerBuildXLsSettings: AutoToolSettings
     {
         /// <summary>
         /// Override the configured builder instance

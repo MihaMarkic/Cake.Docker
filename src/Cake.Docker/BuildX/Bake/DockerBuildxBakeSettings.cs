@@ -1,8 +1,7 @@
 namespace Cake.Docker
 {
     /// <summary>
-    /// Settings for docker buildx bake [OPTIONS] [TARGET...]
-    /// Build from a file
+    /// Settings for docker buildx bake.
     /// </summary>
     public sealed class DockerBuildXBakeSettings : AutoToolSettings
     {
@@ -16,7 +15,7 @@ namespace Cake.Docker
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] File { get; set; }
         /// <summary>
-        /// Shorthand for --set=*.output=type=docker
+        /// Shorthand for "--set=*.output=type=docker"
         /// </summary>
         public bool Load { get; set; }
         /// <summary>
@@ -32,23 +31,22 @@ namespace Cake.Docker
         /// </summary>
         public bool Print { get; set; }
         /// <summary>
-        /// Set type of progress output (auto, plain,
-        ///   tty). Use plain to show container output
-        ///   (default "auto")
+        /// Set type of progress output ("auto",
+        ///   "plain", "tty"). Use plain to show
+        ///   container output (default "auto")
         /// </summary>
         public string Progress { get; set; }
         /// <summary>
-        /// Always attempt to pull a newer version of
-        ///   the image
+        /// Always attempt to pull all referenced images
         /// </summary>
         public bool Pull { get; set; }
         /// <summary>
-        /// Shorthand for --set=*.output=type=registry
+        /// Shorthand for "--set=*.output=type=registry"
         /// </summary>
         public bool Push { get; set; }
         /// <summary>
-        /// Override target value (eg:
-        ///   targetpattern.key=value)
+        /// Override target value (e.g.,
+        ///   "targetpattern.key=value")
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] Set { get; set; }

@@ -14,9 +14,9 @@
         /// </summary>
         public string Builder { get; set; }
         /// <summary>
-        /// Provide filter values (e.g. 'until=24h')
+        /// Provide filter values (e.g., "until=24h")
         /// </summary>
-        public bool Filter { get; set; }
+        public string Filter { get; set; }
         /// <summary>
         /// Do not prompt for confirmation
         /// </summary>
@@ -24,7 +24,7 @@
         /// <summary>
         /// Amount of disk space to keep for cache
         /// </summary>
-        public bool KeepStorage { get; set; }
+        public string KeepStorage { get; set; }
         /// <summary>
         /// Provide a more verbose output
         /// </summary>
