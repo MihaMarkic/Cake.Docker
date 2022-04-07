@@ -12,7 +12,7 @@
         /// <summary>
         /// Provide filter values
         /// </summary>
-        public bool Filter { get; set; }
+        public string Filter { get; set; }
         /// <summary>
         /// Provide a more verbose output
         /// </summary>

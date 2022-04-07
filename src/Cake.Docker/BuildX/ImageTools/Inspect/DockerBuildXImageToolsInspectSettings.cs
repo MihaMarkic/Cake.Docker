@@ -10,7 +10,11 @@
         /// </summary>
         public string Builder { get; set; }
         /// <summary>
-        /// Show original JSON manifest
+        /// Format the output using the given Go template
+        /// </summary>
+        public string Format { get; set; }
+        /// <summary>
+        /// Show original, unformatted JSON manifest
         /// </summary>
         public bool Raw { get; set; }
     }

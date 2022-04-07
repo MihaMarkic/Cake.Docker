@@ -11,6 +11,10 @@
         /// </summary>
         public bool Append { get; set; }
         /// <summary>
+        /// Boot builder after creation
+        /// </summary>
+        public bool Bootstrap { get; set; }
+        /// <summary>
         /// Override the configured builder instance
         /// </summary>
         public string Builder { get; set; }
@@ -23,8 +27,7 @@
         /// </summary>
         public string Config { get; set; }
         /// <summary>
-        /// Driver to use (available: [docker
-        ///   docker-container kubernetes])
+        /// Driver to use (available: "docker", "docker-container", "kubernetes")
         /// </summary>
         public string Driver { get; set; }
         /// <summary>
@@ -33,8 +36,7 @@
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] DriverOpt { get; set; }
         /// <summary>
-        /// Remove a node from builder instead of
-        ///   changing it
+        /// Remove a node from builder instead of changing it
         /// </summary>
         public bool Leave { get; set; }
         /// <summary>

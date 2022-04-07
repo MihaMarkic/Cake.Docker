@@ -1,8 +1,8 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -42,6 +42,6 @@ namespace Cake.Docker
             var runner = new GenericDockerRunner<DockerBuildXImageToolsInspectSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             return runner.RunWithResult("buildx imagetools inspect", settings ?? new DockerBuildXImageToolsInspectSettings(), r => r.ToArray(), name);
         }
-        
+
     }
 }

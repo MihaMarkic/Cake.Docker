@@ -1,2 +1,5 @@
-﻿      --builder string   Override the configured builder instance
+﻿      --all-inactive     Remove all inactive builders
+      --builder string   Override the configured builder instance
+  -f, --force            Do not prompt for confirmation
+      --keep-daemon      Keep the buildkitd daemon running
       --keep-state       Keep BuildKit state
