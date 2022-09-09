@@ -127,6 +127,10 @@ namespace Cake.Docker
 		/// </summary>
 		public string Platform { get; set; }
 		/// <summary>
+		/// Set type of progress output ("auto", "plain", "tty"). Use plain to show container output (default "auto")
+		/// </summary>
+		public string Progress { get; set; }
+		/// <summary>
 		/// --pull
 		/// default: false
 		/// Always attempt to pull a newer version of the image
