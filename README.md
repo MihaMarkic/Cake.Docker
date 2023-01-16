@@ -14,6 +14,8 @@ Including addin in cake script is easy.
 
 **Cake references**
 
+* 1.2.0: Cake 3.0.0
+
 * 1.1.0: Cake 2.0.0
 
 - 1.0.0: Cake 1.0.0
@@ -23,6 +25,8 @@ Including addin in cake script is easy.
 - 0.9.4: Cake 0.28
 
 - 0.9 references Cake 0.26 (and goes .NET Standard 2.0 only)
+
+**Important**: In version 1.2.0 the .netcore 3.1 is dropped, only .net6+ versions are distributed.
 
 **Important**: In version 1.1.0 the .netstandard 2.0 version is dropped and instead .netcore 3.1, .net5 and .net6 versions are distributed.
 

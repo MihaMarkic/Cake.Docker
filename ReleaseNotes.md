@@ -1,3 +1,8 @@
+# Cake.Docker 1.2.0
+
+* Drops support for .NET Core. Only .NET 6.0+ is supported (thanks [Toni Wenzel](https://github.com/twenzel))
+* Bumps Cake reference to 3.0.0 (thanks [Toni Wenzel](https://github.com/twenzel))
+
 # Cake.Docker 1.1.0
 
 * Adds docker image prune
