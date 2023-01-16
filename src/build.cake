@@ -1,4 +1,4 @@
-﻿#tool nuget:?package=NuGet.CommandLine&version=5.11.0
+﻿#tool nuget:?package=NuGet.CommandLine&version=6.3.1
 
 var Project = Directory("./Cake.Docker/");
 var TestProject = Directory("./Cake.Docker.Tests/");
@@ -16,8 +16,8 @@ Task("Default")
 	.Does (() =>
 	{
 		NuGetRestore (CakeDockerSln);
-		DotNetCoreClean(CakeDockerSln);
-		DotNetCoreBuild (CakeDockerSln, new DotNetCoreBuildSettings {
+		DotNetClean(CakeDockerSln);
+		DotNetBuild (CakeDockerSln, new DotNetBuildSettings {
 			Configuration = "Release"
 		});
 });
@@ -26,11 +26,11 @@ Task("UnitTest")
 	.IsDependentOn("Default")
 	.Does(() =>
 	{
-		var settings = new DotNetCoreTestSettings
+		var settings = new DotNetTestSettings
 		 {
 			 Configuration = "Release"
 		 };
-		DotNetCoreTest(CakeTestDockerProj, settings);
+		DotNetTest(CakeTestDockerProj, settings);
 	});
 
 Task("NuGetPack")
@@ -39,7 +39,7 @@ Task("NuGetPack")
 	.Does (() =>
 {
 	CreateDirectory(Nupkg);
-	DotNetCorePack (CakeDockerProj, new DotNetCorePackSettings
+	DotNetPack (CakeDockerProj, new DotNetPackSettings
      {
          Configuration = "Release",
          OutputDirectory = "./nupkg/"
