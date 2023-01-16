@@ -2,7 +2,7 @@
 
 * Drops support for .NET Core. Only .NET 6.0+ is supported (thanks [Toni Wenzel](https://github.com/twenzel))
 * Bumps Cake reference to 3.0.0 (thanks [Toni Wenzel](https://github.com/twenzel))
-
+* Add --progress arguement to DockerImageBuildSettings (thanks [Chris Blyth](https://github.com/BlythMeister))
 # Cake.Docker 1.1.0
 
 * Adds docker image prune
