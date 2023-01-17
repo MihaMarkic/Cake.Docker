@@ -148,7 +148,7 @@ Tested only on Windows and Ubuntu. Ensure that Docker command line tool can be l
 On Linux machines, ensure that user has access to the `docker` daemon Unix socket or use the DOCKER_HOST environment variable to point to the daemon's TCP port.
 Refer to the Docker documentation for controlling access to the docker daemon Unix socket.
 
-[![Follow @mihamarkic](https://img.shields.io/badge/Twitter-Follow%20%40mihamarkic-blue.svg)](https://twitter.com/intent/follow?screen_name=mihamarkic)
+[![Follow @mihamarkic@mastodon.social](https://img.shields.io/mastodon/follow/001030236?style=social)](https://mastodon.social/@mihamarkic)
 
 ## Discussion
 
