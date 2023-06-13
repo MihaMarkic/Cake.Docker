@@ -64,5 +64,11 @@
         ///   setting in the Compose file if present.
         /// </summary>
         public string Scale { get; set; }
+
+        /// <summary>
+        /// Wait for containers to be healthy.
+        /// </summary>
+        [AutoProperty(Format = "--wait", OnlyWhenTrue = true)]
+        public bool Wait { get; set; }
     }
 }
