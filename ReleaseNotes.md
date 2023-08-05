@@ -1,3 +1,8 @@
+# Cake.Docker TBD
+
+* Updated Compose Up settings
+* `DockerComposeUpSettings.DetachedMode` is renamed to `Detached`.
+
 # Cake.Docker 1.2.0
 
 * Drops support for .NET Core. Only .NET 6.0+ is supported (thanks [Toni Wenzel](https://github.com/twenzel))
