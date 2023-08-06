@@ -1,3 +1,7 @@
+# Cake.Docker 1.2.2
+
+* Fixes DockerComposeUpSettings not inherting from DockerComposeSettings introduces in previous version
+
 # Cake.Docker 1.2.1
 
 * Updated Compose Up settings

@@ -3,7 +3,7 @@
     /// <summary>
     /// Settings for docker compose up.
     /// </summary>
-    public sealed class DockerComposeUpSettings : AutoToolSettings
+    public sealed class DockerComposeUpSettings : DockerComposeSettings
     {
         /// <summary>
         /// Stops all containers if any container
