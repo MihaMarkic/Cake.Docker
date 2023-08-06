@@ -1,7 +1,7 @@
 # Cake.Docker 1.2.1
 
 * Updated Compose Up settings
-* `DockerComposeUpSettings.DetachedMode` is renamed to `Detached`.
+* `DockerComposeUpSettings.DetachedMode` is renamed to `Detach`.
 
 # Cake.Docker 1.2.0
 
