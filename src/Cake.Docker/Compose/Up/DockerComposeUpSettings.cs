@@ -41,6 +41,7 @@
         /// Return the exit code of the selected
         ///   service container. Implies --abort-on-container-exit
         /// </summary>
+        [AutoProperty(Format = "--exit-code-from {1}")]
         public string ExitCodeFrom { get; set; }
         /// <summary>
         /// Recreate containers even if their
@@ -104,7 +105,7 @@
         ///   Overrides the scale setting in the
         ///   Compose file if present.
         /// </summary>
-        public bool Scale { get; set; }
+        public string Scale { get; set; }
         /// <summary>
         /// Use this timeout in seconds for
         ///   container shutdown when attached or
