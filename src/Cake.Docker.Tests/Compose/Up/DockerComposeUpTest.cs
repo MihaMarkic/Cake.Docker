@@ -11,12 +11,12 @@ namespace Cake.Docker.Tests.Up
             var fixture = new DockerComposeUpFixture
             {
                 Service = "service",
-                Settings = new DockerComposeUpSettings {  DetachedMode = true },
+                Settings = new DockerComposeUpSettings {  Detach = true },
             };
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("up -d service"));
+            Assert.That(actual.Args, Is.EqualTo("up --detach service"));
         }
 
         [Test]
@@ -57,6 +57,18 @@ namespace Cake.Docker.Tests.Up
             var actual = fixture.Run();
 
             Assert.That(actual.Args, Is.EqualTo("up --abort-on-container-exit --remove-orphans"));
+        }
+        [Test]
+        public void WhenWaitTimeoutIsSet_CommandLineIsCorrect()
+        {
+            var fixture = new DockerComposeUpFixture
+            {
+                Settings = new DockerComposeUpSettings { WaitTimeout = 1 },
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("up --wait-timeout 1"));
         }
     }
 }

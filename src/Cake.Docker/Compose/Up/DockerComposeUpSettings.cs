@@ -125,7 +125,6 @@ namespace Cake.Docker
         /// timeout waiting for application to be
         ///   running|healthy
         /// </summary>
-        [AutoProperty(Format = "--wait", OnlyWhenTrue = true)]
-        public int WaitTimeout { get; set; }
+        public int? WaitTimeout { get; set; }
     }
 }
