@@ -26,7 +26,7 @@ Including addin in cake script is easy.
 
 - 0.9 references Cake 0.26 (and goes .NET Standard 2.0 only)
 
-**Important**: In version 1.2.1 `DockerComposeUpSettings.DetachedMode` is renamed to `Detached`.
+**Important**: In version 1.2.1 `DockerComposeUpSettings.DetachedMode` is renamed to `Detach`.
 
 **Important**: In version 1.2.0 the .netcore 3.1 is dropped, only .net6+ versions are distributed.
 
