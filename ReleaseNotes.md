@@ -1,3 +1,9 @@
+# Cake.Docker 1.2.3
+
+* Fixes incorrect (regression) DockerComposeUpSettings.Scale type (thanks [Davy Courvoisier](https://github.com/davy-oo))
+* Updates release notes with warning of DetachedMode -> Detach (thanks [Pascal Berger](https://github.com/pascalberger))
+* Adds more unit tests and other internal fixes (thanks [Deep](https://github.com/deeps-vmware))
+
 # Cake.Docker 1.2.2
 
 * Fixes DockerComposeUpSettings not inherting from DockerComposeSettings introduces in previous version
