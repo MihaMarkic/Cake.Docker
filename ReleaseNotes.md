@@ -1,3 +1,12 @@
+# Cake.Docker 1.2.2
+
+* Fixes DockerComposeUpSettings not inherting from DockerComposeSettings introduces in previous version
+
+# Cake.Docker 1.2.1
+
+* Updated Compose Up settings
+* `DockerComposeUpSettings.DetachedMode` is renamed to `Detach`.
+
 # Cake.Docker 1.2.0
 
 * Drops support for .NET Core. Only .NET 6.0+ is supported (thanks [Toni Wenzel](https://github.com/twenzel))
