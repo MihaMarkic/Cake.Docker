@@ -1,4 +1,4 @@
-﻿namespace Cake.Docker
+namespace Cake.Docker
 {
     /// <summary>
     /// Settings for docker compose up.
@@ -125,6 +125,7 @@
         /// timeout waiting for application to be
         ///   running|healthy
         /// </summary>
+        [AutoProperty(Format = "--wait", OnlyWhenTrue = true)]
         public int WaitTimeout { get; set; }
     }
 }

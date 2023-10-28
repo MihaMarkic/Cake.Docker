@@ -1,6 +1,4 @@
-﻿#tool nuget:?package=NuGet.CommandLine&version=6.3.1
-
-var Project = Directory("./Cake.Docker/");
+﻿var Project = Directory("./Cake.Docker/");
 var TestProject = Directory("./Cake.Docker.Tests/");
 var CakeDockerProj = Project + File("Cake.Docker.csproj");
 var CakeTestDockerProj = TestProject + File("Cake.Docker.Tests.csproj");
@@ -15,7 +13,7 @@ var target = Argument("target", "Default");
 Task("Default")
 	.Does (() =>
 	{
-		NuGetRestore (CakeDockerSln);
+		DotNetRestore (CakeDockerSln);
 		DotNetClean(CakeDockerSln);
 		DotNetBuild (CakeDockerSln, new DotNetBuildSettings {
 			Configuration = "Release"
