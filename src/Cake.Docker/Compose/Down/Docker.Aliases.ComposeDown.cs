@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -25,12 +25,9 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeDown(this ICakeContext context, DockerComposeDownSettings settings)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             var runner = new GenericDockerComposeRunner<DockerComposeDownSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("down", settings ?? new DockerComposeDownSettings(), new string[0]);
+            runner.Run("down", settings ?? new DockerComposeDownSettings(), []);
         }
 
     }

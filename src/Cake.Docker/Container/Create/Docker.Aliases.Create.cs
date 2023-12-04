@@ -1,8 +1,8 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -36,13 +36,10 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static string DockerCreate(this ICakeContext context, DockerContainerCreateSettings settings, string image, string command, params string[] args)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             if (string.IsNullOrEmpty(image))
             {
-                throw new ArgumentNullException("image");
+                throw new ArgumentNullException(nameof(image));
             }
             var runner = new GenericDockerRunner<DockerContainerCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> { image };

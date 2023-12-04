@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -20,11 +20,11 @@ namespace Cake.Docker
         {
             if (string.IsNullOrEmpty(username))
             {
-                throw new ArgumentNullException("username");
+                throw new ArgumentNullException(nameof(username));
             }
             if (string.IsNullOrEmpty(password))
             {
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException(nameof(password));
             }
 
             DockerLogin(context, new DockerRegistryLoginSettings { Username = username, Password = password }, server);
@@ -40,17 +40,11 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerLogin(this ICakeContext context, DockerRegistryLoginSettings settings, string server = null)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
-            if (settings == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(nameof(settings));
 
             var runner = new GenericDockerRunner<DockerRegistryLoginSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("login", settings, server != null ? new[] { server } : new string[] { });
+            runner.Run("login", settings, server != null ? [server] : []);
         }
     }
 }

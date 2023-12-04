@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -17,8 +17,8 @@ namespace Cake.Docker
         {
             DockerRm(context, new DockerContainerRmSettings(), containers);
         }
-        
-        
+
+
         /// <summary>
         /// Removes an array of <paramref name="containers"/> using the given <param name="settings"/>.
         /// </summary>
@@ -27,13 +27,10 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerRm(this ICakeContext context, DockerContainerRmSettings settings, params string[] containers)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             if (containers == null || containers.Length == 0)
             {
-                throw new ArgumentNullException("containers");
+                throw new ArgumentNullException(nameof(containers));
             }
             var runner = new GenericDockerRunner<DockerContainerRmSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("rm", settings ?? new DockerContainerRmSettings(), containers);

@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -17,7 +17,7 @@ namespace Cake.Docker
         {
             DockerRemove(context, new DockerImageRemoveSettings(), images);
         }
-        
+
         /// <summary>
         /// Removes an array of <paramref name="images"/> using the give <paramref name="settings"/>.
         /// </summary>
@@ -27,13 +27,10 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerRemove(this ICakeContext context, DockerImageRemoveSettings settings, params string[] images)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             if (images == null || images.Length == 0)
             {
-                throw new ArgumentNullException("containers");
+                throw new ArgumentNullException(nameof(images));
             }
             var runner = new GenericDockerRunner<DockerImageRemoveSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("rmi", settings ?? new DockerImageRemoveSettings(), images);

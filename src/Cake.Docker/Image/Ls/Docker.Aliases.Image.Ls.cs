@@ -1,8 +1,8 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -20,10 +20,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerImageLs(this ICakeContext context, DockerImageLsSettings settings)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             var runner = new GenericDockerRunner<DockerImageLsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             return runner.RunWithResult("image ls", settings ?? new DockerImageLsSettings(), r => r.ToArray());
         }

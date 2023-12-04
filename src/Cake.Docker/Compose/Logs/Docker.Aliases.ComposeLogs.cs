@@ -1,8 +1,8 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -27,10 +27,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerComposeLogs(this ICakeContext context, DockerComposeLogsSettings settings)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             var runner = new GenericDockerComposeRunner<DockerComposeLogsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             return runner.RunWithResult("logs", settings ?? new DockerComposeLogsSettings(), r => r.ToArray());
         }

@@ -1,10 +1,10 @@
-﻿using Cake.Core.IO;
-using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
+using Cake.Core.IO;
+using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace Cake.Docker.Tests
 {
@@ -86,7 +86,7 @@ namespace Cake.Docker.Tests
             [Test]
             public void WhenGivenStringArrayProperty_FormatsProperly()
             {
-                var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayProperty(StringsProperty, new string[] { "tubo1", "tubo2" }, isSecret: false);
+                var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayProperty(StringsProperty, ["tubo1", "tubo2"], isSecret: false);
 
                 CollectionAssert.AreEqual(actual, new DockerArgument[] {
                     new DockerArgument("--strings", "tubo1", DockerArgumentQuoting.Quoted),
@@ -107,7 +107,7 @@ namespace Cake.Docker.Tests
             public void WhenGivenStringArrayProperty_FormatsProperly()
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromStringArrayListProperty(
-                    ListStringsProperty, new string[] { "tubo1", "tubo2" }, isSecret: false).Value;
+                    ListStringsProperty, ["tubo1", "tubo2"], isSecret: false).Value;
 
                 Assert.That(actual.Key, Is.EqualTo("--list-strings"));
                 Assert.That(actual.Value, Is.EqualTo("tubo1,tubo2"));
@@ -286,7 +286,7 @@ namespace Cake.Docker.Tests
                 TestSettings input = new TestSettings { String = "tubo" };
 
                 ProcessArgumentBuilder builder = new ProcessArgumentBuilder();
-                builder.AppendAll("cmd", input, new string[] { "arg1" });
+                builder.AppendAll("cmd", input, ["arg1"]);
                 var actual = builder.Render();
 
                 Assert.That(actual, Is.EqualTo("cmd --string \"tubo\" arg1"));
@@ -307,7 +307,7 @@ namespace Cake.Docker.Tests
     }
 
     [TestFixture]
-    public class GetAutoPropertyAttributeOrNull: ArgumentsBuilderExtensionTest
+    public class GetAutoPropertyAttributeOrNull : ArgumentsBuilderExtensionTest
     {
         [Test]
         public void WhenDecorated_ReturnsAutoPropertyAttribute()
@@ -326,7 +326,7 @@ namespace Cake.Docker.Tests
     }
 
     [TestFixture]
-    public class GetArgumentFromAutoProperty: ArgumentsBuilderExtensionTest
+    public class GetArgumentFromAutoProperty : ArgumentsBuilderExtensionTest
     {
         [Test]
         public void WhenGivenValue_FormatsProperly()
@@ -356,13 +356,13 @@ namespace Cake.Docker.Tests
         public void WhenDecoratedStrings_FormatsProperly()
         {
             var attribute = ArgumentsBuilderExtension.GetAutoPropertyAttributeOrNull(DecoratedStringsProperty);
-            var actual = ArgumentsBuilderExtension.GetArgumentFromAutoProperty(attribute, DecoratedStringsProperty, new string[] {"One=1", "Two=2" });
+            var actual = ArgumentsBuilderExtension.GetArgumentFromAutoProperty(attribute, DecoratedStringsProperty, new string[] { "One=1", "Two=2" });
 
             Assert.That(actual, Is.EqualTo("-e One=1 -e Two=2"));
         }
     }
     [TestFixture]
-    public class GetArgumentFromProperty: ArgumentsBuilderExtensionTest
+    public class GetArgumentFromProperty : ArgumentsBuilderExtensionTest
     {
         [Test]
         public void WhenPreCommand_DoesNotAppearInNormalCommands()
@@ -382,7 +382,7 @@ namespace Cake.Docker.Tests
         }
     }
 
-    public class TestSettings: AutoToolSettings
+    public class TestSettings : AutoToolSettings
     {
         public string String { get; set; }
         public string[] Strings { get; set; }
@@ -393,7 +393,7 @@ namespace Cake.Docker.Tests
         public Int64? NullableInt64 { get; set; }
         public UInt64? NullableUInt64 { get; set; }
         public UInt16? NullableUInt16 { get; set; }
-        public  bool? NullableBool { get; set; }
+        public bool? NullableBool { get; set; }
         public TimeSpan? NullableTimeSpan { get; set; }
         public bool Bool { get; set; }
         [AutoProperty(Format = "-s {1}")]
@@ -406,7 +406,7 @@ namespace Cake.Docker.Tests
         public string PreCommandValue { get; set; }
         protected override string[] CollectSecretProperties()
         {
-            return new[] { nameof(Password) };
+            return [nameof(Password)];
         }
     }
 }

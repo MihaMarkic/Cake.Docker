@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -27,17 +27,14 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerPush(this ICakeContext context, DockerImagePushSettings settings, string imageReference)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             if (string.IsNullOrEmpty(imageReference))
             {
-                throw new ArgumentNullException("imageReference");
+                throw new ArgumentNullException(nameof(imageReference));
             }
 
             var runner = new GenericDockerRunner<DockerImagePushSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("push", settings ?? new DockerImagePushSettings(), new [] { imageReference });
+            runner.Run("push", settings ?? new DockerImagePushSettings(), [imageReference]);
         }
     }
 }

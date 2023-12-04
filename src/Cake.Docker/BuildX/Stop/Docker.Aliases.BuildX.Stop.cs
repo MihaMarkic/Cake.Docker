@@ -15,8 +15,9 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuildXStop(this ICakeContext context, string name = null)
         {
-            context.DockerBuildXStop(name);
+            context.DockerBuildXStop(new DockerBuildXStopSettings(), name);
         }
+
         /// <summary>
         /// Stop builder instance given <paramref name="settings"/>.
         /// </summary>
@@ -26,12 +27,9 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuildXStop(this ICakeContext context, DockerBuildXStopSettings settings = null, string name = null)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             var runner = new GenericDockerRunner<DockerBuildXStopSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("buildx stop", new DockerBuildXStopSettings(), new string[] { name });
+            runner.Run("buildx stop", settings ?? new DockerBuildXStopSettings(), [name]);
         }
     }
 }

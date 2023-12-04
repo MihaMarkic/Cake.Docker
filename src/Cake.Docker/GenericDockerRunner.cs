@@ -86,17 +86,17 @@ namespace Cake.Docker
         {
             if (string.IsNullOrEmpty(command))
             {
-                throw new ArgumentNullException("command");
+                throw new ArgumentNullException(nameof(command));
             }
             if (settings == null)
             {
-                throw new ArgumentNullException("settings");
+                throw new ArgumentNullException(nameof(settings));
             }
             if (processOutput == null)
             {
-                throw new ArgumentNullException("processOutput");
+                throw new ArgumentNullException(nameof(processOutput));
             }
-            T[] result = new T[0];
+            T[] result = [];
             ProcessSettings processSettings = IsExperimental ? CreateExperimentalProcessSettings(): new ProcessSettings();
             processSettings.RedirectStandardOutput = true;
             Run(settings, GetArguments(command, settings, arguments),

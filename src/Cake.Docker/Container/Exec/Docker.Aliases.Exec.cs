@@ -1,7 +1,7 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -18,10 +18,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerExec(this ICakeContext context, string container, string command, params string[] args)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             DockerExec(context, new DockerContainerExecSettings(), container, command, args);
         }
         /// <summary>
@@ -33,22 +30,20 @@ namespace Cake.Docker
         /// <param name="args">The arguments.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-		public static void DockerExec(this ICakeContext context, DockerContainerExecSettings settings, string container, string command, params string[] args)
+        public static void DockerExec(this ICakeContext context, DockerContainerExecSettings settings, string container, string command, params string[] args)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
+
             if (string.IsNullOrEmpty(container))
             {
-                throw new ArgumentNullException("container");
+                throw new ArgumentNullException(nameof(container));
             }
             if (string.IsNullOrEmpty(command))
             {
-                throw new ArgumentNullException("command");
+                throw new ArgumentNullException(nameof(command));
             }
             var runner = new GenericDockerRunner<DockerContainerExecSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            List<string> arguments = new List<string> { container, command };
+            List<string> arguments = [container, command];
             if (args.Length > 0)
             {
                 arguments.AddRange(args);

@@ -27,12 +27,9 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuildXCreate(this ICakeContext context, DockerBuildXCreateSettings settings, string target = null)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             var runner = new GenericDockerRunner<DockerBuildXCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("buildx create", settings ?? new DockerBuildXCreateSettings(), target != null ? new[] { target }: Array.Empty<string>());
+            runner.Run("buildx create", settings ?? new DockerBuildXCreateSettings(), target != null ? [target] : []);
         }
 
     }

@@ -1,7 +1,7 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -23,6 +23,7 @@ namespace Cake.Docker
         {
             DockerManifestCreate(context, new DockerManifestCreateSettings(), manifestList, manifest, manifests);
         }
+
         /// <summary>
         /// Create a local manifest list for annotating and pushing to a registry
         /// </summary>
@@ -33,13 +34,10 @@ namespace Cake.Docker
         /// /// <param name="manifests">[MANIFEST...]</param>
         [CakeMethodAlias]
         [Experimental]
-        public static void DockerManifestCreate(this ICakeContext context, DockerManifestCreateSettings settings, string manifestList, 
+        public static void DockerManifestCreate(this ICakeContext context, DockerManifestCreateSettings settings, string manifestList,
             string manifest, params string[] manifests)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             var runner = new GenericDockerRunner<DockerManifestCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> { manifestList, manifest };
             if (manifests?.Length > 0)

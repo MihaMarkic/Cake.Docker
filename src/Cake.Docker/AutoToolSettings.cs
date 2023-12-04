@@ -1,12 +1,12 @@
-﻿using Cake.Core.Tooling;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Cake.Core.Tooling;
 
 namespace Cake.Docker
 {
     /// <summary>
     /// Base class for tooling that is used for autogeneration of command line arguments.
     /// </summary>
-    public abstract class AutoToolSettings: ToolSettings
+    public abstract class AutoToolSettings : ToolSettings
     {
         /// <summary>
         /// Values of these properties shouldn't be displayed in the output.
@@ -15,9 +15,9 @@ namespace Cake.Docker
         /// <summary>
         /// Initializer. Handles secret properties collection.
         /// </summary>
-        public AutoToolSettings()
+        protected AutoToolSettings()
         {
-            SecretProperties = new HashSet<string>(CollectSecretProperties() ?? new string[0]);
+            SecretProperties = new HashSet<string>(CollectSecretProperties() ?? []);
         }
         /// <summary>
         /// Collects secret properties.

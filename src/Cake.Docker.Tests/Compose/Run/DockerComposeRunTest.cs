@@ -25,7 +25,7 @@ namespace Cake.Docker.Tests.Run
             var fixture = new DockerComposeRunFixture
             {
                 Command = "cmd",
-                Settings = new DockerComposeRunSettings { Volume = new[] { "host:guest" } },
+                Settings = new DockerComposeRunSettings { Volume = ["host:guest"] },
             };
 
             var actual = fixture.Run();
@@ -38,7 +38,7 @@ namespace Cake.Docker.Tests.Run
             var fixture = new DockerComposeRunFixture
             {
                 Command = "cmd",
-                Settings = new DockerComposeRunSettings { Volume = new[] { "host:guest", "host2:guest2" } },
+                Settings = new DockerComposeRunSettings { Volume = ["host:guest", "host2:guest2"] },
             };
 
             var actual = fixture.Run();

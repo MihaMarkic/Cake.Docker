@@ -1,8 +1,8 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -17,10 +17,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerCustomCommand(this ICakeContext context, string command)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
 
             return DockerCustomCommand(context, new DockerCustomCommandSettings(), command);
         }
@@ -34,17 +31,11 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerCustomCommand(this ICakeContext context, DockerCustomCommandSettings settings, string command)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
-            if (settings == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(nameof(settings));
             if (string.IsNullOrEmpty(command))
             {
-                throw new ArgumentNullException("command");
+                throw new ArgumentNullException(nameof(command));
             }
 
 
@@ -60,7 +51,7 @@ namespace Cake.Docker
                 commandArguments = command.Substring(space);
             }
 
-            return runner.RunWithResult(commandName, settings, r => r.ToArray(), new[] { commandArguments });
+            return runner.RunWithResult(commandName, settings, r => r.ToArray(), [commandArguments]);
         }
     }
 }

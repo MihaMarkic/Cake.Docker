@@ -19,10 +19,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerBuildXLs(this ICakeContext context, DockerBuildXLsSettings settings = null)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             var runner = new GenericDockerRunner<DockerBuildXLsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             return runner.RunWithResult("buildx ls", settings ?? new DockerBuildXLsSettings(), r => r.ToArray());
         }

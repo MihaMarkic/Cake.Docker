@@ -11,7 +11,7 @@ namespace Cake.Docker.Tests.Compose.Exec
     {
         public string Service { get; set; }
         public string Command { get; set; }
-        public string[] Args { get; set; } = new string[0];
+        public string[] Args { get; set; } = [];
 
         IFileSystem ICakeContext.FileSystem => FileSystem;
 
@@ -31,7 +31,7 @@ namespace Cake.Docker.Tests.Compose.Exec
 
         public DockerComposeExecFixture() : base("docker-compose")
         {
-            ProcessRunner.Process.SetStandardOutput(new string[] { });
+            ProcessRunner.Process.SetStandardOutput(Array.Empty<string>());
         }
         protected override void RunTool()
         {

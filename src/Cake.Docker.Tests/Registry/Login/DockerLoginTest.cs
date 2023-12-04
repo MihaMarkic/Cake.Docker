@@ -37,7 +37,7 @@ namespace Cake.Docker.Tests.Registry.Login
         public void WhenOnlyPasswordIsSet_ArgumentIsRedacted()
         {
             var builder = new ProcessArgumentBuilder();
-            builder.AppendAll("login", new DockerRegistryLoginSettings { Password = "Tubo" }, new string[0]);
+            builder.AppendAll("login", new DockerRegistryLoginSettings { Password = "Tubo" }, []);
 
             var actual = builder.RenderSafe();
 

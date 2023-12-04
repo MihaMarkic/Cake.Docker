@@ -31,7 +31,7 @@ namespace Cake.Docker.Tests.Compose.Port
 
         public DockerComposePortFixture(): base("docker-compose")
         {
-            ProcessRunner.Process.SetStandardOutput(new string[] { });
+            ProcessRunner.Process.SetStandardOutput(Array.Empty<string>());
         }
         protected override void RunTool()
         {

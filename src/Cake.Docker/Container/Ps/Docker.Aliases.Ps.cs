@@ -1,7 +1,7 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Linq;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -19,10 +19,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static string DockerPs(this ICakeContext context, DockerContainerPsSettings settings)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             var runner = new GenericDockerRunner<DockerContainerPsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             var result = runner.RunWithResult("ps", settings ?? new DockerContainerPsSettings(), r => r.ToArray());
             return string.Join("\n", result);

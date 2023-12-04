@@ -1,8 +1,8 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -38,13 +38,10 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static string DockerRun(this ICakeContext context, DockerContainerRunSettings settings, string image, string command, params string[] args)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             if (string.IsNullOrEmpty(image))
             {
-                throw new ArgumentNullException("image");
+                throw new ArgumentNullException(nameof(image));
             }
             var runner = new GenericDockerRunner<DockerContainerRunSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> { image };
@@ -58,6 +55,7 @@ namespace Cake.Docker
             }
             return runner.RunWithResult("run", settings ?? new DockerContainerRunSettings(), r => r.ToArray(), arguments.ToArray()).FirstOrDefault();
         }
+
         /// <summary>
         /// Creates a new container using default settings. and doesn't return the output like 
         /// <see cref="DockerRun(ICakeContext, string, string, string[])"/> does.
@@ -72,6 +70,7 @@ namespace Cake.Docker
         {
             DockerRunWithoutResult(context, new DockerContainerRunSettings(), image, command, args);
         }
+
         /// <summary>
         /// Creates a new container given <paramref name="settings"/> and doesn't return the output like 
         /// <see cref="DockerRun(ICakeContext, DockerContainerRunSettings, string, string, string[])"/> does.
@@ -85,13 +84,10 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerRunWithoutResult(this ICakeContext context, DockerContainerRunSettings settings, string image, string command, params string[] args)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             if (string.IsNullOrEmpty(image))
             {
-                throw new ArgumentNullException("image");
+                throw new ArgumentNullException(nameof(image));
             }
             var runner = new GenericDockerRunner<DockerContainerRunSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> { image };

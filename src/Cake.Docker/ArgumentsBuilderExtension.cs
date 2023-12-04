@@ -1,9 +1,10 @@
-﻿using Cake.Core;
-using Cake.Core.IO;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
+using System.Text;
+using Cake.Core;
+using Cake.Core.IO;
 
 namespace Cake.Docker
 {
@@ -21,35 +22,26 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="arguments"></param>
         public static void AppendAll<TSettings>(this ProcessArgumentBuilder builder, string command, TSettings settings, string[] arguments)
-            where TSettings: AutoToolSettings, new()
+            where TSettings : AutoToolSettings, new()
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException("builder");
-            }
-            if (arguments == null)
-            {
-                throw new ArgumentNullException("arguments");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(builder));
+            ArgumentNullException.ThrowIfNull(nameof(arguments));
+
             if (string.IsNullOrEmpty(command))
             {
-                throw new ArgumentNullException("command");
+                throw new ArgumentNullException(nameof(command));
             }
-            if (settings == null)
-            {
-                settings = new TSettings();
-            }
+            settings ??= new TSettings();
             AppendArguments(builder, settings, preCommand: true);
             builder.Append(command);
             AppendArguments(builder, settings, preCommand: false);
-            if (arguments != null)
+
+            foreach (string argument in arguments)
             {
-                foreach (string argument in arguments)
-                {
-                    builder.Append(argument);
-                }
+                builder.Append(argument);
             }
         }
+
         /// <summary>
         /// Appends pre or post command arguments.
         /// </summary>
@@ -66,7 +58,7 @@ namespace Cake.Docker
                 var query = from a in GetArgumentFromProperty(property, settings, preCommand: preCommand, isSecret: isSecret)
                             where a.HasValue
                             select a.Value;
-                var test = query.ToArray();
+
                 foreach (var argument in query)
                 {
                     if (!string.IsNullOrEmpty(argument.Key))
@@ -86,7 +78,7 @@ namespace Cake.Docker
                             default:
                                 builder.AppendQuoted(argument.Value);
                                 break;
-                                
+
                         }
                     }
                 }
@@ -113,7 +105,7 @@ namespace Cake.Docker
                     yield return new DockerArgument(null, GetArgumentFromAutoProperty(autoPropertyAttribute, property, property.GetValue(settings)), DockerArgumentQuoting.Unquoted);
                 }
             }
-            else if (!preCommand && (autoPropertyAttribute == null || !autoPropertyAttribute.PreCommand) 
+            else if (!preCommand && (autoPropertyAttribute == null || !autoPropertyAttribute.PreCommand)
                 || (autoPropertyAttribute != null && autoPropertyAttribute.PreCommand && preCommand))
             {
                 if (property.PropertyType == typeof(bool))
@@ -164,7 +156,7 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        public  static bool IsPropertyValueSecret<TSettings>(PropertyInfo property, TSettings settings)
+        public static bool IsPropertyValueSecret<TSettings>(PropertyInfo property, TSettings settings)
             where TSettings : AutoToolSettings
         {
             return settings.SecretProperties.Contains(property.Name);
@@ -311,6 +303,13 @@ namespace Cake.Docker
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="values"></param>
+        /// <param name="isSecret"></param>
+        /// <returns></returns>
         public static DockerArgument? GetArgumentFromStringArrayListProperty(PropertyInfo property, string[] values, bool isSecret)
         {
             if (values?.Length > 0)
@@ -331,7 +330,7 @@ namespace Cake.Docker
         {
             if (!string.IsNullOrEmpty(value))
             {
-                return new DockerArgument($"--{GetPropertyName(property.Name)}", value, isSecret ? DockerArgumentQuoting.QuotedSecret: DockerArgumentQuoting.Quoted);
+                return new DockerArgument($"--{GetPropertyName(property.Name)}", value, isSecret ? DockerArgumentQuoting.QuotedSecret : DockerArgumentQuoting.Quoted);
             }
             return null;
         }
@@ -365,26 +364,29 @@ namespace Cake.Docker
         /// <example>NoForce -> no-force</example>
         public static string GetPropertyName(string name)
         {
-            string result = null;
             if (!string.IsNullOrEmpty(name))
             {
-                result = name.Substring(0, 1).ToLower();
+                var builder = new StringBuilder();
+                builder.Append(name.Substring(0, 1).ToLower());
                 if (name.Length > 1)
                 {
                     foreach (char c in name.Substring(1))
                     {
                         if (char.IsUpper(c))
                         {
-                            result += "-" + char.ToLower(c);
+                            builder.Append("-" + char.ToLower(c));
                         }
                         else
                         {
-                            result += c;
+                            builder.Append(c);
                         }
                     }
                 }
+
+                return builder.ToString();
             }
-            return result;
+
+            return null;
         }
     }
 }

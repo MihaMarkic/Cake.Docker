@@ -1,9 +1,9 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Configuration;
 using Cake.Core.Diagnostics;
 using Cake.Core.IO;
 using Cake.Testing.Fixtures;
-using System;
 
 namespace Cake.Docker.Tests.Build
 {
@@ -27,9 +27,9 @@ namespace Cake.Docker.Tests.Build
 
         ICakeConfiguration ICakeContext.Configuration => throw new NotImplementedException();
 
-        public DockerBuildFixture(): base("docker")
+        public DockerBuildFixture() : base("docker")
         {
-            ProcessRunner.Process.SetStandardOutput(new string[] { });
+            ProcessRunner.Process.SetStandardOutput(Array.Empty<string>());
         }
         protected override void RunTool()
         {

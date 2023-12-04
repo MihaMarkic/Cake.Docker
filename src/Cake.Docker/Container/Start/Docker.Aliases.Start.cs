@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -16,7 +16,7 @@ namespace Cake.Docker
         {
             DockerStart(context, new DockerContainerStartSettings(), containers);
         }
-        
+
         /// <summary>
         /// Starts an array of <paramref name="containers"/> using the give <paramref name="settings"/>.
         /// </summary>
@@ -24,15 +24,12 @@ namespace Cake.Docker
         /// <param name="containers">The list of containers.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-		public static void DockerStart(this ICakeContext context, DockerContainerStartSettings settings, params string[] containers)
+        public static void DockerStart(this ICakeContext context, DockerContainerStartSettings settings, params string[] containers)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             if (containers == null || containers.Length == 0)
             {
-                throw new ArgumentNullException("containers");
+                throw new ArgumentNullException(nameof(containers));
             }
             var runner = new GenericDockerRunner<DockerContainerStartSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("start", settings ?? new DockerContainerStartSettings(), containers);

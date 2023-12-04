@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -16,21 +16,18 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerTag(this ICakeContext context, string imageReference, string registryReference)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(nameof(context));
             if (string.IsNullOrEmpty(imageReference))
             {
-                throw new ArgumentNullException("imageReference");
+                throw new ArgumentNullException(nameof(imageReference));
             }
             if (string.IsNullOrEmpty(registryReference))
             {
-                throw new ArgumentNullException("registryReference");
+                throw new ArgumentNullException(nameof(registryReference));
             }
 
             var runner = new GenericDockerRunner<DockerImageTagSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("tag", new DockerImageTagSettings(), new[] { imageReference, registryReference });
+            runner.Run("tag", new DockerImageTagSettings(), [imageReference, registryReference]);
         }
     }
 }
