@@ -28,7 +28,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerSwarmLeave(this ICakeContext context, DockerSwarmLeaveSettings settings, params string[] args)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerSwarmLeaveSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string>();
             if (args.Length > 0)

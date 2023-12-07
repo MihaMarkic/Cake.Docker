@@ -27,7 +27,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerPush(this ICakeContext context, DockerImagePushSettings settings, string imageReference)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(imageReference))
             {
                 throw new ArgumentNullException(nameof(imageReference));

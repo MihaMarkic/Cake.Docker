@@ -20,7 +20,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerImageLs(this ICakeContext context, DockerImageLsSettings settings)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerImageLsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             return runner.RunWithResult("image ls", settings ?? new DockerImageLsSettings(), r => r.ToArray());
         }

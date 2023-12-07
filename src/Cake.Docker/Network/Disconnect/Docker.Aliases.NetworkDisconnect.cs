@@ -28,7 +28,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerNetworkDisconnect(this ICakeContext context, DockerNetworkDisconnectSettings settings, params string[] args)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerNetworkDisconnectSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string>();
             if (args.Length > 0)

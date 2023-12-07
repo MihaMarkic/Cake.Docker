@@ -34,7 +34,7 @@ namespace Cake.Docker
         [Experimental]
         public static void DockerManifestAnnotate(this ICakeContext context, DockerManifestAnnotateSettings settings, string manifestList, string manifest)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerManifestAnnotateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> { manifestList, manifest };
             runner.Run("manifest annotate", settings ?? new DockerManifestAnnotateSettings(), arguments.ToArray());

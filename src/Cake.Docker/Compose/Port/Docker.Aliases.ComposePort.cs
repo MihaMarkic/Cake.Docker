@@ -29,8 +29,8 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerComposePort(this ICakeContext context, DockerComposePortSettings settings, string service, int port)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
-            ArgumentNullException.ThrowIfNull(nameof(service));
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(service);
             var runner = new GenericDockerComposeRunner<DockerComposePortSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             var arguments = new List<string> { service, port.ToString() };
             return runner.RunWithResult("port", settings ?? new DockerComposePortSettings(), r => r.ToArray(), arguments.ToArray());

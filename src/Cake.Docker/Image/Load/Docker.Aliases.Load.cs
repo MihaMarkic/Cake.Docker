@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerLoad(this ICakeContext context, DockerImageLoadSettings settings)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerImageLoadSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("load", settings ?? new DockerImageLoadSettings(), []);
         }

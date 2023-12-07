@@ -27,7 +27,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerRemove(this ICakeContext context, DockerImageRemoveSettings settings, params string[] images)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (images == null || images.Length == 0)
             {
                 throw new ArgumentNullException(nameof(images));

@@ -32,7 +32,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeExec(this ICakeContext context, DockerComposeExecSettings settings, string service, string command, params string[] args)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(service))
             {
                 throw new ArgumentNullException(nameof(service));

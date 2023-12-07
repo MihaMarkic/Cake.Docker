@@ -26,7 +26,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerStart(this ICakeContext context, DockerContainerStartSettings settings, params string[] containers)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (containers == null || containers.Length == 0)
             {
                 throw new ArgumentNullException(nameof(containers));

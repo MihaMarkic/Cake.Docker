@@ -28,7 +28,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerCp(this ICakeContext context, string from, string to, DockerContainerCpSettings settings)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(from))
             {
                 throw new ArgumentNullException(nameof(from));

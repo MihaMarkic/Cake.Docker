@@ -28,7 +28,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerSwarmJoin(this ICakeContext context, DockerSwarmJoinSettings settings, params string[] args)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerSwarmJoinSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string>();
             if (args.Length > 0)

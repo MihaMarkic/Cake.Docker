@@ -46,7 +46,7 @@ namespace Cake.Docker
         [Experimental]
         public static void DockerManifestInspect(this ICakeContext context, DockerManifestInspectSettings settings, string manifestList, string manifest)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerManifestInspectSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> { manifestList, manifest };
             runner.Run("manifest inspect", settings ?? new DockerManifestInspectSettings(), arguments.ToArray());

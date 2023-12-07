@@ -20,7 +20,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerContainerLs(this ICakeContext context, DockerContainerLsSettings settings)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerContainerLsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             return runner.RunWithResult("container ls", settings ?? new DockerContainerLsSettings(), r => r.ToArray());
         }

@@ -27,7 +27,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeCreate(this ICakeContext context, DockerComposeCreateSettings settings, params string[] services)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerComposeRunner<DockerComposeCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("create", settings ?? new DockerComposeCreateSettings(), services);
         }

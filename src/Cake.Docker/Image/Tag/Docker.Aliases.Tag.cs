@@ -16,7 +16,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerTag(this ICakeContext context, string imageReference, string registryReference)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(imageReference))
             {
                 throw new ArgumentNullException(nameof(imageReference));

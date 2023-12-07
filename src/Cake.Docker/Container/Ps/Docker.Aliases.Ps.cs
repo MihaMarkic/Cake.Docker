@@ -19,7 +19,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static string DockerPs(this ICakeContext context, DockerContainerPsSettings settings)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerContainerPsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             var result = runner.RunWithResult("ps", settings ?? new DockerContainerPsSettings(), r => r.ToArray());
             return string.Join("\n", result);

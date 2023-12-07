@@ -32,7 +32,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerNetworkConnect(this ICakeContext context, DockerNetworkConnectSettings settings, string network, string container, params string[] args)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(network))
             {
                 throw new ArgumentNullException(nameof(network));

@@ -33,7 +33,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerBuildXInspect(this ICakeContext context, DockerBuildXInspectSettings settings, string name = null)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXInspectSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             return runner.RunWithResult("buildx inspect", settings ?? new DockerBuildXInspectSettings(), r => r.ToArray(), name);
         }

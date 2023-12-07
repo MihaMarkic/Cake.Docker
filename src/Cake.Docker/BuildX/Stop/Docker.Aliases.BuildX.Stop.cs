@@ -27,7 +27,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuildXStop(this ICakeContext context, DockerBuildXStopSettings settings = null, string name = null)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXStopSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("buildx stop", settings ?? new DockerBuildXStopSettings(), [name]);
         }

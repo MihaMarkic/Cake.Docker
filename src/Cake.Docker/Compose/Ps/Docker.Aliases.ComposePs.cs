@@ -27,7 +27,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerComposePs(this ICakeContext context, DockerComposePsSettings settings, params string[] services)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerComposeRunner<DockerComposePsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             var result = runner.RunWithResult("ps", settings ?? new DockerComposePsSettings(), r => r.ToArray(), services);
             return result;

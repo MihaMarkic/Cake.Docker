@@ -25,7 +25,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeKill(this ICakeContext context, DockerComposeKillSettings settings)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerComposeRunner<DockerComposeKillSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("kill", settings ?? new DockerComposeKillSettings(), []);
         }

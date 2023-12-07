@@ -17,7 +17,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerCustomCommand(this ICakeContext context, string command)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
 
             return DockerCustomCommand(context, new DockerCustomCommandSettings(), command);
         }
@@ -31,8 +31,8 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerCustomCommand(this ICakeContext context, DockerCustomCommandSettings settings, string command)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
-            ArgumentNullException.ThrowIfNull(nameof(settings));
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(settings);
             if (string.IsNullOrEmpty(command))
             {
                 throw new ArgumentNullException(nameof(command));

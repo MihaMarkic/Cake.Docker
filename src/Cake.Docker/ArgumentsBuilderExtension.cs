@@ -24,8 +24,8 @@ namespace Cake.Docker
         public static void AppendAll<TSettings>(this ProcessArgumentBuilder builder, string command, TSettings settings, string[] arguments)
             where TSettings : AutoToolSettings, new()
         {
-            ArgumentNullException.ThrowIfNull(nameof(builder));
-            ArgumentNullException.ThrowIfNull(nameof(arguments));
+            ArgumentNullException.ThrowIfNull(builder);
+            ArgumentNullException.ThrowIfNull(arguments);
 
             if (string.IsNullOrEmpty(command))
             {

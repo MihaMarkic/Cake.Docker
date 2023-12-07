@@ -36,7 +36,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static string DockerCreate(this ICakeContext context, DockerContainerCreateSettings settings, string image, string command, params string[] args)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(image))
             {
                 throw new ArgumentNullException(nameof(image));

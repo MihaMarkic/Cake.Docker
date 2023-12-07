@@ -29,7 +29,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerImagePrune(this ICakeContext context, DockerImagePruneSettings settings)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerImagePruneSettings>(context.FileSystem,
                 context.Environment, context.ProcessRunner, context.Tools);
             return runner.RunWithResult("image prune", settings ?? new DockerImagePruneSettings(), r => r.ToArray());

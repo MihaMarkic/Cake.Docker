@@ -26,7 +26,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuildXUse(this ICakeContext context, DockerBuildXUseSettings settings = null, string name = null)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXUseSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("buildx use", settings ?? new DockerBuildXUseSettings(), [name]);
         }

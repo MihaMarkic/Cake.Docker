@@ -27,7 +27,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerStop(this ICakeContext context, DockerContainerStopSettings settings, params string[] containers)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (containers == null || containers.Length == 0)
             {
                 throw new ArgumentNullException(nameof(containers));

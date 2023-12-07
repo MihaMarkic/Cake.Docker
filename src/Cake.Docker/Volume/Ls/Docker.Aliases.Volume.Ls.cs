@@ -20,7 +20,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerVolumeLs(this ICakeContext context, DockerVolumeLsSettings settings)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerVolumeLsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             return runner.RunWithResult("volume ls", settings ?? new DockerVolumeLsSettings(), r => r.ToArray());
         }

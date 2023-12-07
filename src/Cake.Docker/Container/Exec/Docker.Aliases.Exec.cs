@@ -18,7 +18,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerExec(this ICakeContext context, string container, string command, params string[] args)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             DockerExec(context, new DockerContainerExecSettings(), container, command, args);
         }
         /// <summary>
@@ -32,7 +32,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerExec(this ICakeContext context, DockerContainerExecSettings settings, string container, string command, params string[] args)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
 
             if (string.IsNullOrEmpty(container))
             {

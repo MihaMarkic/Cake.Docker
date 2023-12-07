@@ -29,7 +29,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerNetworkRemove(this ICakeContext context, string[] network, params string[] args)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (network == null || network.Any(n => string.IsNullOrEmpty(n)))
             {
                 throw new ArgumentNullException(nameof(network));

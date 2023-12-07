@@ -26,7 +26,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeUnpause(this ICakeContext context, DockerComposeSettings settings, params string[] services)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerComposeRunner<DockerComposeSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("unpause", settings ?? new DockerComposeSettings(), services);
         }

@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuildXPrune(this ICakeContext context, DockerBuildXPruneSettings settings = null)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXPruneSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("buildx prune", settings ?? new DockerBuildXPruneSettings(), []);
         }

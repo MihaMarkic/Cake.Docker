@@ -28,8 +28,8 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerLogs(this ICakeContext context, DockerContainerLogsSettings settings, string container)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
-            ArgumentNullException.ThrowIfNull(nameof(container));
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(container);
             var runner = new GenericDockerRunner<DockerContainerLogsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             return runner.RunWithResult("logs", settings ?? new DockerContainerLogsSettings(), r => r.ToArray(), [container]);
         }

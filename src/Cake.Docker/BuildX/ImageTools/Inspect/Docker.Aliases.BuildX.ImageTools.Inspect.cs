@@ -33,7 +33,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerBuildXImageToolsInspect(this ICakeContext context, DockerBuildXImageToolsInspectSettings settings, string name)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (name.Length < 1)
             {
                 throw new ArgumentNullException(nameof(name), "Name is required");

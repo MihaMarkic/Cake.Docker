@@ -16,7 +16,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerVolumeRm(this ICakeContext context, DockerVolumeRmSettings settings, string[] volumes)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (volumes?.Length < 1)
             {
                 throw new ArgumentNullException(nameof(volumes), "At least one volume is required");

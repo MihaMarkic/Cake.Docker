@@ -37,7 +37,7 @@ namespace Cake.Docker
         public static void DockerManifestCreate(this ICakeContext context, DockerManifestCreateSettings settings, string manifestList,
             string manifest, params string[] manifests)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerManifestCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> { manifestList, manifest };
             if (manifests?.Length > 0)

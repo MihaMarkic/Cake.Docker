@@ -38,7 +38,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static string DockerRun(this ICakeContext context, DockerContainerRunSettings settings, string image, string command, params string[] args)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(image))
             {
                 throw new ArgumentNullException(nameof(image));
@@ -84,7 +84,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerRunWithoutResult(this ICakeContext context, DockerContainerRunSettings settings, string image, string command, params string[] args)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(image))
             {
                 throw new ArgumentNullException(nameof(image));

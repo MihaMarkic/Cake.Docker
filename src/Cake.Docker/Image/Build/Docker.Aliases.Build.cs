@@ -27,7 +27,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuild(this ICakeContext context, DockerImageBuildSettings settings, string path)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(path))
             {
                 throw new ArgumentNullException(nameof(path));

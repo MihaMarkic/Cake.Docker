@@ -27,7 +27,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerVolumeCreate(this ICakeContext context, DockerVolumeCreateSettings settings, string volume)
         {
-            ArgumentNullException.ThrowIfNull(nameof(context));
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerVolumeCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("volume create", settings ?? new DockerVolumeCreateSettings(), [volume]);
         }

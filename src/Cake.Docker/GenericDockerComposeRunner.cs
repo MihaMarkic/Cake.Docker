@@ -38,8 +38,8 @@ namespace Cake.Docker
                 throw new ArgumentNullException(nameof(command));
             }
 
-            ArgumentNullException.ThrowIfNull(nameof(settings));
-            ArgumentNullException.ThrowIfNull(nameof(additional));
+            ArgumentNullException.ThrowIfNull(settings);
+            ArgumentNullException.ThrowIfNull(additional);
 
             Run(settings, GetArguments(command, settings, additional));
         }
@@ -69,8 +69,8 @@ namespace Cake.Docker
                 throw new ArgumentNullException(nameof(command));
             }
 
-            ArgumentNullException.ThrowIfNull(nameof(settings));
-            ArgumentNullException.ThrowIfNull(nameof(processOutput));
+            ArgumentNullException.ThrowIfNull(settings);
+            ArgumentNullException.ThrowIfNull(processOutput);
 
             T[] result = [];
             Run(settings, GetArguments(command, settings, arguments),
