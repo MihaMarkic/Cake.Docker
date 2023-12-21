@@ -33,7 +33,7 @@ namespace Cake.Docker
             ArgumentNullException.ThrowIfNull(settings);
 
             var runner = new GenericDockerRunner<DockerRegistryLogoutSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("logout", settings, server != null ? [server] : []);
+            runner.Run("logout", settings, server != null ? new[] { server } : Array.Empty<string>());
         }
     }
 }

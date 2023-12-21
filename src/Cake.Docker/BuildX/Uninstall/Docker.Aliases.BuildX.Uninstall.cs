@@ -16,7 +16,7 @@ namespace Cake.Docker
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXUninstallSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("buildx uninstall", new DockerBuildXUninstallSettings(), []);
+            runner.Run("buildx uninstall", new DockerBuildXUninstallSettings(), Array.Empty<string>());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cake.Core.Tooling;
 
 namespace Cake.Docker
@@ -17,7 +18,7 @@ namespace Cake.Docker
         /// </summary>
         protected AutoToolSettings()
         {
-            SecretProperties = new HashSet<string>(CollectSecretProperties() ?? []);
+            SecretProperties = new HashSet<string>(CollectSecretProperties() ?? Array.Empty<string>());
         }
         /// <summary>
         /// Collects secret properties.

@@ -43,7 +43,7 @@ namespace Cake.Docker
                 throw new ArgumentNullException(nameof(command));
             }
             var runner = new GenericDockerRunner<DockerContainerExecSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            List<string> arguments = [container, command];
+            List<string> arguments = new List<string> { container, command };
             if (args.Length > 0)
             {
                 arguments.AddRange(args);

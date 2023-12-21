@@ -31,7 +31,7 @@ namespace Cake.Docker
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXImageToolsCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("buildx imagetools create", settings ?? new DockerBuildXImageToolsCreateSettings(), target?.ToArray() ?? []);
+            runner.Run("buildx imagetools create", settings ?? new DockerBuildXImageToolsCreateSettings(), target?.ToArray() ?? Array.Empty<string>());
         }
 
     }

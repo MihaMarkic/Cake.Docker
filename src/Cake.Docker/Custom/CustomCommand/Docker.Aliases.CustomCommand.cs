@@ -51,7 +51,7 @@ namespace Cake.Docker
                 commandArguments = command.Substring(space);
             }
 
-            return runner.RunWithResult(commandName, settings, r => r.ToArray(), [commandArguments]);
+            return runner.RunWithResult(commandName, settings, r => r.ToArray(), commandArguments);
         }
     }
 }

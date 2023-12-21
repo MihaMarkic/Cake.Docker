@@ -28,7 +28,7 @@ namespace Cake.Docker
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXUseSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("buildx use", settings ?? new DockerBuildXUseSettings(), [name]);
+            runner.Run("buildx use", settings ?? new DockerBuildXUseSettings(), new[] { name });
         }
     }
 }

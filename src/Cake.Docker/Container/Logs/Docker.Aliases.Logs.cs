@@ -31,7 +31,7 @@ namespace Cake.Docker
             ArgumentNullException.ThrowIfNull(context);
             ArgumentNullException.ThrowIfNull(container);
             var runner = new GenericDockerRunner<DockerContainerLogsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            return runner.RunWithResult("logs", settings ?? new DockerContainerLogsSettings(), r => r.ToArray(), [container]);
+            return runner.RunWithResult("logs", settings ?? new DockerContainerLogsSettings(), r => r.ToArray(), container);
         }
     }
 }

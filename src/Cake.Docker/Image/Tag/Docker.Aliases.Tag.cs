@@ -27,7 +27,7 @@ namespace Cake.Docker
             }
 
             var runner = new GenericDockerRunner<DockerImageTagSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("tag", new DockerImageTagSettings(), [imageReference, registryReference]);
+            runner.Run("tag", new DockerImageTagSettings(), new[] { imageReference, registryReference });
         }
     }
 }

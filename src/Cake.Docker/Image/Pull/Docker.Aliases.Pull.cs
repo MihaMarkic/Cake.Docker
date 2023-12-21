@@ -34,7 +34,7 @@ namespace Cake.Docker
             }
 
             var runner = new GenericDockerRunner<DockerImagePullSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("pull", settings ?? new DockerImagePullSettings(), [imageReference]);
+            runner.Run("pull", settings ?? new DockerImagePullSettings(), new[] { imageReference });
         }
     }
 }

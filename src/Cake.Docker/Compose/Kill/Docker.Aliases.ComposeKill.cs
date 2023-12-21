@@ -27,7 +27,7 @@ namespace Cake.Docker
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerComposeRunner<DockerComposeKillSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("kill", settings ?? new DockerComposeKillSettings(), []);
+            runner.Run("kill", settings ?? new DockerComposeKillSettings(), Array.Empty<string>());
         }
 
     }

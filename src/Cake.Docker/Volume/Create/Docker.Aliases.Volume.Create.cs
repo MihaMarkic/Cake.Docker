@@ -29,7 +29,7 @@ namespace Cake.Docker
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerVolumeCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("volume create", settings ?? new DockerVolumeCreateSettings(), [volume]);
+            runner.Run("volume create", settings ?? new DockerVolumeCreateSettings(), new[] { volume });
         }
 
     }

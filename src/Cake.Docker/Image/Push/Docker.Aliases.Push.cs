@@ -34,7 +34,7 @@ namespace Cake.Docker
             }
 
             var runner = new GenericDockerRunner<DockerImagePushSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("push", settings ?? new DockerImagePushSettings(), [imageReference]);
+            runner.Run("push", settings ?? new DockerImagePushSettings(), new[] { imageReference });
         }
     }
 }

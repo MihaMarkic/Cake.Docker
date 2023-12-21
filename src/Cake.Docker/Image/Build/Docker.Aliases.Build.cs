@@ -38,7 +38,7 @@ namespace Cake.Docker
             if (!string.IsNullOrEmpty(path))
             {
                 string trimmed = path.Trim();
-                if (trimmed.Length > 1 && trimmed.StartsWith('\\') && trimmed.EndsWith('\\'))
+                if (trimmed.Length > 1 && trimmed.StartsWith('"') && trimmed.EndsWith('"'))
                 {
                     quotedPath = path;
                 }
@@ -51,7 +51,7 @@ namespace Cake.Docker
             {
                 quotedPath = path;
             }
-            runner.Run("build", settings ?? new DockerImageBuildSettings(), [quotedPath]);
+            runner.Run("build", settings ?? new DockerImageBuildSettings(), new[] { quotedPath });
         }
 
     }

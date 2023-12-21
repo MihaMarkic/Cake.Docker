@@ -17,7 +17,7 @@ namespace Cake.Docker
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerImageLoadSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("load", settings ?? new DockerImageLoadSettings(), []);
+            runner.Run("load", settings ?? new DockerImageLoadSettings(), Array.Empty<string>());
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Cake.Docker
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerVolumePruneSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("volume prune", settings ?? new DockerVolumePruneSettings(), []);
+            runner.Run("volume prune", settings ?? new DockerVolumePruneSettings(), Array.Empty<string>());
         }
 
     }

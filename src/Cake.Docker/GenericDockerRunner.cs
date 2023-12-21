@@ -1,7 +1,7 @@
-﻿using Cake.Core;
-using Cake.Core.IO;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Cake.Core;
+using Cake.Core.IO;
 using Cake.Core.Tooling;
 
 namespace Cake.Docker
@@ -11,7 +11,7 @@ namespace Cake.Docker
     /// </summary>
     /// <typeparam name="TSettings"></typeparam>
     public class GenericDockerRunner<TSettings> : DockerTool<TSettings>
-        where TSettings: AutoToolSettings, new()
+        where TSettings : AutoToolSettings, new()
     {
         /// <summary>
         /// 
@@ -20,7 +20,7 @@ namespace Cake.Docker
         /// <param name="environment"></param>
         /// <param name="processRunner"></param>
         /// <param name="tools"></param>
-        public GenericDockerRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools) 
+        public GenericDockerRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools)
             : base(fileSystem, environment, processRunner, tools)
         {
         }
@@ -80,7 +80,7 @@ namespace Cake.Docker
         /// <param name="processOutput"></param>
         /// <param name="arguments"></param>
         /// <returns></returns>
-        public T[] RunWithResult<T>(string command, TSettings settings, 
+        public T[] RunWithResult<T>(string command, TSettings settings,
             Func<IEnumerable<string>, T[]> processOutput,
             params string[] arguments)
         {
@@ -96,12 +96,13 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException(nameof(processOutput));
             }
-            T[] result = [];
-            ProcessSettings processSettings = IsExperimental ? CreateExperimentalProcessSettings(): new ProcessSettings();
+            T[] result = Array.Empty<T>();
+            ProcessSettings processSettings = IsExperimental ? CreateExperimentalProcessSettings() : new ProcessSettings();
             processSettings.RedirectStandardOutput = true;
             Run(settings, GetArguments(command, settings, arguments),
-                processSettings, 
-                proc => {
+                processSettings,
+                proc =>
+                {
                     result = processOutput(proc.GetStandardOutput());
                 });
             return result;

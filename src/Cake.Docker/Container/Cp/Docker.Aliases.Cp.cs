@@ -38,7 +38,7 @@ namespace Cake.Docker
                 throw new ArgumentNullException(nameof(to));
             }
             var runner = new GenericDockerRunner<DockerContainerCpSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("cp", settings ?? new DockerContainerCpSettings(), [from, to]);
+            runner.Run("cp", settings ?? new DockerContainerCpSettings(), new[] { from, to });
         }
 
     }

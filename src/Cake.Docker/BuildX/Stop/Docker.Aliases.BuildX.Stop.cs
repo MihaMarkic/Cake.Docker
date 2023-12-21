@@ -29,7 +29,7 @@ namespace Cake.Docker
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXStopSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("buildx stop", settings ?? new DockerBuildXStopSettings(), [name]);
+            runner.Run("buildx stop", settings ?? new DockerBuildXStopSettings(), new[] { name });
         }
     }
 }

@@ -72,7 +72,7 @@ namespace Cake.Docker
             ArgumentNullException.ThrowIfNull(settings);
             ArgumentNullException.ThrowIfNull(processOutput);
 
-            T[] result = [];
+            T[] result = Array.Empty<T>();
             Run(settings, GetArguments(command, settings, arguments),
                 new ProcessSettings { RedirectStandardOutput = true },
                 proc =>
