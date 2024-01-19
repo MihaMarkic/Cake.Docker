@@ -1,3 +1,8 @@
+# Cake.Docker 1.3.0
+
+* Bumps Cake reference to 4.0.0 (thanks [Toni Wenzel ](https://github.com/twenzel), [PR](https://github.com/MihaMarkic/Cake.Docker/pull/114))
+* Adds .net 8 target framework (thanks [Toni Wenzel ](https://github.com/twenzel), [PR](https://github.com/MihaMarkic/Cake.Docker/pull/114))
+
 # Cake.Docker 1.2.3
 
 * Fixes incorrect (regression) DockerComposeUpSettings.Scale type (thanks [Davy Courvoisier](https://github.com/davy-oo))
