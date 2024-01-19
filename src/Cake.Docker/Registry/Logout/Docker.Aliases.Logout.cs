@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -29,17 +29,11 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerLogout(this ICakeContext context, DockerRegistryLogoutSettings settings, string server = null)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
-            if (settings == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(settings);
 
             var runner = new GenericDockerRunner<DockerRegistryLogoutSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("logout", settings, server != null ? new[] { server } : new string[]{ });
+            runner.Run("logout", settings, server != null ? new[] { server } : Array.Empty<string>());
         }
     }
 }

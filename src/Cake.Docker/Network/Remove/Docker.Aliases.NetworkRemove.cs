@@ -1,8 +1,8 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -29,16 +29,13 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerNetworkRemove(this ICakeContext context, string[] network, params string[] args)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(context);
             if (network == null || network.Any(n => string.IsNullOrEmpty(n)))
             {
-                throw new ArgumentNullException("network");
+                throw new ArgumentNullException(nameof(network));
             }
             var runner = new GenericDockerRunner<EmptySettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            List<string> arguments = new List<string> (network);
+            List<string> arguments = new List<string>(network);
             if (args.Length > 0)
             {
                 arguments.AddRange(args);

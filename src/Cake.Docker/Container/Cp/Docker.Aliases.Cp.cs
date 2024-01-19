@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -28,20 +28,17 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerCp(this ICakeContext context, string from, string to, DockerContainerCpSettings settings)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(from))
             {
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(from));
             }
             if (string.IsNullOrEmpty(to))
             {
-                throw new ArgumentNullException("to");
+                throw new ArgumentNullException(nameof(to));
             }
             var runner = new GenericDockerRunner<DockerContainerCpSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("cp", settings ?? new DockerContainerCpSettings(), new string[] { from, to });
+            runner.Run("cp", settings ?? new DockerContainerCpSettings(), new[] { from, to });
         }
 
     }

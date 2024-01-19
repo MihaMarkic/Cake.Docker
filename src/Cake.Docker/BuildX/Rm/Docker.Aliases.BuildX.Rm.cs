@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuildXRm(this ICakeContext context, string name = null)
         {
-            context.DockerBuildXRm(name);
+            context.DockerBuildXRm(null, name);
         }
         /// <summary>
         /// Remove a builder instance given <paramref name="settings"/>.
@@ -26,12 +26,9 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuildXRm(this ICakeContext context, DockerBuildXRmSettings settings = null, string name = null)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXRmSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("buildx rm", new DockerBuildXRmSettings(), new string[] { name });
+            runner.Run("buildx rm", settings ?? new DockerBuildXRmSettings(), new[] { name });
         }
     }
 }

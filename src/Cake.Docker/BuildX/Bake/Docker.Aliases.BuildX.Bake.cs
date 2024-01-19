@@ -29,10 +29,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuildXBake(this ICakeContext context, DockerBuildXBakeSettings settings, IEnumerable<string> target = null)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXBakeSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("buildx bake", settings ?? new DockerBuildXBakeSettings(), target?.ToArray() ?? Array.Empty<string>());
         }

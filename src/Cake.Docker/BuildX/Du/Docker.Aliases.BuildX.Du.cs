@@ -19,10 +19,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerBuildXDu(this ICakeContext context, DockerBuildXDuSettings settings = null)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXDuSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             return runner.RunWithResult("buildx du", settings ?? new DockerBuildXDuSettings(), r => r.ToArray());
         }

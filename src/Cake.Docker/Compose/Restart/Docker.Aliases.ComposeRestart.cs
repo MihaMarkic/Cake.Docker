@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -27,10 +27,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeRestart(this ICakeContext context, DockerComposeRestartSettings settings, params string[] services)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerComposeRunner<DockerComposeRestartSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("restart", settings ?? new DockerComposeRestartSettings(), services);
         }

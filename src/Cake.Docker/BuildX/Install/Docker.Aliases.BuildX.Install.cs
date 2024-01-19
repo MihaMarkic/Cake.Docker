@@ -14,10 +14,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuildXInstall(this ICakeContext context)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXInstallSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("buildx install", new DockerBuildXInstallSettings(), Array.Empty<string>());
         }

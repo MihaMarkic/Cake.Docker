@@ -1,8 +1,8 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -18,7 +18,7 @@ namespace Cake.Docker
         {
             return DockerLogs(context, new DockerContainerLogsSettings(), container);
         }
-        
+
         /// <summary>
         /// Logs <paramref name="container"/> using the given <paramref name="settings"/>.
         /// </summary>
@@ -26,18 +26,12 @@ namespace Cake.Docker
         /// <param name="container">The list of containers.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-		public static IEnumerable<string> DockerLogs(this ICakeContext context, DockerContainerLogsSettings settings, string container)
+        public static IEnumerable<string> DockerLogs(this ICakeContext context, DockerContainerLogsSettings settings, string container)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
-            if (container == null)
-            {
-                throw new ArgumentNullException("container");
-            }
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(container);
             var runner = new GenericDockerRunner<DockerContainerLogsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            return runner.RunWithResult("logs", settings ?? new DockerContainerLogsSettings(), r => r.ToArray(), new string[] { container });
+            return runner.RunWithResult("logs", settings ?? new DockerContainerLogsSettings(), r => r.ToArray(), container);
         }
     }
 }

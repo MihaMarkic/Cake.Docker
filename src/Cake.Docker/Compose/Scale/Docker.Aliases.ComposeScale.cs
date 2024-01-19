@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -26,10 +26,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeScale(this ICakeContext context, DockerComposeSettings settings, params string[] services)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerComposeRunner<DockerComposeSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("scale", settings ?? new DockerComposeSettings(), services);
         }

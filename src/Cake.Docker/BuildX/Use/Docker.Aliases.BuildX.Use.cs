@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuildXUse(this ICakeContext context, string name)
         {
-            context.DockerBuildXUse(name);
+            context.DockerBuildXUse(null, name);
         }
         /// <summary>
         /// Set the current builder instance given <paramref name="settings"/>.
@@ -26,12 +26,9 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerBuildXUse(this ICakeContext context, DockerBuildXUseSettings settings = null, string name = null)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXUseSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("buildx use", new DockerBuildXUseSettings(), new string[] { name });
+            runner.Run("buildx use", settings ?? new DockerBuildXUseSettings(), new[] { name });
         }
     }
 }

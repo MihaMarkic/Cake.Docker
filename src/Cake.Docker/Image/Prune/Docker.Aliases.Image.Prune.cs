@@ -1,8 +1,8 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -16,8 +16,9 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerImagePrune(this ICakeContext context)
         {
-            return DockerImagePrune(context);
+            return DockerImagePrune(context, new DockerImagePruneSettings());
         }
+
         /// <summary>
         /// Remove unused images given <paramref name="settings"/>.
         /// </summary>
@@ -28,11 +29,8 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerImagePrune(this ICakeContext context, DockerImagePruneSettings settings)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-            var runner = new GenericDockerRunner<DockerImagePruneSettings>(context.FileSystem, 
+            ArgumentNullException.ThrowIfNull(context);
+            var runner = new GenericDockerRunner<DockerImagePruneSettings>(context.FileSystem,
                 context.Environment, context.ProcessRunner, context.Tools);
             return runner.RunWithResult("image prune", settings ?? new DockerImagePruneSettings(), r => r.ToArray());
         }

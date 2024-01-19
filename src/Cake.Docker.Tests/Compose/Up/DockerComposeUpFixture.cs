@@ -29,7 +29,7 @@ namespace Cake.Docker.Tests.Up
 
         public DockerComposeUpFixture(): base("docker-compose")
         {
-            ProcessRunner.Process.SetStandardOutput(new string[] { });
+            ProcessRunner.Process.SetStandardOutput(Array.Empty<string>());
         }
         protected override void RunTool()
         {

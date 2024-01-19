@@ -1,7 +1,7 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -21,6 +21,7 @@ namespace Cake.Docker
         {
             DockerManifestInspect(context, new DockerManifestInspectSettings(), null, manifest);
         }
+
         /// <summary>
         /// Display an image manifest, or manifest list
         /// </summary>
@@ -33,6 +34,7 @@ namespace Cake.Docker
         {
             DockerManifestInspect(context, new DockerManifestInspectSettings(), manifestList, manifest);
         }
+
         /// <summary>
         /// Display an image manifest, or manifest list
         /// </summary>
@@ -44,10 +46,7 @@ namespace Cake.Docker
         [Experimental]
         public static void DockerManifestInspect(this ICakeContext context, DockerManifestInspectSettings settings, string manifestList, string manifest)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerManifestInspectSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> { manifestList, manifest };
             runner.Run("manifest inspect", settings ?? new DockerManifestInspectSettings(), arguments.ToArray());

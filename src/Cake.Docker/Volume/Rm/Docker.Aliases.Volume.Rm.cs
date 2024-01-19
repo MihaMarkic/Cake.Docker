@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -16,10 +16,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerVolumeRm(this ICakeContext context, DockerVolumeRmSettings settings, string[] volumes)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(context);
             if (volumes?.Length < 1)
             {
                 throw new ArgumentNullException(nameof(volumes), "At least one volume is required");
@@ -27,6 +24,7 @@ namespace Cake.Docker
             var runner = new GenericDockerRunner<DockerVolumeRmSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("volume rm", settings ?? new DockerVolumeRmSettings(), volumes);
         }
+
         /// <summary>
         /// Remove one or more volumes.
         /// </summary>

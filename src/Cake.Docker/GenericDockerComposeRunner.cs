@@ -1,7 +1,7 @@
-﻿using Cake.Core;
-using Cake.Core.IO;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Cake.Core;
+using Cake.Core.IO;
 using Cake.Core.Tooling;
 
 namespace Cake.Docker
@@ -11,7 +11,7 @@ namespace Cake.Docker
     /// </summary>
     /// <typeparam name="TSettings"></typeparam>
     public class GenericDockerComposeRunner<TSettings> : DockerComposeTool<TSettings>
-        where TSettings: AutoToolSettings, new()
+        where TSettings : AutoToolSettings, new()
     {
         /// <summary>
         /// 
@@ -20,7 +20,7 @@ namespace Cake.Docker
         /// <param name="environment"></param>
         /// <param name="processRunner"></param>
         /// <param name="tools"></param>
-        public GenericDockerComposeRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools) 
+        public GenericDockerComposeRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools)
             : base(fileSystem, environment, processRunner, tools)
         {
         }
@@ -37,18 +37,14 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException(nameof(command));
             }
-            if (settings == null)
-            {
-                throw new ArgumentNullException(nameof(settings));
-            }
-            if (additional == null)
-            {
-                throw new ArgumentNullException(nameof(additional));
-            }
+
+            ArgumentNullException.ThrowIfNull(settings);
+            ArgumentNullException.ThrowIfNull(additional);
+
             Run(settings, GetArguments(command, settings, additional));
         }
 
-        private ProcessArgumentBuilder GetArguments(string command, TSettings settings, string[] containers)
+        private static ProcessArgumentBuilder GetArguments(string command, TSettings settings, string[] containers)
         {
             var builder = new ProcessArgumentBuilder();
             builder.AppendAll(command, settings, containers);
@@ -64,26 +60,23 @@ namespace Cake.Docker
         /// <param name="processOutput"></param>
         /// <param name="arguments"></param>
         /// <returns></returns>
-        public T[] RunWithResult<T>(string command, TSettings settings, 
+        public T[] RunWithResult<T>(string command, TSettings settings,
             Func<IEnumerable<string>, T[]> processOutput,
             params string[] arguments)
         {
             if (string.IsNullOrEmpty(command))
             {
-                throw new ArgumentNullException("command");
+                throw new ArgumentNullException(nameof(command));
             }
-            if (settings == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
-            if (processOutput == null)
-            {
-                throw new ArgumentNullException("processOutput");
-            }
-            T[] result = new T[0];
-            Run(settings, GetArguments(command, settings, arguments), 
-                new ProcessSettings { RedirectStandardOutput = true }, 
-                proc => {
+
+            ArgumentNullException.ThrowIfNull(settings);
+            ArgumentNullException.ThrowIfNull(processOutput);
+
+            T[] result = Array.Empty<T>();
+            Run(settings, GetArguments(command, settings, arguments),
+                new ProcessSettings { RedirectStandardOutput = true },
+                proc =>
+                {
                     result = processOutput(proc.GetStandardOutput());
                 });
             return result;

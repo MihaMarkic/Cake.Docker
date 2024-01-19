@@ -1,7 +1,7 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -56,10 +56,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeRun(this ICakeContext context, DockerComposeRunSettings settings, string service, string command, params string[] args)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(service))
             {
                 throw new ArgumentNullException(nameof(service));

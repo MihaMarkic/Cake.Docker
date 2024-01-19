@@ -1,7 +1,7 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -29,12 +29,9 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerSwarmInit(this ICakeContext context, DockerSwarmInitSettings settings, params string[] args)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerSwarmInitSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            List<string> arguments = new List<string> ();
+            List<string> arguments = new List<string>();
             if (args.Length > 0)
             {
                 arguments.AddRange(args);

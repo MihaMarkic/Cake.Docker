@@ -9,7 +9,7 @@ namespace Cake.Docker.Tests.Compose.Ps
 {
     public class DockerComposePsFixture : ToolFixture<DockerComposePsSettings>, ICakeContext
     {
-        public string[] Services { get; set; } = new string[0];
+        public string[] Services { get; set; } = [];
 
         IFileSystem ICakeContext.FileSystem => FileSystem;
 
@@ -29,7 +29,7 @@ namespace Cake.Docker.Tests.Compose.Ps
 
         public DockerComposePsFixture(): base("docker-compose")
         {
-            ProcessRunner.Process.SetStandardOutput(new string[] { });
+            ProcessRunner.Process.SetStandardOutput(Array.Empty<string>());
         }
         protected override void RunTool()
         {

@@ -1,7 +1,7 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -21,6 +21,7 @@ namespace Cake.Docker
         {
             DockerManifestPush(context, new DockerManifestPushSettings(), manifestList);
         }
+
         /// <summary>
         /// Push a manifest list to a repository
         /// </summary>
@@ -31,10 +32,7 @@ namespace Cake.Docker
         [Experimental]
         public static void DockerManifestPush(this ICakeContext context, DockerManifestPushSettings settings, string manifestList)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerManifestPushSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> { manifestList };
             runner.Run("manifest push", settings ?? new DockerManifestPushSettings(), arguments.ToArray());

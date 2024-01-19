@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -15,12 +15,9 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerVolumePrune(this ICakeContext context, DockerVolumePruneSettings settings)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerVolumePruneSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("volume prune", settings ?? new DockerVolumePruneSettings(), new string[0]);
+            runner.Run("volume prune", settings ?? new DockerVolumePruneSettings(), Array.Empty<string>());
         }
 
     }

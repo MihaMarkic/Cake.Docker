@@ -1,7 +1,7 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -22,6 +22,7 @@ namespace Cake.Docker
         {
             DockerManifestAnnotate(context, new DockerManifestAnnotateSettings(), manifestList, manifest);
         }
+
         /// <summary>
         /// Add additional information to a local image manifest
         /// </summary>
@@ -33,10 +34,7 @@ namespace Cake.Docker
         [Experimental]
         public static void DockerManifestAnnotate(this ICakeContext context, DockerManifestAnnotateSettings settings, string manifestList, string manifest)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerManifestAnnotateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string> { manifestList, manifest };
             runner.Run("manifest annotate", settings ?? new DockerManifestAnnotateSettings(), arguments.ToArray());

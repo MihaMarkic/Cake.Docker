@@ -1,8 +1,8 @@
-﻿using Cake.Core;
-using Cake.Core.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cake.Core;
+using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -21,11 +21,8 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static IEnumerable<string> DockerVolumeInspect(this ICakeContext context, DockerVolumeInspectSettings settings, string[] volumes)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-			if (volumes?.Length < 1)
+            ArgumentNullException.ThrowIfNull(context);
+            if (volumes?.Length < 1)
             {
                 throw new ArgumentNullException(nameof(volumes), "At least one volume is required");
             }

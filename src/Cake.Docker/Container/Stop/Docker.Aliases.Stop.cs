@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -17,7 +17,7 @@ namespace Cake.Docker
         {
             DockerStop(context, new DockerContainerStopSettings(), containers);
         }
-        
+
         /// <summary>
         /// Stops an array of <paramref name="containers"/> using the give <paramref name="settings"/>.
         /// </summary>
@@ -25,15 +25,12 @@ namespace Cake.Docker
         /// <param name="containers">The list of containers.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-		public static void DockerStop(this ICakeContext context, DockerContainerStopSettings settings, params string[] containers)
+        public static void DockerStop(this ICakeContext context, DockerContainerStopSettings settings, params string[] containers)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(context);
             if (containers == null || containers.Length == 0)
             {
-                throw new ArgumentNullException("containers");
+                throw new ArgumentNullException(nameof(containers));
             }
             var runner = new GenericDockerRunner<DockerContainerStopSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run("stop", settings ?? new DockerContainerStopSettings(), containers);

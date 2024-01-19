@@ -1,6 +1,6 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
-using System;
 
 namespace Cake.Docker
 {
@@ -25,12 +25,9 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeKill(this ICakeContext context, DockerComposeKillSettings settings)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerComposeRunner<DockerComposeKillSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("kill", settings ?? new DockerComposeKillSettings(), new string[0]);
+            runner.Run("kill", settings ?? new DockerComposeKillSettings(), Array.Empty<string>());
         }
 
     }
