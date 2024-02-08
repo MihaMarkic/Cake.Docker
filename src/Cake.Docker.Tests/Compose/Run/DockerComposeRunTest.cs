@@ -16,7 +16,7 @@ namespace Cake.Docker.Tests.Run
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("run --entrypoint \"somepoint\" cmd"));
+            Assert.That(actual.Args, Is.EqualTo("compose run --entrypoint \"somepoint\" cmd"));
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace Cake.Docker.Tests.Run
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("run --volume \"host:guest\" cmd"));
+            Assert.That(actual.Args, Is.EqualTo("compose run --volume \"host:guest\" cmd"));
         }
         [Test]
         public void WhenTwoVolumesAreSet_CommandLineIsCorrect()
@@ -43,7 +43,7 @@ namespace Cake.Docker.Tests.Run
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("run --volume \"host:guest\" --volume \"host2:guest2\" cmd"));
+            Assert.That(actual.Args, Is.EqualTo("compose run --volume \"host:guest\" --volume \"host2:guest2\" cmd"));
         }
     }
 }

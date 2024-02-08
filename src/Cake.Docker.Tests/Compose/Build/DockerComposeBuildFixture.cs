@@ -27,7 +27,7 @@ namespace Cake.Docker.Tests.Build
 
         ICakeConfiguration ICakeContext.Configuration => throw new NotImplementedException();
 
-        public DockerComposeBuildFixture(): base("docker-compose")
+        public DockerComposeBuildFixture(): base("docker")
         {
             ProcessRunner.Process.SetStandardOutput(Array.Empty<string>());
         }

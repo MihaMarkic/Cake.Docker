@@ -61,7 +61,7 @@ namespace Cake.Docker
             {
                 throw new ArgumentNullException(nameof(service));
             }
-            var runner = new GenericDockerComposeRunner<DockerComposeRunSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            var runner = new GenericDockerRunner<DockerComposeRunSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             List<string> arguments = new List<string>();
             arguments.Add(service);
             if (command != null)
@@ -69,7 +69,7 @@ namespace Cake.Docker
                 arguments.Add(command);
             }
             arguments.AddRange(args);
-            runner.Run("run", settings ?? new DockerComposeRunSettings(), arguments.ToArray());
+            runner.Run("compose run", settings ?? new DockerComposeRunSettings(), arguments.ToArray());
         }
 
     }

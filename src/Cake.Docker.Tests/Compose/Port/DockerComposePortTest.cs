@@ -17,7 +17,7 @@ namespace Cake.Docker.Tests.Compose.Port
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("port serviceA 8080"));
+            Assert.That(actual.Args, Is.EqualTo("compose port serviceA 8080"));
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace Cake.Docker.Tests.Compose.Port
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("port --index=2 serviceA 8080"));
+            Assert.That(actual.Args, Is.EqualTo("compose port --index 2 serviceA 8080"));
         }
     }
 }

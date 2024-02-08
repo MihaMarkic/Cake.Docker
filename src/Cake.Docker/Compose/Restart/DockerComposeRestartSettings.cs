@@ -1,13 +1,17 @@
 ﻿namespace Cake.Docker
 {
     /// <summary>
-    /// Settings for docker build.
+    /// Settings for docker compose restart.
     /// </summary>
-    public sealed class DockerComposeRestartSettings: DockerComposeSettings
+    public sealed class DockerComposeRestartSettings : DockerComposeSettings
     {
         /// <summary>
-        /// Specify a shutdown timeout in seconds. (default: 10)
+        /// Don't restart dependent services.
         /// </summary>
-        public bool Timeout { get; set; }
+        public bool? NoDeps { get; set; }
+        /// <summary>
+        /// Specify a shutdown timeout in seconds
+        /// </summary>
+        public int? Timeout { get; set; }
     }
 }

@@ -28,8 +28,8 @@ namespace Cake.Docker
         public static void DockerComposeBuild(this ICakeContext context, DockerComposeBuildSettings settings, params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);
-            var runner = new GenericDockerComposeRunner<DockerComposeBuildSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("build", settings ?? new DockerComposeBuildSettings(), services);
+            var runner = new GenericDockerRunner<DockerComposeBuildSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("compose build", settings ?? new DockerComposeBuildSettings(), services);
         }
 
     }

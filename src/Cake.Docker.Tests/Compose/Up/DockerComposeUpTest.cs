@@ -16,7 +16,7 @@ namespace Cake.Docker.Tests.Up
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("up --detach service"));
+            Assert.That(actual.Args, Is.EqualTo("compose up --detach service"));
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace Cake.Docker.Tests.Up
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("up --no-color service"));
+            Assert.That(actual.Args, Is.EqualTo("compose up --no-color service"));
         }
         [Test]
         public void WhenWaitIsSet_CommandLineIsCorrect()
@@ -43,7 +43,7 @@ namespace Cake.Docker.Tests.Up
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("up --wait service"));
+            Assert.That(actual.Args, Is.EqualTo("compose up --wait service"));
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace Cake.Docker.Tests.Up
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("up --abort-on-container-exit --remove-orphans"));
+            Assert.That(actual.Args, Is.EqualTo("compose up --abort-on-container-exit --remove-orphans"));
         }
         [Test]
         public void WhenWaitTimeoutIsSet_CommandLineIsCorrect()
@@ -68,7 +68,7 @@ namespace Cake.Docker.Tests.Up
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("up --wait-timeout 1"));
+            Assert.That(actual.Args, Is.EqualTo("compose up --wait-timeout 1"));
         }
     }
 }

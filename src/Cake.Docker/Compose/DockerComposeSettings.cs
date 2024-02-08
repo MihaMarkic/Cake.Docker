@@ -1,72 +1,58 @@
 ﻿namespace Cake.Docker
 {
     /// <summary>
-    /// Generic docker-compose settings.
+    /// Settings for docker compose.
     /// </summary>
     public class DockerComposeSettings : AutoToolSettings
     {
         /// <summary>
-        /// Configuration files.
+        /// Control when to print ANSI control
+        ///   characters ("never"|"always"|"auto")
+        ///   (default "auto")
         /// </summary>
-        [AutoProperty(Format = "-f {1}", PreCommand = true)]
-        public string[] Files { get; set; }
+        public string Ansi { get; set; }
         /// <summary>
-        /// Specify an alternate project name (default: directory name)
+        /// Run compose in backward compatibility mode
         /// </summary>
-        [AutoProperty(Format = "-p {1}", PreCommand = true)]
-        public string ProjectName { get; set; }
+        public bool Compatibility { get; set; }
         /// <summary>
-        /// Show more output
+        /// Execute command in dry run mode
         /// </summary>
-        [AutoProperty(PreCommand = true)]
-        public bool Verbose { get; set; }
+        public bool DryRun { get; set; }
         /// <summary>
-        /// Print version and exit
+        /// Specify an alternate environment file.
         /// </summary>
-        [AutoProperty(PreCommand = true)]
-        public bool Version { get; set; }
+        [AutoProperty(AutoArrayType = AutoArrayType.List)]
+        public string[] EnvFile { get; set; }
         /// <summary>
-        /// Daemon socket to connect to
+        /// Compose configuration files
         /// </summary>
-        [AutoProperty(PreCommand = true)]
-        public string Host { get; set; }
+        [AutoProperty(AutoArrayType = AutoArrayType.List)]
+        public string[] File { get; set; }
         /// <summary>
-        /// Use TLS; implied by --tlsverify
+        /// Control max parallelism, -1 for
+        ///   unlimited (default -1)
         /// </summary>
-        [AutoProperty(PreCommand = true)]
-        public bool Tls { get; set; }
+        public int? Parallel { get; set; }
         /// <summary>
-        /// Trust certs signed only by this CA
+        /// Specify a profile to enable
         /// </summary>
-        [AutoProperty(PreCommand = true)]
-        public string Tlscacert { get; set; }
+        [AutoProperty(AutoArrayType = AutoArrayType.List)]
+        public string[] Profile { get; set; }
         /// <summary>
-        /// Path to TLS certificate file
+        /// Set type of progress output (auto,
+        ///   tty, plain, quiet) (default "auto")
         /// </summary>
-        [AutoProperty(PreCommand = true)]
-        public string Tlscert { get; set; }
-        /// <summary>
-        /// Path to TLS key file
-        /// </summary>
-        [AutoProperty(PreCommand = true)]
-        public string Tlskey { get; set; }
-        /// <summary>
-        /// Use TLS and verify the remote
-        /// </summary>
-        [AutoProperty(PreCommand = true)]
-        public bool Tlsverify { get; set; }
-        /// <summary>
-        /// Don't check the daemon's hostname against the name specified
-        ///   in the client certificate (for example if your docker host
-        ///   is an IP address)
-        /// </summary>
-        [AutoProperty(PreCommand = true)]
-        public bool SkipHostnameCheck { get; set; }
+        public string Progress { get; set; }
         /// <summary>
         /// Specify an alternate working directory
-        /// (default: the path of the Compose file)
+        ///   (default: the path of the, first
+        ///   specified, Compose file)
         /// </summary>
-        [AutoProperty(PreCommand = true)]
         public string ProjectDirectory { get; set; }
+        /// <summary>
+        /// Project name
+        /// </summary>
+        public string ProjectName { get; set; }
     }
 }

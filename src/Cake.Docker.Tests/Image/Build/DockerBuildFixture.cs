@@ -5,7 +5,7 @@ using Cake.Core.Diagnostics;
 using Cake.Core.IO;
 using Cake.Testing.Fixtures;
 
-namespace Cake.Docker.Tests.Build
+namespace Cake.Docker.Tests.Image.Build
 {
     public class DockerBuildFixture : ToolFixture<DockerImageBuildSettings>, ICakeContext
     {

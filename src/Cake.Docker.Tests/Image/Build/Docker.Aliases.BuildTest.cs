@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Cake.Docker.Tests.Build
+namespace Cake.Docker.Tests.Image.Build
 {
     [TestFixture]
     public class DockerBuildTest
@@ -16,20 +16,20 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build \"path\""));
+            Assert.That(actual.Args, Is.EqualTo("image build \"path\""));
         }
         [Test]
         public void WhenRmFlagIsSet_CommandLineIsCorrect()
         {
             var fixture = new DockerBuildFixture
             {
-                Settings = new DockerImageBuildSettings {  Rm = true },
+                Settings = new DockerImageBuildSettings { Rm = true },
                 Path = "path"
             };
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build --rm=True \"path\""));
+            Assert.That(actual.Args, Is.EqualTo("image build --rm=True \"path\""));
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build --rm=False \"path\""));
+            Assert.That(actual.Args, Is.EqualTo("image build --rm=False \"path\""));
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build \"path\""));
+            Assert.That(actual.Args, Is.EqualTo("image build \"path\""));
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build \"path\""));
+            Assert.That(actual.Args, Is.EqualTo("image build \"path\""));
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build --pull \"path\""));
+            Assert.That(actual.Args, Is.EqualTo("image build --pull \"path\""));
         }
         [Test]
         public void WhenPathHasSpaces_ArgumentIsQuoted()
@@ -98,7 +98,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo(@"build ""C:\Some where"""));
+            Assert.That(actual.Args, Is.EqualTo(@"image build ""C:\Some where"""));
         }
         [Test]
         public void WhenPathHasSingleQuote_ArgumentIsQuoted()
@@ -111,7 +111,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo(@"build """""""));
+            Assert.That(actual.Args, Is.EqualTo(@"image build """""""));
         }
         [TestCase("\"test\"")]
         [TestCase(" \"test\"")]
@@ -127,7 +127,7 @@ namespace Cake.Docker.Tests.Build
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo($"build {path}"));
+            Assert.That(actual.Args, Is.EqualTo($"image build {path}"));
         }
     }
 }

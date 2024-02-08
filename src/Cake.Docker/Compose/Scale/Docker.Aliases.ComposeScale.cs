@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeScale(this ICakeContext context, params string[] services)
         {
-            DockerComposeScale(context, new DockerComposeSettings(), services);
+            DockerComposeScale(context, new DockerComposeScaleSettings(), services);
         }
         /// <summary>
         /// Runs docker-compose scale.
@@ -24,11 +24,11 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="services">The list of services.</param>
         [CakeMethodAlias]
-        public static void DockerComposeScale(this ICakeContext context, DockerComposeSettings settings, params string[] services)
+        public static void DockerComposeScale(this ICakeContext context, DockerComposeScaleSettings settings, params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);
-            var runner = new GenericDockerComposeRunner<DockerComposeSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("scale", settings ?? new DockerComposeSettings(), services);
+            var runner = new GenericDockerRunner<DockerComposeScaleSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("compose scale", settings, services);
         }
     }
 }

@@ -1,29 +1,50 @@
 ﻿namespace Cake.Docker
 {
     /// <summary>
-    /// Settings for docker build.
+    /// Settings for docker compose build.
     /// </summary>
-    public sealed class DockerComposeBuildSettings: DockerComposeSettings
+    public sealed class DockerComposeBuildSettings : DockerComposeSettings
     {
         /// <summary>
-        /// Always remove intermediate containers.
+        /// Set build-time variables for services.
         /// </summary>
-        public bool ForceRm { get; set; }
+        [AutoProperty(AutoArrayType = AutoArrayType.List)]
+        public string[] BuildArg { get; set; }
         /// <summary>
-        /// Do not use cache when building the image.
+        /// Set builder to use.
+        /// </summary>
+        public string Builder { get; set; }
+        /// <summary>
+        /// Set memory limit for the build container.
+        ///   Not supported by BuildKit.
+        /// </summary>
+        public bool Memory { get; set; }
+        /// <summary>
+        /// Do not use cache when building the image
         /// </summary>
         public bool NoCache { get; set; }
         /// <summary>
-        /// Always attempt to pull a newer version of the image.
+        /// Always attempt to pull a newer version of
+        ///   the image.
         /// </summary>
         public bool Pull { get; set; }
         /// <summary>
-        /// key=val     Set build-time variables for one service.
+        /// Push service images.
         /// </summary>
-        public string[] BuildArg { get; set; }
+        public bool Push { get; set; }
         /// <summary>
-        /// Build images in parallel.
+        /// Don't print anything to STDOUT
         /// </summary>
-        public bool? Parallel { get; set; }
+        public bool Quiet { get; set; }
+        /// <summary>
+        /// Set SSH authentications used when
+        ///   building service images. (use 'default'
+        ///   for using your default SSH Agent)
+        /// </summary>
+        public string Ssh { get; set; }
+        /// <summary>
+        /// Also build dependencies (transitively).
+        /// </summary>
+        public bool WithDependencies { get; set; }
     }
 }

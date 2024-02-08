@@ -1,1 +1,1 @@
-﻿-t, --timeout TIMEOUT      Specify a shutdown timeout in seconds (default: 10).
+﻿  -t, --timeout int   Specify a shutdown timeout in seconds

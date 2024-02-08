@@ -1,15 +1,18 @@
 ﻿namespace Cake.Docker
 {
     /// <summary>
-    /// Settings for docker build.
+    /// Settings for docker compose kill.
     /// </summary>
-    public sealed class DockerComposeKillSettings: DockerComposeSettings
+    public sealed class DockerComposeKillSettings : DockerComposeSettings
     {
         /// <summary>
-        ///  SIGNAL to send to the container. Default signal is SIGKILL.
+        /// Remove containers for services not defined in
+        ///   the Compose file.
         /// </summary>
-        [AutoProperty(Format = "-s {1}")]
-        public string Signal { get; set; }
-        
+        public bool? RemoveOrphans { get; set; }
+        /// <summary>
+        /// SIGNAL to send to the container. (default "SIGKILL")
+        /// </summary>
+        public string? Signal { get; set; }
     }
 }

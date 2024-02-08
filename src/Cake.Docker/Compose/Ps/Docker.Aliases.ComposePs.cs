@@ -28,8 +28,8 @@ namespace Cake.Docker
         public static IEnumerable<string> DockerComposePs(this ICakeContext context, DockerComposePsSettings settings, params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);
-            var runner = new GenericDockerComposeRunner<DockerComposePsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            var result = runner.RunWithResult("ps", settings ?? new DockerComposePsSettings(), r => r.ToArray(), services);
+            var runner = new GenericDockerRunner<DockerComposePsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            var result = runner.RunWithResult("compose ps", settings ?? new DockerComposePsSettings(), r => r.ToArray(), services);
             return result;
         }
     }

@@ -29,7 +29,7 @@ namespace Cake.Docker.Tests.Compose.Port
 
         ICakeConfiguration ICakeContext.Configuration => throw new NotImplementedException();
 
-        public DockerComposePortFixture(): base("docker-compose")
+        public DockerComposePortFixture(): base("docker")
         {
             ProcessRunner.Process.SetStandardOutput(Array.Empty<string>());
         }

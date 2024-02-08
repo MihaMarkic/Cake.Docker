@@ -17,7 +17,7 @@ namespace Cake.Docker.Tests.Compose.Exec
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("exec service command"));
+            Assert.That(actual.Args, Is.EqualTo("compose exec service command"));
         }
     }
 }

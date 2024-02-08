@@ -31,9 +31,9 @@ namespace Cake.Docker
         {
             ArgumentNullException.ThrowIfNull(context);
             ArgumentNullException.ThrowIfNull(service);
-            var runner = new GenericDockerComposeRunner<DockerComposePortSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            var runner = new GenericDockerRunner<DockerComposePortSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             var arguments = new List<string> { service, port.ToString() };
-            return runner.RunWithResult("port", settings ?? new DockerComposePortSettings(), r => r.ToArray(), arguments.ToArray());
+            return runner.RunWithResult("compose port", settings ?? new DockerComposePortSettings(), r => r.ToArray(), arguments.ToArray());
         }
     }
 }

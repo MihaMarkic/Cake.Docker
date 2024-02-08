@@ -1,43 +1,30 @@
 ﻿namespace Cake.Docker
 {
     /// <summary>
-    /// Settings for docker build.
+    /// Settings for docker compose down.
     /// </summary>
-    public sealed class DockerComposeDownSettings: DockerComposeSettings
+    public sealed class DockerComposeDownSettings : DockerComposeSettings
     {
         /// <summary>
-        /// Remove images. Type must be one of:
-        ///   'all': Remove all images used by any service.
-        ///   'local': Remove only images that don't have a custom tag
-        ///   set by the `image` field.
+        /// Remove containers for services not defined in
+        ///   the Compose file.
         /// </summary>
-        /// <remarks>Can use <see cref="DockerComposeDownRmiType"/> constants.</remarks>
-        public string Rmi { get; set; }
+        public bool? RemoveOrphans { get; set; }
         /// <summary>
-        /// Remove named volumes declared in the `volumes` section
-        ///   of the Compose file and anonymous volumes
-        ///   attached to containers.
+        /// Remove images used by services. "local" remove
+        ///   only images that don't have a custom tag
+        ///   ("local"|"all")
         /// </summary>
-        public bool Volumes { get; set; }
+        public string? Rmi { get; set; }
         /// <summary>
-        /// Remove containers for services not defined in the
-        ///   Compose file
+        /// Specify a shutdown timeout in seconds
         /// </summary>
-        public bool RemoveOrphans { get; set; }
-    }
-
-    /// <summary>
-    /// Options for <see cref="DockerComposeDownSettings"/> Rmi.
-    /// </summary>
-    public static class DockerComposeDownRmiType
-    {
+        public int? Timeout { get; set; }
         /// <summary>
-        /// Remove all images used by any service.
+        /// Remove named volumes declared in the "volumes"
+        ///   section of the Compose file and anonymous
+        ///   volumes attached to containers.
         /// </summary>
-        public const string All = "all";
-        /// <summary>
-        ///  Remove only images that don't have a custom tag set by the `image` field.
-        /// </summary>
-        public const string Local = "local";
+        public bool? Volumes { get; set; }
     }
 }

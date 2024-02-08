@@ -28,8 +28,8 @@ namespace Cake.Docker
         public static void DockerComposePull(this ICakeContext context, DockerComposePullSettings settings, params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);
-            var runner = new GenericDockerComposeRunner<DockerComposePullSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("pull", settings ?? new DockerComposePullSettings(), services);
+            var runner = new GenericDockerRunner<DockerComposePullSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("compose pull", settings ?? new DockerComposePullSettings(), services);
         }
 
     }

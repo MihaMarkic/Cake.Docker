@@ -1,25 +1,30 @@
 ﻿namespace Cake.Docker
 {
     /// <summary>
-    /// Settings for docker build.
+    /// Settings for docker compose pull.
     /// </summary>
-    public sealed class DockerComposePullSettings: DockerComposeSettings
+    public sealed class DockerComposePullSettings : DockerComposeSettings
     {
         /// <summary>
-        /// Pull what it can and ignores images with pull failures.
+        /// Ignore images that can be built.
         /// </summary>
-        public bool IgnorePullFailures { get; set; }
+        public bool? IgnoreBuildable { get; set; }
         /// <summary>
-        /// Disable parallel pulling.
+        /// Pull what it can and ignores images with
+        ///   pull failures.
         /// </summary>
-        public bool NoParallel { get; set; }
+        public bool? IgnorePullFailures { get; set; }
         /// <summary>
-        /// Also pull services declared as dependencies
+        /// Also pull services declared as dependencies.
         /// </summary>
-        public bool IncludeDeps { get; set; }
+        public bool? IncludeDeps { get; set; }
         /// <summary>
-        /// Pull without printing progress information
+        /// Apply pull policy ("missing"|"always").
         /// </summary>
-        public bool Quiet { get; set; }
+        public string? Policy { get; set; }
+        /// <summary>
+        /// Pull without printing progress information.
+        /// </summary>
+        public bool? Quiet { get; set; }
     }
 }

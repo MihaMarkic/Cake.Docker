@@ -1,6 +1,6 @@
 <Query Kind="Statements" />
 
-string path = @"Compose\Cp";
+string path = @"Compose\Run";
 string file = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath)!, $@"src\Cake.Docker\{path}\args.txt");
 //string file = @"D:\GitProjects\Righthand\Cake\Cake.Docker\src\Cake.Docker\Compose\Up\args.txt";
 string[] lines = File.ReadAllLines(file);
@@ -34,7 +34,7 @@ string className = path.Replace(@"\", "");
 "/// <summary>".Dump();
 $"/// Settings for docker {string.Join(" ", path.Split('\\').Select(p => p.ToLower()))}.".Dump();
 "/// </summary>".Dump();
-$"public sealed class Docker{className}Settings : AutoToolSettings".Dump();
+$"public sealed class Docker{className}Settings : DockerComposeSettings".Dump();
 "{".Dump();
 foreach (var pair in data)
 {
@@ -92,29 +92,29 @@ foreach (var pair in data)
 			case "int?":
 			case "int":
 			case "uint":
-				netType = "int";
+				netType = "int?";
 				break;
 			case "value":
 				if (info.EndsWith("[])"))
                 {
-					netType = "string[]";
+					netType = "string[]?";
 				}
 				else
 				{
-					netType = "string";
+					netType = "string=";
 				}
 				break;
 			case "string":
-				netType = "string";
+				netType = "string?";
 				break;
 			case "strings":
-				netType = "string[]";
+				netType = "string[]?";
 				break;
 			case "stringArray":
-				netType = "string[]";
+				netType = "string[]?";
 				break;
 			default:
-				netType = "bool";
+				netType = "bool?";
 				break;
 		}
 		if (type == "stringArray")

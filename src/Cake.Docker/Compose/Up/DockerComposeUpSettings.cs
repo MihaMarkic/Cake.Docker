@@ -9,121 +9,119 @@ namespace Cake.Docker
         /// Stops all containers if any container
         ///   was stopped. Incompatible with -d
         /// </summary>
-        public bool AbortOnContainerExit { get; set; }
+        public bool? AbortOnContainerExit { get; set; }
         /// <summary>
         /// Recreate dependent containers.
         ///   Incompatible with --no-recreate.
         /// </summary>
-        public bool AlwaysRecreateDeps { get; set; }
+        public bool? AlwaysRecreateDeps { get; set; }
         /// <summary>
-        /// Attach to service output.
+        /// Restrict attaching to the specified
+        ///   services. Incompatible with
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
-        public string[] Attach { get; set; }
+        public string[]? Attach { get; set; }
         /// <summary>
-        /// Attach to dependent containers.
+        /// Automatically attach to log output of
+        ///   dependent services.
         /// </summary>
-        public bool AttachDependencies { get; set; }
+        public bool? AttachDependencies { get; set; }
         /// <summary>
         /// Build images before starting containers.
         /// </summary>
-        public bool Build { get; set; }
+        public bool? Build { get; set; }
         /// <summary>
         /// Detached mode: Run containers in the
         ///   background
         /// </summary>
-        public bool Detach { get; set; }
-        /// <summary>
-        /// Execute command in dry run mode
-        /// </summary>
-        public bool DryRun { get; set; }
+        public bool? Detach { get; set; }
         /// <summary>
         /// Return the exit code of the selected
-        ///   service container. Implies --abort-on-container-exit
+        ///   service container. Implies
         /// </summary>
-        [AutoProperty(Format = "--exit-code-from {1}")]
-        public string ExitCodeFrom { get; set; }
+        public string? ExitCodeFrom { get; set; }
         /// <summary>
         /// Recreate containers even if their
         ///   configuration and image haven't changed.
         /// </summary>
-        public bool ForceRecreate { get; set; }
+        public bool? ForceRecreate { get; set; }
         /// <summary>
-        /// Don't attach to specified service.
+        /// Do not attach (stream logs) to the
+        ///   specified services.
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
-        public string[] NoAttach { get; set; }
+        public string[]? NoAttach { get; set; }
         /// <summary>
-        /// Don't build an image, even if it's missing.
+        /// Don't build an image, even if it's policy.
         /// </summary>
-        public bool NoBuild { get; set; }
+        public bool? NoBuild { get; set; }
         /// <summary>
         /// Produce monochrome output.
         /// </summary>
-        public bool NoColor { get; set; }
+        public bool? NoColor { get; set; }
         /// <summary>
         /// Don't start linked services.
         /// </summary>
-        public bool NoDeps { get; set; }
+        public bool? NoDeps { get; set; }
         /// <summary>
         /// Don't print prefix in logs.
         /// </summary>
-        public bool NoLogPrefix { get; set; }
+        public bool? NoLogPrefix { get; set; }
         /// <summary>
         /// If containers already exist, don't
-        ///   recreate them. Incompatible with --force-recreate.
+        ///   recreate them. Incompatible with
         /// </summary>
-        public bool NoRecreate { get; set; }
+        public bool? NoRecreate { get; set; }
         /// <summary>
         /// Don't start the services after creating
         ///   them.
         /// </summary>
-        public bool NoStart { get; set; }
+        public bool? NoStart { get; set; }
         /// <summary>
         /// Pull image before running
         ///   ("always"|"missing"|"never") (default
-        ///   "missing")
+        ///   "policy")
         /// </summary>
-        public string Pull { get; set; }
+        public string? Pull { get; set; }
         /// <summary>
         /// Pull without printing progress information.
         /// </summary>
-        public bool QuietPull { get; set; }
+        public bool? QuietPull { get; set; }
         /// <summary>
         /// Remove containers for services not
         ///   defined in the Compose file.
         /// </summary>
-        public bool RemoveOrphans { get; set; }
+        public bool? RemoveOrphans { get; set; }
         /// <summary>
         /// Recreate anonymous volumes instead of
         ///   retrieving data from the previous
         ///   containers.
         /// </summary>
-        public bool RenewAnonVolumes { get; set; }
+        public bool? RenewAnonVolumes { get; set; }
         /// <summary>
         /// Scale SERVICE to NUM instances.
         ///   Overrides the scale setting in the
         ///   Compose file if present.
         /// </summary>
-        public string Scale { get; set; }
+        public bool? Scale { get; set; }
         /// <summary>
         /// Use this timeout in seconds for
         ///   container shutdown when attached or
         ///   when containers are already running.
         /// </summary>
-        public int Timeout { get; set; }
+        public int? Timeout { get; set; }
         /// <summary>
         /// Show timestamps.
         /// </summary>
-        public bool Timestamps { get; set; }
+        public bool? Timestamps { get; set; }
         /// <summary>
         /// Wait for services to be
         ///   running|healthy. Implies detached mode.
         /// </summary>
-        public bool Wait { get; set; }
+        public bool? Wait { get; set; }
         /// <summary>
-        /// timeout waiting for application to be
-        ///   running|healthy
+        /// Maximum duration to wait for the
+        ///   project to be running|healthy.
         /// </summary>
         public int? WaitTimeout { get; set; }
     }

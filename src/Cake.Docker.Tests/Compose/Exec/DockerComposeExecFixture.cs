@@ -29,7 +29,7 @@ namespace Cake.Docker.Tests.Compose.Exec
 
         ICakeConfiguration ICakeContext.Configuration => throw new NotImplementedException();
 
-        public DockerComposeExecFixture() : base("docker-compose")
+        public DockerComposeExecFixture() : base("docker")
         {
             ProcessRunner.Process.SetStandardOutput(Array.Empty<string>());
         }

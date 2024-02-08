@@ -15,7 +15,7 @@ namespace Cake.Docker.Tests.Compose.Ps
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("ps --filter filter"));
+            Assert.That(actual.Args, Is.EqualTo("compose ps --filter filter"));
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace Cake.Docker.Tests.Compose.Ps
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("ps --filter filter serviceA serviceB"));
+            Assert.That(actual.Args, Is.EqualTo("compose ps --filter filter serviceA serviceB"));
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace Cake.Docker.Tests.Compose.Ps
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("ps --filter filter1 --filter filter2 serviceA serviceB"));
+            Assert.That(actual.Args, Is.EqualTo("compose ps --filter filter1 --filter filter2 serviceA serviceB"));
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace Cake.Docker.Tests.Compose.Ps
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("ps --quiet serviceA serviceB serviceC"));
+            Assert.That(actual.Args, Is.EqualTo("compose ps --quiet serviceA serviceB serviceC"));
         }
     }
 }

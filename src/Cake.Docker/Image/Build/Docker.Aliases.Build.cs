@@ -51,7 +51,7 @@ namespace Cake.Docker
             {
                 quotedPath = path;
             }
-            runner.Run("build", settings ?? new DockerImageBuildSettings(), new[] { quotedPath });
+            runner.Run("image build", settings ?? new DockerImageBuildSettings(), new[] { quotedPath });
         }
 
     }

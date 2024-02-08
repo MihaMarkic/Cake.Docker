@@ -26,8 +26,8 @@ namespace Cake.Docker
         public static void DockerComposeDown(this ICakeContext context, DockerComposeDownSettings settings)
         {
             ArgumentNullException.ThrowIfNull(context);
-            var runner = new GenericDockerComposeRunner<DockerComposeDownSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("down", settings ?? new DockerComposeDownSettings(), Array.Empty<string>());
+            var runner = new GenericDockerRunner<DockerComposeDownSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("compose down", settings ?? new DockerComposeDownSettings(), Array.Empty<string>());
         }
 
     }
