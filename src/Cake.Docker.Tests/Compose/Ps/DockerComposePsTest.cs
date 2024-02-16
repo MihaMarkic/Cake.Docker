@@ -10,7 +10,7 @@ namespace Cake.Docker.Tests.Compose.Ps
         {
             var fixture = new DockerComposePsFixture
             {
-                Settings = new DockerComposePsSettings { Filters = ["filter"] },
+                Settings = new DockerComposePsSettings { Filter = ["filter"] },
             };
 
             var actual = fixture.Run();
@@ -23,7 +23,7 @@ namespace Cake.Docker.Tests.Compose.Ps
         {
             var fixture = new DockerComposePsFixture
             {
-                Settings = new DockerComposePsSettings { Filters = ["filter"] },
+                Settings = new DockerComposePsSettings { Filter = ["filter"] },
                 Services = ["serviceA", "serviceB"],
             };
 
@@ -37,7 +37,7 @@ namespace Cake.Docker.Tests.Compose.Ps
         {
             var fixture = new DockerComposePsFixture
             {
-                Settings = new DockerComposePsSettings { Filters = ["filter1", "filter2"] },
+                Settings = new DockerComposePsSettings { Filter = ["filter1", "filter2"] },
                 Services = ["serviceA", "serviceB"],
             };
 

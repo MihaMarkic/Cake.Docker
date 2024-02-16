@@ -14,7 +14,8 @@
         /// Filter services by a property (supported
         ///   filters: status).
         /// </summary>
-        public string? Filter { get; set; }
+        [AutoProperty(Format = "--filter {1}")]
+        public string[]? Filter { get; set; }
         /// <summary>
         /// Format output using a custom template:
         ///   'table':            Print output in table
