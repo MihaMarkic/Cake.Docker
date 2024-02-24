@@ -70,5 +70,18 @@ namespace Cake.Docker.Tests.Up
 
             Assert.That(actual.Args, Is.EqualTo("compose up --wait-timeout 1"));
         }
+        [Test]
+        public void WhenParallelFlagIsSet_CommandLineIsCorrect()
+        {
+            var fixture = new DockerComposeUpFixture
+            {
+                ComposeSettings = new DockerComposeSettings { Parallel = 2, },
+                Settings = new DockerComposeUpSettings { WaitTimeout = 1 },
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("compose --parallel 2 up --wait-timeout 1"));
+        }
     }
 }

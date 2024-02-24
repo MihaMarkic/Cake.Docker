@@ -23,11 +23,15 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeKill(this ICakeContext context, DockerComposeKillSettings settings)
+        public static void DockerComposeKill(this ICakeContext context, DockerComposeKillSettings settings,
+            DockerComposeSettings? composeSettings = null)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerComposeKillSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("compose kill", settings ?? new DockerComposeKillSettings(), Array.Empty<string>());
+            runner.Run(
+                "compose", composeSettings ?? new DockerComposeSettings(),
+                "kill", settings ?? new DockerComposeKillSettings(), 
+                Array.Empty<string>());
         }
 
     }

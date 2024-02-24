@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeRm(this ICakeContext context, params string[] services)
         {
-            DockerComposeRm(context, new DockerComposeRmSettings(), services);
+            DockerComposeRm(context, new DockerComposeRmSettings(), null, services);
         }
 
         /// <summary>
@@ -25,11 +25,16 @@ namespace Cake.Docker
         /// <param name="services">The list of services.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeRm(this ICakeContext context, DockerComposeRmSettings settings, params string[] services)
+        public static void DockerComposeRm(this ICakeContext context, DockerComposeRmSettings settings,
+            DockerComposeSettings? composeSettings = null,
+            params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerComposeRmSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("compose rm", settings ?? new DockerComposeRmSettings(), services);
+            runner.Run(
+                "compose", composeSettings ?? new(),
+                "rm", settings ?? new(),
+                services);
         }
 
     }

@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeStop(this ICakeContext context, params string[] services)
         {
-            DockerComposeStop(context, new DockerComposeBuildSettings(), services);
+            DockerComposeStop(context, new DockerComposeBuildSettings(), null, services);
         }
 
         /// <summary>
@@ -25,11 +25,16 @@ namespace Cake.Docker
         /// <param name="services">The list of services.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeStop(this ICakeContext context, DockerComposeBuildSettings settings, params string[] services)
+        public static void DockerComposeStop(this ICakeContext context, DockerComposeBuildSettings settings,
+            DockerComposeSettings? composeSettings = null,
+            params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerComposeBuildSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("compose stop", settings ?? new DockerComposeBuildSettings(), services);
+            runner.Run(
+                "compose", composeSettings ?? new(),
+                "stop", settings ?? new (), 
+                services);
         }
 
     }

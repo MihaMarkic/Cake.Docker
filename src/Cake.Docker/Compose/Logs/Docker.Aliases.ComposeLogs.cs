@@ -25,11 +25,15 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static IEnumerable<string> DockerComposeLogs(this ICakeContext context, DockerComposeLogsSettings settings)
+        public static IEnumerable<string> DockerComposeLogs(this ICakeContext context, DockerComposeLogsSettings settings,
+            DockerComposeSettings? composeSettings = null)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerComposeLogsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            return runner.RunWithResult("compose logs", settings ?? new DockerComposeLogsSettings(), r => r.ToArray());
+            return runner.RunWithResult(
+                "compose",composeSettings ?? new DockerComposeSettings(),
+                "logs", settings ?? new DockerComposeLogsSettings(), 
+                r => r.ToArray());
         }
 
     }

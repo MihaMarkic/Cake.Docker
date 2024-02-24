@@ -23,11 +23,15 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeDown(this ICakeContext context, DockerComposeDownSettings settings)
+        public static void DockerComposeDown(this ICakeContext context, DockerComposeDownSettings settings,
+            DockerComposeSettings? composeSettings = null)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerComposeDownSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("compose down", settings ?? new DockerComposeDownSettings(), Array.Empty<string>());
+            runner.Run(
+                "compose", composeSettings ?? new DockerComposeSettings(),
+                "down", settings ?? new DockerComposeDownSettings(), 
+                Array.Empty<string>());
         }
 
     }

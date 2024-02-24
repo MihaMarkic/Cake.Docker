@@ -59,5 +59,19 @@ namespace Cake.Docker.Tests.Compose.Ps
 
             Assert.That(actual.Args, Is.EqualTo("compose ps --quiet serviceA serviceB serviceC"));
         }
+        [Test]
+        public void WhenParallelFlagIsSet_CommandLineIsCorrect()
+        {
+            var fixture = new DockerComposePsFixture
+            {
+                ComposeSettings = new DockerComposeSettings { Parallel = 2, },
+                Settings = new DockerComposePsSettings { Quiet = true },
+                Services = ["serviceA", "serviceB", "serviceC"],
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("compose --parallel 2 ps --quiet serviceA serviceB serviceC"));
+        }
     }
 }

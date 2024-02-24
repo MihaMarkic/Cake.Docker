@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeUnpause(this ICakeContext context, params string[] services)
         {
-            DockerComposeUnpause(context, new DockerComposeSettings(), services);
+            DockerComposeUnpause(context, new DockerComposeSettings(), null, services);
         }
         /// <summary>
         /// Runs docker-compose unpause.
@@ -24,11 +24,16 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="services">The list of services.</param>
         [CakeMethodAlias]
-        public static void DockerComposeUnpause(this ICakeContext context, DockerComposeSettings settings, params string[] services)
+        public static void DockerComposeUnpause(this ICakeContext context, DockerComposeSettings settings,
+            DockerComposeSettings? composeSettings = null,
+            params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerComposeSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("compose unpause", settings ?? new DockerComposeSettings(), services);
+            runner.Run(
+                "compose", composeSettings ?? new(),
+                "unpause", settings ?? new (), 
+                services);
         }
     }
 }

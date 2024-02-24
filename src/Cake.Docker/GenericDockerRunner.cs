@@ -57,6 +57,33 @@ namespace Cake.Docker
                 Run(settings, GetArguments(command, settings, additional));
             }
         }
+        public void Run<TCoreSettings>(string coreCommand, TCoreSettings coreSettings, string command, TSettings settings, string[] additional)
+            where TCoreSettings : AutoToolSettings, new()
+        {
+            if (string.IsNullOrEmpty(command))
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+            if (settings == null)
+            {
+                throw new ArgumentNullException(nameof(settings));
+            }
+            if (additional == null)
+            {
+                throw new ArgumentNullException(nameof(additional));
+            }
+            // checks whether method is experimental based on ExperimentalAttribute decoration
+            if (IsExperimental)
+            {
+                // when experimental, applies proper environmental variable to runner process
+                var processSettings = CreateExperimentalProcessSettings();
+                Run(settings, GetArguments(coreCommand, coreSettings, command, settings, additional), processSettings, postAction: null);
+            }
+            else
+            {
+                Run(settings, GetArguments(coreCommand, coreSettings, command, settings, additional));
+            }
+        }
         static bool IsExperimental => typeof(TSettings).GetCustomAttributes(typeof(ExperimentalAttribute), inherit: true)?.Length > 0;
         static ProcessSettings CreateExperimentalProcessSettings()
         {
@@ -67,6 +94,16 @@ namespace Cake.Docker
         private ProcessArgumentBuilder GetArguments(string command, TSettings settings, string[] additional)
         {
             var builder = new ProcessArgumentBuilder();
+            builder.AppendAll(command, settings, additional);
+            return builder;
+        }
+
+        private ProcessArgumentBuilder GetArguments<TCoreSettings>(string coreCommand, TCoreSettings coreSetings, string command, TSettings settings, 
+            string[] additional)
+            where TCoreSettings : AutoToolSettings, new()
+        {
+            var builder = new ProcessArgumentBuilder();
+            builder.AppendAll(coreCommand, coreSetings, Array.Empty<string>());
             builder.AppendAll(command, settings, additional);
             return builder;
         }
@@ -100,6 +137,36 @@ namespace Cake.Docker
             ProcessSettings processSettings = IsExperimental ? CreateExperimentalProcessSettings() : new ProcessSettings();
             processSettings.RedirectStandardOutput = true;
             Run(settings, GetArguments(command, settings, arguments),
+                processSettings,
+                proc =>
+                {
+                    result = processOutput(proc.GetStandardOutput());
+                });
+            return result;
+        }
+        public T[] RunWithResult<T, TCoreSettings>(
+            string coreCommand, TCoreSettings coreSettings,
+            string command, TSettings settings,
+            Func<IEnumerable<string>, T[]> processOutput,
+            params string[] arguments)
+            where TCoreSettings : AutoToolSettings, new()
+        {
+            if (string.IsNullOrEmpty(command))
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+            if (settings == null)
+            {
+                throw new ArgumentNullException(nameof(settings));
+            }
+            if (processOutput == null)
+            {
+                throw new ArgumentNullException(nameof(processOutput));
+            }
+            T[] result = Array.Empty<T>();
+            ProcessSettings processSettings = IsExperimental ? CreateExperimentalProcessSettings() : new ProcessSettings();
+            processSettings.RedirectStandardOutput = true;
+            Run(settings, GetArguments(coreCommand, coreSettings, command, settings, arguments),
                 processSettings,
                 proc =>
                 {

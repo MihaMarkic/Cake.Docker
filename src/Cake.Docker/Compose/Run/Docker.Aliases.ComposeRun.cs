@@ -17,7 +17,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeRun(this ICakeContext context, string service, params string[] args)
         {
-            DockerComposeRun(context, new DockerComposeRunSettings(), service, null, args);
+            DockerComposeRun(context, new DockerComposeRunSettings(), service, null, composeSettings: null, args);
         }
         /// <summary>
         /// Runs docker-compose run with default settings.
@@ -29,7 +29,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeRun(this ICakeContext context, string service, string command, params string[] args)
         {
-            DockerComposeRun(context, new DockerComposeRunSettings(), service, command, args);
+            DockerComposeRun(context, new DockerComposeRunSettings(), service, command, composeSettings: null, args);
         }
 
         /// <summary>
@@ -40,9 +40,10 @@ namespace Cake.Docker
         /// <param name="args">The arguments.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeRun(this ICakeContext context, DockerComposeRunSettings settings, string service, params string[] args)
+        public static void DockerComposeRun(this ICakeContext context, DockerComposeRunSettings settings, string service, 
+            DockerComposeSettings? composeSettings = null, params string[] args)
         {
-            DockerComposeRun(context, settings, service, command: null, args: args);
+            DockerComposeRun(context, settings, service, command: null, args: args, composeSettings: composeSettings);
         }
 
         /// <summary>
@@ -54,7 +55,9 @@ namespace Cake.Docker
         /// <param name="args">The arguments.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeRun(this ICakeContext context, DockerComposeRunSettings settings, string service, string command, params string[] args)
+        public static void DockerComposeRun(this ICakeContext context, DockerComposeRunSettings settings, string service, string command,
+            DockerComposeSettings? composeSettings = null,
+            params string[] args)
         {
             ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(service))
@@ -69,7 +72,10 @@ namespace Cake.Docker
                 arguments.Add(command);
             }
             arguments.AddRange(args);
-            runner.Run("compose run", settings ?? new DockerComposeRunSettings(), arguments.ToArray());
+            runner.Run(
+                "compose", composeSettings ??  new(),
+                "run", settings ?? new (), 
+                arguments.ToArray());
         }
 
     }

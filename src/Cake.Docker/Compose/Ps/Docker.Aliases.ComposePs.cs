@@ -16,7 +16,7 @@ namespace Cake.Docker
         /// <param name="services">The list of services.</param>
         [CakeMethodAlias]
         public static void DockerComposePs(this ICakeContext context, params string[] services) =>
-            DockerComposePs(context, new DockerComposePsSettings(), services);
+            DockerComposePs(context, new DockerComposePsSettings(), null, services);
 
         /// <summary>
         /// Runs docker-compose ps.
@@ -25,11 +25,16 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="services">The list of services.</param>
         [CakeMethodAlias]
-        public static IEnumerable<string> DockerComposePs(this ICakeContext context, DockerComposePsSettings settings, params string[] services)
+        public static IEnumerable<string> DockerComposePs(this ICakeContext context, DockerComposePsSettings settings,
+            DockerComposeSettings? composeSettings = null, 
+            params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerComposePsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            var result = runner.RunWithResult("compose ps", settings ?? new DockerComposePsSettings(), r => r.ToArray(), services);
+            var result = runner.RunWithResult(
+                "compose", composeSettings ?? new(),
+                "ps", settings ?? new (), 
+                r => r.ToArray(), services);
             return result;
         }
     }

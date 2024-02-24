@@ -1,43 +1,16 @@
-﻿using Cake.Core;
-using Cake.Core.Configuration;
-using Cake.Core.Diagnostics;
-using Cake.Core.IO;
-using Cake.Testing.Fixtures;
-using System;
+﻿using Cake.Docker.Tests.Compose;
 
-namespace Cake.Docker.Tests.Up
+namespace Cake.Docker.Tests.Up;
+
+public class DockerComposeUpFixture : DockerComposeFixture<DockerComposeUpSettings>
 {
-    public class DockerComposeUpFixture : ToolFixture<DockerComposeUpSettings>, ICakeContext
+    public string Service { get; set; }
+    protected override void RunTool()
     {
-        public string Service { get; set; }
-
-        IFileSystem ICakeContext.FileSystem => FileSystem;
-
-        ICakeEnvironment ICakeContext.Environment => Environment;
-
-        public ICakeLog Log => Log;
-
-        ICakeArguments ICakeContext.Arguments => throw new NotImplementedException();
-
-        IProcessRunner ICakeContext.ProcessRunner => ProcessRunner;
-
-        public IRegistry Registry => Registry;
-
-        public ICakeDataResolver Data => throw new NotImplementedException();
-
-        ICakeConfiguration ICakeContext.Configuration => throw new NotImplementedException();
-
-        public DockerComposeUpFixture(): base("docker")
+        this.DockerComposeUp(Settings, ComposeSettings, Service);
+        if(string.IsNullOrEmpty(Service))
         {
-            ProcessRunner.Process.SetStandardOutput(Array.Empty<string>());
-        }
-        protected override void RunTool()
-        {
-            this.DockerComposeUp(Settings, Service);
-            if(string.IsNullOrEmpty(Service))
-            {
-                this.DockerComposeUp(Settings);
-            }
+            this.DockerComposeUp(Settings, ComposeSettings);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeRestart(this ICakeContext context, params string[] services)
         {
-            DockerComposeRestart(context, new DockerComposeRestartSettings(), services);
+            DockerComposeRestart(context, new DockerComposeRestartSettings(), null, services);
         }
 
         /// <summary>
@@ -25,11 +25,15 @@ namespace Cake.Docker
         /// <param name="services">The list of services.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeRestart(this ICakeContext context, DockerComposeRestartSettings settings, params string[] services)
+        public static void DockerComposeRestart(this ICakeContext context, DockerComposeRestartSettings settings,
+            DockerComposeSettings? composeSettings = null, 
+            params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerComposeRestartSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("compose restart", settings ?? new DockerComposeRestartSettings(), services);
+            runner.Run(
+                "compose", composeSettings ?? new(),
+                "restart", settings ?? new (), services);
         }
 
     }

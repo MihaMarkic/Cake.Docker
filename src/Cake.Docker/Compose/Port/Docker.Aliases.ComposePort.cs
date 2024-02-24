@@ -27,13 +27,17 @@ namespace Cake.Docker
         /// <param name="service">The service.</param>
         /// <param name="port">The private port of the container.</param>
         [CakeMethodAlias]
-        public static IEnumerable<string> DockerComposePort(this ICakeContext context, DockerComposePortSettings settings, string service, int port)
+        public static IEnumerable<string> DockerComposePort(this ICakeContext context, DockerComposePortSettings settings, string service, int port
+            , DockerComposeSettings? composeSettings = null)
         {
             ArgumentNullException.ThrowIfNull(context);
             ArgumentNullException.ThrowIfNull(service);
             var runner = new GenericDockerRunner<DockerComposePortSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             var arguments = new List<string> { service, port.ToString() };
-            return runner.RunWithResult("compose port", settings ?? new DockerComposePortSettings(), r => r.ToArray(), arguments.ToArray());
+            return runner.RunWithResult(
+                "compose", composeSettings ?? new(),
+                "port", settings ?? new(),
+                r => r.ToArray(), arguments.ToArray());
         }
     }
 }

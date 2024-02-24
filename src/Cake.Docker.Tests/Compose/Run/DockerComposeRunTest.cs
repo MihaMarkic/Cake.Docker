@@ -45,5 +45,19 @@ namespace Cake.Docker.Tests.Run
 
             Assert.That(actual.Args, Is.EqualTo("compose run --volume \"host:guest\" --volume \"host2:guest2\" cmd"));
         }
+        [Test]
+        public void WhenParallelFlagIsSet_CommandLineIsCorrect()
+        {
+            var fixture = new DockerComposeRunFixture
+            {
+                ComposeSettings = new DockerComposeSettings { Parallel = 2, },
+                Command = "cmd",
+                Settings = new DockerComposeRunSettings { Entrypoint = "somepoint" },
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("compose --parallel 2 run --entrypoint \"somepoint\" cmd"));
+        }
     }
 }

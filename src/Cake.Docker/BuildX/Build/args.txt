@@ -3,6 +3,9 @@
       --allow strings                 Allow extra privileged entitlement
                                       (e.g., "network.host",
                                       "security.insecure")
+      --annotation stringArray        Add annotation to the image
+      --attest stringArray            Attestation parameters (format:
+                                      "type=sbom,generator=image")
       --build-arg stringArray         Set build-time variables
       --build-context stringArray     Additional build contexts (e.g.,
                                       name=path)
@@ -13,7 +16,8 @@
       --cache-to stringArray          Cache export destinations (e.g.,
                                       "user/app:cache",
                                       "type=local,dest=path/to/dir")
-      --cgroup-parent string          Optional parent cgroup for the container
+      --cgroup-parent string          Set the parent cgroup for the "RUN"
+                                      instructions during build
   -f, --file string                   Name of the Dockerfile (default:
                                       "PATH/Dockerfile")
       --iidfile string                Write the image ID to the file
@@ -32,11 +36,13 @@
                                       ("auto", "plain", "tty"). Use plain
                                       to show container output (default
                                       "auto")
+      --provenance string             Shorthand for "--attest=type=provenance"
       --pull                          Always attempt to pull all
                                       referenced images
       --push                          Shorthand for "--output=type=registry"
   -q, --quiet                         Suppress the build output and print
                                       image ID on success
+      --sbom string                   Shorthand for "--attest=type=sbom"
       --secret stringArray            Secret to expose to the build
                                       (format:
                                       "id=mysecret[,src=/local/secret]")
