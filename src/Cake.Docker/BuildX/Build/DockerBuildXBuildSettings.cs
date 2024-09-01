@@ -18,6 +18,11 @@ namespace Cake.Docker
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] Allow { get; set; }
         /// <summary>
+        /// Add annotation to the image
+        /// </summary>
+        [AutoProperty(AutoArrayType = AutoArrayType.List)]
+        public string[] Annotation { get; set; }
+        /// <summary>
         /// Set build-time variables
         /// </summary>
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
