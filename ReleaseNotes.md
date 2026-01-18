@@ -1,3 +1,13 @@
+# Cake.Docker 1.5.0-beta.1
+
+* Bumps Cake reference to 6.0.0 (thanks [gitfool](https://github.com/MihaMarkic/Cake.Docker/pull/124))
+* Enables nullable references and removes a ton of warnings (thankgs [Toni Wenzel](https://github.com/MihaMarkic/Cake.Docker/pull/122))
+* Fixes superclass for DockerComposePortSettings (thanks [papauorg](https://github.com/MihaMarkic/Cake.Docker/pull/121))
+
+# Cake.Docker 1.4.0-beta.1
+
+* Supports Compose v2
+
 # Cake.Docker 1.3.0
 
 * Bumps Cake reference to 4.0.0 (thanks [Toni Wenzel ](https://github.com/twenzel), [PR](https://github.com/MihaMarkic/Cake.Docker/pull/114))
