@@ -8,11 +8,11 @@
         /// <summary>
         /// Key part of the argument
         /// </summary>
-        public string Key { get; }
+        public string? Key { get; }
         /// <summary>
         /// Value part of the argument.
         /// </summary>
-        public  string Value { get; }
+        public string? Value { get; }
         /// <summary>
         /// The required quoting mode.
         /// </summary>
@@ -23,7 +23,7 @@
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="quoting"></param>
-        public DockerArgument(string key, string value, DockerArgumentQuoting quoting)
+        public DockerArgument(string? key, string? value, DockerArgumentQuoting quoting)
         {
             Key = key;
             Value = value;

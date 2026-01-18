@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Cake.Core;
+using Cake.Core.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cake.Core;
-using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -31,7 +31,7 @@ namespace Cake.Docker
         /// <returns>Output text.</returns>
         /// <remarks>Return value are the lines from stdout. This method will redirect stdout and it won't be available for capture.</remarks>
         [CakeMethodAlias]
-        public static IEnumerable<string> DockerBuildXImageToolsInspect(this ICakeContext context, DockerBuildXImageToolsInspectSettings settings, string name)
+        public static IEnumerable<string> DockerBuildXImageToolsInspect(this ICakeContext context, DockerBuildXImageToolsInspectSettings? settings, string name)
         {
             ArgumentNullException.ThrowIfNull(context);
             if (name.Length < 1)

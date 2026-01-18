@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Cake.Core;
+using Cake.Core.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cake.Core;
-using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -26,8 +26,9 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="service">The service.</param>
         /// <param name="port">The private port of the container.</param>
+        /// <param name="composeSettings">The compose settings.</param>
         [CakeMethodAlias]
-        public static IEnumerable<string> DockerComposePort(this ICakeContext context, DockerComposePortSettings settings, string service, int port
+        public static IEnumerable<string> DockerComposePort(this ICakeContext context, DockerComposePortSettings? settings, string service, int port
             , DockerComposeSettings? composeSettings = null)
         {
             ArgumentNullException.ThrowIfNull(context);

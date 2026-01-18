@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Cake.Core;
+using Cake.Core.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cake.Core;
-using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -23,17 +23,18 @@ namespace Cake.Docker
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>
+        /// <param name="composeSettings">The compose settings.</param>
         /// <param name="services">The list of services.</param>
         [CakeMethodAlias]
-        public static IEnumerable<string> DockerComposePs(this ICakeContext context, DockerComposePsSettings settings,
-            DockerComposeSettings? composeSettings = null, 
+        public static IEnumerable<string> DockerComposePs(this ICakeContext context, DockerComposePsSettings? settings,
+            DockerComposeSettings? composeSettings = null,
             params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerComposePsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             var result = runner.RunWithResult(
                 "compose", composeSettings ?? new(),
-                "ps", settings ?? new (), 
+                "ps", settings ?? new(),
                 r => r.ToArray(), services);
             return result;
         }

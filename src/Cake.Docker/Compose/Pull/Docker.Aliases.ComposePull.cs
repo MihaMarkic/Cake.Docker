@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -24,8 +24,9 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="services">The list of services.</param>
         /// <param name="settings">The settings.</param>
+        /// <param name="composeSettings">The compose settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposePull(this ICakeContext context, DockerComposePullSettings settings,
+        public static void DockerComposePull(this ICakeContext context, DockerComposePullSettings? settings,
             DockerComposeSettings? composeSettings = null, params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);

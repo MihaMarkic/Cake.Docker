@@ -3,13 +3,12 @@ using Cake.Core.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cake.Core.Tooling;
 
 namespace Cake.Docker
 {
     internal static class DockerResolver
     {
-        public static FilePath GetDockerPath(IFileSystem fileSystem, ICakeEnvironment environment)
+        public static FilePath? GetDockerPath(IFileSystem fileSystem, ICakeEnvironment environment)
         {
             if (fileSystem == null)
             {
@@ -23,7 +22,7 @@ namespace Cake.Docker
 
             // Cake already searches the PATH for the executable tool names.
             // Check for other known locations.
-            return !environment.Platform.IsUnix() 
+            return !environment.Platform.IsUnix()
                 ? CheckCommonWindowsPaths(fileSystem, environment)
                 : null;
         }
@@ -34,7 +33,7 @@ namespace Cake.Docker
         /// <param name="fileSystem"></param>
         /// <param name="environment"></param>
         /// <returns></returns>
-        private static FilePath CheckCommonWindowsPaths(IFileSystem fileSystem, ICakeEnvironment environment)
+        private static FilePath? CheckCommonWindowsPaths(IFileSystem fileSystem, ICakeEnvironment environment)
         {
             // The docker client is included as part of the Docker Toolbox installer 
             // or can be installed using a Chocolatey package (name: docker).

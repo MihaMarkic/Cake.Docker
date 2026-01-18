@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
+using System.Collections.Generic;
 
 namespace Cake.Docker
 {
@@ -26,7 +26,7 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        public static void DockerSwarmUpdate(this ICakeContext context, DockerSwarmUpdateSettings settings, params string[] args)
+        public static void DockerSwarmUpdate(this ICakeContext context, DockerSwarmUpdateSettings? settings, params string[] args)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerSwarmUpdateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);

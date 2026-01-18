@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -23,8 +23,9 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>
         /// <param name="services">The list of services.</param>
+        /// <param name="composeSettings">The compose settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeUnpause(this ICakeContext context, DockerComposeSettings settings,
+        public static void DockerComposeUnpause(this ICakeContext context, DockerComposeSettings? settings,
             DockerComposeSettings? composeSettings = null,
             params string[] services)
         {
@@ -32,7 +33,7 @@ namespace Cake.Docker
             var runner = new GenericDockerRunner<DockerComposeSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run(
                 "compose", composeSettings ?? new(),
-                "unpause", settings ?? new (), 
+                "unpause", settings ?? new(),
                 services);
         }
     }

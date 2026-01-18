@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -13,7 +13,7 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerLoad(this ICakeContext context, DockerImageLoadSettings settings)
+        public static void DockerLoad(this ICakeContext context, DockerImageLoadSettings? settings)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerImageLoadSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);

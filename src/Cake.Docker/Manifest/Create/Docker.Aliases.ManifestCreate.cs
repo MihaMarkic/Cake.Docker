@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
+using System.Collections.Generic;
 
 namespace Cake.Docker
 {
@@ -34,7 +34,7 @@ namespace Cake.Docker
         /// /// <param name="manifests">[MANIFEST...]</param>
         [CakeMethodAlias]
         [Experimental]
-        public static void DockerManifestCreate(this ICakeContext context, DockerManifestCreateSettings settings, string manifestList,
+        public static void DockerManifestCreate(this ICakeContext context, DockerManifestCreateSettings? settings, string manifestList,
             string manifest, params string[] manifests)
         {
             ArgumentNullException.ThrowIfNull(context);

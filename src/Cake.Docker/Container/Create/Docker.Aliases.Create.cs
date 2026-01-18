@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Cake.Core;
+using Cake.Core.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cake.Core;
-using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -17,9 +17,9 @@ namespace Cake.Docker
         /// <param name="image">The image.</param>
         /// <param name="args">The arguments.</param>
         /// <param name="command">The command.</param>
-        /// <returns>container ID</returns>
+        /// <returns>container ID or null</returns>
         [CakeMethodAlias]
-        public static string DockerCreate(this ICakeContext context, string image, string command, params string[] args)
+        public static string? DockerCreate(this ICakeContext context, string image, string command, params string[] args)
         {
             return DockerCreate(context, new DockerContainerCreateSettings(), image, command, args);
         }
@@ -32,9 +32,9 @@ namespace Cake.Docker
         /// <param name="image">The image.</param>
         /// <param name="args">The arguments.</param>
         /// <param name="command">The command.</param>
-        /// <returns>container ID</returns>
+        /// <returns>container ID or null</returns>
         [CakeMethodAlias]
-        public static string DockerCreate(this ICakeContext context, DockerContainerCreateSettings settings, string image, string command, params string[] args)
+        public static string? DockerCreate(this ICakeContext context, DockerContainerCreateSettings? settings, string image, string command, params string[] args)
         {
             ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(image))

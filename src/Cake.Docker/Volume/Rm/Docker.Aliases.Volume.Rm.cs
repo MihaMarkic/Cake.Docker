@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -14,10 +14,10 @@ namespace Cake.Docker
         /// <param name="volumes">Volumes</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerVolumeRm(this ICakeContext context, DockerVolumeRmSettings settings, string[] volumes)
+        public static void DockerVolumeRm(this ICakeContext context, DockerVolumeRmSettings? settings, string[] volumes)
         {
             ArgumentNullException.ThrowIfNull(context);
-            if (volumes?.Length < 1)
+            if (volumes == null || volumes.Length < 1)
             {
                 throw new ArgumentNullException(nameof(volumes), "At least one volume is required");
             }

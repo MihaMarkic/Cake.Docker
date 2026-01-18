@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
+using System.Collections.Generic;
 
 namespace Cake.Docker
 {
@@ -29,9 +29,10 @@ namespace Cake.Docker
         /// <param name="command">The command.</param>
         /// <param name="args">The arguments.</param>
         /// <param name="settings">The settings.</param>
+        /// <param name="composeSettings">The compose settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeExec(this ICakeContext context, 
-            DockerComposeExecSettings settings,
+        public static void DockerComposeExec(this ICakeContext context,
+            DockerComposeExecSettings? settings,
             string service, string command,
             DockerComposeSettings? composeSettings = null,
             params string[] args)
@@ -56,7 +57,7 @@ namespace Cake.Docker
             }
 
             runner.Run("compose", composeSettings ?? new DockerComposeSettings(),
-                "exec", settings ?? new DockerComposeExecSettings(), 
+                "exec", settings ?? new DockerComposeExecSettings(),
                 arguments.ToArray());
         }
     }

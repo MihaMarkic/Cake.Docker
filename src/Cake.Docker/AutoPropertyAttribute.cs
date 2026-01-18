@@ -6,7 +6,7 @@ namespace Cake.Docker
     /// 
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class AutoPropertyAttribute: Attribute
+    public class AutoPropertyAttribute : Attribute
     {
         /// <summary>
         /// Format of the output, i.e. "-s {1}"

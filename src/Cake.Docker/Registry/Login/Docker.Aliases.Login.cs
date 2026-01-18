@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -16,7 +16,7 @@ namespace Cake.Docker
         /// <param name="password">The password.</param>
         /// <param name="server">The server.</param>
         [CakeMethodAlias]
-        public static void DockerLogin(this ICakeContext context, string username, string password, string server = null)
+        public static void DockerLogin(this ICakeContext context, string username, string password, string? server = null)
         {
             if (string.IsNullOrEmpty(username))
             {
@@ -38,7 +38,7 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="server">The server.</param>
         [CakeMethodAlias]
-        public static void DockerLogin(this ICakeContext context, DockerRegistryLoginSettings settings, string server = null)
+        public static void DockerLogin(this ICakeContext context, DockerRegistryLoginSettings settings, string? server = null)
         {
             ArgumentNullException.ThrowIfNull(context);
             ArgumentNullException.ThrowIfNull(settings);

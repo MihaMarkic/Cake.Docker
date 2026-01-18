@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Cake.Core;
+using Cake.Core.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cake.Core;
-using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -17,7 +17,7 @@ namespace Cake.Docker
         /// <returns>Output text.</returns>
         /// <remarks>Return value are the lines from stdout. This method will redirect stdout and it won't be available for capture.</remarks>
         [CakeMethodAlias]
-        public static IEnumerable<string> DockerBuildXInspect(this ICakeContext context, string name = null)
+        public static IEnumerable<string> DockerBuildXInspect(this ICakeContext context, string? name = null)
         {
             return context.DockerBuildXInspect(new DockerBuildXInspectSettings(), name);
         }
@@ -31,11 +31,11 @@ namespace Cake.Docker
         /// <returns>Output text.</returns>
         /// <remarks>Return value are the lines from stdout. This method will redirect stdout and it won't be available for capture.</remarks>
         [CakeMethodAlias]
-        public static IEnumerable<string> DockerBuildXInspect(this ICakeContext context, DockerBuildXInspectSettings settings, string name = null)
+        public static IEnumerable<string> DockerBuildXInspect(this ICakeContext context, DockerBuildXInspectSettings? settings, string? name = null)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXInspectSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            return runner.RunWithResult("buildx inspect", settings ?? new DockerBuildXInspectSettings(), r => r.ToArray(), name);
+            return runner.RunWithResult("buildx inspect", settings ?? new DockerBuildXInspectSettings(), r => r.ToArray(), name != null ? new[] { name } : Array.Empty<string>());
         }
 
     }

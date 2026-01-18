@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Cake.Core;
+using Cake.Core.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cake.Core;
-using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -15,7 +15,7 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="target">Targets</param>
         [CakeMethodAlias]
-        public static void DockerBuildXBake(this ICakeContext context, IEnumerable<string> target = null)
+        public static void DockerBuildXBake(this ICakeContext context, IEnumerable<string>? target = null)
         {
             DockerBuildXBake(context, new DockerBuildXBakeSettings(), target);
         }
@@ -27,7 +27,7 @@ namespace Cake.Docker
         /// <param name="target">Targets</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerBuildXBake(this ICakeContext context, DockerBuildXBakeSettings settings, IEnumerable<string> target = null)
+        public static void DockerBuildXBake(this ICakeContext context, DockerBuildXBakeSettings? settings, IEnumerable<string>? target = null)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXBakeSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);

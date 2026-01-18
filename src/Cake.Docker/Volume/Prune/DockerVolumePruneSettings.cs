@@ -8,7 +8,7 @@
         /// <summary>
         /// Provide filter values (e.g. ‘label=’)
         /// </summary>
-        public string Filter { get; set; }
+        public string? Filter { get; set; }
         /// <summary>
         /// Do not prompt for confirmation
         /// </summary>

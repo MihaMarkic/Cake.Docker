@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -14,7 +14,7 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="images">The list of images.</param>
         [CakeMethodAlias]
-        public static void DockerSave(this ICakeContext context, DockerImageSaveSettings settings, params string[] images)
+        public static void DockerSave(this ICakeContext context, DockerImageSaveSettings? settings, params string[] images)
         {
             ArgumentNullException.ThrowIfNull(context);
             if (images == null || images.Length == 0)

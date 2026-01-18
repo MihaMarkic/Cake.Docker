@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Cake.Core;
+using Cake.Core.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cake.Core;
-using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -15,7 +15,7 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="target">Targets</param>
         [CakeMethodAlias]
-        public static void DockerBuildXImageToolsCreate(this ICakeContext context, IEnumerable<string> target = null)
+        public static void DockerBuildXImageToolsCreate(this ICakeContext context, IEnumerable<string>? target = null)
         {
             DockerBuildXImageToolsCreate(context, new DockerBuildXImageToolsCreateSettings(), target);
         }
@@ -27,7 +27,7 @@ namespace Cake.Docker
         /// <param name="target">Targets</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerBuildXImageToolsCreate(this ICakeContext context, DockerBuildXImageToolsCreateSettings settings, IEnumerable<string> target = null)
+        public static void DockerBuildXImageToolsCreate(this ICakeContext context, DockerBuildXImageToolsCreateSettings? settings, IEnumerable<string>? target = null)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXImageToolsCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);

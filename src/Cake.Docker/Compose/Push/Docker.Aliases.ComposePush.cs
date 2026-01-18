@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -24,15 +24,16 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="services">The list of services.</param>
         /// <param name="settings">The settings.</param>
+        /// <param name="composeSettings">The compose settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposePush(this ICakeContext context, DockerComposePushSettings settings,
+        public static void DockerComposePush(this ICakeContext context, DockerComposePushSettings? settings,
             DockerComposeSettings? composeSettings = null, params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerComposePushSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             runner.Run(
                 "compose", composeSettings ?? new(),
-                "push", settings ?? new (), services);
+                "push", settings ?? new(), services);
         }
 
     }

@@ -8,7 +8,7 @@ namespace Cake.Docker
         /// <summary>
         /// Override the configured builder instance
         /// </summary>
-        public string Builder { get; set; }
+        public string? Builder { get; set; }
         /// <summary>
         /// Build definition file
         /// </summary>
@@ -21,7 +21,7 @@ namespace Cake.Docker
         /// <summary>
         /// Write build result metadata to the file
         /// </summary>
-        public string MetadataFile { get; set; }
+        public string? MetadataFile { get; set; }
         /// <summary>
         /// Do not use cache when building the image
         /// </summary>
@@ -33,7 +33,7 @@ namespace Cake.Docker
         /// <summary>
         /// Set type of progress output ("auto", "plain", "tty"). Use plain to show container output (default "auto")
         /// </summary>
-        public string Progress { get; set; }
+        public string? Progress { get; set; }
         /// <summary>
         /// Always attempt to pull all referenced images
         /// </summary>

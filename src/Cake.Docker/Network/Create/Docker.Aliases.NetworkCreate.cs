@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
+using System.Collections.Generic;
 
 namespace Cake.Docker
 {
@@ -26,7 +26,7 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        public static void DockerNetworkCreate(this ICakeContext context, DockerNetworkCreateSettings settings, params string[] args)
+        public static void DockerNetworkCreate(this ICakeContext context, DockerNetworkCreateSettings? settings, params string[] args)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerNetworkCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
