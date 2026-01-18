@@ -3,7 +3,7 @@
     /// <summary>
     /// Settings for docker-compose port.
     /// </summary>
-    public sealed class DockerComposePortSettings: DockerComposeSettings
+    public sealed class DockerComposePortSettings: AutoToolSettings
     {
         /// <summary>
         /// --index
