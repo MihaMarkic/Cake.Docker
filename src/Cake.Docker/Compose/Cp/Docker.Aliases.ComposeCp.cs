@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -25,8 +25,10 @@ namespace Cake.Docker
         /// <param name="source">Source path.</param>
         /// <param name="destination">Destination path.</param>
         /// <param name="settings">The settings.</param>
+        /// <param name="composeSettings">The compose settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeCp(this ICakeContext context, string source, string destination, DockerComposeCpSettings settings)
+        public static void DockerComposeCp(this ICakeContext context, string source, string destination, DockerComposeCpSettings? settings,
+            DockerComposeSettings? composeSettings = null)
         {
             ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(source))
@@ -38,7 +40,9 @@ namespace Cake.Docker
                 throw new ArgumentNullException(nameof(destination));
             }
             var runner = new GenericDockerRunner<DockerComposeCpSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("compose cp", settings ?? new DockerComposeCpSettings(), new[] { source, destination });
+            runner.Run(
+                "compose", composeSettings ?? new DockerComposeSettings(),
+                "cp", settings ?? new DockerComposeCpSettings(), new[] { source, destination });
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
+using System.Collections.Generic;
 
 namespace Cake.Docker
 {
@@ -30,7 +30,7 @@ namespace Cake.Docker
         /// <param name="args">The arguments.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerExec(this ICakeContext context, DockerContainerExecSettings settings, string container, string command, params string[] args)
+        public static void DockerExec(this ICakeContext context, DockerContainerExecSettings? settings, string container, string command, params string[] args)
         {
             ArgumentNullException.ThrowIfNull(context);
 

@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposeStart(this ICakeContext context, params string[] services)
         {
-            DockerComposeStart(context, new DockerComposeSettings(), services);
+            DockerComposeStart(context, new DockerComposeSettings(), null, services);
         }
         /// <summary>
         /// Runs docker-compose start.
@@ -23,12 +23,17 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="settings">The settings.</param>
         /// <param name="services">The list of services.</param>
+        /// <param name="composeSettings">The compose settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposeStart(this ICakeContext context, DockerComposeSettings settings, params string[] services)
+        public static void DockerComposeStart(this ICakeContext context, DockerComposeSettings? settings,
+            DockerComposeSettings? composeSettings = null,
+            params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);
-            var runner = new GenericDockerComposeRunner<DockerComposeSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("start", settings ?? new DockerComposeSettings(), services);
+            var runner = new GenericDockerRunner<DockerComposeSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run(
+                "compose", composeSettings ?? new(),
+                "start", settings ?? new(), services);
         }
     }
 }

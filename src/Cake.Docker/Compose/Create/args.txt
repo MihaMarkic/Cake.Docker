@@ -1,4 +1,13 @@
-﻿--force-recreate       Recreate containers even if their configuration and image haven't changed. Incompatible with --no-recreate.
---no-recreate          If containers already exist, don't recreate them. Incompatible with --force-recreate.
---no-build             Don't build an image, even if it's missing.
---build                Build images before creating containers.
+﻿      --build            Build images before starting containers.
+      --force-recreate   Recreate containers even if their configuration
+                         and image haven't changed.
+      --no-build         Don't build an image, even if it's policy.
+      --no-recreate      If containers already exist, don't recreate
+                         them. Incompatible with --force-recreate.
+      --pull string      Pull image before running
+                         ("always"|"missing"|"never"|"build") (default
+                         "policy")
+      --remove-orphans   Remove containers for services not defined in
+                         the Compose file.
+      --scale scale      Scale SERVICE to NUM instances. Overrides the
+                         scale setting in the Compose file if present.

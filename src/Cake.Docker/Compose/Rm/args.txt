@@ -1,3 +1,3 @@
-﻿-f, --force   Don't ask to confirm removal
-    -s, --stop    Stop the containers, if required, before removing
-    -v            Remove any anonymous volumes attached to containers
+﻿  -f, --force     Don't ask to confirm removal
+  -s, --stop      Stop the containers, if required, before removing
+  -v, --volumes   Remove any anonymous volumes attached to containers

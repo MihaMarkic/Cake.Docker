@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -25,7 +25,7 @@ namespace Cake.Docker
         /// <param name="images">The list of images.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerRemove(this ICakeContext context, DockerImageRemoveSettings settings, params string[] images)
+        public static void DockerRemove(this ICakeContext context, DockerImageRemoveSettings? settings, params string[] images)
         {
             ArgumentNullException.ThrowIfNull(context);
             if (images == null || images.Length == 0)

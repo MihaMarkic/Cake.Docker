@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -13,7 +13,7 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="target">Targets</param>
         [CakeMethodAlias]
-        public static void DockerBuildXCreate(this ICakeContext context, string target = null)
+        public static void DockerBuildXCreate(this ICakeContext context, string? target = null)
         {
             DockerBuildXCreate(context, new DockerBuildXCreateSettings(), target);
         }
@@ -25,7 +25,7 @@ namespace Cake.Docker
         /// <param name="target">Targets</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerBuildXCreate(this ICakeContext context, DockerBuildXCreateSettings settings, string target = null)
+        public static void DockerBuildXCreate(this ICakeContext context, DockerBuildXCreateSettings? settings, string? target = null)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerBuildXCreateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);

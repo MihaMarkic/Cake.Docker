@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
+using System.Linq;
 
 namespace Cake.Docker
 {
@@ -17,7 +17,7 @@ namespace Cake.Docker
         /// <returns>Output text.</returns>
         /// <remarks>Return value are the lines from stdout. This method will redirect stdout and it won't be available for capture.</remarks>
         [CakeMethodAlias]
-        public static string DockerPs(this ICakeContext context, DockerContainerPsSettings settings)
+        public static string DockerPs(this ICakeContext context, DockerContainerPsSettings? settings)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerContainerPsSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);

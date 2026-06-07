@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -25,7 +25,7 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="imageReference">The image reference.</param>
         [CakeMethodAlias]
-        public static void DockerPush(this ICakeContext context, DockerImagePushSettings settings, string imageReference)
+        public static void DockerPush(this ICakeContext context, DockerImagePushSettings? settings, string imageReference)
         {
             ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(imageReference))

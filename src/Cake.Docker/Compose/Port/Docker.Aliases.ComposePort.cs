@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Cake.Core;
+using Cake.Core.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cake.Core;
-using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -26,14 +26,19 @@ namespace Cake.Docker
         /// <param name="settings">The settings.</param>
         /// <param name="service">The service.</param>
         /// <param name="port">The private port of the container.</param>
+        /// <param name="composeSettings">The compose settings.</param>
         [CakeMethodAlias]
-        public static IEnumerable<string> DockerComposePort(this ICakeContext context, DockerComposePortSettings settings, string service, int port)
+        public static IEnumerable<string> DockerComposePort(this ICakeContext context, DockerComposePortSettings? settings, string service, int port
+            , DockerComposeSettings? composeSettings = null)
         {
             ArgumentNullException.ThrowIfNull(context);
             ArgumentNullException.ThrowIfNull(service);
-            var runner = new GenericDockerComposeRunner<DockerComposePortSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            var runner = new GenericDockerRunner<DockerComposePortSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
             var arguments = new List<string> { service, port.ToString() };
-            return runner.RunWithResult("port", settings ?? new DockerComposePortSettings(), r => r.ToArray(), arguments.ToArray());
+            return runner.RunWithResult(
+                "compose", composeSettings ?? new(),
+                "port", settings ?? new(),
+                r => r.ToArray(), arguments.ToArray());
         }
     }
 }

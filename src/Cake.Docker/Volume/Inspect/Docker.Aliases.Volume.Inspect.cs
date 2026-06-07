@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Cake.Core;
+using Cake.Core.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cake.Core;
-using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -19,10 +19,10 @@ namespace Cake.Docker
         /// <returns>Output text.</returns>
         /// <remarks>Return value are the lines from stdout. This method will redirect stdout and it won't be available for capture.</remarks>
         [CakeMethodAlias]
-        public static IEnumerable<string> DockerVolumeInspect(this ICakeContext context, DockerVolumeInspectSettings settings, string[] volumes)
+        public static IEnumerable<string> DockerVolumeInspect(this ICakeContext context, DockerVolumeInspectSettings? settings, string[] volumes)
         {
             ArgumentNullException.ThrowIfNull(context);
-            if (volumes?.Length < 1)
+            if (volumes == null || volumes.Length < 1)
             {
                 throw new ArgumentNullException(nameof(volumes), "At least one volume is required");
             }

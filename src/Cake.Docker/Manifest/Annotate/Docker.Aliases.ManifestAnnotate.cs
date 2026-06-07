@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
+using System.Collections.Generic;
 
 namespace Cake.Docker
 {
@@ -32,7 +32,7 @@ namespace Cake.Docker
         /// <param name="manifest">MANIFEST</param>
         [CakeMethodAlias]
         [Experimental]
-        public static void DockerManifestAnnotate(this ICakeContext context, DockerManifestAnnotateSettings settings, string manifestList, string manifest)
+        public static void DockerManifestAnnotate(this ICakeContext context, DockerManifestAnnotateSettings? settings, string manifestList, string manifest)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerManifestAnnotateSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);

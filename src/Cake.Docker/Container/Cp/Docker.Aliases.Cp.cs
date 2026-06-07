@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -26,7 +26,7 @@ namespace Cake.Docker
         /// <param name="to">Destination path.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerCp(this ICakeContext context, string from, string to, DockerContainerCpSettings settings)
+        public static void DockerCp(this ICakeContext context, string from, string to, DockerContainerCpSettings? settings)
         {
             ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(from))

@@ -10,12 +10,13 @@ namespace Cake.Docker.Tests.Build
         {
             var fixture = new DockerComposeBuildFixture
             {
-                Settings = new DockerComposeBuildSettings {  Parallel = true },
+                ComposeSettings = new DockerComposeSettings { Parallel = 2, },
+                Settings = new DockerComposeBuildSettings {   },
             };
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build --parallel"));
+            Assert.That(actual.Args, Is.EqualTo("compose --parallel 2 build"));
         }
 
         [Test]
@@ -23,12 +24,52 @@ namespace Cake.Docker.Tests.Build
         {
             var fixture = new DockerComposeBuildFixture
             {
-                Settings = new DockerComposeBuildSettings { Parallel = false },
+                ComposeSettings = new DockerComposeSettings { Parallel = null, },
+                Settings = new DockerComposeBuildSettings { },
             };
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("build"));
+            Assert.That(actual.Args, Is.EqualTo("compose build"));
+        }
+
+        [Test]
+        public void WhenFilesAreUsed_CommandLineIncludesIt()
+        {
+            var fixture = new DockerComposeBuildFixture
+            {
+                ComposeSettings = new DockerComposeSettings { File = ["alfa.yaml"], },
+                Settings = new DockerComposeBuildSettings { },
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("compose --file \"alfa.yaml\" build"));
+        }
+        [Test]
+        public void WhenTwoFilesAreProvided_CommandLineIncludesThem()
+        {
+            var fixture = new DockerComposeBuildFixture
+            {
+                ComposeSettings = new DockerComposeSettings { File = ["alfa.yaml", "beta.yaml"], },
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("compose --file \"alfa.yaml\" --file \"beta.yaml\" build"));
+        }
+        [Test]
+        public void WhenFilesAreUsedAndMemoryIsSet_CommandLineIncludesIt()
+        {
+            var fixture = new DockerComposeBuildFixture
+            {
+                ComposeSettings = new DockerComposeSettings { File = ["alfa.yaml"], },
+                Settings = new DockerComposeBuildSettings { Memory = 1024, },
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("compose --file \"alfa.yaml\" build --memory 1024"));
         }
     }
 }

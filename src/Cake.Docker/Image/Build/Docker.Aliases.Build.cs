@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -25,7 +25,7 @@ namespace Cake.Docker
         /// <param name="path">The path.</param>
         /// <param name="settings">The settings.</param>
         [CakeMethodAlias]
-        public static void DockerBuild(this ICakeContext context, DockerImageBuildSettings settings, string path)
+        public static void DockerBuild(this ICakeContext context, DockerImageBuildSettings? settings, string path)
         {
             ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(path))
@@ -51,7 +51,7 @@ namespace Cake.Docker
             {
                 quotedPath = path;
             }
-            runner.Run("build", settings ?? new DockerImageBuildSettings(), new[] { quotedPath });
+            runner.Run("image build", settings ?? new DockerImageBuildSettings(), new[] { quotedPath });
         }
 
     }

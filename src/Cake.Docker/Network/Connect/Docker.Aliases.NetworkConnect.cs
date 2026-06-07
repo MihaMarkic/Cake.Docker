@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
+using System.Collections.Generic;
 
 namespace Cake.Docker
 {
@@ -30,7 +30,7 @@ namespace Cake.Docker
         /// <param name="container">The container.</param>
         /// <param name="args">The arguments.</param>
         [CakeMethodAlias]
-        public static void DockerNetworkConnect(this ICakeContext context, DockerNetworkConnectSettings settings, string network, string container, params string[] args)
+        public static void DockerNetworkConnect(this ICakeContext context, DockerNetworkConnectSettings? settings, string network, string container, params string[] args)
         {
             ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(network))

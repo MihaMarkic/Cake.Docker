@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Cake.Core;
+using Cake.Core.IO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Cake.Core;
-using Cake.Core.IO;
 
 namespace Cake.Docker
 {
@@ -110,7 +110,7 @@ namespace Cake.Docker
             {
                 if (property.PropertyType == typeof(bool))
                 {
-                    yield return new DockerArgument(null, GetArgumentFromBoolProperty(property, (bool)property.GetValue(settings)), DockerArgumentQuoting.Unquoted);
+                    yield return new DockerArgument(null, GetArgumentFromBoolProperty(property, (bool?)property.GetValue(settings) == true), DockerArgumentQuoting.Unquoted);
                 }
                 else if (property.PropertyType == typeof(bool?))
                 {
@@ -168,9 +168,9 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromAutoProperty(AutoPropertyAttribute attribute, PropertyInfo property, object value)
+        public static string? GetArgumentFromAutoProperty(AutoPropertyAttribute attribute, PropertyInfo property, object? value)
         {
-            if (value == null)
+            if (value == null || property == null)
             {
                 return null;
             }
@@ -196,7 +196,7 @@ namespace Cake.Docker
         /// </summary>
         /// <param name="property"></param>
         /// <returns></returns>
-        public static AutoPropertyAttribute GetAutoPropertyAttributeOrNull(PropertyInfo property)
+        public static AutoPropertyAttribute? GetAutoPropertyAttributeOrNull(PropertyInfo property)
         {
             return property.GetCustomAttribute<AutoPropertyAttribute>();
         }
@@ -206,7 +206,7 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromBoolProperty(PropertyInfo property, bool value)
+        public static string? GetArgumentFromBoolProperty(PropertyInfo property, bool value)
         {
             return value ? $"--{GetPropertyName(property.Name)}" : null;
         }
@@ -217,7 +217,7 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromNullableIntProperty(PropertyInfo property, int? value)
+        public static string? GetArgumentFromNullableIntProperty(PropertyInfo property, int? value)
         {
             return value.HasValue ? $"--{GetPropertyName(property.Name)} {value.Value}" : null;
         }
@@ -227,7 +227,7 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromNullableInt64Property(PropertyInfo property, Int64? value)
+        public static string? GetArgumentFromNullableInt64Property(PropertyInfo property, Int64? value)
         {
             return value.HasValue ? $"--{GetPropertyName(property.Name)} {value.Value}" : null;
         }
@@ -237,7 +237,7 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromNullableUInt64Property(PropertyInfo property, UInt64? value)
+        public static string? GetArgumentFromNullableUInt64Property(PropertyInfo property, UInt64? value)
         {
             return value.HasValue ? $"--{GetPropertyName(property.Name)} {value.Value}" : null;
         }
@@ -247,7 +247,7 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromNullableUInt16Property(PropertyInfo property, UInt16? value)
+        public static string? GetArgumentFromNullableUInt16Property(PropertyInfo property, UInt16? value)
         {
             return value.HasValue ? $"--{GetPropertyName(property.Name)} {value.Value}" : null;
         }
@@ -258,7 +258,7 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromNullableBoolProperty(PropertyInfo property, bool? value)
+        public static string? GetArgumentFromNullableBoolProperty(PropertyInfo property, bool? value)
         {
             if (value ?? false)
             {
@@ -326,7 +326,7 @@ namespace Cake.Docker
         /// <param name="value"></param>
         /// <param name="isSecret"></param>
         /// <returns></returns>
-        public static DockerArgument? GetArgumentFromStringProperty(PropertyInfo property, string value, bool isSecret)
+        public static DockerArgument? GetArgumentFromStringProperty(PropertyInfo property, string? value, bool isSecret)
         {
             if (!string.IsNullOrEmpty(value))
             {
@@ -341,7 +341,7 @@ namespace Cake.Docker
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromNullableTimeSpanProperty(PropertyInfo property, TimeSpan? value)
+        public static string? GetArgumentFromNullableTimeSpanProperty(PropertyInfo property, TimeSpan? value)
         {
             return value.HasValue ? $"--{GetPropertyName(property.Name)} {ConvertTimeSpan(value.Value)}" : null;
         }
@@ -362,7 +362,7 @@ namespace Cake.Docker
         /// <param name="name"></param>
         /// <returns></returns>
         /// <example>NoForce -> no-force</example>
-        public static string GetPropertyName(string name)
+        public static string? GetPropertyName(string name)
         {
             if (!string.IsNullOrEmpty(name))
             {

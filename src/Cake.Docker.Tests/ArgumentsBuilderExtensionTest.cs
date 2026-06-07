@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿#nullable enable
 using Cake.Core.IO;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Cake.Docker.Tests
 {
     public class ArgumentsBuilderExtensionTest
     {
         public static PropertyInfo StringProperty => GetProperty(nameof(TestSettings.String));
+        public static PropertyInfo NullableStringProperty => GetProperty(nameof(TestSettings.NullableString));
         public static PropertyInfo PasswordProperty => GetProperty(nameof(TestSettings.Password));
         public static PropertyInfo StringsProperty => GetProperty(nameof(TestSettings.Strings));
         public static PropertyInfo ListStringsProperty => GetProperty(nameof(TestSettings.ListStrings));
@@ -27,7 +29,7 @@ namespace Cake.Docker.Tests
         public static PropertyInfo PreCommandValueProperty => GetProperty(nameof(TestSettings.PreCommandValue));
         public static PropertyInfo GetProperty(string name)
         {
-            return typeof(TestSettings).GetProperty(name, BindingFlags.Public | BindingFlags.Instance);
+            return typeof(TestSettings).GetProperty(name, BindingFlags.Public | BindingFlags.Instance) ?? throw new InvalidOperationException($"Property {name} not found!");
         }
         [TestFixture]
         public class GetArgumentFromBoolProperty
@@ -63,6 +65,26 @@ namespace Cake.Docker.Tests
             public void WhenGivenNull_NullIsReturned()
             {
                 var actual = ArgumentsBuilderExtension.GetArgumentFromStringProperty(StringProperty, null, isSecret: false);
+
+                Assert.That(actual, Is.Null);
+            }
+        }
+        [TestFixture]
+        public class GetArgumentFromNullableStringProperty
+        {
+            [Test]
+            public void WhenGivenStringProperty_FormatsProperly()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromStringProperty(NullableStringProperty, "tubo", isSecret: false).Value;
+
+                Assert.That(actual.Key, Is.EqualTo("--nullable-string"));
+                Assert.That(actual.Value, Is.EqualTo("tubo"));
+                Assert.That(actual.Quoting, Is.EqualTo(DockerArgumentQuoting.Quoted));
+            }
+            [Test]
+            public void WhenGivenNull_NullIsReturned()
+            {
+                var actual = ArgumentsBuilderExtension.GetArgumentFromStringProperty(NullableStringProperty, null, isSecret: false);
 
                 Assert.That(actual, Is.Null);
             }
@@ -385,6 +407,7 @@ namespace Cake.Docker.Tests
     public class TestSettings : AutoToolSettings
     {
         public string String { get; set; }
+        public string? NullableString { get; set; }
         public string[] Strings { get; set; }
         [AutoProperty(AutoArrayType = AutoArrayType.List)]
         public string[] ListStrings { get; set; }

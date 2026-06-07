@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
+using System.Collections.Generic;
 
 namespace Cake.Docker
 {
@@ -44,11 +44,14 @@ namespace Cake.Docker
         /// <param name="manifest">MANIFEST</param>
         [CakeMethodAlias]
         [Experimental]
-        public static void DockerManifestInspect(this ICakeContext context, DockerManifestInspectSettings settings, string manifestList, string manifest)
+        public static void DockerManifestInspect(this ICakeContext context, DockerManifestInspectSettings? settings, string? manifestList, string manifest)
         {
             ArgumentNullException.ThrowIfNull(context);
             var runner = new GenericDockerRunner<DockerManifestInspectSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            List<string> arguments = new List<string> { manifestList, manifest };
+            List<string> arguments = new List<string> { manifest };
+            if (manifestList != null)
+                arguments.Insert(0, manifestList);
+
             runner.Run("manifest inspect", settings ?? new DockerManifestInspectSettings(), arguments.ToArray());
         }
     }

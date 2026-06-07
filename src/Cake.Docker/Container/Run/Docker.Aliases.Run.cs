@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Cake.Core;
+using Cake.Core.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cake.Core;
-using Cake.Core.Annotations;
 
 namespace Cake.Docker
 {
@@ -17,10 +17,10 @@ namespace Cake.Docker
         /// <param name="image">The image.</param>
         /// <param name="args">The arguments.</param>
         /// <param name="command">The command.</param>
-        /// <returns>Container ID</returns>
+        /// <returns>Container ID or null</returns>
         /// <remarks>Return value is first line from stdout. This method will redirect stdout and it won't be available for capture.</remarks>
         [CakeMethodAlias]
-        public static string DockerRun(this ICakeContext context, string image, string command, params string[] args)
+        public static string? DockerRun(this ICakeContext context, string image, string command, params string[] args)
         {
             return DockerRun(context, new DockerContainerRunSettings(), image, command, args);
         }
@@ -33,10 +33,10 @@ namespace Cake.Docker
         /// <param name="image">The image.</param>
         /// <param name="args">The arguments.</param>
         /// <param name="command">The command.</param>
-        /// <returns>Container ID</returns>
+        /// <returns>Container ID or null</returns>
         /// <remarks>Return value is first line from stdout. This method will redirect stdout and it won't be available for capture.</remarks>
         [CakeMethodAlias]
-        public static string DockerRun(this ICakeContext context, DockerContainerRunSettings settings, string image, string command, params string[] args)
+        public static string? DockerRun(this ICakeContext context, DockerContainerRunSettings? settings, string image, string command, params string[] args)
         {
             ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(image))
@@ -82,7 +82,7 @@ namespace Cake.Docker
         /// <param name="args">The arguments.</param>
         /// <param name="command">The command.</param>
         [CakeMethodAlias]
-        public static void DockerRunWithoutResult(this ICakeContext context, DockerContainerRunSettings settings, string image, string command, params string[] args)
+        public static void DockerRunWithoutResult(this ICakeContext context, DockerContainerRunSettings? settings, string image, string command, params string[] args)
         {
             ArgumentNullException.ThrowIfNull(context);
             if (string.IsNullOrEmpty(image))

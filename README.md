@@ -4,6 +4,7 @@ A Cake AddIn that extends Cake with [Docker](https://www.docker.com/) command to
 
 [![cakebuild.net](https://img.shields.io/badge/WWW-cakebuild.net-blue.svg)](http://cakebuild.net/)
 [![NuGet](https://img.shields.io/nuget/v/Cake.Docker.svg)](https://www.nuget.org/packages/Cake.Docker)
+[![NuGet (with prereleases)](https://img.shields.io/nuget/vpre/Cake.Docker.svg)](https://www.nuget.org/packages/Cake.Docker)
 
 ## Including addin
 Including addin in cake script is easy.
@@ -13,6 +14,10 @@ Including addin in cake script is easy.
 ## Commands supported
 
 **Cake references**
+
+* 1.5.0: Cake 6.0.0
+
+* 1.4.0: Adds support for Compose v2
 
 * 1.3.0: Cake 4.0.0
 

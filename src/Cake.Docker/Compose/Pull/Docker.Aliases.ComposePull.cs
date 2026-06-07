@@ -1,6 +1,6 @@
-﻿using System;
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.Annotations;
+using System;
 
 namespace Cake.Docker
 {
@@ -15,7 +15,7 @@ namespace Cake.Docker
         [CakeMethodAlias]
         public static void DockerComposePull(this ICakeContext context, params string[] services)
         {
-            DockerComposePull(context, new DockerComposePullSettings(), services);
+            DockerComposePull(context, new DockerComposePullSettings(), null, services);
         }
 
         /// <summary>
@@ -24,12 +24,16 @@ namespace Cake.Docker
         /// <param name="context">The context.</param>
         /// <param name="services">The list of services.</param>
         /// <param name="settings">The settings.</param>
+        /// <param name="composeSettings">The compose settings.</param>
         [CakeMethodAlias]
-        public static void DockerComposePull(this ICakeContext context, DockerComposePullSettings settings, params string[] services)
+        public static void DockerComposePull(this ICakeContext context, DockerComposePullSettings? settings,
+            DockerComposeSettings? composeSettings = null, params string[] services)
         {
             ArgumentNullException.ThrowIfNull(context);
-            var runner = new GenericDockerComposeRunner<DockerComposePullSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
-            runner.Run("pull", settings ?? new DockerComposePullSettings(), services);
+            var runner = new GenericDockerRunner<DockerComposePullSettings>(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            runner.Run("compose", composeSettings ?? new(),
+                "pull", settings ?? new(),
+                services);
         }
 
     }

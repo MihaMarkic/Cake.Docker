@@ -1,1 +1,2 @@
-﻿-t, --timeout TIMEOUT      Specify a shutdown timeout in seconds. (default: 10)
+﻿      --no-deps       Don't restart dependent services.
+  -t, --timeout int   Specify a shutdown timeout in seconds

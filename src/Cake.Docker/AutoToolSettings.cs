@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Cake.Core.Tooling;
+using System;
 using System.Collections.Generic;
-using Cake.Core.Tooling;
 
 namespace Cake.Docker
 {
@@ -24,7 +24,7 @@ namespace Cake.Docker
         /// Collects secret properties.
         /// </summary>
         /// <returns></returns>
-        protected virtual string[] CollectSecretProperties()
+        protected virtual string[]? CollectSecretProperties()
         {
             return null;
         }

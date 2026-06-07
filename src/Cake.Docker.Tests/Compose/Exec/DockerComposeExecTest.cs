@@ -17,7 +17,22 @@ namespace Cake.Docker.Tests.Compose.Exec
 
             var actual = fixture.Run();
 
-            Assert.That(actual.Args, Is.EqualTo("exec service command"));
+            Assert.That(actual.Args, Is.EqualTo("compose exec service command"));
+        }
+        [Test]
+        public void WhenParallelFlagIsSet_CommandLineIsCorrect()
+        {
+            var fixture = new DockerComposeExecFixture
+            {
+                Service = "service",
+                Command = "command",
+                ComposeSettings = new DockerComposeSettings { Parallel = 2, },
+                Settings = new DockerComposeExecSettings { },
+            };
+
+            var actual = fixture.Run();
+
+            Assert.That(actual.Args, Is.EqualTo("compose --parallel 2 exec service command"));
         }
     }
 }
