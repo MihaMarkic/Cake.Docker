@@ -6,6 +6,14 @@ A Cake AddIn that extends Cake with [Docker](https://www.docker.com/) command to
 [![NuGet](https://img.shields.io/nuget/v/Cake.Docker.svg)](https://www.nuget.org/packages/Cake.Docker)
 [![NuGet (with prereleases)](https://img.shields.io/nuget/vpre/Cake.Docker.svg)](https://www.nuget.org/packages/Cake.Docker)
 
+## Development might not continue
+
+While Cake.Docker has been a very well received Cake addin, it feels like not necessary anymore as there 
+is now [Docker.DotNet](https://www.nuget.org/packages/Docker.DotNet/) where one can talk to Docker directly through the library
+and get more reliable and machine-readable results. See the [issue](https://github.com/MihaMarkic/Cake.Docker/issues/117) for a little bit more info.
+
+I won't archive it for the time being but will eventually do it.
+
 ## Including addin
 Including addin in cake script is easy.
 ```
