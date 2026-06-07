@@ -1,3 +1,7 @@
+# Cake.Docker 1.5.0
+
+* Release version
+
 # Cake.Docker 1.5.0-beta.1
 
 * Bumps Cake reference to 6.0.0 (thanks [gitfool](https://github.com/MihaMarkic/Cake.Docker/pull/124))
